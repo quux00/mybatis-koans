@@ -1,0 +1,131 @@
+# MyBatis Koans
+
+A [koan](http://en.wikipedia.org/wiki/K%C5%8Dan) is a question or statement to be meditated upon in order to improve and test a student's progress. Among programmers, software koans have become a clever way to learn a software language or tool.  As the [Ruby koan website](http://rubykoans.com/) says: "The Koans walk you along the path to enlightenment" -- in this case to learn and practice with the [MyBatis 3](http://mybatis.org/) data mapper framework.
+
+A software koan comes in the form of a broken unit test that you must fix to get it to pass, usually by filling in the blanks or entire missing sections.  The koan is intended to teach one or a small set of cohesive features about the language or tool being studied.
+
+The structure of these koans is inspired by the challenging and informative [Neo4j koans](https://github.com/jimwebber/neo4j-tutorial) by Jim Webber and colleagues.
+
+---
+
+# Getting Started
+
+## Prerequisites
+
+In order to do the koans, you must have:
+
+* Java JDK (preferably version 6 or higher)
+* [Apache Ant](http://ant.apache.org/) (preferably version 1.8 or higher)
+* [MyBatis 3](http://mybatis.org/)
+* A database server (and client) installed
+  * These koans come have been specifically tested with MySQL and PostgreSQL and come with some instructions around using those databases.  You should be able to use (or adapt) them to work with Oracle and other databases if you desire.
+* The sakila database and dataset (the PostgreSQL version is called "pagila").  See "Set up" section below for details.
+* JDBC driver for your database of choice.
+
+I don't provide instructions here on how to set those up (other than the sakila database), as I assume you are familiar with programming in Java and setting up and using a relational database.
+
+While MyBatis can be used with [other JVM languages](http://www.fdmtech.org/2011/12/mybatis-for-scala-1-0-beta-released), these koans are all in pure Java.
+
+_Note_: My instructions below assume you know how to get around on the command line.  In particular, I'm a Unix/Linux guy.  Since this is pure Java, the koans should work on Windows, but some of my instructions assume you have a Unix/Linux environment.
+
+---
+
+## Editing the koans
+
+No IDE is required.  You can use any editor you like or an IDE.  I have built and tested the koans using emacs and Eclipse.
+
+---
+
+## Set up
+
+### Get the Koans
+
+**Step 1**: After installing and testing the prerequisites, clone this repository from github:
+
+    git clone git@github.com:midpeter444/mybatis-koans.git
+
+Go into the mybatis-koans directory and either view it in your graphical directory explorer of choice or on the command line type `tree`.  (If you don't have the tree command on Unix, go install it.  If you are on Windows, I built a [simple version in Java](xxx).)
+
+---
+
+### Download and set up the sakila database/dataset
+
+**Step 1:**  Download the sakila database
+
+Here are three places to get it from:
+
+* [http://code.google.com/p/sakila-sample-database-ports/](http://code.google.com/p/sakila-sample-database-ports/)
+  * _I recommend using this one, as this is what I used to set up and test the koans_
+  * This one has versions for MySQL, PostgreSQL, Oracle, SQLite, SQL Server and a few others
+* Official MySQL version: [http://dev.mysql.com/doc/index-other.html](http://dev.mysql.com/doc/index-other.html)
+* PostgreSQL "pagila" version from PGFoundry:  [http://pgfoundry.org/projects/dbsamples](http://pgfoundry.org/projects/dbsamples)
+
+<br/>
+**Step 2:**  Unzip the Sakila zip file in the `src/main/sql` directory of mybatis-koans
+
+This will create a Sakila directory under which will be database-specific versions:
+
+    $ ls -CF src/main/sql/Sakila
+    interbase-sakila-db/  mysql-sakila-db/   postgres-sakila-db/  sqlite-sakila-db/
+    ms-access-sakila-db/  oracle-sakila-db/  ReadME.txt           sql-server-sakila-db/
+
+**Step 3:**  Create the database and load the data
+
+Follow the standard process for your database of choice for creating a database, running the DDL and DML scripts provided in the Sakila zip file.  Below I show how to do this for PostgreSQL and MySQL from the command line (tested on a Linux machine).
+
+<div style="border: 2px solid grey; margin: 10px; padding: 0px 10px;">
+  <p><strong>Creating and loading the PostgreSQL sakila database</strong></p>
+  <pre>
+    $ cd src/main/sql/Sakila/postgres-sakila-db
+    # edit the next line to have your username rather than mine
+    $ echo "GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO midpeter444;" >> postgres-sakila-schema.sql
+    $ sudo su postgres
+    $ createdb sakila
+    $ psql sakila < postgres-sakila-schema.sql
+    $ psql sakila < postgres-sakila-data.sql
+    $ &lt;Ctrl-D&gt; (log-out as postgres back to your user)
+    $ psql -h localhost  # log in here and check that the tables were created and that you can query them
+  </pre>
+</div>
+
+
+<div style="border: 2px solid grey; margin: 10px; padding: 0px 10px;">
+  <p><strong>Creating and loading the MySQL sakila database</strong></p>
+  <pre>
+    $ cd src/main/sql/Sakila/mysql-sakila-db
+    $ mysql -p
+    mysql> create database sakila;
+    Query OK, 1 row affected (0.00 sec)
+    mysql> exit
+    $ mysql sakila -p < sakila-schema.sql
+    $ mysql sakila -p < sakila-schema.sql
+    $ mysql -p  # log in here and check that the tables were created and that you can query them
+  </pre>
+</div>
+
+
+<br/>
+**Step 4:**  Study the database diagrams and structure to get familiar with it
+
+In the `src/main/sql` directory, I have provided some analysis documents and visualizations reverse engineered from the PostgreSQL and MySQL sakila databases.
+
+View the PNG files in the `postgres-viz/dbvis` or `mysql-viz/dbvis` directories to see physical data models and relationships between tables.  These were generated using the free version of [DbVisualizer](http://www.dbvis.com/).
+
+For a deeper analysis open the `index.html` in either `postgres-viz/schemaSpy` or `mysql-viz/schemaSpy`.  These were generated using the open source [SchemaSpy](http://schemaspy.sourceforge.net/) tool.
+
+Finally, you can also view the documentation that MySQL provides for the sakila database: [http://dev.mysql.com/doc/sakila/en/index.html](http://dev.mysql.com/doc/sakila/en/index.html)
+
+---
+
+# Current Status
+
+As of last writing in May 2012, these koans are only just started and not complete.  Feel free to grab them and try them out.  Suggestions for improvements are welcome.
+
+---
+
+## Notes
+
+http://stackoverflow.com/questions/4115410/generate-er-diagram-from-postgres-sql-database-on-osx-snow-leopard
+
+* Koan for TypeHandlers? => what would one use a custom TypeHandler for?
+* sr
