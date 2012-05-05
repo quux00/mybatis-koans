@@ -1,2 +1,6 @@
-src/main/sql/Sakila/
-README.html
+sql/Sakila/
+.classpath
+.project
+bin/
+lib/
+tmp

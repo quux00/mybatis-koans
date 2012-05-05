@@ -17,6 +17,7 @@ In order to do the koans, you must have:
 * Java JDK (preferably version 6 or higher)
 * [Apache Ant](http://ant.apache.org/) (preferably version 1.8 or higher)
 * [MyBatis 3](http://mybatis.org/)
+* [JUnit 4](http://www.junit.org/)
 * A database server (and client) installed
   * These koans come have been specifically tested with MySQL and PostgreSQL and come with some instructions around using those databases.  You should be able to use (or adapt) them to work with Oracle and other databases if you desire.
 * The sakila database and dataset (the PostgreSQL version is called "pagila").  See "Set up" section below for details.
@@ -38,13 +39,25 @@ No IDE is required.  You can use any editor you like or an IDE.  I have built an
 
 ## Set up
 
+Unfortunately, the setup for the MyBatis koans is not as simple as the Ruby koans, since you have to set up and configure a database, load a standard dataset, and configure the MyBatis system for it.  So you'll need to roll up your sleeves a bit before you can get started meditating on the koans themselves.
+
+---
+
 ### Get the Koans
 
-**Step 1**: After installing and testing the prerequisites, clone this repository from github:
+After installing and testing the prerequisites, clone this repository from github:
 
     git clone git@github.com:midpeter444/mybatis-koans.git
 
 Go into the mybatis-koans directory and either view it in your graphical directory explorer of choice or on the command line type `tree`.  (If you don't have the tree command on Unix, go install it.  If you are on Windows, I built a [simple version in Java](xxx).)
+
+The koans come twice - once in "uncompleted" form and once in "completed" form.
+
+The "uncompleted" koans are the ones you will fill in. They are JUnit 4 tests in the `src/net/thornydev/mybatis/koan/koanXX` directories.  Each koan has its own directory (and thus package name) in order to have separate MyBatis config files to exercise different aspects of the MyBatis data mapper framework.
+
+The completed koans are there for reference in case you get stuck and need to see the solution.  They are in the `completed-koans` directory.
+
+Also notice that there is an `sql` directory that has some visual aids and documentation about the sakila database you will be using - more on that later.
 
 ---
 
@@ -114,6 +127,51 @@ View the PNG files in the `postgres-viz/dbvis` or `mysql-viz/dbvis` directories 
 For a deeper analysis open the `index.html` in either `postgres-viz/schemaSpy` or `mysql-viz/schemaSpy`.  These were generated using the open source [SchemaSpy](http://schemaspy.sourceforge.net/) tool.
 
 Finally, you can also view the documentation that MySQL provides for the sakila database: [http://dev.mysql.com/doc/sakila/en/index.html](http://dev.mysql.com/doc/sakila/en/index.html)
+
+---
+
+### Configure the environment to start working on the koans
+
+There are two ways to do the koans (that I have tested):
+
+1. Create an Eclipse project, set up the Java Build Path to the dependencies in Eclipse and run the koan JUnit tests one at a time from within Eclipse.
+  * If you choose this route you can put the dependencies (jars) in the provided `lib` directory or you can configure Eclipse to find them elsewhere.
+2. Use your editor of choice (including Eclipse) to edit the koans and run the koans using ant from the command line.  You will need to put the jar dependencies in the `lib` directory (see below).
+
+---
+
+### Do the Koans in Eclipse
+
+Open Eclipse and start a new Java Project.  Give it the project name "mybatis-koans" and uncheck the "Use default location" option.  Browse to the mybatis-koans directory where you downloaded the koans from GitHub.
+
+Set up your Java Build Path to have the mybatis-3.x.x jar file, the JDBC library of your choice, and JUnit 4.
+
+Navigate to Koan01.java in the net.thornydev.mybatis.koan.koan1 package.  Run it as a JUnit test by right-clicking in the editing screen and choose Run As > JUnit Test.  It should fail.  If it passes, then you are probably in the completed koans section.
+
+Read the instructions in the Koan.  You will have a series of TODOs to complete.  Fill those in, using the MyBatis User Guide as help until the koan passes.  Then move to the next one.
+
+---
+
+### Do the Koans using ant (command line)
+
+Make sure you have ant in your PATH.
+
+In the mybatis-koans directory, run `ant -p` to make sure ant is working and to see the available targets.
+
+You will need to put (or symlink to) the dependended on jar files in the `mybatis-koans/lib` directory.  For example, here is what my `lib` directory looks like:
+
+    $ ls -l
+    lrwxrwxrwx 1 (...) junit4.jar -> /home/midpeter444/java/lib/junit4.jar
+    lrwxrwxrwx 1 (...) mybatis.jar -> /home/midpeter444/java/lib/mybatis.jar
+    lrwxrwxrwx 1 (...) mysql-connector-java.jar -> /home/midpeter444/java/lib/mysql-connector-java.jar
+    lrwxrwxrwx 1 (...) postgresql.jar -> /home/midpeter444/java/lib/postgresql.jar
+
+
+Run `ant koan01`.  You should get a failing test with output like:
+
+    XXXXXX Need output here
+
+Open `src/net/thornydev/mybatis/koan/koan01/Koan01.java` in your editor of choice and read the instructions in the Koan.  You will have a series of TODOs to complete.  Fill those in, using the MyBatis User Guide as help until the koan passes.  Then move to the next one.
 
 ---
 
