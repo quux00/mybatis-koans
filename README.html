@@ -147,10 +147,30 @@ ms-access-sakila-db/  oracle-sakila-db/  ReadME.txt           sql-server-sakila-
 <ul>
 <li>If you choose this route you can put the dependencies (jars) in the provided <code>lib</code> directory or you can configure Eclipse to find them elsewhere.</li>
 </ul></li>
-<li>Use your editor of choice and run the koans using ant from the command line.  If you use the ant build.xml file (either from the command line or within Eclipse), you will need to put (or symlink to) the dependended on jar files in the <code>mybatis-koans/lib</code> directory.</li>
+<li>Use your editor of choice (including Eclipse) to edit the koans and run the koans using ant from the command line.  You will need to put the jar dependencies in the <code>lib</code> directory (see below).</li>
 </ol>
 
-<p>For example, here is what my lib directory looks like:</p>
+<hr />
+
+<h3>Do the Koans in Eclipse</h3>
+
+<p>Open Eclipse and start a new Java Project.  Give it the project name "mybatis-koans" and uncheck the "Use default location" option.  Browse to the mybatis-koans directory where you downloaded the koans from GitHub.</p>
+
+<p>Set up your Java Build Path to have the mybatis-3.x.x jar file, the JDBC library of your choice, and JUnit 4.</p>
+
+<p>Navigate to Koan01.java in the net.thornydev.mybatis.koan.koan1 package.  Run it as a JUnit test by right-clicking in the editing screen and choose Run As > JUnit Test.  It should fail.  If it passes, then you are probably in the completed koans section.</p>
+
+<p>Read the instructions in the Koan.  You will have a series of TODOs to complete.  Fill those in, using the MyBatis User Guide as help until the koan passes.  Then move to the next one.</p>
+
+<hr />
+
+<h3>Do the Koans using ant (command line)</h3>
+
+<p>Make sure you have ant in your PATH.</p>
+
+<p>In the mybatis-koans directory, run <code>ant -p</code> to make sure ant is working and to see the available targets.</p>
+
+<p>You will need to put (or symlink to) the dependended on jar files in the <code>mybatis-koans/lib</code> directory.  For example, here is what my <code>lib</code> directory looks like:</p>
 
 <pre><code>$ ls -l
 lrwxrwxrwx 1 (...) junit4.jar -&gt; /home/midpeter444/java/lib/junit4.jar
@@ -159,17 +179,23 @@ lrwxrwxrwx 1 (...) mysql-connector-java.jar -&gt; /home/midpeter444/java/lib/mys
 lrwxrwxrwx 1 (...) postgresql.jar -&gt; /home/midpeter444/java/lib/postgresql.jar
 </code></pre>
 
-<hr />
+<p>Run <code>ant koan01</code>.  You should get a failing test with output like:</p>
 
-<h3>Do the Koans in Eclipse</h3>
+<pre><code>koan01:
+[junit] Running net.thornydev.mybatis.koan.koan01.Koan01
+[junit] Testsuite: net.thornydev.mybatis.koan.koan01.Koan01
+[junit] Tests run: 1, Failures: 1, Errors: 0, Time elapsed: 0.081 sec
+[junit] Tests run: 1, Failures: 1, Errors: 0, Time elapsed: 0.081 sec
+[junit] 
+[junit] Testcase: learnBasicConfigurationSetup took 0.063 sec
+[junit]     FAILED
+[junit] null
+[junit] junit.framework.AssertionFailedError
+[junit]     at net.thornydev.mybatis.koan.koan01.Koan01.learnBasicConfigurationSetup(Koan01.java:29)
+[junit]
+</code></pre>
 
-<p>asdf</p>
-
-<hr />
-
-<h3>Do the Koans using ant (command line)</h3>
-
-<p>aasdfs</p>
+<p>Open <code>src/net/thornydev/mybatis/koan/koan01/Koan01.java</code> in your editor of choice and read the instructions in the Koan.  You will have a series of TODOs to complete.  Fill those in, using the MyBatis User Guide or other online resources as help until the koan passes.  Then move to the next one.</p>
 
 <hr />
 

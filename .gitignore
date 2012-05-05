@@ -4,3 +4,4 @@ sql/Sakila/
 bin/
 lib/
 tmp
+TEST-*

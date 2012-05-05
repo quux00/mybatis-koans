@@ -20,7 +20,7 @@ In order to do the koans, you must have:
 * [JUnit 4](http://www.junit.org/)
 * A database server (and client) installed
   * These koans come have been specifically tested with MySQL and PostgreSQL and come with some instructions around using those databases.  You should be able to use (or adapt) them to work with Oracle and other databases if you desire.
-* The sakila database and dataset (the PostgreSQL version is called "pagila").  See "Set up" section below for details.
+* The _sakila_ database and dataset (the PostgreSQL version is called "pagila").  See "Set up" section below for details.
 * JDBC driver for your database of choice.
 
 I don't provide instructions here on how to set those up (other than the sakila database), as I assume you are familiar with programming in Java and setting up and using a relational database.
@@ -169,9 +169,20 @@ You will need to put (or symlink to) the dependended on jar files in the `mybati
 
 Run `ant koan01`.  You should get a failing test with output like:
 
-    XXXXXX Need output here
+    koan01:
+    [junit] Running net.thornydev.mybatis.koan.koan01.Koan01
+    [junit] Testsuite: net.thornydev.mybatis.koan.koan01.Koan01
+    [junit] Tests run: 1, Failures: 1, Errors: 0, Time elapsed: 0.081 sec
+    [junit] Tests run: 1, Failures: 1, Errors: 0, Time elapsed: 0.081 sec
+    [junit] 
+    [junit] Testcase: learnBasicConfigurationSetup took 0.063 sec
+    [junit] 	FAILED
+    [junit] null
+    [junit] junit.framework.AssertionFailedError
+    [junit] 	at net.thornydev.mybatis.koan.koan01.Koan01.learnBasicConfigurationSetup(Koan01.java:29)
+    [junit] 
 
-Open `src/net/thornydev/mybatis/koan/koan01/Koan01.java` in your editor of choice and read the instructions in the Koan.  You will have a series of TODOs to complete.  Fill those in, using the MyBatis User Guide as help until the koan passes.  Then move to the next one.
+Open `src/net/thornydev/mybatis/koan/koan01/Koan01.java` in your editor of choice and read the instructions in the Koan.  You will have a series of TODOs to complete.  Fill those in, using the MyBatis User Guide or other online resources as help until the koan passes.  Then move to the next one.
 
 ---
 

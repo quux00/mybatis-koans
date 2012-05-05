@@ -4,7 +4,7 @@
           "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
   <!-- TODO: fill in path to config.properties -->
-  <properties resource="net/thornydev/mybatis/koan/config.properties" />
+  <properties resource="" />
 
   <environments default="development">
     <environment id="development">
@@ -12,10 +12,10 @@
       <dataSource type="POOLED">
         <!-- TODO: fill in the value fields as variables 
                    referencing the above properties file -->
-        <property name="driver"   value="${driver}" />
-        <property name="url"      value="${url}" />
-        <property name="username" value="${username}" />
-        <property name="password" value="${password}" />
+        <property name="driver"   value="" />
+        <property name="url"      value="" />
+        <property name="username" value="" />
+        <property name="password" value="" />
       </dataSource>
     </environment>
   </environments>
