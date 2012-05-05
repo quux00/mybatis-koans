@@ -15,13 +15,14 @@ The structure of these koans is inspired by the challenging and informative [Neo
 In order to do the koans, you must have:
 
 * Java JDK (preferably version 6 or higher)
-* [Apache Ant](http://ant.apache.org/) (preferably version 1.8 or higher)
-* [MyBatis 3](http://mybatis.org/)
+* [MyBatis 3](http://mybatis.org/) Persistence Framework
 * [JUnit 4](http://www.junit.org/)
 * A database server (and client) installed
   * These koans come have been specifically tested with MySQL and PostgreSQL and come with some instructions around using those databases.  You should be able to use (or adapt) them to work with Oracle and other databases if you desire.
 * The _sakila_ database and dataset (the PostgreSQL version is called "pagila").  See "Set up" section below for details.
 * JDBC driver for your database of choice.
+
+If you want to run the koans via the provided ant `build.xml` file, then you will also need [Apache Ant](http://ant.apache.org/) installed (preferably version 1.8 or higher).
 
 I don't provide instructions here on how to set those up (other than the sakila database), as I assume you are familiar with programming in Java and setting up and using a relational database.
 
@@ -82,6 +83,7 @@ This will create a Sakila directory under which will be database-specific versio
     interbase-sakila-db/  mysql-sakila-db/   postgres-sakila-db/  sqlite-sakila-db/
     ms-access-sakila-db/  oracle-sakila-db/  ReadME.txt           sql-server-sakila-db/
 
+<br/>
 **Step 3:**  Create the database and load the data
 
 Follow the standard process for your database of choice for creating a database, running the DDL and DML scripts provided in the Sakila zip file.  Below I show how to do this for PostgreSQL and MySQL from the command line (tested on a Linux machine).
@@ -94,8 +96,8 @@ Follow the standard process for your database of choice for creating a database,
     $ echo "GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO midpeter444;" >> postgres-sakila-schema.sql
     $ sudo su postgres
     $ createdb sakila
-    $ psql sakila < postgres-sakila-schema.sql
-    $ psql sakila < postgres-sakila-data.sql
+    $ psql sakila &lt; postgres-sakila-schema.sql
+    $ psql sakila &lt; postgres-sakila-data.sql
     $ &lt;Ctrl-D&gt; (log-out as postgres back to your user)
     $ psql -h localhost  # log in here and check that the tables were created and that you can query them
   </pre>
@@ -110,8 +112,8 @@ Follow the standard process for your database of choice for creating a database,
     mysql> create database sakila;
     Query OK, 1 row affected (0.00 sec)
     mysql> exit
-    $ mysql sakila -p < sakila-schema.sql
-    $ mysql sakila -p < sakila-schema.sql
+    $ mysql sakila -p &lt; sakila-schema.sql
+    $ mysql sakila -p &lt; sakila-schema.sql
     $ mysql -p  # log in here and check that the tables were created and that you can query them
   </pre>
 </div>
@@ -148,7 +150,7 @@ Set up your Java Build Path to have the mybatis-3.x.x jar file, the JDBC library
 
 Navigate to Koan01.java in the net.thornydev.mybatis.koan.koan1 package.  Run it as a JUnit test by right-clicking in the editing screen and choose Run As > JUnit Test.  It should fail.  If it passes, then you are probably in the completed koans section.
 
-Read the instructions in the Koan.  You will have a series of TODOs to complete.  Fill those in, using the MyBatis User Guide as help until the koan passes.  Then move to the next one.
+Read the instructions in the Koan.  You will have a series of TODOs to complete.  Fill those in, using the [MyBatis User Guide](http://www.mybatis.org/core/) as help until the koan passes.  Then move to the next one.
 
 ---
 
@@ -158,7 +160,7 @@ Make sure you have ant in your PATH.
 
 In the mybatis-koans directory, run `ant -p` to make sure ant is working and to see the available targets.
 
-You will need to put (or symlink to) the dependended on jar files in the `mybatis-koans/lib` directory.  For example, here is what my `lib` directory looks like:
+You will need to put (or symlink to) the jar file dependencies in the `mybatis-koans/lib` directory.  For example, here is what my `lib` directory looks like:
 
     $ ls -l
     lrwxrwxrwx 1 (...) junit4.jar -> /home/midpeter444/java/lib/junit4.jar
@@ -190,11 +192,3 @@ Open `src/net/thornydev/mybatis/koan/koan01/Koan01.java` in your editor of choic
 
 As of last writing in May 2012, these koans are only just started and not complete.  Feel free to grab them and try them out.  Suggestions for improvements are welcome.
 
----
-
-## Notes
-
-http://stackoverflow.com/questions/4115410/generate-er-diagram-from-postgres-sql-database-on-osx-snow-leopard
-
-* Koan for TypeHandlers? => what would one use a custom TypeHandler for?
-* sr
