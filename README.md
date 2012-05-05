@@ -50,7 +50,7 @@ After installing and testing the prerequisites, clone this repository from githu
 
     git clone git@github.com:midpeter444/mybatis-koans.git
 
-Go into the mybatis-koans directory and either view it in your graphical directory explorer of choice or on the command line type `tree`.  (If you don't have the tree command on Unix, go install it.  If you are on Windows, I built a [simple version in Java](xxx).)
+Go into the mybatis-koans directory and either view it in your graphical directory explorer of choice or on the command line type `tree`.  (If you don't have the [tree](http://www.computerhope.com/unix/tree.htm) command on Unix, go install it.  If you are on Windows, I built a [simple version in Java](https://github.com/midpeter444/tree), which you can use.)
 
 The koans come twice - once in "uncompleted" form and once in "completed" form.
 
@@ -91,31 +91,29 @@ Follow the standard process for your database of choice for creating a database,
 <div style="border: 2px solid grey; margin: 10px; padding: 0px 10px;">
   <p><strong>Creating and loading the PostgreSQL sakila database</strong></p>
   <pre>
-    $ cd src/main/sql/Sakila/postgres-sakila-db
-    # edit the next line to have your username rather than mine
-    $ echo "GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO midpeter444;" >> postgres-sakila-schema.sql
-    $ sudo su postgres
-    $ createdb sakila
-    $ psql sakila &lt; postgres-sakila-schema.sql
-    $ psql sakila &lt; postgres-sakila-data.sql
-    $ &lt;Ctrl-D&gt; (log-out as postgres back to your user)
-    $ psql -h localhost  # log in here and check that the tables were created and that you can query them
-  </pre>
+  $ cd src/main/sql/Sakila/postgres-sakila-db
+  # edit the next line to have your username rather than mine
+  $ echo "GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO midpeter444;" >> postgres-sakila-schema.sql
+  $ sudo su postgres
+  $ createdb sakila
+  $ psql sakila &lt; postgres-sakila-schema.sql
+  $ psql sakila &lt; postgres-sakila-data.sql
+  $ &lt;Ctrl-D&gt; (log-out as postgres back to your user)
+  $ psql -h localhost  # log in here and check that the tables were created and that you can query them</pre>
 </div>
 
 
 <div style="border: 2px solid grey; margin: 10px; padding: 0px 10px;">
   <p><strong>Creating and loading the MySQL sakila database</strong></p>
   <pre>
-    $ cd src/main/sql/Sakila/mysql-sakila-db
-    $ mysql -p
-    mysql> create database sakila;
-    Query OK, 1 row affected (0.00 sec)
-    mysql> exit
-    $ mysql sakila -p &lt; sakila-schema.sql
-    $ mysql sakila -p &lt; sakila-schema.sql
-    $ mysql -p  # log in here and check that the tables were created and that you can query them
-  </pre>
+  $ cd src/main/sql/Sakila/mysql-sakila-db
+  $ mysql -p
+  mysql> create database sakila;
+  Query OK, 1 row affected (0.00 sec)
+  mysql> exit
+  $ mysql sakila -p &lt; sakila-schema.sql
+  $ mysql sakila -p &lt; sakila-schema.sql
+  $ mysql -p  # log in here and check that the tables were created and that you can query them</pre>
 </div>
 
 
