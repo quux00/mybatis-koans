@@ -40,19 +40,16 @@ public class Koan02 {
 
 	@Before
 	public void setUp() throws Exception {
-		// TODO: create session
 		session = sessionFactory.openSession();
 	}
 
 	@After
 	public void tearDown() throws Exception {
-		// TODO: it is important to close your resources ...
 		if (session != null) session.close();
 	}
 
 	@Test
 	public void learnToQueryViaXmlMapperReturningHashMap() throws Exception {
-		// TODO: call "selectFirstCountryAsMap" mapped query
 		Map<?,?> map = session.selectOne("selectFirstCountryAsMap");
 
 		assertEquals(Integer.valueOf(1), map.get("country_id"));
@@ -63,7 +60,6 @@ public class Koan02 {
 
 	@Test
 	public void learnToQueryMapperReturningHashMapWithParameterInput() throws Exception {
-		// TODO: call "selectOneAsMapDynamic" mapped query, passing in id 33 as param
 		Map<Object,Object> map = session.selectOne("selectOneAsMapDynamic", 33);
 
 		assertEquals(Integer.valueOf(33), map.get("country_id"));
@@ -74,7 +70,6 @@ public class Koan02 {
 	
 	@Test
 	public void learnToQueryViaXmlMapperReturningListOfHashMaps() throws Exception {
-		// TODO: query for a list
 		List<Map<Object,Object>> lmap = session.selectList("selectAsListOfMaps");
 		
 		assertEquals(109, lmap.size());

@@ -67,7 +67,6 @@ public class Koan03 {
 
 	@Test
 	public void learnToQueryViaXmlMapperReturningListOfCountries() throws Exception {
-		// TODO: query for a list
 		List<Country> lmap = session.selectList("selectAsListOfCountries");
 		
 		assertEquals(109, lmap.size());

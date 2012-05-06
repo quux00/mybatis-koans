@@ -9,7 +9,7 @@
   <environments default="development">
     <environment id="development">
       <transactionManager type="JDBC" />
-      <dataSource type="POOLED">
+      <dataSource type="UNPOOLED">
         <!-- TODO: fill in the value fields as variables 
                    referencing the above properties file -->
         <property name="driver"   value="" />

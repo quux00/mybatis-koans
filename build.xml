@@ -94,6 +94,33 @@
     </junit>
   </target>
 
+  <target name="koan04" depends="compile" description="Run Koan04">
+    <junit haltonfailure="yes" printsummary="yes" fork="true">
+      <classpath refid="project.classpath" />
+      <test name="net.thornydev.mybatis.koan.koan04.Koan04">
+        <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      </test>
+    </junit>
+  </target>
+
+  <target name="koan05" depends="compile" description="Run Koan05">
+    <junit haltonfailure="yes" printsummary="yes" fork="true">
+      <classpath refid="project.classpath" />
+      <test name="net.thornydev.mybatis.koan.koan05.Koan05">
+        <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      </test>
+    </junit>
+  </target>
+
+  <target name="koan06" depends="compile" description="Run Koan06">
+    <junit haltonfailure="yes" printsummary="yes" fork="true">
+      <classpath refid="project.classpath" />
+      <test name="net.thornydev.mybatis.koan.koan06.Koan06">
+        <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      </test>
+    </junit>
+  </target>
+
   <target name="run" depends="compile" description="Runs all Koans">
     <junit haltonfailure="yes" fork="true">
       <classpath refid="project.classpath" />

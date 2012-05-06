@@ -68,7 +68,6 @@ public class Koan04 {
 	
 	@Test
 	public void learnToQueryViaMapperClassReturningListOfCountries() throws Exception {
-		// TODO: query for a list
 		Koan04Mapper mapper = session.getMapper(Koan04Mapper.class);
 		List<Country> allCountries = mapper.getAllCountries();
 		

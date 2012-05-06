@@ -3,11 +3,8 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!-- TODO: set the namespace of the mapper element to match the Mapper
-           object we created for Koan04 -->
 <mapper namespace="net.thornydev.mybatis.koan.koan04.Koan04Mapper">
 
-  <!-- TODO: xxxx -->
   <select id="getCountryById" parameterType="int" resultType="Country">
     SELECT country_id as id, country, last_update as lastUpdate
     FROM country 
