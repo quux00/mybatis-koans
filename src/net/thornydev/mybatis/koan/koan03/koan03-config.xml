@@ -5,11 +5,8 @@
 <configuration>
   <properties resource="net/thornydev/mybatis/koan/config.properties"/>
 
-  <typeAliases>
-    <!-- TODO: FILL IN BLANK -->
-<!--     <typeAlias type="__" alias="Actor" /> -->
-    <typeAlias type="net.thornydev.mybatis.koan.Country" alias="Country" />
-  </typeAliases>
+  <!-- TODO: Add typeAlias for net.thornydev.mybatis.koan.Country -->
+
 
   <environments default="development">
     <environment id="development">

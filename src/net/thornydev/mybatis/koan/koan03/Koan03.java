@@ -16,7 +16,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -28,7 +27,7 @@ import org.junit.Test;
 // To complete this koan test you will need to edit:
 // 1. all the TODO entries in this koan
 // 2. the koan03-config.xml file to specify a TypeAlias
-// 3. the mapper xml file to have the right SQL queries and MyBatis XML entries
+// 3. the koan03-mapper.xml file to have the right SQL queries and MyBatis XML entries
 public class Koan03 {
 
 	static SqlSessionFactory sessionFactory;
@@ -54,7 +53,8 @@ public class Koan03 {
 
 	@Test
 	public void learnToQueryViaXmlMapperReturningCountryDomainObject() throws Exception {
-		Country c = session.selectOne("selectFirstCountry");
+		// TODO: call "selectFirstCountry" query to return a Country object
+		Country c = null;
 		
 		assertNotNull(c);
 		assertEquals(1, c.getId());
@@ -67,8 +67,8 @@ public class Koan03 {
 
 	@Test
 	public void learnToQueryViaXmlMapperReturningListOfCountries() throws Exception {
-		// TODO: query for a list
-		List<Country> lmap = session.selectList("selectAsListOfCountries");
+		// TODO: query for a list of all Country objects
+		List<Country> lmap = null;
 		
 		assertEquals(109, lmap.size());
 		Country c109 = lmap.get(0);
@@ -79,11 +79,17 @@ public class Koan03 {
 	
 	@Test
 	public void learnToQueryViaXmlMapperReturningHashMapOfCountriesKeyedById() throws Exception {
-		Map<Integer,Country> countriesMap = session.selectMap("selectAsMapOfCountries", "id");
+		// TODO: call query to return a map of ids to Country object.
+		//       This should return a map of all 109 countries and the key to 
+		//       the map is the id of the country in the database
+		// TODO: fill in the ?,? of the Map to their proper types
+		Map<?,?> countriesMap = null;
 		
 		assertEquals(109, countriesMap.size());
 		
-		Country c33 = countriesMap.get(33);
+		// TODO: when you fill in the "?" generic placeholders above
+		//       this cast will no longer be necessary - remove it
+		Country c33 = (Country)countriesMap.get(33);
 		assertEquals(33, c33.getId());
 		assertEquals("Finland", c33.getCountry());
 
