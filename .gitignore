@@ -2,7 +2,7 @@ sql/Sakila/
 .classpath
 .project
 bin/
-lib/
+lib/*.jar
 tmp
 TEST-*
 TODO.org
