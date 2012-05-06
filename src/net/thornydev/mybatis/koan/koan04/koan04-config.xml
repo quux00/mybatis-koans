@@ -8,7 +8,7 @@
   <typeAliases>
     <!-- TODO: FILL IN BLANK -->
 <!--     <typeAlias type="__" alias="Actor" /> -->
-    <typeAlias type="net.thornydev.mybatis.koan.Country" alias="Country" />
+<!--     <typeAlias type="net.thornydev.mybatis.koan.Actor" alias="Actor" /> -->
   </typeAliases>
 
   <environments default="development">
@@ -24,6 +24,7 @@
   </environments>
   
   <mappers>
+<!--     <package name="net.thornydev.mybatis.koan.koan1.sql" /> -->
     <mapper resource="net/thornydev/mybatis/koan/koan03/koan03-mapper.xml"/>
   </mappers>
 </configuration>

@@ -184,6 +184,15 @@ Run `ant koan01`.  You should get a failing test with output like:
 
 Open `src/net/thornydev/mybatis/koan/koan01/Koan01.java` in your editor of choice and read the instructions in the Koan.  You will have a series of TODOs to complete.  Fill those in, using the MyBatis User Guide or other online resources as help until the koan passes.  Then move to the next one.
 
+
+#### Tweaking the settings
+
+By default, the koan test output will be written to a plain text formatted file in the top directory called `TEST-net.thornydev.mybatis.koan.koan01.Koan01.txt` (and so on for the other koans).  If you do not want these files you can set the `log.koan.output.to.file` property to "false" in the build.xml file, like so:
+
+    <property name="log.koan.output.to.file" value="false"/>
+
+MyBatis uses log4j, so a log4j.properties file is provided in the src directory.  By default it will log WARN level messages and higher to the console only.  If you want other settings, edit this file.
+
 ---
 
 # Current Status
