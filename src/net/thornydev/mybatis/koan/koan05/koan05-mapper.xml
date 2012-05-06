@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.thornydev.mybatis.koan.koan05.Koan05Mapper">
+
+  <select id="getCountryCount" resultType="int">
+    SELECT count(*) FROM country 
+  </select>
+
+  <select id="getCountryRange" resultType="Country">
+    SELECT country_id AS id, country, last_update AS lastUpdate 
+    FROM country
+    WHERE country_id BETWEEN #{param1} AND #{param2}
+  </select>
+
+  <select id="getCountryRange2" resultType="Country">
+    SELECT country_id AS id, country, last_update AS lastUpdate 
+    FROM country
+    WHERE country_id BETWEEN #{id1} AND #{id2}
+  </select>
+
+  <select id="getCountries" resultType="Country">
+    SELECT country_id as id, country, last_update as lastUpdate
+    FROM country
+  </select>
+
+</mapper>
