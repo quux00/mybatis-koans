@@ -54,8 +54,10 @@ public class Koan04 {
 
 	@Test
 	public void learnToQueryViaMapperClassReturningCountryDomainObject() throws Exception {
-		Koan04Mapper mapper = session.getMapper(Koan04Mapper.class);
-		Country c = mapper.getCountryById(1);
+		// TODO: create a mapper object
+		Koan04Mapper mapper = null; 
+		// TODO: get the Country with id 1 via the mapper (*not* via session.selectOne())
+		Country c = null;
 		
 		assertNotNull(c);
 		assertEquals(1, c.getId());
@@ -68,9 +70,10 @@ public class Koan04 {
 	
 	@Test
 	public void learnToQueryViaMapperClassReturningListOfCountries() throws Exception {
-		// TODO: query for a list
-		Koan04Mapper mapper = session.getMapper(Koan04Mapper.class);
-		List<Country> allCountries = mapper.getAllCountries();
+		// TODO: create a mapper object
+		Koan04Mapper mapper = null;
+		// TODO: get List of all Countries via a mapper method invocation
+		List<Country> allCountries = null;
 		
 		assertEquals(109, allCountries.size());
 		Country c109 = allCountries.get(0);
@@ -81,12 +84,17 @@ public class Koan04 {
 
 	@Test
 	public void learnToQueryViaMapperClassReturningHashMapOfCountriesKeyedById() throws Exception {
-		Koan04Mapper mapper = session.getMapper(Koan04Mapper.class);
-		Map<Integer,Country> countriesMap = mapper.getAllCountriesMappedById();
+		// TODO: create a mapper object
+		Koan04Mapper mapper = null;
+		// TODO: query for a map of all Country objects
+		// TODO: fill in the "?" generic param placeholders
+		Map<?,?> countriesMap = null;
 		
 		assertEquals(109, countriesMap.size());
 		
-		Country c33 = countriesMap.get(33);
+		// TODO: when you fill in the "?" generic placeholders above
+		//       this cast will no longer be necessary - remove it
+		Country c33 = (Country)countriesMap.get(33);
 		assertEquals(33, c33.getId());
 		assertEquals("Finland", c33.getCountry());
 
