@@ -29,8 +29,6 @@ public class Koan05 {
 
 	@Test
 	public void learnToQueryForTotalCount() throws Exception {
-		// TODO: to move to the more idiomatic way of using sessions, create
-		//       a session here and use a try/finally to close it when done
 		SqlSession session = null;
 		try {
 			session = sessionFactory.openSession();
@@ -46,8 +44,6 @@ public class Koan05 {
 
 	@Test
 	public void learnToQueryWithMultipleParams() throws Exception {
-		// TODO: to move to the more idiomatic way of using sessions, create
-		//       a session here and use a try/finally to close it when done
 		SqlSession session = null;
 		try {
 			session = sessionFactory.openSession();
@@ -65,8 +61,6 @@ public class Koan05 {
 	
 	@Test
 	public void learnToQueryWithMultipleParamsWithAnnotatedNames() throws Exception {
-		// TODO: to move to the more idiomatic way of using sessions, create
-		//       a session here and use a try/finally to close it when done
 		SqlSession session = null;
 		try {
 			session = sessionFactory.openSession();
@@ -84,8 +78,6 @@ public class Koan05 {
 	
 	@Test
 	public void learnToQueryWithRowBounds() throws Exception {
-		// TODO: to move to the more idiomatic way of using sessions, create
-		//       a session here and use a try/finally to close it when done
 		SqlSession session = null;
 		try {
 			session = sessionFactory.openSession();
@@ -105,9 +97,7 @@ public class Koan05 {
 	}		
 	
 	@Test
-	public void learnToQueryWithRowBoundsToMapperClass() throws Exception {
-		// TODO: to move to the more idiomatic way of using sessions, create
-		//       a session here and use a try/finally to close it when done
+	public void learnToQueryMapperClassWithRowBounds() throws Exception {
 		SqlSession session = null;
 		try {
 			session = sessionFactory.openSession();

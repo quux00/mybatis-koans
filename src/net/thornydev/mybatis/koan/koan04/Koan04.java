@@ -29,6 +29,7 @@ import org.junit.Test;
 // To complete this koan test you will need to edit:
 // 1. all the TODO entries in this koan
 // 2. the mapper xml file to have the right SQL queries and MyBatis XML entries
+// 3. all the TODO entries in the Koan04Mapper class
 public class Koan04 {
 
 	static SqlSessionFactory sessionFactory;
