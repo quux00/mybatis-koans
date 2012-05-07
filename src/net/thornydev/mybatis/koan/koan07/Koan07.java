@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.io.InputStream;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 import net.thornydev.mybatis.koan.Country;
 
@@ -43,8 +44,15 @@ public class Koan07 {
 			assertEquals(1, n);
 			
 			int totalCountries = session.selectOne("getCountryCount");
-			
 			assertEquals(110, totalCountries);
+			
+			Country southSudan = session.selectOne("getCountryById", 1000);
+			assertNotNull(southSudan);
+			assertEquals(1000, southSudan.getId());
+			assertEquals("South Sudan", southSudan.getCountry());
+			Timestamp newTs = new Timestamp(southSudan.getLastUpdate().getTime());
+			Timestamp origTs = Timestamp.valueOf("2006-02-15 09:44:00");
+			assertTrue(newTs.after(origTs));
 			
 		} finally {
 			if (session != null) {
@@ -121,6 +129,64 @@ public class Koan07 {
 			totalCountries = session.selectOne("getCountryCount");			
 			assertEquals(109, totalCountries);
 			
+		} finally {
+			if (session != null) {
+				session.rollback();
+				session.close();
+			}
+		}
+	}	
+
+	// FIXME: Need additional documentation here ...
+	@Test
+	public void learnToInsertUsingKeyProperty() throws Exception {
+		SqlSession session = null;
+		
+		try {
+			session = sessionFactory.openSession();
+			Country c = new Country();
+			c.setCountry("South Sudan");
+			c.setLastUpdate(NOW);
+			int n = session.insert("insertCountry2", c);
+			
+			assertEquals(1, n);
+			assertEquals(110, c.getId());  // id should have been filled in
+			
+			int totalCountries = session.selectOne("getCountryCount");
+			assertEquals(110, totalCountries);
+			
+			Country southSudan = session.selectOne("getCountryById", 110);
+			assertNotNull(southSudan);
+			assertEquals(110, southSudan.getId());
+			assertEquals("South Sudan", southSudan.getCountry());
+			Timestamp newTs = new Timestamp(southSudan.getLastUpdate().getTime());
+			Timestamp origTs = Timestamp.valueOf("2006-02-15 09:44:00");
+			assertTrue(newTs.after(origTs));
+			
+		} finally {
+			if (session != null) {
+				session.rollback();
+				session.close();
+			}
+		}
+	}
+	
+	
+	@Test
+	public void learnToUseDynamicStringSubstitutionVariables() throws Exception {
+		SqlSession session = null;
+		
+		try {
+			session = sessionFactory.openSession();
+			List<Country> lc = session.selectList("getCountries", "ORDER BY country DESC");
+			assertEquals(109, lc.size());
+			Country c = lc.get(0);
+			assertEquals("Zambia", c.getCountry());
+			
+			lc = session.selectList("getCountries", null);
+			assertEquals(109, lc.size());
+			c = lc.get(0);
+			assertEquals("Afghanistan", c.getCountry());
 			
 		} finally {
 			if (session != null) {
