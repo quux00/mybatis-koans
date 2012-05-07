@@ -182,7 +182,7 @@ Run `ant koan01`.  You should get a failing test with output like:
     [junit] 	at net.thornydev.mybatis.koan.koan01.Koan01.learnBasicConfigurationSetup(Koan01.java:29)
     [junit] 
 
-Open `src/net/thornydev/mybatis/koan/koan01/Koan01.java` in your editor of choice and read the instructions in the Koan.  You will have a series of TODOs to complete.  Fill those in, using the MyBatis User Guide or other online resources as help until the koan passes.  Then move to the next one.
+Open `src/net/thornydev/mybatis/koan/koan01/Koan01.java` in your editor of choice and read the instructions in the Koan.  You will have a series of TODOs to complete.  Fill those in, using the [MyBatis User Guide](http://www.mybatis.org/core/) or other online resources as help until the koan passes.  Then move to the next one.
 
 
 #### Tweaking the settings
