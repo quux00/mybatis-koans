@@ -20,17 +20,6 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-// In Koan06, we switch over to using full annotation based mappings - no xml
-// mapping file at all.  This changes how we tell the config xml file how to 
-// find the mapper - in this case a mapper class not a mapper xml file.
-// The queries in Koan06 are pretty much the same ones from koans 4 and 5, but
-// now all the mappings are done in annotations in Koan06Mapper, so you will 
-// learn how to configure those.
-//
-// To complete this koan test you will need to edit:
-// 1. all the TODO entries in this koan
-// 2. all the TODO entries in the Koan06Mapper class
-// 3. the koan config xml file to tell it where to find the SQL mappings 
 public class Koan06 {
 
 	static SqlSessionFactory sessionFactory;
@@ -134,7 +123,7 @@ public class Koan06 {
 			int limit = 12;
 			RowBounds rb = new RowBounds(offset, limit);
 			Koan06Mapper mapper = session.getMapper(Koan06Mapper.class);
-			List<Country> lc = mapper.getCountryRange(rb);
+			List<Country> lc = mapper.getCountryRange2(rb);
 
 			assertEquals(12, lc.size());
 			Country finland = lc.get(11);

@@ -5,25 +5,26 @@ import java.util.Map;
 
 import net.thornydev.mybatis.koan.Country;
 
-import org.apache.ibatis.annotations.MapKey;
-import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.session.RowBounds;
 
 public interface Koan06Mapper {
 
-	@Select("SELECT count(*) FROM country")
+	// TODO: add annotation to specify the SQL mapping for this method	
 	int getCountryCount();
-	
-	@Select("SELECT country_id AS id, country, last_update AS lastUpdate FROM country WHERE country_id = #{id}")
+
+	// TODO: add annotation to specify the SQL mapping for this method	
 	Country getCountryById(int id);
 	
-	@Select("SELECT country_id AS id, country, last_update AS lastUpdate FROM country")	
-	@MapKey("id")
+	// TODO: add annotation to specify the SQL mapping for this method	
+	// TODO: add any other annotations required to make this return a Map
 	Map<Integer,Country> getAllCountriesMappedById();
 
-	@Select("SELECT country_id AS id, country, last_update AS lastUpdate FROM country WHERE country_id BETWEEN #{param1} and #{param2}")
+	// TODO: add annotation to specify the SQL mapping for this method
+	// TODO: depending how you specify the parameters in the SQL, you may 
+	//       also need additional annotations
 	List<Country> getCountryRange(int lowerBound, int upperBound);
 	
-	@Select("SELECT country_id AS id, country, last_update AS lastUpdate FROM country")
-	List<Country> getCountryRange2(RowBounds rb);
+	// TODO: add annotation to specify the SQL mapping for this method
+	// TODO: even though you can have overloaded method names in Java, will it work here?
+	List<Country> getCountryRange(RowBounds rb);
 }

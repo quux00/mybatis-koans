@@ -22,6 +22,6 @@
   </environments>
   
   <mappers>
-    <!-- TODO: specify the mapper. You can't specify a file based resource any more. -->
+    <mapper class="net.thornydev.mybatis.koan.koan06.Koan06Mapper"/>
   </mappers>
 </configuration>
