@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.io.InputStream;
 
+import net.thornydev.mybatis.koan.domain.City;
 import net.thornydev.mybatis.koan.domain.Country;
 
 import org.apache.ibatis.io.Resources;
@@ -59,6 +60,50 @@ public class Koan09 {
 			
 			assertEquals(33, c.getId());
 			assertEquals("Finland", c.getCountry());
+			
+		} finally {
+			if (session != null) session.close();
+		}
+	}
+
+	@Test
+	public void learnToUseResultMapForTwoTableAssociation() {
+		SqlSession session = null;
+		try {
+			session = sessionFactory.openSession();
+			Koan09Mapper mapper = session.getMapper(Koan09Mapper.class);
+			City city = mapper.getCityById(544);
+			
+			assertEquals(544, city.getId());
+			assertEquals("Toulouse", city.getCity());
+			assertNotNull(city.getLastUpdate());
+			
+			Country co = city.getCountry();
+			assertNotNull(co);
+			assertEquals("France", co.getCountry());
+			assertNotNull(co.getLastUpdate());
+			
+		} finally {
+			if (session != null) session.close();
+		}
+	}
+
+	@Test
+	public void learnToUseNestedSelectForAssociation() {
+		SqlSession session = null;
+		try {
+			session = sessionFactory.openSession();
+			Koan09Mapper mapper = session.getMapper(Koan09Mapper.class);
+			City city = mapper.getCityByIdLazy(544);
+			
+			assertEquals(544, city.getId());
+			assertEquals("Toulouse", city.getCity());
+			assertNotNull(city.getLastUpdate());
+			
+			Country co = city.getCountry();
+			assertNotNull(co);
+			assertEquals("France", co.getCountry());
+			assertNotNull(co.getLastUpdate());
 			
 		} finally {
 			if (session != null) session.close();

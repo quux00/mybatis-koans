@@ -12,9 +12,43 @@
   </resultMap>
 
   <select id="getCountryById" parameterType="int" resultMap="countryResultMap">
-    SELECT country_id AS id, country, last_update AS lastUpdate 
+    SELECT country_id, country, last_update
     FROM country 
     WHERE country_id = #{id}
+  </select>
+
+  <resultMap id="cityResultMap" type="City">
+    <constructor>
+      <idArg column="city_id" javaType="_integer"/>
+    </constructor>
+    <result property="city"       column="city"/>
+    <result property="lastUpdate" column="city_upd"/>
+    
+    <association property="country" resultMap="countryResultMap"/>
+  </resultMap>
+
+  <!-- FIXME: need to try the 'lazy' pattern from the Spring exercises too ... -->
+  <!-- Eager loading -->
+  <select id="getCityById" parameterType="int" resultMap="cityResultMap">
+    SELECT ci.city_id, ci.city, ci.last_update AS city_upd, 
+           co.country_id, co.country, co.last_update
+    FROM city ci
+    JOIN country co ON ci.country_id = co.country_id
+    WHERE ci.city_id = #{id}
+  </select>
+
+  <!-- Lazy loading =???= -->
+  <resultMap id="cityResultMapLazy" type="City">
+    <constructor>
+      <idArg column="city_id" javaType="_integer"/>
+    </constructor>
+    <association property="country" column="country_id" javaType="Country" select="getCountryById"/>
+  </resultMap>
+
+  <select id="getCityByIdLazy" parameterType="int" resultMap="cityResultMapLazy">
+    SELECT city_id, city, last_update AS lastUpdate, country_id
+    FROM city
+    WHERE city_id = #{id}
   </select>
 
 </mapper>
