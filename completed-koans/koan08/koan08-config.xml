@@ -22,8 +22,8 @@
   </environments>
   
   <mappers>
-    <!-- TODO: what mapper type should you use here? 
-               Do you need a <mapper class=""> entry or just <mapper resource="">? 
-               Is it dependent on the namespace of the root element of this file? -->
+    <!-- FIXME: need both of these?? -->
+<!--     <mapper class="net.thornydev.mybatis.koan.koan08.Koan08Mapper"/> -->
+    <mapper resource="net/thornydev/mybatis/koan/koan08/koan08-mapper.xml"/>
   </mappers>
 </configuration>

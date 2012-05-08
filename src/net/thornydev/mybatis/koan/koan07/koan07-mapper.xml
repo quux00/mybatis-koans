@@ -5,29 +5,37 @@
 
 <mapper namespace="net.thornydev.mybatis.koan.koan07.Koan07Mapper">
 
-  <sql id="countryColumns">country_id, country, last_update</sql>
-
-  <update id="updateCountry" parameterType="Country">
+  <!-- TODO: the update xml element needs additional information to know 
+             what's being passed in -->
+  <update id="updateCountry">
+    <!-- TODO: fill in question marks below -->
     UPDATE country
-    SET country = #{country}, last_update = #{lastUpdate}
-    WHERE country_id = #{id}
+    SET country = ???, last_update = ???
+    WHERE country_id = ???
   </update>
 
-  <insert id="insertCountry" parameterType="Country">
-    INSERT INTO country (<include refid="countryColumns"/>)
-    VALUES (#{id}, #{country}, #{lastUpdate})
+  <!-- TODO: the insert xml element needs additional information to know 
+             what's being passed in -->
+  <insert id="insertCountry">
+    INSERT INTO country (country_id, country, last_update)
+    VALUES (<!-- TODO: fill in how the values clause will be set with values passed in -->)
   </insert>
 
   <insert id="insertCountry2" parameterType="Country">
-    <selectKey keyProperty="id" resultType="int" order="BEFORE">
-      SELECT MAX(country_id) + 1 AS id FROM country
+    <!-- TODO: the selectKey xml element needs attributes to know how to operate -->
+    <selectKey>
+      SELECT max(country_id) + 1 AS id FROM country
     </selectKey>
-    INSERT INTO country (<include refid="countryColumns"/>)
-	  VALUES (#{id}, #{country}, #{lastUpdate})
+    INSERT INTO country (country_id, country, last_update)
+	  VALUES (<!-- TODO: fill in how the values clause will be set with values passed in -->)
   </insert>
 
   <select id="getCountryCount" resultType="int">
     SELECT count(*) FROM country 
+  </select>
+
+  <!-- TODO: create a getMaxCountryId mapping -->
+  <select id="getMaxCountryId">
   </select>
 
   <select id="getCountryById" resultType="Country">
@@ -36,10 +44,4 @@
     WHERE country_id = #{id}
   </select>
 
-  <!-- Note: http://mybatis-user.963551.n3.nabble.com/how-to-use-dynamic-parameters-in-select-statement-in-iBatis-3-td1639391.html -->
-  <select id="getCountries" resultType="Country">
-    SELECT country_id AS id, country, last_update AS lastUpdate 
-    FROM country 
-    ${value}
-  </select>
 </mapper>

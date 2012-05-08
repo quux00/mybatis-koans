@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.io.InputStream;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 import net.thornydev.mybatis.koan.Country;
 
@@ -35,9 +36,8 @@ import org.junit.Test;
 //
 // To complete this koan test you will need to edit:
 // 1. all the TODO entries in this koan
-// 2. all the TODO entries in the Koan07Mapper class
-// 3. all the TODO entries in the the koan mapper xml file 
-// 4. the mapper element in koan07-config.xml
+// 2. all the TODO entries in the Koan06Mapper class
+// 3. the koan config xml file to tell it where to find the SQL mappings 
 public class Koan07 {
 
 	static SqlSessionFactory sessionFactory;
@@ -58,18 +58,13 @@ public class Koan07 {
 		try {
 			session = sessionFactory.openSession();
 			Country c = new Country();
-			c.setId(1000);                // note that we explicitly set id here (for now)
+			c.setId(1000);
 			c.setCountry("South Sudan");  // new country as of July 2011
 			c.setLastUpdate(NOW);
+			int n = session.insert("insertCountry", c);
 			
-			// TODO: call the "insertCountry" mapping - either directly via the
-			//       session or add an interface method to Koan07Mapper, whichever
-			//       you prefer.  Either way, get the return value of number of rows
-			//       inserted and check that it is 1.
-			int n = -1;
 			assertEquals(1, n);
 			
-			// validate that the insert worked
 			int totalCountries = session.selectOne("getCountryCount");
 			assertEquals(110, totalCountries);
 			
@@ -83,8 +78,6 @@ public class Koan07 {
 			
 		} finally {
 			if (session != null) {
-				// TODO: try it without calling rollback() and see what happens
-				// TODO: try it with calling commit() and see what happens
 				session.rollback();
 				session.close();
 			}
@@ -101,12 +94,8 @@ public class Koan07 {
 			c.setId(89);
 			c.setCountry("North Sudan");  // adjust the name
 			c.setLastUpdate(NOW);
+			int n = session.update("updateCountry", c);
 			
-			// TODO: call the "updateCountry" mapping - either directly via the
-			//       session or add an interface method to Koan07Mapper, whichever
-			//       you prefer.  Either way, get the return value of number of rows
-			//       updated and check that it is 1.
-			int n = -1;
 			assertEquals(1, n);
 			
 			int totalCountries = session.selectOne("getCountryCount");
@@ -152,15 +141,12 @@ public class Koan07 {
 			
 			// second delete it via mapper class
 			Koan07Mapper mapper = session.getMapper(Koan07Mapper.class);
-			
 			n = mapper.deleteCountryById( c1000.getId() );
 			assertEquals(1, n);
 			totalCountries = session.selectOne("getCountryCount");			
 			assertEquals(110, totalCountries);
 			
-			// TODO: delete record with id 1001 by using the whole Country
-			//       object rather than just passing the id
-			n = -1;
+			n = mapper.deleteCountry(c1001);
 			assertEquals(1, n);
 			totalCountries = session.selectOne("getCountryCount");			
 			assertEquals(109, totalCountries);
@@ -187,10 +173,11 @@ public class Koan07 {
 			// first get max country id and cache it for assert testing later
 			int maxId = session.selectOne("getMaxCountryId");
 			
-			// TODO: create the Country "South Sudan", but leave the id blank
-			Country c = null;
+			Country c = new Country();
+			c.setCountry("South Sudan");
+			c.setLastUpdate(NOW);
+			int n = session.insert("insertCountry2", c);
 			
-			int n = session.insert("insertCountry2", c);			
 			assertEquals(1, n);
 			assertEquals(maxId + 1, c.getId());  // id should have been filled in and set to new maxId
 			

@@ -1,13 +1,14 @@
 package net.thornydev.mybatis.koan.koan07;
 
-import org.apache.ibatis.annotations.Delete;
-
 import net.thornydev.mybatis.koan.Country;
 
 public interface Koan07Mapper {
-	@Delete("DELETE FROM country WHERE country_id = #{id}")
+	// TODO: Specify the DELETE sql in an annotation, not xml, for this method 
+	//       that takes an id, rather than a Country object
 	int deleteCountryById(int id);
 
-	@Delete("DELETE FROM country WHERE country_id = #{id}")
+	
+	// TODO: Specify the DELETE sql in an annotation, not xml, for this method
+	//       that takes a Country object, rather than an id
 	int deleteCountry(Country c);
 }
