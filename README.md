@@ -112,7 +112,7 @@ Follow the standard process for your database of choice for creating a database,
   Query OK, 1 row affected (0.00 sec)
   mysql> exit
   $ mysql sakila -p &lt; sakila-schema.sql
-  $ mysql sakila -p &lt; sakila-schema.sql
+  $ mysql sakila -p &lt; sakila-data.sql
   $ mysql -p  # log in here and check that the tables were created and that you can query them</pre>
 </div>
 

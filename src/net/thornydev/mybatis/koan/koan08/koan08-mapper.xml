@@ -4,26 +4,33 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="net.thornydev.mybatis.koan.koan08.Koan08Mapper">
+  
+  <!-- TODO: create an sql element called "selectAllCountries" that does
+             the SELECT statement needed by all the "get" mappings below -->
+  <sql></sql>
 
-  <sql id="selectAllCountries">
-    SELECT country_id AS id, country, last_update AS lastUpdate
-    FROM country
-  </sql>
-
-  <!-- Note: http://mybatis-user.963551.n3.nabble.com/how-to-use-dynamic-parameters-in-select-statement-in-iBatis-3-td1639391.html -->
+  <!-- TODO: fill in the ${???} string substitution variable below -->
+  <!-- Note: as of May 2012, the MyBatis User Guide has wrong (or incomplete)
+       information on this. See this URL for help on what to fill in here:
+       http://mybatis-user.963551.n3.nabble.com/how-to-use-dynamic-parameters-in-select-statement-in-iBatis-3-td1639391.html -->
   <select id="getCountriesOrdered" resultType="Country">
-    <include refid="selectAllCountries"/> 
-    ORDER BY ${value}
+    <!-- TODO: Reference the "selectAllCountries" sql element here, rather
+         than write SQL directly -->
+    ORDER BY ${???}  
   </select>
 
   <select id="getCountriesOrdered2" resultType="Country">
-    <include refid="selectAllCountries"/> 
-    ORDER BY ${columnName}
+    <!-- TODO: Reference the "selectAllCountries" sql element here, rather
+         than write SQL directly -->
+    ORDER BY ${columnName}  <!-- This variable name is correct - do NOT change it. 
+                                 Instead, adjust the Koan08Mapper to use it. -->
   </select>
 
+  <!-- TODO: fill in the ${???} string substitution variable below -->
   <select id="getCountries" resultType="Country">
-    <include refid="selectAllCountries"/> 
-    ${value}
+    <!-- TODO: Reference the "selectAllCountries" sql element here, rather
+         than write SQL directly -->
+    ${???}
   </select>
 
 </mapper>

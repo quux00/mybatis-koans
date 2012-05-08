@@ -1,6 +1,6 @@
 package net.thornydev.mybatis.koan.koan08;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.io.InputStream;
 import java.util.List;
@@ -14,6 +14,20 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+// In Koan08, we learn about two minor but useful features of XML mapping:
+// 1. the <sql> element that allows you to keep your SQL more D.R.Y.
+// 2. dynamic string substitution in SQL that does not correspond to bound
+//    params in a PreparedStatement
+// 
+// We will use the latter to pass in information on how to sort (ORDER BY)
+// or filter (WHERE). We will do this both directly to the xml mapping code
+// and also via the Koan08Mapper class and use an annotation to specify
+// the name of the param that the dynamic string variable is bound to.
+// 
+// To complete this koan test you will need to edit:
+// 1. all the TODO entries in this koan
+// 2. all the TODO entries in the Koan08Mapper class
+// 3. all the TODO entries in the the koan mapper xml file 
 public class Koan08 {
 
 	static SqlSessionFactory sessionFactory;
@@ -25,7 +39,6 @@ public class Koan08 {
 		sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 		inputStream.close();
 	}
-
 
 	@Test
 	public void learnToSpecifyOrderViaDynamicStringSubstitutionVariableInXml() throws Exception {
@@ -53,7 +66,10 @@ public class Koan08 {
 		try {
 			session = sessionFactory.openSession();
 			Koan08Mapper mapper = session.getMapper(Koan08Mapper.class);
-			List<Country> lc = mapper.getCountriesOrdered2("country DESC");
+			// TODO: call the "getCountriesOrdered2" method in the Koan08Mapper, passing in
+			//       the column to sort by and any other ordering information needed to make
+			//       the asserts below pass
+			List<Country> lc = null;
 
 			assertEquals(109, lc.size());
 			Country c = lc.get(0);
@@ -78,8 +94,10 @@ public class Koan08 {
 		
 		try {
 			session = sessionFactory.openSession();
-			// use an order by clause
-			List<Country> lc = session.selectList("getCountries", "ORDER BY country DESC");
+
+			// TODO: specify a sort order via an SQL clause (where the ??? is)
+			//       review the asserts below to know what SQL clause to use
+			List<Country> lc = session.selectList("getCountries", "???");
 			assertEquals(109, lc.size());
 			Country c = lc.get(0);
 			assertEquals("Zambia", c.getCountry());
@@ -90,8 +108,9 @@ public class Koan08 {
 			c = lc.get(0);
 			assertEquals("Afghanistan", c.getCountry());
 			
-			// specify a range via an SQL clause
-			lc = session.selectList("getCountries", "WHERE country_id BETWEEN 22 and 33");
+			// TODO: specify a range via an SQL clause (where the ??? is)
+			//       review the asserts below to know what SQL clause to use
+			lc = session.selectList("getCountries", "???");
 			assertEquals(12, lc.size());
 			c = lc.get(11);
 			assertEquals(33, c.getId());			
