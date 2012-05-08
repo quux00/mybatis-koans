@@ -1,6 +1,6 @@
 package net.thornydev.mybatis.koan.koan07;
 
-import net.thornydev.mybatis.koan.Country;
+import net.thornydev.mybatis.koan.domain.Country;
 
 public interface Koan07Mapper {
 	// TODO: Specify the DELETE sql in an annotation, not xml, for this method 

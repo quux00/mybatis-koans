@@ -3,7 +3,7 @@ package net.thornydev.mybatis.koan.koan06;
 import java.util.List;
 import java.util.Map;
 
-import net.thornydev.mybatis.koan.Country;
+import net.thornydev.mybatis.koan.domain.Country;
 
 import org.apache.ibatis.session.RowBounds;
 

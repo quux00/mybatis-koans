@@ -2,7 +2,7 @@ package net.thornydev.mybatis.koan.koan08;
 
 import java.util.List;
 
-import net.thornydev.mybatis.koan.Country;
+import net.thornydev.mybatis.koan.domain.Country;
 
 public interface Koan08Mapper {
 	// TODO: This looks like it should work, but it won't given the way that

@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.io.InputStream;
 import java.util.List;
 
-import net.thornydev.mybatis.koan.Country;
+import net.thornydev.mybatis.koan.domain.Country;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;

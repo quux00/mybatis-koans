@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.sql.Timestamp;
 import java.util.Date;
 
-import net.thornydev.mybatis.koan.Country;
+import net.thornydev.mybatis.koan.domain.Country;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
