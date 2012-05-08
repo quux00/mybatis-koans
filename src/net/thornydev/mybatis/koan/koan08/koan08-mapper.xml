@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.thornydev.mybatis.koan.koan08.Koan08Mapper">
+
+  <sql id="selectAllCountries">
+    SELECT country_id AS id, country, last_update AS lastUpdate
+    FROM country
+  </sql>
+
+  <!-- Note: http://mybatis-user.963551.n3.nabble.com/how-to-use-dynamic-parameters-in-select-statement-in-iBatis-3-td1639391.html -->
+  <select id="getCountriesOrdered" resultType="Country">
+    <include refid="selectAllCountries"/> 
+    ORDER BY ${value}
+  </select>
+
+  <select id="getCountriesOrdered2" resultType="Country">
+    <include refid="selectAllCountries"/> 
+    ORDER BY ${columnName}
+  </select>
+
+  <select id="getCountries" resultType="Country">
+    <include refid="selectAllCountries"/> 
+    ${value}
+  </select>
+
+</mapper>
