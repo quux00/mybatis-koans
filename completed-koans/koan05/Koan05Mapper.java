@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
-import net.thornydev.mybatis.koan.Country;
+import net.thornydev.mybatis.koan.domain.Country;
 
 public interface Koan05Mapper {
 

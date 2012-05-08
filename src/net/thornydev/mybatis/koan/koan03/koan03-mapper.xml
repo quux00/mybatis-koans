@@ -5,7 +5,7 @@
 
 <mapper namespace="net.thornydev.mybatis.koan.koan03.Koan03Mapper">
 
-  <select id="selectFirstCountry" resultType="net.thornydev.mybatis.koan.Country">
+  <select id="selectFirstCountry" resultType="net.thornydev.mybatis.koan.domain.Country">
     <!-- TODO: fill in select clause to populate all fields of Country object -->
     SELECT ???
     FROM country 

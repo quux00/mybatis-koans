@@ -2,7 +2,7 @@ package net.thornydev.mybatis.koan.koan07;
 
 import org.apache.ibatis.annotations.Delete;
 
-import net.thornydev.mybatis.koan.Country;
+import net.thornydev.mybatis.koan.domain.Country;
 
 public interface Koan07Mapper {
 	@Delete("DELETE FROM country WHERE country_id = #{id}")
