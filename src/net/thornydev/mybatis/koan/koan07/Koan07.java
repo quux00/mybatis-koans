@@ -29,9 +29,9 @@ import org.junit.Test;
 // being used.  In a later test, we add a little more intelligence by using
 // the "selectKey" feature to dynamically specify what key (id) should be used
 // when inserting a new country record.  The query I use is not best practice
-// may not work in all databases (I've tested it in mysql and postgresql), but
-// it nicely illustrates the "selectKey" feature.  We'll see better alternatives
-// in later koans.
+// and may not work in all databases (I've tested it in mysql and postgresql),
+// but it nicely illustrates the "selectKey" feature.  We'll see better 
+// alternatives in later koans.
 //
 // To complete this koan test you will need to edit:
 // 1. all the TODO entries in this koan

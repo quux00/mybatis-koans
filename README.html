@@ -121,7 +121,7 @@ ms-access-sakila-db/  oracle-sakila-db/  ReadME.txt           sql-server-sakila-
   Query OK, 1 row affected (0.00 sec)
   mysql> exit
   $ mysql sakila -p &lt; sakila-schema.sql
-  $ mysql sakila -p &lt; sakila-schema.sql
+  $ mysql sakila -p &lt; sakila-data.sql
   $ mysql -p  # log in here and check that the tables were created and that you can query them</pre>
 </div>
 
@@ -195,7 +195,7 @@ lrwxrwxrwx 1 (...) postgresql.jar -&gt; /home/midpeter444/java/lib/postgresql.ja
 [junit]
 </code></pre>
 
-<p>Open <code>src/net/thornydev/mybatis/koan/koan01/Koan01.java</code> in your editor of choice and read the instructions in the Koan.  You will have a series of TODOs to complete.  Fill those in, using the MyBatis User Guide or other online resources as help until the koan passes.  Then move to the next one.</p>
+<p>Open <code>src/net/thornydev/mybatis/koan/koan01/Koan01.java</code> in your editor of choice and read the instructions in the Koan.  You will have a series of TODOs to complete.  Fill those in, using the <a href="http://www.mybatis.org/core/">MyBatis User Guide</a> or other online resources as help until the koan passes.  Then move to the next one.</p>
 
 <h4>Tweaking the settings</h4>
 
@@ -205,6 +205,137 @@ lrwxrwxrwx 1 (...) postgresql.jar -&gt; /home/midpeter444/java/lib/postgresql.ja
 </code></pre>
 
 <p>MyBatis uses log4j, so a log4j.properties file is provided in the src directory.  By default it will log WARN level messages and higher to the console only.  If you want other settings, edit this file.</p>
+
+<hr />
+
+<h1>Koan Topics</h1>
+
+<h3>Koan 01</h3>
+
+<p><strong>Configuration Koan</strong></p>
+
+<p>Learn:</p>
+
+<ul>
+<li>how to configure a MyBatis config file, including a shared properties that will used by the MyBatis config file </li>
+<li>how to wire up your Java code to use the MyBatis config file</li>
+<li>how to create a SqlSessionFactory</li>
+</ul>
+
+<hr />
+
+<h3>Koan 02</h3>
+
+<p><strong>Xml mapper file</strong></p>
+
+<p>Learn:</p>
+
+<ul>
+<li>how to reference a mapper file from a MyBatis config file</li>
+<li>how to set up a SQL mapping in a mapper file</li>
+<li>how to create <code>SqlSession</code>s</li>
+<li>how to call the SQL mapping and get data from the database via MyBatis</li>
+<li>the basic types of datastructures that MyBatis can return and how to specify them</li>
+</ul>
+
+<hr />
+
+<h3>Koan 03</h3>
+
+<p><strong>Domain objects</strong></p>
+
+<p>Learn:</p>
+
+<ul>
+<li>how to create a mapper xml file that returns a domain object, rather than a generic data structure</li>
+<li>how to return a list or map of domain objects from a mapped SQL query</li>
+<li>how to set up a TypeAlias in the MyBatis config file</li>
+</ul>
+
+<hr />
+
+<h3>Koan 04</h3>
+
+<p><strong>Mapper interface</strong></p>
+
+<p>Learn:</p>
+
+<ul>
+<li>how to create and use a Java Mapper interface to do the same type of queries in the previous koans</li>
+</ul>
+
+<hr />
+
+<h3>Koan 05</h3>
+
+<p><strong>Multiple Arguments and RowBounds</strong></p>
+
+<p>Learn:</p>
+
+<ul>
+<li>how to create and use a Java Mapper interface to do the same type of queries in the previous koans</li>
+<li>how to return a simple numeric value from a mapped SQL query</li>
+<li>how to pass in multiple arguments to a mapped query (including using annotations)</li>
+<li>how to use a MyBatis RowBounds object to limit the number of results returned</li>
+</ul>
+
+<hr />
+
+<h3>Koan 06</h3>
+
+<p><strong>Annotation driven mappings</strong></p>
+
+<p>Learn:</p>
+
+<ul>
+<li>how to do annotation driven mappings, thus having no XML mapping file</li>
+<li>how to specify a mapper in the config file when you don't have an XML mapping file</li>
+</ul>
+
+<hr />
+
+<h3>Koan 07</h3>
+
+<p><strong>Updates, inserts and deletes</strong></p>
+
+<p>Learn:</p>
+
+<ul>
+<li>how to do updates, inserts and deletes
+<ul>
+<li>in xml mapping files</li>
+<li>annotation driven in Java Mapper interfaces</li>
+</ul></li>
+<li>how to use the <code>selectKey</code> feature of MyBatis to dynamically create a new key for a domain object being inserted into the database</li>
+<li>the effect of calling <code>rollback</code>, <code>commit</code> or neither on the session object when executing DML statements via MyBatis</li>
+</ul>
+
+<hr />
+
+<h3>Koan 08</h3>
+
+<p><strong><code>&lt;sql&gt;</code> and dynamic string substitution</strong></p>
+
+<p>Learn:</p>
+
+<ul>
+<li>how to use the <code>&lt;sql&gt;</code> MyBatis element to keep your SQL DRY ("don't repeat yourself")</li>
+<li>how to do dynamic string substitution in sections of SQL that are not bound variables to PreparedStatements</li>
+</ul>
+
+<hr />
+
+<h3>Koan 09</h3>
+
+<p><strong>ResultMaps, part 1</strong></p>
+
+<p>Learn:</p>
+
+<ul>
+<li>how to use a ResultMap for a single table query</li>
+<li>how to use a ResultMap for a multiple table query</li>
+<li>how to use ResultMaps as part of a "nested select" (the N+1 approach)</li>
+</ul>
 
 <hr />
 

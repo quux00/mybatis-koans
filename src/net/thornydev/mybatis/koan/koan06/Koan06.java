@@ -28,9 +28,8 @@ import org.junit.Test;
 // learn how to configure those.
 //
 // To complete this koan test you will need to edit:
-// 1. all the TODO entries in this koan
-// 2. all the TODO entries in the Koan06Mapper class
-// 3. the koan config xml file to tell it where to find the SQL mappings 
+// 1. all the TODO entries in the Koan06Mapper class
+// 2. the koan config xml file to tell it where to find the SQL mappings 
 public class Koan06 {
 
 	static SqlSessionFactory sessionFactory;

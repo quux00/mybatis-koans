@@ -195,6 +195,117 @@ MyBatis uses log4j, so a log4j.properties file is provided in the src directory.
 
 ---
 
+# Koan Topics
+
+### Koan 01
+
+**Configuration Koan**
+
+Learn:
+
+* how to configure a MyBatis config file, including a shared properties that will used by the MyBatis config file 
+* how to wire up your Java code to use the MyBatis config file
+* how to create a SqlSessionFactory
+
+---
+
+### Koan 02
+
+**Xml mapper file**
+
+Learn:
+
+* how to reference a mapper file from a MyBatis config file
+* how to set up a SQL mapping in a mapper file
+* how to create `SqlSession`s
+* how to call the SQL mapping and get data from the database via MyBatis
+* the basic types of datastructures that MyBatis can return and how to specify them
+
+---
+
+### Koan 03
+
+**Domain objects**
+
+Learn:
+
+* how to create a mapper xml file that returns a domain object, rather than a generic data structure
+* how to return a list or map of domain objects from a mapped SQL query
+* how to set up a TypeAlias in the MyBatis config file
+
+---
+
+### Koan 04
+
+**Mapper interface**
+
+Learn:
+
+* how to create and use a Java Mapper interface to do the same type of queries in the previous koans
+
+---
+
+### Koan 05
+
+**Multiple Arguments and RowBounds**
+
+Learn:
+
+* how to create and use a Java Mapper interface to do the same type of queries in the previous koans
+* how to return a simple numeric value from a mapped SQL query
+* how to pass in multiple arguments to a mapped query (including using annotations)
+* how to use a MyBatis RowBounds object to limit the number of results returned
+
+---
+
+### Koan 06
+
+**Annotation driven mappings**
+
+Learn:
+
+* how to do annotation driven mappings
+* how to specify a mapper in the config file when you don't have an XML mapping file
+
+---
+
+### Koan 07
+
+**Updates, inserts and deletes**
+
+Learn:
+
+* how to do updates, inserts and deletes
+  * in xml mapping files
+  * annotation driven in Java Mapper interfaces
+* how to use the `selectKey` feature of MyBatis to dynamically create a new key for a domain object being inserted into the database
+* the effect of calling `rollback`, `commit` or neither on the session object when executing DML statements via MyBatis
+
+---
+
+### Koan 08
+
+**`<sql>` and dynamic string substitution**
+
+Learn:
+
+* how to use the `<sql>` MyBatis element to keep your SQL DRY ("don't repeat yourself")
+* how to do dynamic string substitution in sections of SQL that are not bound variables to PreparedStatements
+
+---
+
+### Koan 09
+
+**ResultMaps, part 1**
+
+Learn:
+
+* how to use a ResultMap for a single table query
+* how to use a ResultMap for a multiple table query, using the "association" feature
+* how to use ResultMaps as part of a "nested select" (the N+1 approach)
+
+---
+
 # Current Status
 
 As of last writing in May 2012, these koans are only just started and not complete.  Feel free to grab them and try them out.  Suggestions for improvements are welcome.

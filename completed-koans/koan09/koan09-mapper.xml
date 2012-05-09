@@ -10,10 +10,7 @@
     <result property="country" column="country"/>
     <result property="lastUpdate" column="last_update"/>
   </resultMap>
-  <!-- TODO: create the "countryResultMap" ResultMap.
-             Note that the query below does NOT include column aliases that
-             map to the Country object property names, so you will need to
-             provide that mapping in the ResultMap -->
+
   <select id="getCountryById" parameterType="int" resultMap="countryResultMap">
     SELECT country_id, country, last_update
     FROM country 
