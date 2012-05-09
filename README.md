@@ -217,7 +217,7 @@ Learn:
 
 * how to reference a mapper file from a MyBatis config file
 * how to set up a SQL mapping in a mapper file
-* how to create `SqlSession`s
+* how to create a `SqlSession`
 * how to call the SQL mapping and get data from the database via MyBatis
 * the basic types of datastructures that MyBatis can return and how to specify them
 
