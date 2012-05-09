@@ -33,11 +33,14 @@ import org.junit.Test;
 // city table and N queries on the Country table, where N is the number of
 // cities retrieved.  This is rather inefficient.
 // 
-// By doing a relational join, we can do a single query.  MyBatis uses what
-// it calls "nested results" to create City-Country object duos from a single
-// query using joins.
+// By doing a relational join, we can do a single query, which is more efficient.
+// MyBatis uses what it calls "nested results" to create City-Country object 
+// duos from a single query using joins.
 // 
-// FIXME: more here ...
+// To complete this koan test you will need to edit:
+// 1. all the TODO entries in this koan
+// 2. the mapper xml file to have the right SQL queries and MyBatis XML entries
+// 3. the config xml file to set up another TypeAlias
 public class Koan09 {
 
 	static SqlSessionFactory sessionFactory;
@@ -79,7 +82,8 @@ public class Koan09 {
 			assertEquals("Toulouse", city.getCity());
 			assertNotNull(city.getLastUpdate());
 			
-			Country co = city.getCountry();
+			// TODO: get the Country associated with the city "Toulouse"
+			Country co = null;
 			assertNotNull(co);
 			assertEquals("France", co.getCountry());
 			assertNotNull(co.getLastUpdate());
@@ -101,6 +105,7 @@ public class Koan09 {
 
 			City first = lc.iterator().next();
 			assertEquals(1, first.getId());
+			assertNotNull(first.getCountry());
 			
 			assertEquals(cityCount, lc.size());
 			City city = lc.get(543);
