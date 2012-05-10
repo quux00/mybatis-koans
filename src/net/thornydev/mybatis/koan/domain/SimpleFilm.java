@@ -6,12 +6,11 @@ public class SimpleFilm {
 	private int id;
 	private String title;
 	private String description;
-//	private Year releaseYear;  // FIXME change to Year object later ...
 	private String releaseYear;
 	private int rentalDuration;
-	private float rentalRate;  // FIXME change to BigDecimal later
+	private float rentalRate;
 	private int length;
-	private float replacementCost;  // FIXME change to BigDecimal later
+	private float replacementCost;
 	private String rating;
 	private Date lastUpdate;
 	private String specialFeatures;

@@ -28,10 +28,4 @@
     ORDER BY f.film_id DESC
   </select>
 
-<!--   <select id="getLanguageById2" parameterType="int" resultMap="languageResultMap"> -->
-<!--     SELECT language_id, name, last_update -->
-<!--     FROM language  -->
-<!--     WHERE language_id = #{id} -->
-<!--   </select> -->
-
 </mapper>
