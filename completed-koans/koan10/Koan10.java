@@ -16,26 +16,6 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-// In Koan09 our domain objects were modeled after a "has one" or "belongs to"
-// set of relationships. One City "has one" or "belongs to" a Country, so the
-// City object had a reference to a single Country, but the Country domain 
-// object did not have a list of City objects that were in it.
-// 
-// In Koan10 we go the opposite direction and model the "has-many" directionality
-// of relationship. For that we use the language and film tables from the sakila
-// database. A language has many films, while a film has only one language.
-// The Language object has a list of films and we get to learn to do map that
-// using the MyBatis <collection> element.
-// 
-// We also change the namespace of the mapper from the generic "KoanXXMapper" to
-// the actual object type it is mapping - LanguageMapper in this case.
-// 
-// Take a look at the sakila data in the film and language tables. Not all 
-// languages have films and we will test how to handle that as well.
-// 
-// To complete this koan test you will need to edit:
-// 1. the mapper xml file to have the right SQL queries and MyBatis XML entries
-// 2. the config xml file to set up type aliases and a proper namespace
 public class Koan10 {
 
 	static SqlSessionFactory sessionFactory;
@@ -61,12 +41,10 @@ public class Koan10 {
 			assertEquals("English", lang.getName().trim());
 			assertNotNull(lang.getFilms());
 			
-			List<?> lf = lang.getFilms();
+			List<SimpleFilm> lf = lang.getFilms();
 			assertEquals(1000, lf.size());
 			
-			// Note that the test expects the "last" film to be first in the list
-			// so make your SQL match this expectation
-			SimpleFilm f = (SimpleFilm) lf.get(0);
+			SimpleFilm f = lf.get(0);
 			assertEquals(1000, f.getId());
 			assertEquals("ZORRO ARK", f.getTitle());
 			assertTrue( Pattern.
@@ -103,4 +81,5 @@ public class Koan10 {
 			if (session != null) session.close();
 		}
 	}
+
 }
