@@ -24,6 +24,13 @@ public class Year {
 		this.date = date;
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		if (! (obj instanceof Year)) return false;
+		Year other = (Year) obj;
+		return other.getYear().equals(this.getYear());
+	};
+	
 	public String getYear() {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);

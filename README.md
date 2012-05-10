@@ -306,6 +306,26 @@ Learn:
 
 ---
 
+### Koan 10
+
+**ResultMaps, part 2**
+
+Learn:
+
+* how to use a ResultMap for a multiple table query, using the "collection" feature
+
+---
+
+### Koan 11
+
+**TypeHandlers**
+
+Learn:
+
+* xxx
+
+---
+
 # Current Status
 
 As of last writing in May 2012, these koans are only just started and not complete.  Feel free to grab them and try them out.  Suggestions for improvements are welcome.
