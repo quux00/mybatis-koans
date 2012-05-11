@@ -38,10 +38,10 @@ public class Koan10 {
 			assertEquals("English", lang.getName().trim());
 			assertNotNull(lang.getFilms());
 			
-			List<SimpleFilm> lf = lang.getFilms();
+			List<FilmK10> lf = lang.getFilms();
 			assertEquals(1000, lf.size());
 			
-			SimpleFilm f = lf.get(0);
+			FilmK10 f = lf.get(0);
 			assertEquals(1000, f.getId());
 			assertEquals("ZORRO ARK", f.getTitle());
 			assertTrue( Pattern.

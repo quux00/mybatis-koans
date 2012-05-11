@@ -58,12 +58,12 @@ public class Koan10 {
 			assertEquals("English", lang.getName().trim());
 			assertNotNull(lang.getFilms());
 			
-			List<?> lf = lang.getFilms();
+			List<FilmK10> lf = lang.getFilms();
 			assertEquals(1000, lf.size());
 			
 			// Note that the test expects the "last" film to be first in the list
 			// so make your SQL match this expectation
-			FilmK10 f = (FilmK10) lf.get(0);
+			FilmK10 f = lf.get(0);
 			assertEquals(1000, f.getId());
 			assertEquals("ZORRO ARK", f.getTitle());
 			assertTrue( Pattern.
@@ -88,7 +88,7 @@ public class Koan10 {
 			// NOTE: if this test fails but "learnToQueryHasManyRelationshipUsingCollection"
 			// succeeded, you need to modify the SQL in koan10-mapper to return a 
 			// language even if it is has no films (Hint: an inner join will not work)
-			Language lang = mapper.getLanguageById(3);
+			LanguageK10 lang = mapper.getLanguageById(3);
 			assertNotNull(lang);
 			assertEquals(3, lang.getId());
 			assertEquals("Japanese", lang.getName().trim());
