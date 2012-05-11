@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import net.thornydev.mybatis.koan.domain.Language;
-import net.thornydev.mybatis.koan.domain.SimpleFilm;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
