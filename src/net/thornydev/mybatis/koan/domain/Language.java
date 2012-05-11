@@ -3,6 +3,8 @@ package net.thornydev.mybatis.koan.domain;
 import java.util.Date;
 import java.util.List;
 
+import net.thornydev.mybatis.koan.koan10.SimpleFilm;
+
 public class Language {
 	private int id;
 	private String name;

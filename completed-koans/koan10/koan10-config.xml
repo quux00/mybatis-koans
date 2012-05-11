@@ -6,7 +6,7 @@
   <properties resource="net/thornydev/mybatis/koan/config.properties"/>
 
   <typeAliases>
-    <typeAlias type="net.thornydev.mybatis.koan.domain.SimpleFilm" alias="Film"/>
+    <typeAlias type="net.thornydev.mybatis.koan.koan10.SimpleFilm" alias="Film"/>
     <typeAlias type="net.thornydev.mybatis.koan.domain.Language"   alias="Language"/>
   </typeAliases>
 

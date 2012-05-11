@@ -1,4 +1,4 @@
-package net.thornydev.mybatis.koan.domain;
+package net.thornydev.mybatis.koan.koan10;
 
 import java.util.Date;
 
