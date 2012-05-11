@@ -6,9 +6,6 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import net.thornydev.mybatis.koan.domain.Language;
-import net.thornydev.mybatis.koan.koan10.SimpleFilm;
-
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -35,7 +32,7 @@ public class Koan10 {
 			session = sessionFactory.openSession();
 			LanguageMapper mapper = session.getMapper(LanguageMapper.class);
 		
-			Language lang = mapper.getLanguageById(1);
+			LanguageK10 lang = mapper.getLanguageById(1);
 			assertNotNull(lang);
 			assertEquals(1, lang.getId());
 			assertEquals("English", lang.getName().trim());
@@ -69,7 +66,7 @@ public class Koan10 {
 			// NOTE: if this test fails but "learnToQueryHasManyRelationshipUsingCollection"
 			// succeeded, you need to modify the SQL in koan10-mapper to return a 
 			// language even if it is has no films (Hint: an inner join will not work)
-			Language lang = mapper.getLanguageById(3);
+			LanguageK10 lang = mapper.getLanguageById(3);
 			assertNotNull(lang);
 			assertEquals(3, lang.getId());
 			assertEquals("Japanese", lang.getName().trim());

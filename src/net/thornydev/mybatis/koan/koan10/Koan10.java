@@ -6,9 +6,6 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import net.thornydev.mybatis.koan.domain.Language;
-import net.thornydev.mybatis.koan.koan10.SimpleFilm;
-
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -55,7 +52,7 @@ public class Koan10 {
 			session = sessionFactory.openSession();
 			LanguageMapper mapper = session.getMapper(LanguageMapper.class);
 		
-			Language lang = mapper.getLanguageById(1);
+			LanguageK10 lang = mapper.getLanguageById(1);
 			assertNotNull(lang);
 			assertEquals(1, lang.getId());
 			assertEquals("English", lang.getName().trim());
@@ -66,7 +63,7 @@ public class Koan10 {
 			
 			// Note that the test expects the "last" film to be first in the list
 			// so make your SQL match this expectation
-			SimpleFilm f = (SimpleFilm) lf.get(0);
+			FilmK10 f = (FilmK10) lf.get(0);
 			assertEquals(1000, f.getId());
 			assertEquals("ZORRO ARK", f.getTitle());
 			assertTrue( Pattern.

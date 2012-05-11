@@ -1,18 +1,18 @@
-package net.thornydev.mybatis.koan.domain;
+package net.thornydev.mybatis.koan.koan10;
 
 import java.util.Date;
 import java.util.List;
 
 import net.thornydev.mybatis.koan.koan10.FilmK10;
 
-public class Language {
+public class LanguageK10 {
 	private int id;
 	private String name;
 	private Date lastUpdate;
 	// has many relationship
 	private List<FilmK10> films;
 
-	public Language(int id, String langName) {
+	public LanguageK10(int id, String langName) {
 		this.id = id;
 		this.name = langName;
 	}

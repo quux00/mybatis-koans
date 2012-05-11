@@ -2,7 +2,7 @@ package net.thornydev.mybatis.koan.koan10;
 
 import java.util.Date;
 
-public class SimpleFilm {
+public class FilmK10 {
 	private int id;
 	private String title;
 	private String description;
@@ -18,9 +18,9 @@ public class SimpleFilm {
 	// skipping "full text" column (or table) since it is treated differently
 	// in the different databases
 
-	public SimpleFilm() {}
+	public FilmK10() {}
 
-	public SimpleFilm(int id) {
+	public FilmK10(int id) {
 		this.id = id;
 	}
 
