@@ -8,9 +8,11 @@
 # This can be useful in order to run the completed koans to
 # test it on your setup.
 #
-# This script is not highly intelligent so it could mess things
-# up if you don't do it in the right order, so it's best to save
+# This script is not highly intelligent so it if you don't do it
+# in the right order it can be destructive, so it's best to save
 # any work into git (or your preferred SCM/VCS repo) first.
+# That way if you mess up you can just do 'git reset --hard' to
+# get back to where you started.
 #
 # Usage:
 # test-completed.rb <koan> <test|reset>
@@ -52,9 +54,10 @@ def copy_completed_to_main_koan_area(koan)
   puts "cp -r #{COMPLETED_DIR}/#{koan}/ #{SRCDIR}"
 end
 
-def delete_completed_in_src(koan)
-  FileUtils.rm_r "#{SRCDIR}/#{koan}"
-  puts "rm -r #{SRCDIR}/#{koan}"
+def move_completed_in_src_back(koan)
+  FileUtils.rm_r "#{COMPLETED_DIR}/#{koan}"
+  FileUtils.mv "#{SRCDIR}/#{koan}", COMPLETED_DIR
+  puts "mv #{SRCDIR}/#{koan} #{COMPLETED_DIR}"
 end
 
 def copy_tmp_partials_to_src(koan)
@@ -73,7 +76,7 @@ def main(koan, direction)
     copy_partials_to_tmp(koan)
     copy_completed_to_main_koan_area(koan)
   elsif direction == "reset"
-    delete_completed_in_src(koan)
+    move_completed_in_src_back(koan)
     copy_tmp_partials_to_src(koan)
     delete_tmp(koan)
   end

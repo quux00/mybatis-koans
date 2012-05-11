@@ -142,11 +142,11 @@
     </junit>
   </target>
 
-  <target name="koan10" depends="compile" description="Run Koan09">
+  <target name="koan10" depends="compile" description="Run Koan10">
     <junit haltonfailure="yes" printsummary="yes" fork="true">
       <classpath refid="project.classpath" />
       <formatter type="plain" usefile="${log.koan.output.to.file}" />
-      <test name="net.thornydev.mybatis.koan.koan09.Koan09"/>
+      <test name="net.thornydev.mybatis.koan.koan10.Koan10"/>
     </junit>
   </target>
 
