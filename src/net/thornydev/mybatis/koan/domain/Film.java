@@ -6,6 +6,10 @@ import java.util.List;
 
 import net.thornydev.mybatis.koan.util.Year;
 
+/**
+ * Film domain object. The sakila film table is referenced by language
+ * but this Film domain object is unaware of the Language class.
+ */
 public class Film {
 	private int id;
 	private String title;
@@ -17,9 +21,9 @@ public class Film {
 	
 	// the next four need special type handlers (?)
 	private Year releaseYear;
-	private List<String> specialFeatures;
 	private BigDecimal rentalRate;
 	private BigDecimal replacementCost;
+	private List<String> specialFeatures;
 
 	// skipping "full text" column (or table) since it is treated differently
 	// in the different databases

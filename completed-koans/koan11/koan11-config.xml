@@ -13,6 +13,7 @@
 
   <typeHandlers>
     <typeHandler handler="net.thornydev.mybatis.koan.util.YearTypeHandler" javaType="Year"/>
+<!--     <typeHandler handler="net.thornydev.mybatis.koan.util.FilmSpecialFeaturesTypeHandler" javaType="List"/> -->
   </typeHandlers>
 
   <environments default="development">

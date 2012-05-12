@@ -3,14 +3,20 @@ package net.thornydev.mybatis.koan.domain;
 import java.util.Date;
 import java.util.List;
 
-import net.thornydev.mybatis.koan.koan10.FilmK10;
-
+/**
+ * Language domain object. This domain object references one other
+ * domain object, Film, and keeps a list of all Films that are in
+ * this language.
+ * 
+ * We provide setters and getters as well as a single constructor
+ * that takes entries for all of two of its fields.
+ */
 public class Language {
 	private int id;
 	private String name;
 	private Date lastUpdate;
-	// has many relationship
-	private List<FilmK10> films;
+	// has-many relationship modeled here
+	private List<Film> films;
 
 	public Language(int id, String langName) {
 		this.id = id;
@@ -33,11 +39,11 @@ public class Language {
 		this.name = name;
 	}
 
-	public List<FilmK10> getFilms() {
+	public List<Film> getFilms() {
 		return films;
 	}
 
-	public void setFilms(List<FilmK10> films) {
+	public void setFilms(List<Film> films) {
 		this.films = films;
 	}
 

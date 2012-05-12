@@ -322,7 +322,9 @@ Learn:
 
 Learn:
 
-* xxx
+* How to use a MyBatis TypeHandler in order to set a domain specific object type as a field in a mapped object
+  * Learn to set a TypeHandler for all object type (for any query that uses it)
+  * Learn to set a TypeHandler for a specify field/column of a specify mapped query
 
 ---
 
