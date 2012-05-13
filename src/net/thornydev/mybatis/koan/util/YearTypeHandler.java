@@ -12,23 +12,25 @@ public class YearTypeHandler extends BaseTypeHandler<Year> {
 
 	@Override
 	public Year getNullableResult(ResultSet rs, String colName) throws SQLException {
-		return new Year(rs.getString(colName));
+		// TODO: fill in
+		return null;
 	}
 
 	@Override
 	public Year getNullableResult(ResultSet rs, int colIdx) throws SQLException {
-		return new Year(rs.getString(colIdx));
+		// TODO: fill in
+		return null;
 	}
 
 	@Override
 	public Year getNullableResult(CallableStatement arg0, int arg1)	throws SQLException {
+		// OPTIONAL TODO: this will never be called in this example
 		return null;
 	}
 
 	@Override
 	public void setNonNullParameter(PreparedStatement ps, int idx, Year yr, JdbcType jt) throws SQLException {
-		System.out.printf("i: %d; yr: %s; jt: %s%n", idx, yr, jt);
-		ps.setInt( idx, Integer.parseInt(yr.getYear()) );
+		// TODO: fill in for the DML statements (not needed for queries)
 	}
 
 }

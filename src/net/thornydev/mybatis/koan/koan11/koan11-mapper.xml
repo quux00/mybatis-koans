@@ -33,11 +33,4 @@
     ORDER BY f.film_id DESC
   </select>
 
-  <update id="updateYearAndReplacementCost" parameterType="Film">
-    UPDATE film
-    SET year             = #{releaseYear},
-        replacement_cost = #{replacementCost}
-    WHERE film_id = #{id}
-  </update>
-
 </mapper>

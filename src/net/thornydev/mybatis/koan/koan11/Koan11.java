@@ -56,7 +56,8 @@ import org.junit.Test;
 // the SpecialFeaturesTypeHandler as a general handler for all strings, but
 // only for the special_features column in the query we are interested in.
 //
-//// To complete this koan test you will need to edit:
+// To complete this koan test you will need to edit:
+//   1. the TODO entries in the YearTypeHandler interface
 //   2. the TODO entries in the FilmMapper interface
 //// 1. the mapper xml file to have the right SQL queries and MyBatis XML entries
 //// 2. the config xml file to set up type aliases and a proper namespace

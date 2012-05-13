@@ -15,7 +15,8 @@ public class FilmSpecialFeaturesTypeHandler extends BaseTypeHandler<List<String>
 
 	@Override
 	public List<String> getNullableResult(ResultSet rs, String colName) throws SQLException {
-		return cleanAndSplit( rs.getString(colName) );
+		// 
+		return null;
 	}
 
 	@Override
@@ -40,14 +41,11 @@ public class FilmSpecialFeaturesTypeHandler extends BaseTypeHandler<List<String>
 	
 	@Override
 	public List<String> getNullableResult(CallableStatement arg0, int arg1)	throws SQLException {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void setNonNullParameter(PreparedStatement arg0, int arg1,
 			List<String> arg2, JdbcType arg3) throws SQLException {
-		// TODO Auto-generated method stub
-		
 	}
 }
