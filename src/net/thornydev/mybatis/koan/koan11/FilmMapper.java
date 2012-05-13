@@ -3,7 +3,6 @@ package net.thornydev.mybatis.koan.koan11;
 import net.thornydev.mybatis.koan.domain.Film;
 
 import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 
 public interface FilmMapper {
 	// TODO: create an annotated mapping to update the release_year and replacement_cost fields via a Film object

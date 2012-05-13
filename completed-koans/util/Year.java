@@ -5,6 +5,12 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * A object wrapper that represents a Year entity.
+ * It can take a year either a Date object (in which case it ignores
+ * all parts of the date except the year) or a String, which should
+ * be a four-digit year, such as 1968.
+ */
 public class Year {
 	private Date date;
 	
@@ -14,6 +20,7 @@ public class Year {
 		}
 		try {
 			DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			// by convention set the date to first month, first day of the year it represents
 			this.date = format.parse(year + "-01-01");			
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -23,13 +30,6 @@ public class Year {
 	public Year(Date date) {
 		this.date = date;
 	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		if (! (obj instanceof Year)) return false;
-		Year other = (Year) obj;
-		return other.getYear().equals(this.getYear());
-	};
 	
 	public String getYear() {
 		Calendar cal = Calendar.getInstance();
@@ -44,5 +44,12 @@ public class Year {
 	@Override
 	public String toString() {
 		return getYear();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (! (obj instanceof Year)) return false;
+		Year other = (Year) obj;
+		return other.getYear().equals(this.getYear());
 	}
 }

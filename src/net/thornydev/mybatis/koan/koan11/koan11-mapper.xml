@@ -3,9 +3,11 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="net.thornydev.mybatis.koan.koan11.LanguageMapper">
+<!-- TODO: fill in proper namespace -->
+<mapper namespace="???">
   
-  <resultMap id="languageResultMap" type="Language">
+  <!-- TODO: fill in property return type -->
+  <resultMap id="languageResultMap" type="???">
     <constructor>
       <idArg column="language_id" javaType="_integer"/>
       <arg column="name" javaType="String"/>
@@ -15,11 +17,9 @@
       <id property="id" column="film_id"/>
       <result property="title" column="title"/>
       <result property="lastUpdate" column="film_upd"/>
-      <result property="specialFeatures" column="special_features"/>
-      <result property="releaseYear" column="release_year" javaType="Year"/>
+      <!-- TODO: specify result mapping for the release_year column -->
       <result property="rentalRate"  column="rental_rate" />
-      <result property="specialFeatures" column="special_features" 
-              typeHandler="net.thornydev.mybatis.koan.util.FilmSpecialFeaturesTypeHandler"/>
+      <!-- TODO: specify result mapping for the special_features column -->
     </collection>
   </resultMap>
 

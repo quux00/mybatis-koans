@@ -124,7 +124,7 @@ public class Koan11 {
 			// test to make sure it was updated as expected
 			f = mapper.getFilmById(1000);
 			assertEquals("ZORRO ARK", f.getTitle());
-			assertEquals(new Year("2012"), f.getReleaseYear());
+			assertEquals("2012", f.getReleaseYear().toString());
 			assertEquals(BigDecimal.valueOf(25.95), f.getReplacementCost());
 			
 		} finally {

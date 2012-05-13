@@ -15,7 +15,6 @@
       <id property="id" column="film_id"/>
       <result property="title" column="title"/>
       <result property="lastUpdate" column="film_upd"/>
-      <result property="specialFeatures" column="special_features"/>
       <result property="releaseYear" column="release_year" javaType="Year"/>
       <result property="rentalRate"  column="rental_rate" />
       <result property="specialFeatures" column="special_features" 

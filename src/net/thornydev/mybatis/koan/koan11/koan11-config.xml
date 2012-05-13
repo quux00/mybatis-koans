@@ -8,12 +8,10 @@
   <typeAliases>
     <typeAlias type="net.thornydev.mybatis.koan.domain.Film"     alias="Film"/>
     <typeAlias type="net.thornydev.mybatis.koan.domain.Language" alias="Language"/>
-    <typeAlias type="net.thornydev.mybatis.koan.util.Year"       alias="Year"/>
+    <!-- TODO: add any additional typeAlias(es) you need -->
   </typeAliases>
 
-  <typeHandlers>
-    <typeHandler handler="net.thornydev.mybatis.koan.util.YearTypeHandler" javaType="Year"/>
-  </typeHandlers>
+  <!-- TODO: add any typeHandler(s) you need -->
 
   <environments default="development">
     <environment id="development">
@@ -28,7 +26,6 @@
   </environments>
   
   <mappers>
-    <mapper resource="net/thornydev/mybatis/koan/koan11/koan11-mapper.xml"/>
-    <mapper class="net.thornydev.mybatis.koan.koan11.FilmMapper"/>
+    <!-- TODO: add the mapper(s) you need -->
   </mappers>
 </configuration>

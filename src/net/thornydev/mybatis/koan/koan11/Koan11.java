@@ -56,11 +56,14 @@ import org.junit.Test;
 // the SpecialFeaturesTypeHandler as a general handler for all strings, but
 // only for the special_features column in the query we are interested in.
 //
-// To complete this koan test you will need to edit:
-//   1. the TODO entries in the YearTypeHandler interface
-//   2. the TODO entries in the FilmMapper interface
-//// 1. the mapper xml file to have the right SQL queries and MyBatis XML entries
-//// 2. the config xml file to set up type aliases and a proper namespace
+// To complete this koan test you will need to (in no particular order):
+//   1. Edit the TODO entries in the FilmMapper interface
+//   2. Edit the TODO entries in this Koan11 TestCase
+//   3. Edit the TODO entries in the FilmSpecialFeaturesTypeHandler interface
+//   4. Edit the TODO entries mapper xml file
+//   5. Edit the TODO entries in the MyBatis config xml file 
+//   6. Create a TypeHandler for the Year class. I recommend that you call it
+//      "YearTypeHandler" and put it in the util package (along with Year).
 public class Koan11 {
 
 	static SqlSessionFactory sessionFactory;
@@ -116,9 +119,9 @@ public class Koan11 {
 			session = sessionFactory.openSession();
 			FilmMapper mapper = session.getMapper(FilmMapper.class);
 			
-			Film f = new Film(1000);
-			f.setReleaseYear(new Year("2012"));
-			f.setReplacementCost(BigDecimal.valueOf(25.95));
+			// TODO: create a Film object (id 1000) to pass the
+			//       with properties set to pass tests down below
+			Film f = null;
 			
 			int n = mapper.updateYearAndReplacementCost(f);
 			assertEquals(1, n);
@@ -126,7 +129,7 @@ public class Koan11 {
 			// test to make sure it was updated as expected
 			f = mapper.getFilmById(1000);
 			assertEquals("ZORRO ARK", f.getTitle());
-			assertEquals(new Year("2012"), f.getReleaseYear());
+			assertEquals("2012", f.getReleaseYear().toString());
 			assertEquals(BigDecimal.valueOf(25.95), f.getReplacementCost());
 			
 		} finally {

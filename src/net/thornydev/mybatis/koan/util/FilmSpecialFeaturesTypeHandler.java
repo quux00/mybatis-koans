@@ -11,17 +11,24 @@ import java.util.List;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 
+/**
+ * A MyBatis TypeHandler for the special_features column in the film 
+ * table of the sakila database.  The special_features is a non-normalized
+ * string with multiple entries separated by commas.  This TypeHandler 
+ * "normalizes" those entries into an explicit list of strings.
+ */
 public class FilmSpecialFeaturesTypeHandler extends BaseTypeHandler<List<String>> {
 
 	@Override
 	public List<String> getNullableResult(ResultSet rs, String colName) throws SQLException {
-		// 
+		// TODO: fill in
 		return null;
 	}
 
 	@Override
 	public List<String> getNullableResult(ResultSet rs, int colNum) throws SQLException {
-		return cleanAndSplit( rs.getString(colNum) );
+		// TODO: fill in
+		return null;
 	}
 
 	private List<String> cleanAndSplit(final String sf) {
