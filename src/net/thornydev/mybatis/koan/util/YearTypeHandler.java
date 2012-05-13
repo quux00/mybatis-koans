@@ -26,9 +26,9 @@ public class YearTypeHandler extends BaseTypeHandler<Year> {
 	}
 
 	@Override
-	public void setNonNullParameter(PreparedStatement ps, int arg1,
-			Year arg2, JdbcType arg3) throws SQLException {
-		// FIXME: fill in later when doing inserts/updates
+	public void setNonNullParameter(PreparedStatement ps, int idx, Year yr, JdbcType jt) throws SQLException {
+		System.out.printf("i: %d; yr: %s; jt: %s%n", idx, yr, jt);
+		ps.setInt( idx, Integer.parseInt(yr.getYear()) );
 	}
 
 }

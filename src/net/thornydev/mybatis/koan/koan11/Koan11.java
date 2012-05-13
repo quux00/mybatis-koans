@@ -33,7 +33,7 @@ public class Koan11 {
 	}
 
 	@Test
-	public void learnToUseTypeHandlerForDomainSpecificFieldTypes() {
+	public void learnToUseTypeHandlerForDomainSpecificFieldTypesForQueries() {
 		SqlSession session = null;
 		try {
 			session = sessionFactory.openSession();
@@ -68,4 +68,31 @@ public class Koan11 {
 		}
 	}
 
+	@Test
+	public void learnToUseTypeHandlerForDomainSpecificFieldTypesForDMLStatements() {
+		SqlSession session = null;
+		try {
+			session = sessionFactory.openSession();
+			FilmMapper mapper = session.getMapper(FilmMapper.class);
+			
+			Film f = new Film(1000);
+			f.setReleaseYear(new Year("2012"));
+			f.setReplacementCost(BigDecimal.valueOf(25.95));
+			
+			int n = mapper.updateYearAndReplacementCost(f);
+			assertEquals(1, n);
+
+			// test to make sure it was updated as expected
+			f = mapper.getFilmById(1000);
+			assertEquals("ZORRO ARK", f.getTitle());
+			assertEquals(new Year("2012"), f.getReleaseYear());
+			assertEquals(BigDecimal.valueOf(25.95), f.getReplacementCost());
+			
+		} finally {
+			if (session != null) {
+				session.rollback();
+				session.close();
+			}
+		}
+	}
 }

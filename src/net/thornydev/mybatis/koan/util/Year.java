@@ -34,10 +34,15 @@ public class Year {
 	public String getYear() {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
-		return String.valueOf( cal.get(Calendar.YEAR) - 1900 );
+		return String.valueOf( cal.get(Calendar.YEAR) );
 	}
 	
 	public Date getYearAsDate() {
 		return date;
+	}
+	
+	@Override
+	public String toString() {
+		return getYear();
 	}
 }
