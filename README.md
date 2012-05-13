@@ -328,6 +328,18 @@ Learn:
 
 ---
 
+### Koan 12
+
+**MyBatis and Immutable Objects**
+
+Learn:
+
+* How to use a MyBatis with immutable objects that have no setter fields
+  * Learn to set a TypeHandler for all object type (for any query that uses it)
+  * Learn to set a TypeHandler for a specify field/column of a specify mapped query
+
+---
+
 # Current Status
 
 As of last writing in May 2012, these koans are only just started and not complete.  Feel free to grab them and try them out.  Suggestions for improvements are welcome.
