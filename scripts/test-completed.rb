@@ -118,5 +118,6 @@ if $0 == __FILE__
   end
 
   # invoke script
+  main("util", direction)
   main(koan, direction)
 end
