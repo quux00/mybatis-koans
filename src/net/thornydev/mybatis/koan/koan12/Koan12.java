@@ -1,11 +1,16 @@
 package net.thornydev.mybatis.koan.koan12;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.InputStream;
 import java.util.List;
 
 import net.thornydev.mybatis.koan.domain.Actor;
+import net.thornydev.mybatis.koan.domain.Address;
+import net.thornydev.mybatis.koan.domain.City;
+import net.thornydev.mybatis.koan.domain.Country;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -95,4 +100,22 @@ public class Koan12 {
 		session.rollback();	
 	}
 
+	@Test
+	public void learnToQueryImmutableObjectsThatChainToOtherDomainObjects() {
+		AddressMapper mapper = session.getMapper(AddressMapper.class);
+		
+		Address addr = mapper.getAddressById(600);
+		assertNotNull(addr);
+		assertEquals(600, addr.getId().intValue());
+		assertEquals("1837 Kaduna Parkway", addr.getAddress());
+		assertEquals("82580", addr.getPostalCode());
+		
+		City city = addr.getCity();
+		assertNotNull(city);
+		assertEquals("Jining", city.getCity());
+
+		Country country = city.getCountry();
+		assertNotNull(country);
+		assertEquals("China", country.getCountry());
+	}
 }
