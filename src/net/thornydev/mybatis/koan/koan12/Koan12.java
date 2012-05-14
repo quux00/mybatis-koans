@@ -16,12 +16,51 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.junit.After;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+// In earlier koans, we used the <constructor> element in our mappings
+// to handle domain objects that did not have default (empty) constructors.
+// In Koan12, we take that to the next level by using "immutable objects":
+// objects whose fields are all declared final and must be set in their 
+// constructors.
+// 
+// We start by using the Actor class, which we model as having no
+// dependencies. All its fields are final, so we start by creating a 
+// query mapping that will set all the fields in its constructor.
+// 
+// Then we show how we can create an immutable Actor class and insert it
+// into the actor table. That is pretty easy. But what if we want to let
+// MyBatis set the id with a <selectKey> mapper like we've used before?
+// If the Actor class is immutable, we can't set the id to null and then
+// let MyBatis later set the id to the next value from the database. Or
+// can we? It turns out, MyBatis can, as it uses reflection - it can set
+// the id even though it is final and has no setters. We will work through
+// getting that set up and working.
+// 
+// After completing those, the next challenge will be to deal with an
+// immutable class that depends on other domain objects. In this case, 
+// we start working with the Address entity, which we model as having a 
+// "has-one" relationship with the City entity, which (as we saw in an 
+// earlier koan) has a "has-one" relationship with the Country entity. 
+// The Address object has a "final" (immutable) reference to its City object. 
+// We'll see how to set up a MyBatis mapping to handle a query that pulls 
+// back an Address, City and Country object.
+// 
+// To ratchet up the koan challenge even more, we will specify each domain
+// entity to have its own mapper file. You will need to configure the config
+// and mapper xml files to properly reference each other.
+// 
+// You'll notice that we have constructors with long param lists, which leads
+// to multiple versions of constructors, having different combinations of 
+// optional params. There are better ways to handle this for immutable objects
+// and we will tackle that in the next koan.
+// 
+// In order to complete this koan, you will need to:
+// 1. Edit the TODO entries in this Koan12 TestCase
+// 2. Edit the TODO entries in the three mapper xml files that have them
+// 3. Edit the TODO entries in the MyBatis config xml file 
 public class Koan12 {
 
 	// Note that we've moved to using one session for the whole koan
@@ -40,15 +79,8 @@ public class Koan12 {
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
+		// TODO: remember to close your resources
 		if (session != null) session.close();
-	}
-
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	@After
-	public void tearDown() throws Exception {
 	}
 
 	@Test
@@ -84,6 +116,9 @@ public class Koan12 {
 	public void learnToCreateAndInsertAnImmutableObjectAwaitingIdFromDB() {
 		ActorMapper mapper = session.getMapper(ActorMapper.class);
 		
+		// insert null as Id - let MyBatis fill it in
+		// (Note: we switched to using Integer rather than int as type for id here
+		//        in order to allow null to be a sentinel value as a temp placeholder)
 		Actor a = new Actor(null, "Sally", "Bazquux");
 		int n = mapper.insertNewActorGetNextIdFromDb(a);
 		assertEquals(1, n);
@@ -101,7 +136,7 @@ public class Koan12 {
 	}
 
 	@Test
-	public void learnToQueryImmutableObjectsThatChainToOtherDomainObjectsAndMultipleMappingFiles() {
+	public void learnToQueryImmutableObjectsThatChainToOtherDomainObjectsAndUseMultipleMappingFiles() {
 		AddressMapper mapper = session.getMapper(AddressMapper.class);
 		
 		Address addr = mapper.getAddressById(600);

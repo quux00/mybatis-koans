@@ -43,14 +43,6 @@ public class Koan12 {
 		if (session != null) session.close();
 	}
 
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	@After
-	public void tearDown() throws Exception {
-	}
-
 	@Test
 	public void learnToPopulateAnImmutableObjectFromMyBatisQuery() {
 		ActorMapper mapper = session.getMapper(ActorMapper.class);
@@ -101,7 +93,7 @@ public class Koan12 {
 	}
 
 	@Test
-	public void learnToQueryImmutableObjectsThatChainToOtherDomainObjectsAndMultipleMappingFiles() {
+	public void learnToQueryImmutableObjectsThatChainToOtherDomainObjectsAndUseMultipleMappingFiles() {
 		AddressMapper mapper = session.getMapper(AddressMapper.class);
 		
 		Address addr = mapper.getAddressById(600);

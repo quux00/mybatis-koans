@@ -6,10 +6,7 @@
   <properties resource="net/thornydev/mybatis/koan/config.properties"/>
 
   <typeAliases>
-    <typeAlias type="net.thornydev.mybatis.koan.domain.Actor"   alias="Actor"/>
-    <typeAlias type="net.thornydev.mybatis.koan.domain.Address" alias="Address"/>
-    <typeAlias type="net.thornydev.mybatis.koan.domain.City"    alias="City"/>
-    <typeAlias type="net.thornydev.mybatis.koan.domain.Country"  alias="Country"/>
+    <!-- TODO: fill in any typeAliases you need -->
   </typeAliases>
 
   <environments default="development">
@@ -25,9 +22,6 @@
   </environments>
   
   <mappers>
-    <mapper resource="net/thornydev/mybatis/koan/koan12/actor-mapper.xml"/>
-    <mapper resource="net/thornydev/mybatis/koan/koan12/country-mapper.xml"/>
-    <mapper resource="net/thornydev/mybatis/koan/koan12/city-mapper.xml"/>
-    <mapper resource="net/thornydev/mybatis/koan/koan12/address-mapper.xml"/>
+    <!-- TODO: fill in all the mappers that you need -->
   </mappers>
 </configuration>

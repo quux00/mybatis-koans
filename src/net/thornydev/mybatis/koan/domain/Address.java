@@ -44,6 +44,7 @@ public class Address {
 		this(id, address, address2, district, postalCode, phone, new Date(), null);
 	}
 	
+	// Ignore this constructor for Koan12
 	public Address(HashMap<String, Object> fieldsMap) {
 		this.id         = (Integer) fieldsMap.get("id");
 		this.address    = (String)  fieldsMap.get("address");

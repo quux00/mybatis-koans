@@ -10,7 +10,8 @@
     </constructor>
     <result property="city"       column="city"/>
     <result property="lastUpdate" column="city_upd"/>
-    
-    <association property="country" resultMap="net.thornydev.mybatis.koan.koan12.CountryMapper.countryResultMap"/>
+
+    <!-- TODO: reference the countryResultMap resultMap -->
+    <association property="country" resultMap="???"/>
   </resultMap>
 </mapper>

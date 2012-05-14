@@ -3,26 +3,22 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="net.thornydev.mybatis.koan.koan12.AddressMapper">
+<!-- TODO: fill in namespace -->
+<mapper namespace="???">
   <resultMap id="addressResultMap" type="Address">
     <constructor>
-      <idArg column="address_id" javaType="int"/>
-      <arg column="address" javaType="String"/>
-      <arg column="address2" javaType="String"/>
-      <arg column="district" javaType="String"/>
-      <arg column="postal_code" javaType="String"/>
-      <arg column="phone" javaType="String"/>
+      <!-- TODO: fill in the constructor args for an Address object here, making sure
+                 to specify the javaType if/where necessary or desired -->
     </constructor>
-    <association property="city" resultMap="net.thornydev.mybatis.koan.koan12.CityMapper.cityResultMap"/>
+    <!-- TODO: reference the cityResultMap resultMap -->
+    <association property="city" resultMap="???"/>
   </resultMap>  
   
   <select id="getAddressById" parameterType="int" resultMap="addressResultMap">
     SELECT a.address_id, a.address, a.address2, a.district, a.postal_code, a.phone, a.last_update,
            ci.city_id, ci.city,
            co.country_id, co.country
-    FROM address a
-    JOIN city ci ON a.city_id = ci.city_id
-    JOIN country co ON ci.country_id = co.country_id
+    <!-- TODO: do a three table join (ideally using ANSI SQL join syntax) to do "eager loading" -->
     WHERE a.address_id = #{id}
   </select>
 </mapper>
