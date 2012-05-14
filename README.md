@@ -330,17 +330,32 @@ Learn:
 
 ### Koan 12
 
-**MyBatis and Immutable Objects**
+**MyBatis and Immutable Objects, part 1**
 
 Learn:
 
 * How to use a MyBatis with immutable objects that have no setter fields
   * Learn to set a TypeHandler for all object type (for any query that uses it)
   * Learn to set a TypeHandler for a specify field/column of a specify mapped query
+* How to use multiple mapper files that reference each other
+
+---
+
+### Koan 13
+
+**MyBatis and Immutable Objects, part 2**
+
+Learn:
+
+* How to use a MyBatis with immutable objects that have no setter fields and without having to directly map to long constructor param lists by using two additional features of MyBatis:
+  * ResultHandler
+  * Object Factory
 
 ---
 
 # Current Status
 
-As of last writing in May 2012, these koans are only just started and not complete.  Feel free to grab them and try them out.  Suggestions for improvements are welcome.
+As of last writing in May 2012, these koans are still in progress and not complete.  Feel free to grab them and try them out.  Suggestions for improvements are welcome.
+
+Right now these koans focus only on the MyBatis Persistence Framework. If there is interest, future koans could also focus on the other "modules" of MyBatis, such as Schema Migrations, the MyBatis code generator and MyBatis-Spring integration, Scala integration and Caches (such as EHCache and memcached).
 
