@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.thornydev.mybatis.koan.koan12.CityMapper">
+  <resultMap id="cityResultMap" type="City">
+    <constructor>
+      <idArg column="city_id" javaType="_integer"/>
+    </constructor>
+    <result property="city"       column="city"/>
+    <result property="lastUpdate" column="city_upd"/>
+    
+    <association property="country" resultMap="net.thornydev.mybatis.koan.koan12.CountryMapper.countryResultMap"/>
+  </resultMap>
+</mapper>
