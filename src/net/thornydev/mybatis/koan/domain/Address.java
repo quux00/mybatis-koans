@@ -1,7 +1,7 @@
 package net.thornydev.mybatis.koan.domain;
 
 import java.util.Date;
-import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Immutable Address class, which has a has-one relationship
@@ -45,7 +45,7 @@ public class Address {
 	}
 	
 	// Ignore this constructor for Koan12
-	public Address(HashMap<String, Object> fieldsMap) {
+	public Address(Map<String, Object> fieldsMap) {
 		this.id         = (Integer) fieldsMap.get("id");
 		this.address    = (String)  fieldsMap.get("address");
 		this.address2   = (String)  fieldsMap.get("address2");

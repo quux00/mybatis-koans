@@ -38,4 +38,9 @@ public class Actor {
 	public Date getLastUpdate() {
 		return lastUpdate;
 	}
+
+	@Override
+	public String toString() {
+		return String.format("[Actor: id = %d; firstName = %s; lastName = %s]", id, firstName, lastName);
+	}
 }
