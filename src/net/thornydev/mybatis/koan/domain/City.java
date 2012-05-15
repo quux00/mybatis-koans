@@ -1,6 +1,7 @@
 package net.thornydev.mybatis.koan.domain;
 
 import java.util.Date;
+import java.util.Map;
 
 /**
  * City domain object. This domain object references one other
@@ -19,6 +20,13 @@ public class City {
 		this.id = id;
 	}
 
+	// ignore this constructor until Koan13
+	public City(int id, String city, Date lastUpdate) {
+		this.id = id;
+		this.city = city;
+		this.lastUpdate = lastUpdate;
+	}
+	
 	public int getId() {
 		return id;
 	}

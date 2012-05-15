@@ -1,6 +1,7 @@
 package net.thornydev.mybatis.koan.domain;
 
 import java.util.Date;
+import java.util.Map;
 
 /**
  * Immutable Actor class.
@@ -23,6 +24,13 @@ public class Actor {
 		this(id, firstName, lastName, new Date());
 	}
 
+	public Actor(Map<String,Object> argsMap) {
+		this.id = (Integer) argsMap.get("id");
+		this.firstName = (String) argsMap.get("firstName");
+		this.lastName = (String) argsMap.get("lastName");
+		this.lastUpdate = (Date) argsMap.get("lastUpdate");
+	}
+	
 	public Integer getId() {
 		return id;
 	}

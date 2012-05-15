@@ -22,6 +22,73 @@ public class Address {
 
 	private final City city;
 	
+	
+	public static class Builder {
+		private Integer id;
+		private String address;
+		private String address2;
+		private String district;
+		private String postalCode;
+		private String phone;
+		private Date lastUpdate;
+		private City city;
+		
+		public Address.Builder id(Integer id) {
+			this.id = id;
+			return this;
+		}
+		
+		public Address.Builder address(String address) {
+			this.address = address;
+			return this;
+		}
+		
+		public Address.Builder address2(String address2) {
+			this.address2 = address2;
+			return this;
+		}
+		
+		public Address.Builder district(String district) {
+			this.district = district;
+			return this;
+		}
+		
+		public Address.Builder postalCode(String postalCode) {
+			this.postalCode = postalCode;
+			return this;
+		}
+		
+		public Address.Builder phone(String phone) {
+			this.phone = phone;
+			return this;
+		}
+		
+		public Address.Builder lastUpdate(Date lastUpdate) {
+			this.lastUpdate = lastUpdate;
+			return this;
+		}
+		
+		public Address.Builder city(City city) {
+			this.city = city;
+			return this;
+		}
+		
+		public Address build() {
+			return new Address(this);
+		}
+	}
+	
+	private Address(Address.Builder b) {
+		this.id = b.id;
+		this.address = b.address;
+		this.address2 = b.address2;
+		this.district = b.district;
+		this.postalCode = b.postalCode;
+		this.phone = b.phone;
+		this.lastUpdate = b.lastUpdate;
+		this.city = b.city;		
+	}
+	
 	public Address(Integer id, String address, String address2, String district,
 			String postalCode, String phone, Date lastUpdate, City city) {
 		this.id = id;
