@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.util.List;
 
 import net.thornydev.mybatis.koan.domain.Country;
+import net.thornydev.mybatis.koan.util.Range;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.RowBounds;
@@ -75,6 +76,23 @@ public class Koan05 {
 			if (session != null) session.close();
 		}
 	}	
+
+	@Test
+	public void learnToQueryWithDomainSpecificRangeParam() throws Exception {
+		SqlSession session = null;
+		try {
+			session = sessionFactory.openSession();
+			List<Country> lc = session.selectList("getCountryRange3", new Range(22, 33));
+
+			assertEquals(12, lc.size());
+			Country finland = lc.get(11);
+			assertEquals("Finland", finland.getCountry());
+			
+		} finally {
+			if (session != null) session.close();
+		}
+	}	
+	
 	
 	@Test
 	public void learnToQueryWithRowBounds() throws Exception {

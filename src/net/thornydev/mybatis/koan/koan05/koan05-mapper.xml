@@ -26,6 +26,17 @@
   </select>
 
   <!-- TODO: fill in resultType -->
+  <!-- TODO: This one is called with a specify parameter type that 
+             must be specified. (You may also want to declare a
+             typeAlias for it.) -->
+  <select id="getCountryRange3" resultType="???">
+    SELECT country_id AS id, country, last_update AS lastUpdate 
+    FROM country
+    <!-- TODO: fill in param names -->
+    WHERE country_id BETWEEN #{???} AND #{???}
+  </select>
+
+  <!-- TODO: fill in resultType -->
   <select id="getCountries" resultType="???">
     SELECT country_id as id, country, last_update as lastUpdate
     FROM country

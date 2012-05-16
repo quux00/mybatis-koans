@@ -347,9 +347,8 @@ Learn:
 
 Learn:
 
-* How to use a MyBatis with immutable objects that have no setter fields and without having to directly map to long constructor param lists by using two additional features of MyBatis:
-  * ObjectFactory
-  * ResultHandler
+* How to use a MyBatis with immutable objects that have no setter fields and without having to directly map to long constructor param lists by implementing MyBatis' ObjectFactory
+* How to use a ResultHandler to do additional things with the objects created by MyBatis (or your ObjectFactory), such as filtering what results are returned
 
 ---
 
