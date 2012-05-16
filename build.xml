@@ -174,6 +174,14 @@
     </junit>
   </target>
 
+  <target name="koan14" depends="compile" description="Run Koan14">
+    <junit haltonfailure="yes" printsummary="yes" fork="true">
+      <classpath refid="project.classpath" />
+      <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      <test name="net.thornydev.mybatis.koan.koan14.Koan14"/>
+    </junit>
+  </target>
+
   <target name="run" depends="compile" description="Runs all Koans">
     <junit haltonfailure="yes" fork="true">
       <classpath refid="project.classpath" />

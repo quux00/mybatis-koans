@@ -1,15 +1,10 @@
 package net.thornydev.mybatis.koan.domain;
 
 import java.util.Date;
-import java.util.Map;
 
 /**
  * Immutable Address class, which has a has-one relationship
  * with the City domain object.
- * 
- * This version of Address requires you to populate a HashMap mapping 
- * field names to values in order to set all of the final fields in the
- * constructor. 
  */
 public class Address {
 	private final Integer id;
@@ -22,7 +17,8 @@ public class Address {
 
 	private final City city;
 	
-	
+	/* ---[ Internal Builder class ]--- */
+
 	public static class Builder {
 		private Integer id;
 		private String address;
@@ -78,6 +74,8 @@ public class Address {
 		}
 	}
 	
+	/* ---[ Long list of (too many) constructors ]--- */
+	
 	private Address(Address.Builder b) {
 		this.id = b.id;
 		this.address = b.address;
@@ -110,23 +108,9 @@ public class Address {
 			String district, String postalCode, String phone) {
 		this(id, address, address2, district, postalCode, phone, new Date(), null);
 	}
-	
-	// Ignore this constructor for Koan12
-	public Address(Map<String, Object> fieldsMap) {
-		this.id         = (Integer) fieldsMap.get("id");
-		this.address    = (String)  fieldsMap.get("address");
-		this.address2   = (String)  fieldsMap.get("address2");
-		this.district   = (String)  fieldsMap.get("district");
-		this.postalCode = (String)  fieldsMap.get("postalCode");
-		this.phone      = (String)  fieldsMap.get("phone");
-		this.city       = (City)    fieldsMap.get("city");
-		if (fieldsMap.containsKey("lastUpdate")) {
-			this.lastUpdate = (Date) fieldsMap.get("lastUpdate");
-		} else {
-			this.lastUpdate = new Date();
-		}
-	}
 
+	/* ---[ Getters and Setters ]--- */
+	
 	public Integer getId() {
 		return id;
 	}

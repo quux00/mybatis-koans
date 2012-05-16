@@ -33,7 +33,7 @@ import org.junit.Test;
 // 2. using the builder idiom to set params that will construct an underlying
 //    immutable object.  (If you are interested in more background on the
 //    builder "idiom" as I call it, see my blog post on the topic:
-//    http://XXXXXXXXX)
+//    http://thornydev.blogspot.com/2012/02/factories-and-builders-idioms-and.html)
 // 
 // MyBatis does not know how to use these more exotic techniques out of the box
 // though, so we need to be able to intercept how it creates our domain objects

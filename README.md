@@ -352,6 +352,17 @@ Learn:
 
 ---
 
+### Koan 14
+
+**Database inserts, revisited**
+
+Learn:
+
+* How to insert null values into a nullable columns in the database
+* How to insert into multiple tables from a chain of related objects
+
+---
+
 # Current Status
 
 As of last writing in May 2012, these koans are still in progress and not complete.  Feel free to grab them and try them out.  Suggestions for improvements are welcome.

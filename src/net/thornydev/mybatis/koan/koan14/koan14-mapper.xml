@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.thornydev.mybatis.koan.koan14.Koan14Mapper">
+  
+  <!-- COUNTRY mappings -->
+
+  <insert id="insertCountry" parameterType="Country">
+    INSERT INTO country (country_id, country)
+    VALUES (#{id}, #{country})
+  </insert>
+
+  <insert id="insertCountry2" parameterType="Country">
+    <selectKey keyProperty="id" resultType="int" order="BEFORE">
+      SELECT MAX(country_id) + 1 AS id FROM country
+    </selectKey>
+    INSERT INTO country (country_id, country, last_update)
+    VALUES (#{id}, #{country}, #{lastUpdate})
+  </insert>
+
+  <select id="getCountryCount" resultType="int">
+    SELECT count(*) FROM country 
+  </select>
+
+  <select id="getMaxCountryId" resultType="int">
+    SELECT MAX(country_id) FROM country 
+  </select>
+
+  <select id="getCountryById" resultType="Country">
+    SELECT country_id AS id, country, last_update AS lastUpdate 
+    FROM country 
+    WHERE country_id = #{id}
+  </select>  
+
+  <!-- CITY mappings -->
+
+  <insert id="insertCity" parameterType="City">
+    INSERT INTO city (city_id, city, country_id)
+    VALUES (#{id}, #{city}, #{country, typeHandler=CountryIdTypeHandler}) 
+<!--     VALUES (#{id}, #{city}, #{country, typeHandler=CountryIdTypeHandler})  -->
+  </insert>
+
+  <!-- FIXME: make general "getCount" method and pass in table name -->
+  <select id="getCityCount" resultType="int">
+    SELECT count(*) FROM city 
+  </select>
+  
+</mapper>
