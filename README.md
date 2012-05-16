@@ -358,14 +358,14 @@ Learn:
 
 Learn:
 
-* How to insert into multiple tables from a chain of related objects
+* How to use a TypeHandler to insert into a table where its mapped domain object depends on other domain objects
 * How to insert null values into a nullable columns in the database
 
 ---
 
 # A Note on Solutions
 
-As noted above, my answers are in the completed-koans directory. For many koans, there are probably many ways to make it worth (even within the constraints I set in order to exercise some feature of MyBatis). If you have an alternative answer that you think is better or just as good and will help others see the possibilities, feel free to send it to me (or send a pull request) and I can add those to the repo.
+As noted above, my answers are in the completed-koans directory. For many koans, there are probably many ways to make it work (even within the constraints I set in order to exercise a given feature of MyBatis). If you have an alternative answer that you think is better or just as good and will help others see the possibilities, feel free to send it to me (or send a pull request) and I can add those to the repo.
 
 ---
 
@@ -383,7 +383,7 @@ So far, I have only tested them carefully with PostgreSQL 9.1.3 on Linux. I also
 
 Right now these koans focus only on the MyBatis Persistence Framework. If there is interest, future koans could also focus on the other "modules" of MyBatis, such as Schema Migrations, the MyBatis code generator and MyBatis-Spring integration, Scala integration and Caches (such as EHCache and memcached).
 
-Even within the Persistence Framework, these koans do not cover some functionality in MyBatis 3, such as:
+Even within the Persistence Framework, these koans do **not** cover some functionality in MyBatis 3, such as:
 
 * caching
 * altering the defaults of a wide variety of settings, such as "useGeneratedKeys", turning off "aggressiveLazyLoading", or altering "autoMappingBehavior"
@@ -391,6 +391,6 @@ Even within the Persistence Framework, these koans do not cover some functionali
 * implementing our own TransactionFactory
 * JNDI lookups 
 * databaseIdProvider
-* more
+* more features, not listed here
 
-If any of these you have found to be really useful, feel free to suggest a new koan or write one yourself to add it here.
+If you have found any of these to be really useful, feel free to suggest a new koan or write one yourself to add it here.
