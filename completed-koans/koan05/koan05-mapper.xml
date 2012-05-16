@@ -21,6 +21,12 @@
     WHERE country_id BETWEEN #{id1} AND #{id2}
   </select>
 
+  <select id="getCountryRange3" resultType="Country">
+    SELECT country_id AS id, country, last_update AS lastUpdate 
+    FROM country
+    WHERE country_id BETWEEN #{start} AND #{end}
+  </select>
+
   <select id="getCountries" resultType="Country">
     SELECT country_id as id, country, last_update as lastUpdate
     FROM country
