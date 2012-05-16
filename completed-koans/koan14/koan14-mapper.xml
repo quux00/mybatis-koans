@@ -21,7 +21,9 @@
 
   <insert id="insertCity" parameterType="City">
     INSERT INTO city (city_id, city, country_id)
-    VALUES (#{id}, #{city}, #{country, typeHandler=CountryIdTypeHandler}) 
+    <!-- TODO: specify the values clause, remember to include a typeHandler 
+               for the types that MyBatis doesn't have default typeHandlers for -->
+    VALUES (???) 
   </insert>
 
   <resultMap id="cityResultMap" type="City">
@@ -42,8 +44,9 @@
   <insert id="insertAddress" parameterType="Address">
     INSERT INTO address (address_id, address, address2, district, city_id, 
                          postal_code, phone)
-    VALUES (#{id}, #{address}, #{address2, jdbcType=VARCHAR}, #{district}, 
-            #{city, typeHandler=CityIdTypeHandler}, #{postalCode, jdbcType=VARCHAR}, 
-            #{phone})
+    <!-- TODO: specify the values clause, remember to include the jdbcType
+               for nullable columns and typeHandler for the types that MyBatis
+               doesn't have default typeHandlers for -->
+    VALUES (???)
   </insert>
 </mapper>

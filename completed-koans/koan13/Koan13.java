@@ -70,7 +70,6 @@ import org.junit.Test;
 // something additional with it, such as add it to lists, filter out
 // the ones we don't want or whatever. In our koan, we use it to filter
 // out any Actors whose last name is 4 characters long.
-//   FIXME: the above hasn't been done yet !!!
 //
 // In order to complete this koan, you will need to:
 // 1. Edit the TODO entries in this Koan12 Test

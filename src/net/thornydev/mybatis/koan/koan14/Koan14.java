@@ -17,9 +17,39 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-// Quote from MyBatis User Guide:  "The JDBC type is only required for
-// nullable columns upon insert, update or delete."
-
+// Koan14 returns to DML statements, INSERT in particular.
+// We take on two things we didn't do before:
+// 1. Inserting records from a domain object that depends on other
+//    domain objects.
+// 2. Inserting null values into nullable columns.
+// 
+// For the first challenge we insert a City object into the city table
+// and we insert an Address into the address table.
+// City has a reference to a Country object and Address has a reference
+// to a City object.  Out of the box, MyBatis has no idea how to get
+// the city_id or country_id out of the City and Country domain objects,
+// so we must provide a TypeHandler.
+//
+// For the second challenge on inserting nulls, the MyBatis User Guide says
+//    "The JDBC type is only required for
+//     nullable columns upon insert, update or delete."
+//      -and-
+//    "NOTE The JDBC Type is required by JDBC for all nullable columns, if 
+//     null is passed as a value. You can investigate this yourself by 
+//     reading the JavaDocs for the PreparedStatement.setNull() method."
+// 
+// So we follow those instructions when inserting null values into the
+// nullable columns of the address table.
+// 
+// Note: so far, using Java 1.7, MyBatis-3.1.1 and PostgreSQL 9.1 using
+//       postgresql-9.1-901.jdbc4.jar, I have not found that specifying
+//       the jdbcType for nullable columns is required.
+// 
+// In order to complete this koan, you will need to:
+// 1. Complete the TODO entries in the koan14-mapper.xml file
+// 2. Implement two TypeHandlers:
+//    a. net.thornydev.mybatis.koan.util.CountryIdTypeHandler
+//    b. net.thornydev.mybatis.koan.util.CityIdTypeHandler
 public class Koan14 {
 
 	static SqlSession session;
