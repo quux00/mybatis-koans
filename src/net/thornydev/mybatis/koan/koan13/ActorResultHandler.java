@@ -1,5 +1,8 @@
 package net.thornydev.mybatis.koan.koan13;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.thornydev.mybatis.koan.domain.Actor;
 
 import org.apache.ibatis.session.ResultContext;
@@ -7,14 +10,17 @@ import org.apache.ibatis.session.ResultHandler;
 
 public class ActorResultHandler implements ResultHandler {
 	
-	private Actor actor = null;
+	private List<Actor> actors = new ArrayList<Actor>();
 	
 	@Override
 	public void handleResult(ResultContext rc) {
-		actor = (Actor) rc.getResultObject();
+		Actor actor = (Actor) rc.getResultObject();
+		if (actor.getLastName().length() != 4) {
+			actors.add(actor);
+		}
 	}
 	
-	public Actor getActor() {
-		return actor;
+	public List<Actor> getActors() {
+		return actors;
 	}
 }

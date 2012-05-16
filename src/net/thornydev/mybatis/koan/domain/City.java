@@ -1,7 +1,6 @@
 package net.thornydev.mybatis.koan.domain;
 
 import java.util.Date;
-import java.util.Map;
 
 /**
  * City domain object. This domain object references one other

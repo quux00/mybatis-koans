@@ -6,10 +6,11 @@
   <properties resource="net/thornydev/mybatis/koan/config.properties"/>
 
   <typeAliases>
-    <typeAlias type="net.thornydev.mybatis.koan.domain.Actor"    alias="Actor"/>
-    <typeAlias type="net.thornydev.mybatis.koan.domain.Address"  alias="Address"/>
-    <typeAlias type="net.thornydev.mybatis.koan.domain.City"     alias="City"/>
-    <typeAlias type="net.thornydev.mybatis.koan.domain.Country"  alias="Country"/>
+    <typeAlias type="net.thornydev.mybatis.koan.domain.Actor"   alias="Actor"/>
+    <typeAlias type="net.thornydev.mybatis.koan.domain.Address" alias="Address"/>
+    <typeAlias type="net.thornydev.mybatis.koan.domain.City"    alias="City"/>
+    <typeAlias type="net.thornydev.mybatis.koan.domain.Country" alias="Country"/>
+    <typeAlias type="net.thornydev.mybatis.koan.util.Range"     alias="Range"/>
   </typeAliases>
 
   <objectFactory type="net.thornydev.mybatis.koan.koan13.Koan13ObjectFactory"/>

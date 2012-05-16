@@ -20,4 +20,10 @@
     WHERE actor_id = #{id}
   </select>
   
+  <select id="getActorByRange" parameterType="Range" resultMap="actorMapper">
+    SELECT actor_id, first_name, last_name, last_update
+    FROM actor
+    WHERE actor_id BETWEEN #{start} AND #{end}
+  </select>
+  
 </mapper>
