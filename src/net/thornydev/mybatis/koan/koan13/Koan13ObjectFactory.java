@@ -1,13 +1,7 @@
 package net.thornydev.mybatis.koan.koan13;
 
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import net.thornydev.mybatis.koan.domain.Actor;
-import net.thornydev.mybatis.koan.domain.Address;
-import net.thornydev.mybatis.koan.domain.City;
 import net.thornydev.mybatis.koan.util.ObjectFactoryCheck;
 
 import org.apache.ibatis.reflection.factory.DefaultObjectFactory;
@@ -18,15 +12,12 @@ public class Koan13ObjectFactory extends DefaultObjectFactory {
 
 	@Override
 	public <T> T create(Class<T> type, List<Class<?>> ctorArgTypes, List<Object> ctorArgs) {
-		if (type.equals(Actor.class)) {
-			return createActor(ctorArgs);
-		} else if (type.equals(Address.class)) {
-			return createAddress(ctorArgs);
-		} else if (type.equals(City.class)) {
-			return createCity(ctorArgs);
-		} else {
-			return super.create(type, ctorArgTypes, ctorArgs);
-		}
+		// TODO: override this create method and call the appropriate createXXX
+		//       method below based on the Class type passed in
+		// NOTE: make sure to handle the case where the Class passed in is not
+		//       one of the specific types we are overriding below - those need
+		//       to invoke the MyBatis default object factory creation code
+		return null;
 	}
 	
 	/**
@@ -37,63 +28,45 @@ public class Koan13ObjectFactory extends DefaultObjectFactory {
 	 * wouldn't use the ObjectFactory in production code this way,
 	 * but it serves to illustrate how to mimic what MyBatis does
 	 * behind the scenes with an ObjectFactory. 
+	 * 
+	 * This method expects three constructorArgs as specified in the
+	 * city-mapper.xml file.
 	 */
 	private <T> T createCity(List<Object> ctorArgs) {
+		// leave this intact
 		ObjectFactoryCheck.getInstance().setObjectFactoryUsed(true);
-
-		final int expSize = 3; 
-		if (ctorArgs.size() != expSize) {
-			throw new IllegalArgumentException("Expected "+expSize+" constructor args for City class");
-		}
-		int id = (int) ctorArgs.get(0);
-		String city = (String) ctorArgs.get(1);
-		Date lastUpdate = (Date) ctorArgs.get(2);
-		@SuppressWarnings("unchecked")
-		T addr = (T) new City(id, city, lastUpdate);
-		return addr;
+		
+		// TODO: fill in, using the three param constructor of City
+		return null;
 	}
 
+	/**
+	 * Create an Actor object using the constructor that takes a Map
+	 * of field names to field values.
+	 * 
+	 * This method expects four constructorArgs as specified in the
+	 * actor-mapper.xml file.
+	 */
 	private <T> T createActor(List<Object> ctorArgs) {		
+		// leave this intact
 		ObjectFactoryCheck.getInstance().setObjectFactoryUsed(true);
-
-		final int expSize = 4;
-		if (ctorArgs.size() != expSize) {
-			throw new IllegalArgumentException("Expected "+expSize+" constructor args for Actor class");
-		}
 		
-		Map<String,Object> argMap = new HashMap<String,Object>();
-		argMap.put("id", ctorArgs.get(0));
-		argMap.put("firstName", ctorArgs.get(1));
-		argMap.put("lastName", ctorArgs.get(2));
-		argMap.put("lastUpdate", ctorArgs.get(3));
-		// FIXME: not sure this is the right/best way to do this!
-		@SuppressWarnings("unchecked")
-		T actor = (T) new Actor(argMap);
-		return actor;		
+		// TODO: fill in using the constructor of Actor that takes a Map
+		return null;
 	}
 
+	/**
+	 * Create an Address object using the Builder idiom.
+	 * 
+	 * This method expects seven constructorArgs as specified in the
+	 * address-mapper.xml file.
+	 */
 	private <T> T createAddress(List<Object> ctorArgs) {
+		// leave this intact
 		ObjectFactoryCheck.getInstance().setObjectFactoryUsed(true);
-
-		final int expSize = 7; 
-		if (ctorArgs.size() != expSize) {
-			throw new IllegalArgumentException("Expected "+expSize+" constructor args for Address class");
-		}
-
-		// use the Builder
-		Address addr = new Address.Builder().
-				id( (Integer) ctorArgs.get(0) ).
-				address( (String) ctorArgs.get(1) ).
-				address2( (String) ctorArgs.get(2) ).
-				district( (String) ctorArgs.get(3) ).
-				postalCode( (String) ctorArgs.get(4) ).
-				phone( (String) ctorArgs.get(5) ).
-				lastUpdate( (Date) ctorArgs.get(6) ).
-				build();
 		
-		@SuppressWarnings("unchecked")
-		T t = (T)addr;
-		return t;
+		// TODO: fill in using the Address.Builder inner class of Address
+		return null;
 	}
 
 }

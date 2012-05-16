@@ -1,26 +1,15 @@
 package net.thornydev.mybatis.koan.koan13;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import net.thornydev.mybatis.koan.domain.Actor;
 
-import org.apache.ibatis.session.ResultContext;
-import org.apache.ibatis.session.ResultHandler;
-
-public class ActorResultHandler implements ResultHandler {
-	
-	private List<Actor> actors = new ArrayList<Actor>();
-	
-	@Override
-	public void handleResult(ResultContext rc) {
-		Actor actor = (Actor) rc.getResultObject();
-		if (actor.getLastName().length() != 4) {
-			actors.add(actor);
-		}
-	}
+// TODO: implement a ResultHandler that keeps a List of
+//       all Actors passed to it, filtering out those that have
+//       last name of length 4
+public class ActorResultHandler {
 	
 	public List<Actor> getActors() {
-		return actors;
+		return null;
 	}
 }

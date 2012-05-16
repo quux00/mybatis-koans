@@ -12,6 +12,7 @@ import net.thornydev.mybatis.koan.util.ObjectFactoryCheck;
 import net.thornydev.mybatis.koan.util.Range;
 
 import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
@@ -73,9 +74,11 @@ import org.junit.Test;
 //   FIXME: the above hasn't been done yet !!!
 //
 // In order to complete this koan, you will need to:
-// 1. Edit the TODO entries in this Koan12 Test
-// 2. Edit the TODO entries in the three mapper xml files that have them
-// 3. Edit the TODO entries in the MyBatis config xml file 
+// 1. Edit the TODO entries in this Koan13 Test
+// 2. Edit the TODO entries in the Koan13ObjectFactory class
+// 3. Edit the TODO entries in the actor-mapper.xml file
+// 4. Edit the TODO entries in the MyBatis config xml file 
+// 5. Implement a ResultHandler - see TODO in ActorResultHandler
 public class Koan13 {
 
 	static SqlSession session;
@@ -111,7 +114,9 @@ public class Koan13 {
 	@Test
 	public void learnToUseObjectFactoryAndResultHandler_Actor() {
 		ActorResultHandler rh = new ActorResultHandler();
-		session.select("getActorByRange", new Range(36, 42), rh);
+		// TODO: the cast to ResultHandler will be unnecessary once you properly
+		//       implement ActorResultHandler
+		session.select("getActorByRange", new Range(36, 42), (ResultHandler) rh);
 		List<Actor> la = rh.getActors();
 		assertNotNull(la);
 		assertEquals(6, la.size());
