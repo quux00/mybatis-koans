@@ -72,7 +72,7 @@ public class Koan15 {
 
 	@Test
 	public void learnToInsertDomainObjectThatReferencesAnotherDomainObject() {
-		int cntBefore = session.selectOne("getCount", "city");
+		int cntBefore = (Integer) session.selectOne("getCount", "city");
 
 		Country c = session.selectOne("getCountryById", 22);
 		
@@ -80,7 +80,7 @@ public class Koan15 {
 		city.setCountry(c);
 		
 		session.insert("insertCity", city);
-		int cntAfter = session.selectOne("getCount", "city");
+		int cntAfter = (Integer) session.selectOne("getCount", "city");
 		
 		assertEquals(cntAfter, cntBefore + 1);
 		
@@ -105,10 +105,10 @@ public class Koan15 {
 				phone("555-8675-309").
 				build();
 	
-		int before = session.selectOne("getCount", "address");
+		int before = (Integer) session.selectOne("getCount", "address");
 		int n = session.insert("insertAddress", addr);
 		assertEquals(1, n);
-		int after = session.selectOne("getCount", "address");
+		int after = (Integer) session.selectOne("getCount", "address");
 		assertEquals(after, before + 1);
 		
 		session.rollback();

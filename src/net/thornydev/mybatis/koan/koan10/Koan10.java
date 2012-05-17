@@ -98,7 +98,7 @@ public class Koan10 {
 		SqlSession session = null;
 		try {
 			session = sessionFactory.openSession();
-			int cityCount = session.selectOne("getCityCount");
+			int cityCount = (Integer) session.selectOne("getCityCount");
 			
 			Koan10Mapper mapper = session.getMapper(Koan10Mapper.class);
 			List<City> lc = mapper.getCities();

@@ -65,7 +65,7 @@ public class Koan08 {
 			
 			assertEquals(1, n);
 			
-			int totalCountries = session.selectOne("getCountryCount");
+			int totalCountries = (Integer) session.selectOne("getCountryCount");
 			assertEquals(110, totalCountries);
 			
 			Country southSudan = session.selectOne("getCountryById", 1000);
@@ -98,7 +98,7 @@ public class Koan08 {
 			
 			assertEquals(1, n);
 			
-			int totalCountries = session.selectOne("getCountryCount");
+			int totalCountries = (Integer) session.selectOne("getCountryCount");
 			assertEquals(109, totalCountries);
 			
 			Country northSudan = session.selectOne("getCountryById", 89);
@@ -136,19 +136,19 @@ public class Koan08 {
 			n = session.insert("insertCountry", c1001);
 			assertEquals(1, n);
 			
-			int totalCountries = session.selectOne("getCountryCount");			
+			int totalCountries = (Integer) session.selectOne("getCountryCount");			
 			assertEquals(111, totalCountries);
 			
 			// second delete it via mapper class
 			Koan08Mapper mapper = session.getMapper(Koan08Mapper.class);
 			n = mapper.deleteCountryById( c1000.getId() );
 			assertEquals(1, n);
-			totalCountries = session.selectOne("getCountryCount");			
+			totalCountries = (Integer) session.selectOne("getCountryCount");			
 			assertEquals(110, totalCountries);
 			
 			n = mapper.deleteCountry(c1001);
 			assertEquals(1, n);
-			totalCountries = session.selectOne("getCountryCount");			
+			totalCountries = (Integer) session.selectOne("getCountryCount");			
 			assertEquals(109, totalCountries);
 			
 		} finally {
@@ -171,7 +171,7 @@ public class Koan08 {
 		try {
 			session = sessionFactory.openSession();
 			// first get max country id and cache it for assert testing later
-			int maxId = session.selectOne("getMaxCountryId");
+			int maxId = (Integer) session.selectOne("getMaxCountryId");
 			
 			Country c = new Country();
 			c.setCountry("South Sudan");
@@ -181,7 +181,7 @@ public class Koan08 {
 			assertEquals(1, n);
 			assertEquals(maxId + 1, c.getId());  // id should have been filled in and set to new maxId
 			
-			int totalCountries = session.selectOne("getCountryCount");
+			int totalCountries = (Integer) session.selectOne("getCountryCount");
 			assertEquals(110, totalCountries);
 			
 			Country southSudan = session.selectOne("getCountryById", maxId + 1);
