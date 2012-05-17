@@ -237,6 +237,16 @@ Learn:
 
 ### Koan 04
 
+**Domain objects, using underscore to camelCase mapping**
+
+Learn:
+
+* how to tell MyBatis to convert underscores to camelCase to auto-map database column names to object property names
+
+---
+
+### Koan 05
+
 **Mapper interface**
 
 Learn:
@@ -245,7 +255,7 @@ Learn:
 
 ---
 
-### Koan 05
+### Koan 06
 
 **Multiple Arguments and RowBounds**
 
@@ -258,7 +268,7 @@ Learn:
 
 ---
 
-### Koan 06
+### Koan 07
 
 **Annotation driven mappings**
 
@@ -269,7 +279,7 @@ Learn:
 
 ---
 
-### Koan 07
+### Koan 08
 
 **Updates, inserts and deletes**
 
@@ -283,7 +293,7 @@ Learn:
 
 ---
 
-### Koan 08
+### Koan 09
 
 **`<sql>` and dynamic string substitution**
 
@@ -294,7 +304,7 @@ Learn:
 
 ---
 
-### Koan 09
+### Koan 10
 
 **ResultMaps, part 1**
 
@@ -306,7 +316,7 @@ Learn:
 
 ---
 
-### Koan 10
+### Koan 11
 
 **ResultMaps, part 2**
 
@@ -316,7 +326,7 @@ Learn:
 
 ---
 
-### Koan 11
+### Koan 12
 
 **TypeHandlers**
 
@@ -328,7 +338,7 @@ Learn:
 
 ---
 
-### Koan 12
+### Koan 13
 
 **MyBatis and Immutable Objects, part 1**
 
@@ -341,7 +351,7 @@ Learn:
 
 ---
 
-### Koan 13
+### Koan 14
 
 **MyBatis and Immutable Objects, part 2**
 
@@ -352,7 +362,7 @@ Learn:
 
 ---
 
-### Koan 14
+### Koan 15
 
 **Database inserts, revisited**
 

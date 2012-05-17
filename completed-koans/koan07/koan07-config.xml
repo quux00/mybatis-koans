@@ -22,6 +22,6 @@
   </environments>
   
   <mappers>
-    <mapper resource="net/thornydev/mybatis/koan/koan07/koan07-mapper.xml"/>
+    <mapper class="net.thornydev.mybatis.koan.koan07.Koan07Mapper"/>
   </mappers>
 </configuration>

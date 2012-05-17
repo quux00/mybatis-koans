@@ -5,25 +5,37 @@
 
 <mapper namespace="net.thornydev.mybatis.koan.koan08.Koan08Mapper">
 
-  <sql id="selectAllCountries">
-    SELECT country_id AS id, country, last_update AS lastUpdate
-    FROM country
-  </sql>
+  <update id="updateCountry" parameterType="Country">
+    UPDATE country
+    SET country = #{country}, last_update = #{lastUpdate}
+    WHERE country_id = #{id}
+  </update>
 
-  <!-- Note: http://mybatis-user.963551.n3.nabble.com/how-to-use-dynamic-parameters-in-select-statement-in-iBatis-3-td1639391.html -->
-  <select id="getCountriesOrdered" resultType="Country">
-    <include refid="selectAllCountries"/> 
-    ORDER BY ${value}
+  <insert id="insertCountry" parameterType="Country">
+    INSERT INTO country (country_id, country, last_update)
+    VALUES (#{id}, #{country}, #{lastUpdate})
+  </insert>
+
+  <insert id="insertCountry2" parameterType="Country">
+    <selectKey keyProperty="id" resultType="int" order="BEFORE">
+      SELECT MAX(country_id) + 1 AS id FROM country
+    </selectKey>
+    INSERT INTO country (country_id, country, last_update)
+	  VALUES (#{id}, #{country}, #{lastUpdate})
+  </insert>
+
+  <select id="getCountryCount" resultType="int">
+    SELECT count(*) FROM country 
   </select>
 
-  <select id="getCountriesOrdered2" resultType="Country">
-    <include refid="selectAllCountries"/> 
-    ORDER BY ${columnName}
+  <select id="getMaxCountryId" resultType="int">
+    SELECT MAX(country_id) FROM country 
   </select>
 
-  <select id="getCountries" resultType="Country">
-    <include refid="selectAllCountries"/> 
-    ${value}
+  <select id="getCountryById" resultType="Country">
+    SELECT country_id AS id, country, last_update AS lastUpdate 
+    FROM country 
+    WHERE country_id = #{id}
   </select>
 
 </mapper>

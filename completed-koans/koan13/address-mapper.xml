@@ -12,7 +12,6 @@
       <arg column="district" javaType="String"/>
       <arg column="postal_code" javaType="String"/>
       <arg column="phone" javaType="String"/>
-      <arg column="last_update" javaType="Date"/>
     </constructor>
     <association property="city" resultMap="net.thornydev.mybatis.koan.koan13.CityMapper.cityResultMap"/>
   </resultMap>  

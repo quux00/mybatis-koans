@@ -15,17 +15,13 @@
       <id property="id" column="film_id"/>
       <result property="title" column="title"/>
       <result property="lastUpdate" column="film_upd"/>
-      <result property="releaseYear" column="release_year" javaType="Year"/>
-      <result property="rentalRate"  column="rental_rate" />
-      <result property="specialFeatures" column="special_features" 
-              typeHandler="net.thornydev.mybatis.koan.util.FilmSpecialFeaturesTypeHandler"/>
+      <result property="specialFeatures" column="special_features"/>
     </collection>
   </resultMap>
 
   <select id="getLanguageById" parameterType="int" resultMap="languageResultMap">
     SELECT l.language_id, l.name, l.last_update,
-           f.film_id, f.title, f.last_update as film_upd, f.special_features,
-           f.release_year, f.rental_rate
+           f.film_id, f.title, f.last_update as film_upd, f.special_features
     FROM language l
     LEFT OUTER JOIN film f on f.language_id = l.language_id
     WHERE l.language_id = #{id}

@@ -1,11 +1,13 @@
 package net.thornydev.mybatis.koan.koan08;
 
-import java.util.List;
+import org.apache.ibatis.annotations.Delete;
 
 import net.thornydev.mybatis.koan.domain.Country;
 
-import org.apache.ibatis.annotations.Param;
-
 public interface Koan08Mapper {
-	List<Country> getCountriesOrdered2(@Param("columnName") String columnName);
+	@Delete("DELETE FROM country WHERE country_id = #{id}")
+	int deleteCountryById(int id);
+
+	@Delete("DELETE FROM country WHERE country_id = #{id}")
+	int deleteCountry(Country c);
 }

@@ -4,33 +4,44 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="net.thornydev.mybatis.koan.koan08.Koan08Mapper">
-  
-  <!-- TODO: create an sql element called "selectAllCountries" that does
-             the SELECT statement needed by all the "get" mappings below -->
-  <sql></sql>
 
-  <!-- TODO: fill in the ${???} string substitution variable below -->
-  <!-- Note: as of May 2012, the MyBatis User Guide has wrong (or incomplete)
-       information on this. See this URL for help on what to fill in here:
-       http://mybatis-user.963551.n3.nabble.com/how-to-use-dynamic-parameters-in-select-statement-in-iBatis-3-td1639391.html -->
-  <select id="getCountriesOrdered" resultType="Country">
-    <!-- TODO: Reference the "selectAllCountries" sql element here, rather
-         than write SQL directly -->
-    ORDER BY ${???}  
+  <!-- TODO: the update xml element needs additional information to know 
+             what's being passed in -->
+  <update id="updateCountry">
+    <!-- TODO: fill in question marks below -->
+    UPDATE country
+    SET country = ???, last_update = ???
+    WHERE country_id = ???
+  </update>
+
+  <!-- TODO: the insert xml element needs additional information to know 
+             what's being passed in -->
+  <insert id="insertCountry">
+    INSERT INTO country (country_id, country, last_update)
+    VALUES (<!-- TODO: fill in how the values clause will be set with values passed in -->)
+  </insert>
+
+  <insert id="insertCountry2" parameterType="Country">
+    <!-- TODO: the selectKey xml element needs attributes to know how to operate -->
+    <selectKey>
+      SELECT max(country_id) + 1 AS id FROM country
+    </selectKey>
+    INSERT INTO country (country_id, country, last_update)
+	  VALUES (<!-- TODO: fill in how the values clause will be set with values passed in -->)
+  </insert>
+
+  <select id="getCountryCount" resultType="int">
+    SELECT count(*) FROM country 
   </select>
 
-  <select id="getCountriesOrdered2" resultType="Country">
-    <!-- TODO: Reference the "selectAllCountries" sql element here, rather
-         than write SQL directly -->
-    ORDER BY ${columnName}  <!-- This variable name is correct - do NOT change it. 
-                                 Instead, adjust the Koan08Mapper to use it. -->
+  <!-- TODO: create a getMaxCountryId mapping -->
+  <select id="getMaxCountryId">
   </select>
 
-  <!-- TODO: fill in the ${???} string substitution variable below -->
-  <select id="getCountries" resultType="Country">
-    <!-- TODO: Reference the "selectAllCountries" sql element here, rather
-         than write SQL directly -->
-    ${???}
+  <select id="getCountryById" resultType="Country">
+    SELECT country_id AS id, country, last_update AS lastUpdate 
+    FROM country 
+    WHERE country_id = #{id}
   </select>
 
 </mapper>

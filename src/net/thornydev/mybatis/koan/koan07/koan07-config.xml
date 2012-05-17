@@ -22,8 +22,6 @@
   </environments>
   
   <mappers>
-    <!-- TODO: what mapper type should you use here? 
-               Do you need a <mapper class=""> entry or just <mapper resource="">? 
-               Is it dependent on the namespace of the root element of this file? -->
+    <!-- TODO: specify the mapper. You can't specify a file based resource any more. -->
   </mappers>
 </configuration>

@@ -3,22 +3,62 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!-- TODO: fill in namespace -->
-<mapper namespace="???">
+<mapper namespace="net.thornydev.mybatis.koan.koan10.Koan10Mapper">
   
-  <resultMap id="languageResultMap" type="Language">
-    <!-- TODO: fill in mappings for Language -->
+  <!-- TODO: create the "countryResultMap" ResultMap.
+             Note that the query below does NOT include column aliases that
+             map to the Country object property names, so you will need to
+             provide that mapping in the ResultMap -->
+             
+  <select id="getCountryById" parameterType="int" resultMap="countryResultMap">
+    SELECT country_id, country, last_update
+    FROM country 
+    WHERE country_id = #{id}
+  </select>
 
-    <!-- TODO: create a collection mapping for the list of Films for a Language -->
-    <!-- NOTE: only the id, title, lastUpdate and specialFeatures fields are required
-               (by the unit test), but you can add more if you'd like -->
-    <collection/>
+  <resultMap id="cityResultMap" type="City">
+    <!-- TODO: fill in the ResultMap for mapping city columns to the City properties.
+               Note, however, that the City object does not have a default constructor,
+               but instead must be passed its id in the constructor.  Do not change the City
+               domain object. Instead, accommodate that restriction here in the ResultMap -->
+    <!-- HINT: You may have trouble getting the id constructor argument to the City object
+               working. If you do, read the error message you get carefully and take note 
+               that the City constructor takes a primitive int, not an Integer object. -->
+    
+    <!-- TODO: make an association to the Country object. You can either specify
+               the full association here or you can reuse the existing Country ResultMap,
+               though that might take some minor tweaking to the getCityById SQL query. -->
+    <association property="???"></association>
   </resultMap>
 
-  <select id="getLanguageById" parameterType="int" resultMap="languageResultMap">
-    SELECT l.language_id, l.name, l.last_update,
-           f.film_id, f.title, f.last_update as film_upd, f.special_features
-    <!-- TODO: finish SQL that joins the language table and the film table -->
+  <!-- Nested Result for Association (Eager loading) -->
+  <select id="getCityById" parameterType="int" resultMap="cityResultMap">
+    SELECT ci.city_id, ci.city, ci.last_update AS city_upd, 
+           co.country_id, co.country, co.last_update AS country_upd
+    FROM city ci
+    JOIN country co ON ci.country_id = co.country_id
+    WHERE ci.city_id = #{id}
+  </select>
+
+  <!-- Nested Select for Association (Lazy loading) -->
+  <resultMap id="cityResultMapLazy" type="City">
+    <!-- TODO: remember that City does not have a default constructor, so you
+               have to accommodate that here.  The aliases in the SQL query can
+               only help with properties (via setters). -->
+    
+    <!-- TODO: in the association below, do not reference a ResultMap. Instead
+               reference the "getCountryById" select statement. -->
+    <association property="???"></association>
+  </resultMap>
+
+  <select id="getCities" resultMap="cityResultMapLazy">
+    SELECT city_id, city, last_update AS lastUpdate, country_id
+    FROM city 
+    ORDER by city_id
+  </select>
+  
+  <select id="getCityCount" resultType="int">
+    SELECT count(*) FROM city
   </select>
 
 </mapper>

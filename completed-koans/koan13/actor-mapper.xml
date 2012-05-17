@@ -20,10 +20,24 @@
     WHERE actor_id = #{id}
   </select>
   
-  <select id="getActorByRange" parameterType="Range" resultMap="actorMapper">
+  <select id="getActorByFullName" parameterType="String" resultMap="actorMapper">
     SELECT actor_id, first_name, last_name, last_update
     FROM actor
-    WHERE actor_id BETWEEN #{start} AND #{end}
+    WHERE first_name = #{param1} AND last_name = #{param2}
+    ORDER BY actor_id
   </select>
-  
+
+  <insert id="insertNewActor">
+    INSERT INTO actor
+    VALUES(#{id}, #{firstName}, #{lastName}, #{lastUpdate})
+  </insert>
+
+  <insert id="insertNewActorGetNextIdFromDb">
+    <selectKey keyProperty="id" resultType="int" order="BEFORE">
+      SELECT MAX(actor_id) + 1 AS id FROM actor
+    </selectKey>
+    INSERT INTO actor
+    VALUES(#{id}, #{firstName}, #{lastName}, #{lastUpdate})
+  </insert>
+
 </mapper>

@@ -6,8 +6,12 @@
   <properties resource="net/thornydev/mybatis/koan/config.properties"/>
 
   <typeAliases>
-    <!-- TODO: fill in any typeAliases you need -->
+    <typeAlias type="net.thornydev.mybatis.koan.domain.Film"     alias="Film"/>
+    <typeAlias type="net.thornydev.mybatis.koan.domain.Language" alias="Language"/>
+    <!-- TODO: add any additional typeAlias(es) you need -->
   </typeAliases>
+
+  <!-- TODO: add any typeHandler(s) you need -->
 
   <environments default="development">
     <environment id="development">
@@ -22,6 +26,6 @@
   </environments>
   
   <mappers>
-    <!-- TODO: fill in all the mappers that you need -->
+    <!-- TODO: add the mapper(s) you need -->
   </mappers>
 </configuration>

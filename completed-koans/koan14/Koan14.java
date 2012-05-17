@@ -3,11 +3,13 @@ package net.thornydev.mybatis.koan.koan14;
 import static org.junit.Assert.*;
 
 import java.io.InputStream;
-import java.util.Date;
+import java.util.List;
 
+import net.thornydev.mybatis.koan.domain.Actor;
 import net.thornydev.mybatis.koan.domain.Address;
 import net.thornydev.mybatis.koan.domain.City;
-import net.thornydev.mybatis.koan.domain.Country;
+import net.thornydev.mybatis.koan.util.ObjectFactoryCheck;
+import net.thornydev.mybatis.koan.util.Range;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -17,9 +19,62 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-// Quote from MyBatis User Guide:  "The JDBC type is only required for
-// nullable columns upon insert, update or delete."
-
+// In Koan12, we dealt with immutable objects by building long constructor
+// lists, though we also learned that MyBatis can work around the final
+// keyword, so it is not strictly necessary to pass in all fields to the
+// constructor when using MyBatis.
+// 
+// In Koan14, we continue our investigation of ways to handle immutable
+// objects with MyBatis.  We show two additional patterns for using immutable
+// objects:
+// 1. passing in a Map of params to the constructor (which is
+//    typical in dynamic languages, though not that common in Java and other
+//    statically typed languages).
+// 2. using the builder idiom to set params that will construct an underlying
+//    immutable object.  (If you are interested in more background on the
+//    builder "idiom" as I call it, see my blog post on the topic:
+//    http://thornydev.blogspot.com/2012/02/factories-and-builders-idioms-and.html)
+// 
+// MyBatis does not know how to use these more exotic techniques out of the box
+// though, so we need to be able to intercept how it creates our domain objects
+// and do it ourselves.  MyBatis provides the ObjectFactory interface for just
+// this purpose (and a concrete default implementation class called 
+// DefaultObjectFactory, which we will leverage).
+// 
+// In implementing and configuring the ObjectFactory, we will learn two 
+// additional important things:
+// 1. there can only be one ObjectFactory registered in your config file
+// 2. the order of declaration of XML elements in the MyBatis config file
+//    is significant (you will get an error if they are out of order)
+// 
+// We start by using the City class. While the City class does not have 
+// immutable fields, it is included here in order to demonstrate a simple use
+// of the ObjectFactory - basically creating a City class with a standard
+// constructor.
+// 
+// Next we use the constructor of the Actor class that takes a 
+// Map<String,Object> in order to set its immutable fields.
+// 
+// Third, we use the Builder inner class of the Address class to create
+// an Address class in the Koan14ObjectFactory.
+// 
+// In showing so many ways to use MyBatis, the domain classes have gotten
+// rather polluted (e.g., how many different ways are there to create a
+// Address class now?).  This design is definitely not meant to show best
+// practice recommendation, but rather to show various aspects of working
+// with MyBatis. You should then pick the style that works best for your
+// project and stick to that.
+// 
+// Lastly, we learn how to use the MyBatis ResultHandler class. The 
+// ResultHandler can receive the output of the ObjectFactory and do
+// something additional with it, such as add it to lists, filter out
+// the ones we don't want or whatever. In our koan, we use it to filter
+// out any Actors whose last name is 4 characters long.
+//
+// In order to complete this koan, you will need to:
+// 1. Edit the TODO entries in this Koan12 Test
+// 2. Edit the TODO entries in the three mapper xml files that have them
+// 3. Edit the TODO entries in the MyBatis config xml file 
 public class Koan14 {
 
 	static SqlSession session;
@@ -41,46 +96,58 @@ public class Koan14 {
 	}
 
 	@Test
-	public void learnToInsertDomainObjectThatReferencesAnotherDomainObject() {
-		int cntBefore = session.selectOne("getCount", "city");
-
-		Country c = session.selectOne("getCountryById", 22);
+	public void learnToUseObjectFactory_City() {
+		City c = session.selectOne("getCityById", 188);
+		assertNotNull(c);
+		assertEquals(188, c.getId());
+		assertEquals("Guadalajara", c.getCity());
+		assertNotNull(c.getLastUpdate());
+		assertNotNull(c.getCountry());
 		
-		City city = new City(1000, "FooCity", new Date());
-		city.setCountry(c);
-		
-		session.insert("insertCity", city);
-		int cntAfter = session.selectOne("getCount", "city");
-		
-		assertEquals(cntAfter, cntBefore + 1);
-		
-		session.rollback();
+		checkObjectFactoryWasUsed();
 	}
-
-	@Test
-	public void learnToInsertDomainObjectWithNullValues() {
-		City city = session.selectOne("getCityById", 375);
-		assertNotNull(city);
-		assertNotNull(city.getCountry());
-		assertEquals("Okara", city.getCity());
-		assertEquals("Pakistan", city.getCountry().getCountry());
-
-		Address addr = new Address.Builder().
-				id(1000).
-				address("100 Foo St.").
-				address2(null).  // could also just leave it off, but here to be explicit
-				district("Bar").
-				city(city).
-				postalCode(null).
-				phone("555-8675-309").
-				build();
 	
-		int before = session.selectOne("getCount", "address");
-		int n = session.insert("insertAddress", addr);
-		assertEquals(1, n);
-		int after = session.selectOne("getCount", "address");
-		assertEquals(after, before + 1);
+	@Test
+	public void learnToUseObjectFactoryAndResultHandler_Actor() {
+		ActorResultHandler rh = new ActorResultHandler();
+		session.select("getActorByRange", new Range(36, 42), rh);
+		List<Actor> la = rh.getActors();
+		assertNotNull(la);
+		assertEquals(6, la.size());
 		
-		session.rollback();
+		Actor first = la.get(0);
+		assertEquals(36, first.getId().intValue());
+		assertEquals("BURT", first.getFirstName());
+		assertEquals("DUKAKIS", first.getLastName());
+	
+		Actor fifth = la.get(4);
+		assertEquals(41, fifth.getId().intValue());
+		assertEquals("JODIE", fifth.getFirstName());
+		assertEquals("DEGENERES", fifth.getLastName());
+	
+		checkObjectFactoryWasUsed();
+	}
+	
+	@Test
+	public void learnToUseObjectFactory_Address() {
+		AddressMapper mapper = session.getMapper(AddressMapper.class);
+		Address addr = mapper.getAddressById(100);
+		assertNotNull(addr);
+		assertEquals(100, addr.getId().intValue());
+		assertEquals("1308 Arecibo Way", addr.getAddress());
+		assertEquals("30695", addr.getPostalCode());
+		assertNotNull(addr.getLastUpdate());
+		assertNotNull(addr.getCity());
+		assertNotNull(addr.getCity().getCountry());
+		
+		checkObjectFactoryWasUsed();
+	}	
+
+	/* ---[ HELPER METHODS ]--- */
+
+	private void checkObjectFactoryWasUsed() {
+		assertTrue(ObjectFactoryCheck.getInstance().getObjectFactoryUsed());
+		// reset for next test
+		ObjectFactoryCheck.getInstance().setObjectFactoryUsed(false);
 	}
 }

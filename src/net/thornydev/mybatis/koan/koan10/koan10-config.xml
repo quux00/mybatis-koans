@@ -6,8 +6,8 @@
   <properties resource="net/thornydev/mybatis/koan/config.properties"/>
 
   <typeAliases>
-    <!-- TODO: set up the necessary TypeAlias entries -->
-    <!-- Use the alias "Film" for the SimpleFilm class -->
+    <typeAlias type="net.thornydev.mybatis.koan.domain.Country" alias="Country"/>
+    <!-- TODO: need another type alias -->
   </typeAliases>
 
   <environments default="development">

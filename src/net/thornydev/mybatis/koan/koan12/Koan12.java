@@ -5,66 +5,67 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.InputStream;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
-import net.thornydev.mybatis.koan.domain.Actor;
-import net.thornydev.mybatis.koan.domain.Address;
-import net.thornydev.mybatis.koan.domain.City;
-import net.thornydev.mybatis.koan.domain.Country;
+import net.thornydev.mybatis.koan.domain.Film;
+import net.thornydev.mybatis.koan.domain.Language;
+import net.thornydev.mybatis.koan.util.Year;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-// In earlier koans, we used the <constructor> element in our mappings
-// to handle domain objects that did not have default (empty) constructors.
-// In Koan12, we take that to the next level by using "immutable objects":
-// objects whose fields are all declared final and must be set in their 
-// constructors.
+// Koan12 investigates the use of the MyBatis TypeHandler in order to 
+// handle domain specific types or to do special processing on a known type.
 // 
-// We start by using the Actor class, which we model as having no
-// dependencies. All its fields are final, so we start by creating a 
-// query mapping that will set all the fields in its constructor.
+// We also do exercises to test the TypeHandler in both directions - pulling
+// data out (queries) and pushing data into the database (DML).
 // 
-// Then we show how we can create an immutable Actor class and insert it
-// into the actor table. That is pretty easy. But what if we want to let
-// MyBatis set the id with a <selectKey> mapper like we've used before?
-// If the Actor class is immutable, we can't set the id to null and then
-// let MyBatis later set the id to the next value from the database. Or
-// can we? It turns out, MyBatis can, as it uses reflection - it can set
-// the id even though it is final and has no setters. We will work through
-// getting that set up and working.
+// In order to use the MyBatis TypeHandler extend 
+// org.apache.ibatis.type.BaseTypeHandler<T>, where T is the data type of you 
+// want to return from queries or convert to a database type for DML statements.
 // 
-// After completing those, the next challenge will be to deal with an
-// immutable class that depends on other domain objects. In this case, 
-// we start working with the Address entity, which we model as having a 
-// "has-one" relationship with the City entity, which (as we saw in an 
-// earlier koan) has a "has-one" relationship with the Country entity. 
-// The Address object has a "final" (immutable) reference to its City object. 
-// We'll see how to set up a MyBatis mapping to handle a query that pulls 
-// back an Address, City and Country object.
+// In this koan, we use net.thornydev.mybatis.koan.domain.Film, rather than 
+// net.thornydev.mybatis.koan.koan10.FilmK10. There are three differences:
+// 1. the "releaseYear" field is of type net.thornydev.mybatis.koan.util.Year
+//    rather than a simple String
+// 2. the "specialFeatures" field is now a List<String>, rather than a simple
+//    String with multiple comma-separated entries
+// 3. the rentalRate and replacementCost fields have been converted to
+//    BigDecimal types rather than floats.
 // 
-// To ratchet up the koan challenge even more, we will specify each domain
-// entity to have its own mapper file. You will need to configure the config
-// and mapper xml files to properly reference each other.
-// 
-// You'll notice that we have constructors with long param lists, which leads
-// to multiple versions of constructors, having different combinations of 
-// optional params. There are better ways to handle this for immutable objects
-// and we will tackle that in the next koan.
-// 
-// In order to complete this koan, you will need to:
-// 1. Edit the TODO entries in this Koan12 TestCase
-// 2. Edit the TODO entries in the three mapper xml files that have them
-// 3. Edit the TODO entries in the MyBatis config xml file 
+// Our first use of a TypeHandler is to handle the Year domain specific class.
+// It is not a very interesting domain type, but serves as a good illustration of
+// how to use a TypeHandler.  Since MyBatis will not know by default how to 
+// handle the Year class, you need to help it and register the TypeHandler as
+// a general handler of the Year type for all queries/DML statements.
+//
+// Our second use of a TypeHandler is to specify for a specific query 
+// ("getLanguageById") how to handle the text in the special_features column. 
+// The special_features column is a comma-separated list of features
+// (it is not third normal form compliant). Since we have specified that
+// the specialFeatures property of Film is now a List<String>, then we need
+// a handler to split the string by commas and removes any extraneous characters
+// (the postgresql dataset uses curly braces and quotes, for example).
+// However, because the special_features data is a String, we can't register
+// the SpecialFeaturesTypeHandler as a general handler for all strings, but
+// only for the special_features column in the query we are interested in.
+//
+// To complete this koan test you will need to (in no particular order):
+//   1. Edit the TODO entries in the FilmMapper interface
+//   2. Edit the TODO entries in this Koan12 TestCase
+//   3. Edit the TODO entries in the FilmSpecialFeaturesTypeHandler interface
+//   4. Edit the TODO entries mapper xml file
+//   5. Edit the TODO entries in the MyBatis config xml file 
+//   6. Create a TypeHandler for the Year class. I recommend that you call it
+//      "YearTypeHandler" and put it in the util package (along with Year).
 public class Koan12 {
 
-	// Note that we've moved to using one session for the whole koan
-	static SqlSession session;
 	static SqlSessionFactory sessionFactory;
 	
 	@BeforeClass
@@ -73,84 +74,69 @@ public class Koan12 {
 		InputStream inputStream = Resources.getResourceAsStream(resource);
 		sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 		inputStream.close();
-
-		session = sessionFactory.openSession();
-	}
-
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-		// TODO: remember to close your resources
-		if (session != null) session.close();
 	}
 
 	@Test
-	public void learnToPopulateAnImmutableObjectFromMyBatisQuery() {
-		ActorMapper mapper = session.getMapper(ActorMapper.class);
-		List<Actor> actors = mapper.getActorByFullName("UMA", "WOOD");
-		assertEquals(1, actors.size());
-		Actor uma = actors.get(0);
-		assertEquals(13, uma.getId().intValue());
-		assertEquals("UMA", uma.getFirstName());
-		assertEquals("WOOD", uma.getLastName());
-		assertNotNull(uma.getLastUpdate());
+	public void learnToUseTypeHandlerForDomainSpecificFieldTypesForQueries() {
+		SqlSession session = null;
+		try {
+			session = sessionFactory.openSession();
+			LanguageMapper mapper = session.getMapper(LanguageMapper.class);
+		
+			Language lang = mapper.getLanguageById(1);
+			assertNotNull(lang);
+			assertEquals(1, lang.getId());
+			assertEquals("English", lang.getName().trim());
+			assertNotNull(lang.getFilms());
+			
+			List<Film> lf = lang.getFilms();
+			assertEquals(1000, lf.size());
+			
+			Film f = lf.get(0);
+			assertEquals(1000, f.getId());
+			assertEquals("ZORRO ARK", f.getTitle());
+			assertNotNull(f.getReleaseYear());
+			assertEquals( new Year("2006"), f.getReleaseYear() );
+			assertEquals( BigDecimal.valueOf(4.99), f.getRentalRate() );
+			assertNotNull( f.getSpecialFeatures() );
+			assertEquals( 3, f.getSpecialFeatures().size() );
+			
+			List<String> expectedSpecFeat = new ArrayList<String>();
+			expectedSpecFeat.add("Trailers");
+			expectedSpecFeat.add("Commentaries");
+			expectedSpecFeat.add("Behind the Scenes");
+			assertTrue( f.getSpecialFeatures().containsAll(expectedSpecFeat) );
+			
+		} finally {
+			if (session != null) session.close();
+		}
 	}
 
 	@Test
-	public void learnToCreateAndInsertAnImmutableObjectWithPrecreatedId() {
-		ActorMapper mapper = session.getMapper(ActorMapper.class);
-		
-		Actor a = new Actor(1000, "Timothy", "Foobar");
-		int n = mapper.insertNewActor(a);
-		assertEquals(1, n);
-		
-		Actor b = mapper.getActorById(1000);
-		assertEquals(a.getId(), b.getId());
-		assertEquals(a.getFirstName(), b.getFirstName());
-		assertEquals(a.getLastName(), b.getLastName());
-		assertNotNull(b.getLastUpdate());
-		
-		session.rollback();
-	}
+	public void learnToUseTypeHandlerForDomainSpecificFieldTypesForDMLStatements() {
+		SqlSession session = null;
+		try {
+			session = sessionFactory.openSession();
+			FilmMapper mapper = session.getMapper(FilmMapper.class);
+			
+			// TODO: create a Film object (id 1000) to pass the
+			//       with properties set to pass tests down below
+			Film f = null;
+			
+			int n = mapper.updateYearAndReplacementCost(f);
+			assertEquals(1, n);
 
-	@Test
-	public void learnToCreateAndInsertAnImmutableObjectAwaitingIdFromDB() {
-		ActorMapper mapper = session.getMapper(ActorMapper.class);
-		
-		// insert null as Id - let MyBatis fill it in
-		// (Note: we switched to using Integer rather than int as type for id here
-		//        in order to allow null to be a sentinel value as a temp placeholder)
-		Actor a = new Actor(null, "Sally", "Bazquux");
-		int n = mapper.insertNewActorGetNextIdFromDb(a);
-		assertEquals(1, n);
-		
-		assertNotNull(a.getId());
-		assertTrue(a.getId().intValue() > 0);
-
-		Actor b = mapper.getActorById(a.getId());
-		assertEquals(a.getId(), b.getId());
-		assertEquals(a.getFirstName(), b.getFirstName());
-		assertEquals(a.getLastName(), b.getLastName());
-		assertNotNull(b.getLastUpdate());
-		
-		session.rollback();	
-	}
-
-	@Test
-	public void learnToQueryImmutableObjectsThatChainToOtherDomainObjectsAndUseMultipleMappingFiles() {
-		AddressMapper mapper = session.getMapper(AddressMapper.class);
-		
-		Address addr = mapper.getAddressById(600);
-		assertNotNull(addr);
-		assertEquals(600, addr.getId().intValue());
-		assertEquals("1837 Kaduna Parkway", addr.getAddress());
-		assertEquals("82580", addr.getPostalCode());
-		
-		City city = addr.getCity();
-		assertNotNull(city);
-		assertEquals("Jining", city.getCity());
-
-		Country country = city.getCountry();
-		assertNotNull(country);
-		assertEquals("China", country.getCountry());
+			// test to make sure it was updated as expected
+			f = mapper.getFilmById(1000);
+			assertEquals("ZORRO ARK", f.getTitle());
+			assertEquals("2012", f.getReleaseYear().toString());
+			assertEquals(BigDecimal.valueOf(25.95), f.getReplacementCost());
+			
+		} finally {
+			if (session != null) {
+				session.rollback();
+				session.close();
+			}
+		}
 	}
 }

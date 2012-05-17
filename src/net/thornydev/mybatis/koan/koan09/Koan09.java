@@ -1,11 +1,10 @@
 package net.thornydev.mybatis.koan.koan09;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.io.InputStream;
 import java.util.List;
 
-import net.thornydev.mybatis.koan.domain.City;
 import net.thornydev.mybatis.koan.domain.Country;
 
 import org.apache.ibatis.io.Resources;
@@ -15,32 +14,20 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-// Koan09 finally gets us to more than one table.  We learn about how to
-// use MyBatis ResultMaps to map table column names to object property
-// names or constructor arguments.
+// In Koan09, we learn about two minor but useful features of XML mapping:
+// 1. the <sql> element that allows you to keep your SQL more D.R.Y.
+// 2. dynamic string substitution in SQL that does not correspond to bound
+//    params in a PreparedStatement
 // 
-// ResultMaps can be used for single table queries or multiple table queries.
-// 
-// Before moving to ResultMaps mapping multiple tables to domain objects,
-// we will start with the good old country table to Country object mapping
-// but this time use an explicit MyBatis ResultMap, rather than the implicit
-// one we've been using thus far.
-// 
-// Next we introduce the City object that has a "has-one" (or "belongs to")
-// association with the Country object. We will meditate on two ways to query 
-// the city table to also bring back its corresponding Country object from
-// the country table.  In one case ("nested selects") we do 1 query on the
-// city table and N queries on the Country table, where N is the number of
-// cities retrieved.  This is rather inefficient.
-// 
-// By doing a relational join, we can do a single query, which is more efficient.
-// MyBatis uses what it calls "nested results" to create City-Country object 
-// duos from a single query using joins.
+// We will use the latter to pass in information on how to sort (ORDER BY)
+// or filter (WHERE). We will do this both directly to the xml mapping code
+// and also via the Koan09Mapper class and use an annotation to specify
+// the name of the param that the dynamic string variable is bound to.
 // 
 // To complete this koan test you will need to edit:
 // 1. all the TODO entries in this koan
-// 2. the mapper xml file to have the right SQL queries and MyBatis XML entries
-// 3. the config xml file to set up another TypeAlias
+// 2. all the TODO entries in the Koan09Mapper class
+// 3. all the TODO entries in the the koan mapper xml file 
 public class Koan09 {
 
 	static SqlSessionFactory sessionFactory;
@@ -54,73 +41,86 @@ public class Koan09 {
 	}
 
 	@Test
-	public void learnToUseResultMapForSingleTableQuery() {
+	public void learnToSpecifyOrderViaDynamicStringSubstitutionVariableInXml() throws Exception {
 		SqlSession session = null;
+		
 		try {
 			session = sessionFactory.openSession();
-			Koan09Mapper mapper = session.getMapper(Koan09Mapper.class);
-			Country c = mapper.getCountryById(33);
-			
-			assertEquals(33, c.getId());
-			assertEquals("Finland", c.getCountry());
-			assertNotNull(c.getLastUpdate());
+			List<Country> lc = session.selectList("getCountriesOrdered", "country DESC");
+			assertEquals(109, lc.size());
+			Country c = lc.get(0);
+			assertEquals("Zambia", c.getCountry());
 			
 		} finally {
-			if (session != null) session.close();
+			if (session != null) {
+				session.rollback();
+				session.close();
+			}
 		}
 	}
 
 	@Test
-	public void learnToUseResultMapForTwoTableAssociation() {
+	public void learnToSpecifyOrderViaDynamicStringSubstitutionVariableInMapperClass() throws Exception {
 		SqlSession session = null;
+		
 		try {
 			session = sessionFactory.openSession();
 			Koan09Mapper mapper = session.getMapper(Koan09Mapper.class);
-			City city = mapper.getCityById(544);
+			// TODO: call the "getCountriesOrdered2" method in the Koan09Mapper, passing in
+			//       the column to sort by and any other ordering information needed to make
+			//       the asserts below pass
+			List<Country> lc = null;
+
+			assertEquals(109, lc.size());
+			Country c = lc.get(0);
+			assertEquals("Zambia", c.getCountry());
 			
-			assertEquals(544, city.getId());
-			assertEquals("Toulouse", city.getCity());
-			assertNotNull(city.getLastUpdate());
-			
-			// TODO: get the Country associated with the city "Toulouse"
-			Country co = null;
-			assertNotNull(co);
-			assertEquals("France", co.getCountry());
-			assertNotNull(co.getLastUpdate());
+			lc = session.selectList("getCountries", null);
+			assertEquals(109, lc.size());
+			c = lc.get(0);
+			assertEquals("Afghanistan", c.getCountry());
 			
 		} finally {
-			if (session != null) session.close();
+			if (session != null) {
+				session.rollback();
+				session.close();
+			}
 		}
-	}
-
+	}	
+	
 	@Test
-	public void learnToUseNestedSelectForAssociation() {
+	public void learnToSpecifyDynamicClausesInXml() throws Exception {
 		SqlSession session = null;
+		
 		try {
 			session = sessionFactory.openSession();
-			int cityCount = session.selectOne("getCityCount");
-			
-			Koan09Mapper mapper = session.getMapper(Koan09Mapper.class);
-			List<City> lc = mapper.getCities();
 
-			City first = lc.iterator().next();
-			assertEquals(1, first.getId());
-			assertNotNull(first.getCountry());
+			// TODO: specify a sort order via an SQL clause (where the ??? is)
+			//       review the asserts below to know what SQL clause to use
+			List<Country> lc = session.selectList("getCountries", "???");
+			assertEquals(109, lc.size());
+			Country c = lc.get(0);
+			assertEquals("Zambia", c.getCountry());
 			
-			assertEquals(cityCount, lc.size());
-			City city = lc.get(543);
-			assertEquals(544, city.getId());
-			assertEquals("Toulouse", city.getCity());
-			assertNotNull(city.getLastUpdate());
+			// use no clause at all
+			lc = session.selectList("getCountries", null);
+			assertEquals(109, lc.size());
+			c = lc.get(0);
+			assertEquals("Afghanistan", c.getCountry());
 			
-			Country co = city.getCountry();
-			assertNotNull(co);
-			assertEquals("France", co.getCountry());
-			assertNotNull(co.getLastUpdate());
+			// TODO: specify a range via an SQL clause (where the ??? is)
+			//       review the asserts below to know what SQL clause to use
+			lc = session.selectList("getCountries", "???");
+			assertEquals(12, lc.size());
+			c = lc.get(11);
+			assertEquals(33, c.getId());			
+			assertEquals("Finland", c.getCountry());			
 			
 		} finally {
-			if (session != null) session.close();
+			if (session != null) {
+				session.rollback();
+				session.close();
+			}
 		}
 	}
-
 }

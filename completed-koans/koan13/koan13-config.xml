@@ -9,11 +9,8 @@
     <typeAlias type="net.thornydev.mybatis.koan.domain.Actor"   alias="Actor"/>
     <typeAlias type="net.thornydev.mybatis.koan.domain.Address" alias="Address"/>
     <typeAlias type="net.thornydev.mybatis.koan.domain.City"    alias="City"/>
-    <typeAlias type="net.thornydev.mybatis.koan.domain.Country" alias="Country"/>
-    <typeAlias type="net.thornydev.mybatis.koan.util.Range"     alias="Range"/>
+    <typeAlias type="net.thornydev.mybatis.koan.domain.Country"  alias="Country"/>
   </typeAliases>
-
-  <objectFactory type="net.thornydev.mybatis.koan.koan13.Koan13ObjectFactory"/>
 
   <environments default="development">
     <environment id="development">

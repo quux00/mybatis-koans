@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import java.io.InputStream;
 import java.util.List;
 
-import net.thornydev.mybatis.koan.domain.City;
 import net.thornydev.mybatis.koan.domain.Country;
 
 import org.apache.ibatis.io.Resources;
@@ -27,73 +26,82 @@ public class Koan09 {
 		inputStream.close();
 	}
 
+
 	@Test
-	public void learnToUseResultMapForSingleTableQuery() {
+	public void learnToSpecifyOrderViaDynamicStringSubstitutionVariableInXml() throws Exception {
 		SqlSession session = null;
+		
 		try {
 			session = sessionFactory.openSession();
-			Koan09Mapper mapper = session.getMapper(Koan09Mapper.class);
-			Country c = mapper.getCountryById(33);
-			
-			assertEquals(33, c.getId());
-			assertEquals("Finland", c.getCountry());
-			assertNotNull(c.getLastUpdate());
+			List<Country> lc = session.selectList("getCountriesOrdered", "country DESC");
+			assertEquals(109, lc.size());
+			Country c = lc.get(0);
+			assertEquals("Zambia", c.getCountry());
 			
 		} finally {
-			if (session != null) session.close();
+			if (session != null) {
+				session.rollback();
+				session.close();
+			}
 		}
 	}
 
 	@Test
-	public void learnToUseResultMapForTwoTableAssociation() {
+	public void learnToSpecifyOrderViaDynamicStringSubstitutionVariableInMapperClass() throws Exception {
 		SqlSession session = null;
+		
 		try {
 			session = sessionFactory.openSession();
 			Koan09Mapper mapper = session.getMapper(Koan09Mapper.class);
-			City city = mapper.getCityById(544);
+			List<Country> lc = mapper.getCountriesOrdered2("country DESC");
+
+			assertEquals(109, lc.size());
+			Country c = lc.get(0);
+			assertEquals("Zambia", c.getCountry());
 			
-			assertEquals(544, city.getId());
-			assertEquals("Toulouse", city.getCity());
-			assertNotNull(city.getLastUpdate());
-			
-			Country co = city.getCountry();
-			assertNotNull(co);
-			assertEquals("France", co.getCountry());
-			assertNotNull(co.getLastUpdate());
+			lc = session.selectList("getCountries", null);
+			assertEquals(109, lc.size());
+			c = lc.get(0);
+			assertEquals("Afghanistan", c.getCountry());
 			
 		} finally {
-			if (session != null) session.close();
+			if (session != null) {
+				session.rollback();
+				session.close();
+			}
 		}
-	}
-
+	}	
+	
 	@Test
-	public void learnToUseNestedSelectForAssociation() {
+	public void learnToSpecifyDynamicClausesInXml() throws Exception {
 		SqlSession session = null;
+		
 		try {
 			session = sessionFactory.openSession();
-			int cityCount = session.selectOne("getCityCount");
+			// use an order by clause
+			List<Country> lc = session.selectList("getCountries", "ORDER BY country DESC");
+			assertEquals(109, lc.size());
+			Country c = lc.get(0);
+			assertEquals("Zambia", c.getCountry());
 			
-			Koan09Mapper mapper = session.getMapper(Koan09Mapper.class);
-			List<City> lc = mapper.getCities();
-
-			City first = lc.iterator().next();
-			assertEquals(1, first.getId());
-			assertNotNull(first.getCountry());
+			// use no clause at all
+			lc = session.selectList("getCountries", null);
+			assertEquals(109, lc.size());
+			c = lc.get(0);
+			assertEquals("Afghanistan", c.getCountry());
 			
-			assertEquals(cityCount, lc.size());
-			City city = lc.get(543);
-			assertEquals(544, city.getId());
-			assertEquals("Toulouse", city.getCity());
-			assertNotNull(city.getLastUpdate());
-			
-			Country co = city.getCountry();
-			assertNotNull(co);
-			assertEquals("France", co.getCountry());
-			assertNotNull(co.getLastUpdate());
+			// specify a range via an SQL clause
+			lc = session.selectList("getCountries", "WHERE country_id BETWEEN 22 and 33");
+			assertEquals(12, lc.size());
+			c = lc.get(11);
+			assertEquals(33, c.getId());			
+			assertEquals("Finland", c.getCountry());			
 			
 		} finally {
-			if (session != null) session.close();
+			if (session != null) {
+				session.rollback();
+				session.close();
+			}
 		}
 	}
-
 }

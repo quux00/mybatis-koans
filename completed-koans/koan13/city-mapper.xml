@@ -7,16 +7,10 @@
   <resultMap id="cityResultMap" type="City">
     <constructor>
       <idArg column="city_id" javaType="_integer"/>
-      <arg column="city" javaType="String"/>
-      <arg column="last_update" javaType="Date"/>
     </constructor>
+    <result property="city"       column="city"/>
+    <result property="lastUpdate" column="city_upd"/>
     
     <association property="country" resultMap="net.thornydev.mybatis.koan.koan13.CountryMapper.countryResultMap"/>
   </resultMap>
-  
-  <select id="getCityById" resultMap="cityResultMap">
-    SELECT city_id, city, last_update
-    FROM city
-    WHERE city_id = #{id}
-  </select>
 </mapper>

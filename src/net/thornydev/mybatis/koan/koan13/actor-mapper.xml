@@ -6,12 +6,8 @@
 <mapper namespace="net.thornydev.mybatis.koan.koan13.ActorMapper">
   
   <resultMap id="actorMapper" type="Actor">
-    <constructor>
-      <idArg column="actor_id"  javaType="int"/>
-      <arg column="first_name"  javaType="String"/>
-      <arg column="last_name"   javaType="String"/>
-      <arg column="last_update" javaType="Date"/>
-    </constructor>
+    <!-- TODO: fill in resultMap to work for both getActorById
+               and getActorByFullName queries -->
   </resultMap>
   
   <select id="getActorById" parameterType="int" resultMap="actorMapper">
@@ -20,12 +16,23 @@
     WHERE actor_id = #{id}
   </select>
   
-  <!-- TODO: fill in the parameterType -->
-  <select id="getActorByRange" parameterType="???" resultMap="actorMapper">
+  <select id="getActorByFullName" parameterType="String" resultMap="actorMapper">
     SELECT actor_id, first_name, last_name, last_update
     FROM actor
-    <!-- TODO: fill in the parameter names -->
-    WHERE actor_id BETWEEN #{???} AND #{???}
+    <!-- TODO: fill in where clause to match the method signature in ActorMapper interface -->
+    ORDER BY actor_id
   </select>
-  
+
+  <insert id="insertNewActor">
+    INSERT INTO actor
+    VALUES( <!-- TODO: fill in VALUES clause --> )
+  </insert>
+
+  <insert id="insertNewActorGetNextIdFromDb">
+    <!-- TODO: create a selectKey element using the same logic we did
+               in the previous koan where we used this -->   
+    INSERT INTO actor
+    VALUES( <!-- TODO: fill in VALUES clause --> )
+  </insert>
+
 </mapper>

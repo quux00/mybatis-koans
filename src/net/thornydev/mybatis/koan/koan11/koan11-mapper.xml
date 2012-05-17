@@ -3,34 +3,22 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!-- TODO: fill in proper namespace -->
+<!-- TODO: fill in namespace -->
 <mapper namespace="???">
   
-  <!-- TODO: fill in property return type -->
-  <resultMap id="languageResultMap" type="???">
-    <constructor>
-      <idArg column="language_id" javaType="_integer"/>
-      <arg column="name" javaType="String"/>
-    </constructor>
-    <result property="lastUpdate" column="last_update"/>
-    <collection property="films" ofType="Film">
-      <id property="id" column="film_id"/>
-      <result property="title" column="title"/>
-      <result property="lastUpdate" column="film_upd"/>
-      <!-- TODO: specify result mapping for the release_year column -->
-      <result property="rentalRate"  column="rental_rate" />
-      <!-- TODO: specify result mapping for the special_features column -->
-    </collection>
+  <resultMap id="languageResultMap" type="Language">
+    <!-- TODO: fill in mappings for Language -->
+
+    <!-- TODO: create a collection mapping for the list of Films for a Language -->
+    <!-- NOTE: only the id, title, lastUpdate and specialFeatures fields are required
+               (by the unit test), but you can add more if you'd like -->
+    <collection/>
   </resultMap>
 
   <select id="getLanguageById" parameterType="int" resultMap="languageResultMap">
     SELECT l.language_id, l.name, l.last_update,
-           f.film_id, f.title, f.last_update as film_upd, f.special_features,
-           f.release_year, f.rental_rate
-    FROM language l
-    LEFT OUTER JOIN film f on f.language_id = l.language_id
-    WHERE l.language_id = #{id}
-    ORDER BY f.film_id DESC
+           f.film_id, f.title, f.last_update as film_upd, f.special_features
+    <!-- TODO: finish SQL that joins the language table and the film table -->
   </select>
 
 </mapper>

@@ -5,29 +5,19 @@
 
 <mapper namespace="net.thornydev.mybatis.koan.koan05.Koan05Mapper">
 
-  <select id="getCountryCount" resultType="int">
-    SELECT count(*) FROM country 
+  <select id="getCountryById" parameterType="int" resultType="Country">
+    SELECT country_id as id, country, last_update as lastUpdate
+    FROM country 
+    WHERE country_id = #{id}
   </select>
 
-  <select id="getCountryRange" resultType="Country">
+  <select id="getAllCountries" resultType="Country">
     SELECT country_id AS id, country, last_update AS lastUpdate 
     FROM country
-    WHERE country_id BETWEEN #{param1} AND #{param2}
+    ORDER BY country_id DESC
   </select>
 
-  <select id="getCountryRange2" resultType="Country">
-    SELECT country_id AS id, country, last_update AS lastUpdate 
-    FROM country
-    WHERE country_id BETWEEN #{id1} AND #{id2}
-  </select>
-
-  <select id="getCountryRange3" resultType="Country">
-    SELECT country_id AS id, country, last_update AS lastUpdate 
-    FROM country
-    WHERE country_id BETWEEN #{start} AND #{end}
-  </select>
-
-  <select id="getCountries" resultType="Country">
+  <select id="getAllCountriesMappedById" resultType="Country">
     SELECT country_id as id, country, last_update as lastUpdate
     FROM country
   </select>

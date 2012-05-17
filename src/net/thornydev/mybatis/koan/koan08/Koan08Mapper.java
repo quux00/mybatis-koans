@@ -1,13 +1,14 @@
 package net.thornydev.mybatis.koan.koan08;
 
-import java.util.List;
-
 import net.thornydev.mybatis.koan.domain.Country;
 
 public interface Koan08Mapper {
-	// TODO: This looks like it should work, but it won't given the way that
-	//       the "getCountriesOrdered2" mapping is written in the xml file.
-	//       Add something here to fix it. Do NOT change the getCountriesOrdered2
-	//       entry in xml file for this exercise.
-	List<Country> getCountriesOrdered2(String s);
+	// TODO: Specify the DELETE sql in an annotation, not xml, for this method 
+	//       that takes an id, rather than a Country object
+	int deleteCountryById(int id);
+
+	
+	// TODO: Specify the DELETE sql in an annotation, not xml, for this method
+	//       that takes a Country object, rather than an id
+	int deleteCountry(Country c);
 }

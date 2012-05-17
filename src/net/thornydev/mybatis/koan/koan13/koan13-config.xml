@@ -6,11 +6,7 @@
   <properties resource="net/thornydev/mybatis/koan/config.properties"/>
 
   <typeAliases>
-    <typeAlias type="net.thornydev.mybatis.koan.domain.Actor"   alias="Actor"/>
-    <typeAlias type="net.thornydev.mybatis.koan.domain.Address" alias="Address"/>
-    <typeAlias type="net.thornydev.mybatis.koan.domain.City"    alias="City"/>
-    <typeAlias type="net.thornydev.mybatis.koan.domain.Country" alias="Country"/>
-    <typeAlias type="net.thornydev.mybatis.koan.util.Range"     alias="Range"/>
+    <!-- TODO: fill in any typeAliases you need -->
   </typeAliases>
 
   <environments default="development">
@@ -24,16 +20,8 @@
       </dataSource>
     </environment>
   </environments>
-
-  <!-- TODO: register an objectFactory here -->
-  <!-- NOTE: even after you configure this, it will give you an error.
-       HINT: the order of elements in the MyBatis config file is important. -->
-  <objectFactory type="???"/>
   
   <mappers>
-    <mapper resource="net/thornydev/mybatis/koan/koan13/actor-mapper.xml"/>
-    <mapper resource="net/thornydev/mybatis/koan/koan13/country-mapper.xml"/>
-    <mapper resource="net/thornydev/mybatis/koan/koan13/city-mapper.xml"/>
-    <mapper resource="net/thornydev/mybatis/koan/koan13/address-mapper.xml"/>
+    <!-- TODO: fill in all the mappers that you need -->
   </mappers>
 </configuration>
