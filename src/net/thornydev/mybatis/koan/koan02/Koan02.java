@@ -1,6 +1,7 @@
 package net.thornydev.mybatis.koan.koan02;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.io.InputStream;
 import java.util.List;
@@ -53,37 +54,40 @@ public class Koan02 {
 	@Test
 	public void learnToQueryViaXmlMapperReturningHashMap() throws Exception {
 		// TODO: call "selectFirstCountryAsMap" mapped query
+    // TODO: fill in "?" generic unknown placeholders
 		Map<?,?> map = null;
 
 		assertEquals(Integer.valueOf(1), map.get("country_id"));
 		assertEquals("Afghanistan", map.get("country"));
-		assertEquals(java.sql.Timestamp.valueOf("2006-02-15 09:44:00.0"), 
-				map.get("last_update"));
+    assertNotNull(map.get("last_update"));  
 	}	
 
 	@Test
 	public void learnToQueryMapperReturningHashMapWithParameterInput() throws Exception {
 		// TODO: call "selectOneAsMapDynamic" mapped query, passing in id 33 as param
-    // NOTE: you will only be able to do this if you are using MyBatis 3.0.3 or higher, as
-    //       this feature was removed in the early versions of MyBatis 3 and then added back
 		Map<Object,Object> map = null;
 
 		assertEquals(Integer.valueOf(33), map.get("country_id"));
 		assertEquals("Finland", map.get("country"));
-		assertEquals(java.sql.Timestamp.valueOf("2006-02-15 09:44:00.0"), 
-				map.get("last_update"));
+    assertNotNull(map.get("last_update"));  
 	}	
 	
 	@Test
 	public void learnToQueryViaXmlMapperReturningListOfHashMaps() throws Exception {
 		// TODO: query for a list
-		List<Map<Object,Object>> lmap = session.selectList("selectAsListOfMaps");
+    // TODO: fill in "?" generic unknown placeholders
+		List<Map<?,?>> lmap = session.selectList("selectAsListOfMaps");
 		
 		assertEquals(109, lmap.size());
+    // TODO: fill in "?" generic unknown placeholders
 		Map<?,?> map109 = lmap.get(0);
 
 		assertEquals(Integer.valueOf(109), map109.get("country_id"));
 		assertEquals("Zambia", map109.get("country"));
 	}
 
+  // FIXME: need to add query that uses selectMap
+  // NOTE: you will only be able to do this if you are using MyBatis 3.0.3 or higher, as
+  //       this feature was removed in the early versions of MyBatis 3 and then added back
+  
 }

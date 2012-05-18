@@ -1,6 +1,7 @@
 package net.thornydev.mybatis.koan.koan02;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.io.InputStream;
 import java.util.List;
@@ -50,13 +51,12 @@ public class Koan02 {
 
 	@Test
 	public void learnToQueryViaXmlMapperReturningHashMap() throws Exception {
-		Map<?,?> map = session.selectOne("selectFirstCountryAsMap");
+		Map<String,Object> map = session.selectOne("selectFirstCountryAsMap");
 
 		assertEquals(Integer.valueOf(1), map.get("country_id"));
 		assertEquals("Afghanistan", map.get("country"));
-		assertEquals(java.sql.Timestamp.valueOf("2006-02-15 09:44:00.0"), 
-				map.get("last_update"));
-	}	
+    assertNotNull(map.get("last_update"));    
+	}
 
 	@Test
 	public void learnToQueryMapperReturningHashMapWithParameterInput() throws Exception {
@@ -64,16 +64,15 @@ public class Koan02 {
 
 		assertEquals(Integer.valueOf(33), map.get("country_id"));
 		assertEquals("Finland", map.get("country"));
-		assertEquals(java.sql.Timestamp.valueOf("2006-02-15 09:44:00.0"), 
-				map.get("last_update"));
-	}	
+    assertNotNull(map.get("last_update"));
+	}
 	
 	@Test
 	public void learnToQueryViaXmlMapperReturningListOfHashMaps() throws Exception {
-		List<Map<Object,Object>> lmap = session.selectList("selectAsListOfMaps");
+		List<Map<String,Object>> lmap = session.selectList("selectAsListOfMaps");
 		
 		assertEquals(109, lmap.size());
-		Map<?,?> map109 = lmap.get(0);
+		Map<String,Object> map109 = lmap.get(0);
 
 		assertEquals(Integer.valueOf(109), map109.get("country_id"));
 		assertEquals("Zambia", map109.get("country"));
