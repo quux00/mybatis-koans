@@ -64,6 +64,8 @@ public class Koan02 {
 	@Test
 	public void learnToQueryMapperReturningHashMapWithParameterInput() throws Exception {
 		// TODO: call "selectOneAsMapDynamic" mapped query, passing in id 33 as param
+    // NOTE: you will only be able to do this if you are using MyBatis 3.0.3 or higher, as
+    //       this feature was removed in the early versions of MyBatis 3 and then added back
 		Map<Object,Object> map = null;
 
 		assertEquals(Integer.valueOf(33), map.get("country_id"));

@@ -16,6 +16,7 @@ In order to do the koans, you must have:
 
 * Java JDK (preferably version 6 or higher)
 * [MyBatis 3](http://mybatis.org/) Persistence Framework
+  * Ideally MyBatis 3.0.3 or higher
 * [JUnit 4](http://www.junit.org/)
 * A database server (and client) installed
   * These koans come have been specifically tested with MySQL and PostgreSQL and come with some instructions around using those databases.  You should be able to use (or adapt) them to work with Oracle and other databases if you desire.
