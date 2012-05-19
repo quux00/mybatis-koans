@@ -6,3 +6,4 @@ lib/*.jar
 tmp
 TEST-*
 TODO.org
+*.orig

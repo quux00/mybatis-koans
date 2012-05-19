@@ -18,120 +18,120 @@ import org.junit.Test;
 
 public class Koan06 {
 
-	static SqlSessionFactory sessionFactory;
-	
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-		String resource = "net/thornydev/mybatis/koan/koan06/koan06-config.xml";  
-		InputStream inputStream = Resources.getResourceAsStream(resource);
-		sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-		inputStream.close();
-	}
+  static SqlSessionFactory sessionFactory;
 
-	@Test
-	public void learnToQueryForTotalCount() throws Exception {
-		SqlSession session = null;
-		try {
-			session = sessionFactory.openSession();
-			Koan06Mapper mapper = session.getMapper(Koan06Mapper.class);
-			int totalCountries = mapper.getCountryCount();
-			
-			assertEquals(109, totalCountries);
-			
-		} finally {
-			if (session != null) session.close();
-		}
-	}
+  @BeforeClass
+  public static void setUpBeforeClass() throws Exception {
+    String resource = "net/thornydev/mybatis/koan/koan06/koan06-config.xml";
+    InputStream inputStream = Resources.getResourceAsStream(resource);
+    sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+    inputStream.close();
+  }
 
-	@Test
-	public void learnToQueryWithMultipleParams() throws Exception {
-		SqlSession session = null;
-		try {
-			session = sessionFactory.openSession();
-			Koan06Mapper mapper = session.getMapper(Koan06Mapper.class);
-			List<Country> lc = mapper.getCountryRange(22, 33);
-			
-			assertEquals(12, lc.size());
-			Country finland = lc.get(11);
-			assertEquals("Finland", finland.getCountry());
-			
-		} finally {
-			if (session != null) session.close();
-		}
-	}	
-	
-	@Test
-	public void learnToQueryWithMultipleParamsWithAnnotatedNames() throws Exception {
-		SqlSession session = null;
-		try {
-			session = sessionFactory.openSession();
-			Koan06Mapper mapper = session.getMapper(Koan06Mapper.class);
-			List<Country> lc = mapper.getCountryRange2(22, 33);
-			
-			assertEquals(12, lc.size());
-			Country finland = lc.get(11);
-			assertEquals("Finland", finland.getCountry());
-			
-		} finally {
-			if (session != null) session.close();
-		}
-	}	
+  @Test
+  public void learnToQueryForTotalCount() throws Exception {
+    SqlSession session = null;
+    try {
+      session = sessionFactory.openSession();
+      Koan06Mapper mapper = session.getMapper(Koan06Mapper.class);
+      int totalCountries = mapper.getCountryCount();
 
-	@Test
-	public void learnToQueryWithDomainSpecificRangeParam() throws Exception {
-		SqlSession session = null;
-		try {
-			session = sessionFactory.openSession();
-			List<Country> lc = session.selectList("getCountryRange3", new Range(22, 33));
+      assertEquals(109, totalCountries);
 
-			assertEquals(12, lc.size());
-			Country finland = lc.get(11);
-			assertEquals("Finland", finland.getCountry());
-			
-		} finally {
-			if (session != null) session.close();
-		}
-	}	
-	
-	
-	@Test
-	public void learnToQueryWithRowBounds() throws Exception {
-		SqlSession session = null;
-		try {
-			session = sessionFactory.openSession();
+    } finally {
+      if (session != null) session.close();
+    }
+  }
 
-			int offset = 21;
-			int limit = 12;
-			RowBounds rb = new RowBounds(offset, limit);
-			List<Country> lc = session.selectList("getCountries", null, rb);
+  @Test
+  public void learnToQueryWithMultipleParams() throws Exception {
+    SqlSession session = null;
+    try {
+      session = sessionFactory.openSession();
+      Koan06Mapper mapper = session.getMapper(Koan06Mapper.class);
+      List<Country> lc = mapper.getCountryRange(22, 33);
 
-			assertEquals(12, lc.size());
-			Country finland = lc.get(11);
-			assertEquals("Finland", finland.getCountry());
-			
-		} finally {
-			if (session != null) session.close();
-		}
-	}		
-	
-	@Test
-	public void learnToQueryMapperClassWithRowBounds() throws Exception {
-		SqlSession session = null;
-		try {
-			session = sessionFactory.openSession();
+      assertEquals(12, lc.size());
+      Country finland = lc.get(11);
+      assertEquals("Finland", finland.getCountry());
 
-			int offset = 21;
-			int limit = 12;
-			RowBounds rb = new RowBounds(offset, limit);
-			Koan06Mapper mapper = session.getMapper(Koan06Mapper.class);
-			List<Country> lc = mapper.getCountries(rb);
+    } finally {
+      if (session != null) session.close();
+    }
+  }
 
-			assertEquals(12, lc.size());
-			Country finland = lc.get(11);
-			assertEquals("Finland", finland.getCountry());
-			
-		} finally {
-			if (session != null) session.close();
-		}
-	}		
+  @Test
+  public void learnToQueryWithMultipleParamsWithAnnotatedNames() throws Exception {
+    SqlSession session = null;
+    try {
+      session = sessionFactory.openSession();
+      Koan06Mapper mapper = session.getMapper(Koan06Mapper.class);
+      List<Country> lc = mapper.getCountryRange2(22, 33);
+
+      assertEquals(12, lc.size());
+      Country finland = lc.get(11);
+      assertEquals("Finland", finland.getCountry());
+
+    } finally {
+      if (session != null) session.close();
+    }
+  }
+
+  @Test
+  public void learnToQueryWithDomainSpecificRangeParam() throws Exception {
+    SqlSession session = null;
+    try {
+      session = sessionFactory.openSession();
+      List<Country> lc = session.selectList("getCountryRange3", new Range(22, 33));
+
+      assertEquals(12, lc.size());
+      Country finland = lc.get(11);
+      assertEquals("Finland", finland.getCountry());
+
+    } finally {
+      if (session != null) session.close();
+    }
+  }
+
+
+  @Test
+  public void learnToQueryWithRowBounds() throws Exception {
+    SqlSession session = null;
+    try {
+      session = sessionFactory.openSession();
+
+      int offset = 21;
+      int limit = 12;
+      RowBounds rb = new RowBounds(offset, limit);
+      List<Country> lc = session.selectList("getCountries", null, rb);
+
+      assertEquals(12, lc.size());
+      Country finland = lc.get(11);
+      assertEquals("Finland", finland.getCountry());
+
+    } finally {
+      if (session != null) session.close();
+    }
+  }
+
+  @Test
+  public void learnToQueryMapperClassWithRowBounds() throws Exception {
+    SqlSession session = null;
+    try {
+      session = sessionFactory.openSession();
+
+      int offset = 21;
+      int limit = 12;
+      RowBounds rb = new RowBounds(offset, limit);
+      Koan06Mapper mapper = session.getMapper(Koan06Mapper.class);
+      List<Country> lc = mapper.getCountries(rb);
+
+      assertEquals(12, lc.size());
+      Country finland = lc.get(11);
+      assertEquals("Finland", finland.getCountry());
+
+    } finally {
+      if (session != null) session.close();
+    }
+  }
 }

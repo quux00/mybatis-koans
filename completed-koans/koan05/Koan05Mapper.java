@@ -8,8 +8,8 @@ import org.apache.ibatis.annotations.MapKey;
 import net.thornydev.mybatis.koan.domain.Country;
 
 public interface Koan05Mapper {
-	Country getCountryById(int id);
-	List<Country> getAllCountries();
-	@MapKey("id")
-	Map<Integer,Country> getAllCountriesMappedById();
+  Country getCountryById(int id);
+  List<Country> getAllCountries();
+  @MapKey("id")
+  Map<Integer,Country> getAllCountriesMappedById();
 }

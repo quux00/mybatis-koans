@@ -13,38 +13,38 @@ import org.apache.ibatis.type.JdbcType;
 
 public class FilmSpecialFeaturesTypeHandler extends BaseTypeHandler<List<String>> {
 
-	@Override
-	public List<String> getNullableResult(ResultSet rs, String colName) throws SQLException {
-		return cleanAndSplit( rs.getString(colName) );
-	}
+  @Override
+  public List<String> getNullableResult(ResultSet rs, String colName) throws SQLException {
+    return cleanAndSplit( rs.getString(colName) );
+  }
 
-	@Override
-	public List<String> getNullableResult(ResultSet rs, int colNum) throws SQLException {
-		return cleanAndSplit( rs.getString(colNum) );
-	}
+  @Override
+  public List<String> getNullableResult(ResultSet rs, int colNum) throws SQLException {
+    return cleanAndSplit( rs.getString(colNum) );
+  }
 
-	private List<String> cleanAndSplit(final String sf) {
-		if (sf == null || sf.equals("")) {
-			@SuppressWarnings("unchecked")
-			List<String> empty = (List<String>)Collections.EMPTY_LIST;
-			return empty;
-		} else {
-			List<String> list = new ArrayList<String>();
-			String[] ary = sf.replaceAll("[{}]", "").split("\\s*,\\s*");
-			for (String s: ary) {
-				list.add( s.replaceAll("\"", "") );
-			}
-			return list;
-		}
-	}
-	
-	@Override
-	public List<String> getNullableResult(CallableStatement arg0, int arg1)	throws SQLException {
-		return null;
-	}
+  private List<String> cleanAndSplit(final String sf) {
+    if (sf == null || sf.equals("")) {
+      @SuppressWarnings("unchecked")
+      List<String> empty = (List<String>)Collections.EMPTY_LIST;
+      return empty;
+    } else {
+      List<String> list = new ArrayList<String>();
+      String[] ary = sf.replaceAll("[{}]", "").split("\\s*,\\s*");
+      for (String s: ary) {
+        list.add( s.replaceAll("\"", "") );
+      }
+      return list;
+    }
+  }
 
-	@Override
-	public void setNonNullParameter(PreparedStatement arg0, int arg1,
-			List<String> arg2, JdbcType arg3) throws SQLException {
-	}
+  @Override
+  public List<String> getNullableResult(CallableStatement arg0, int arg1)	throws SQLException {
+    return null;
+  }
+
+  @Override
+  public void setNonNullParameter(PreparedStatement arg0, int arg1,
+                                  List<String> arg2, JdbcType arg3) throws SQLException {
+  }
 }

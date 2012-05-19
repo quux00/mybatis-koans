@@ -21,61 +21,61 @@ import org.junit.Test;
 //
 // We will query the country table first, since no other table depends
 // (has foreign keys) into it.
-// 
+//
 // To complete this koan test you will need to edit:
 // 1. all the TODO entries in this koan
 // 2. the koan02-config.xml file to specify the mapper xml file to use
 // 3. the mapper xml file to have the right SQL queries and MyBatis XML entries
 public class Koan02 {
 
-	static SqlSessionFactory sessionFactory;
-	SqlSession session;
-	
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-		String resource = "net/thornydev/mybatis/koan/koan02/koan02-config.xml";  
-		InputStream inputStream = Resources.getResourceAsStream(resource);
-		sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-		inputStream.close();
-	}
+  static SqlSessionFactory sessionFactory;
+  SqlSession session;
 
-	@Before
-	public void setUp() throws Exception {
-		session = sessionFactory.openSession();
-	}
+  @BeforeClass
+  public static void setUpBeforeClass() throws Exception {
+    String resource = "net/thornydev/mybatis/koan/koan02/koan02-config.xml";
+    InputStream inputStream = Resources.getResourceAsStream(resource);
+    sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+    inputStream.close();
+  }
 
-	@After
-	public void tearDown() throws Exception {
-		if (session != null) session.close();
-	}
+  @Before
+  public void setUp() throws Exception {
+    session = sessionFactory.openSession();
+  }
 
-	@Test
-	public void learnToQueryViaXmlMapperReturningHashMap() throws Exception {
-		Map<String,Object> map = session.selectOne("selectFirstCountryAsMap");
+  @After
+  public void tearDown() throws Exception {
+    if (session != null) session.close();
+  }
 
-		assertEquals(Integer.valueOf(1), map.get("country_id"));
-		assertEquals("Afghanistan", map.get("country"));
-    assertNotNull(map.get("last_update"));    
-	}
+  @Test
+  public void learnToQueryViaXmlMapperReturningHashMap() throws Exception {
+    Map<String,Object> map = session.selectOne("selectFirstCountryAsMap");
 
-	@Test
-	public void learnToQueryMapperReturningHashMapWithParameterInput() throws Exception {
-		Map<Object,Object> map = session.selectOne("selectOneAsMapDynamic", 33);
-
-		assertEquals(Integer.valueOf(33), map.get("country_id"));
-		assertEquals("Finland", map.get("country"));
+    assertEquals(Integer.valueOf(1), map.get("country_id"));
+    assertEquals("Afghanistan", map.get("country"));
     assertNotNull(map.get("last_update"));
-	}
-	
-	@Test
-	public void learnToQueryViaXmlMapperReturningListOfHashMaps() throws Exception {
-		List<Map<String,Object>> lmap = session.selectList("selectAsListOfMaps");
-		
-		assertEquals(109, lmap.size());
-		Map<String,Object> map109 = lmap.get(0);
+  }
 
-		assertEquals(Integer.valueOf(109), map109.get("country_id"));
-		assertEquals("Zambia", map109.get("country"));
-	}
+  @Test
+  public void learnToQueryMapperReturningHashMapWithParameterInput() throws Exception {
+    Map<Object,Object> map = session.selectOne("selectOneAsMapDynamic", 33);
+
+    assertEquals(Integer.valueOf(33), map.get("country_id"));
+    assertEquals("Finland", map.get("country"));
+    assertNotNull(map.get("last_update"));
+  }
+
+  @Test
+  public void learnToQueryViaXmlMapperReturningListOfHashMaps() throws Exception {
+    List<Map<String,Object>> lmap = session.selectList("selectAsListOfMaps");
+
+    assertEquals(109, lmap.size());
+    Map<String,Object> map109 = lmap.get(0);
+
+    assertEquals(Integer.valueOf(109), map109.get("country_id"));
+    assertEquals("Zambia", map109.get("country"));
+  }
 
 }

@@ -30,75 +30,75 @@ import org.junit.Test;
 // 3. all the TODO entries in the Koan05Mapper class
 public class Koan05 {
 
-	static SqlSessionFactory sessionFactory;
-	SqlSession session;
-	
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-		String resource = "net/thornydev/mybatis/koan/koan05/koan05-config.xml";  
-		InputStream inputStream = Resources.getResourceAsStream(resource);
-		sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-		inputStream.close();
-	}
+  static SqlSessionFactory sessionFactory;
+  SqlSession session;
 
-	@Before
-	public void setUp() throws Exception {
-		session = sessionFactory.openSession();
-	}
+  @BeforeClass
+  public static void setUpBeforeClass() throws Exception {
+    String resource = "net/thornydev/mybatis/koan/koan05/koan05-config.xml";
+    InputStream inputStream = Resources.getResourceAsStream(resource);
+    sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+    inputStream.close();
+  }
 
-	@After
-	public void tearDown() throws Exception {
-		if (session != null) session.close();
-	}
+  @Before
+  public void setUp() throws Exception {
+    session = sessionFactory.openSession();
+  }
 
-	@Test
-	public void learnToQueryViaMapperClassReturningCountryDomainObject() throws Exception {
-		// TODO: create a mapper object
-		Koan05Mapper mapper = null; 
-		// TODO: get the Country with id 1 via the mapper (*not* via session.selectOne())
-		Country c = null;
-		
-		assertNotNull(c);
-		assertEquals(1, c.getId());
-		assertEquals("Afghanistan", c.getCountry());
+  @After
+  public void tearDown() throws Exception {
+    if (session != null) session.close();
+  }
+
+  @Test
+  public void learnToQueryViaMapperClassReturningCountryDomainObject() throws Exception {
+    // TODO: create a mapper object
+    Koan05Mapper mapper = null;
+    // TODO: get the Country with id 1 via the mapper (*not* via session.selectOne())
+    Country c = null;
+
+    assertNotNull(c);
+    assertEquals(1, c.getId());
+    assertEquals("Afghanistan", c.getCountry());
 
     assertNotNull(c.getLastUpdate());
     String dateStr = c.getLastUpdate().toString();
     assertTrue( Pattern.
                 compile("Feb\\s+15.+2006").
                 matcher( dateStr ).
-                find() );    
-	}
-	
-	@Test
-	public void learnToQueryViaMapperClassReturningListOfCountries() throws Exception {
-		// TODO: create a mapper object
-		Koan05Mapper mapper = null;
-		// TODO: get List of all Countries via a mapper method invocation
-		List<Country> allCountries = null;
-		
-		assertEquals(109, allCountries.size());
-		Country c109 = allCountries.get(0);
+                find() );
+  }
 
-		assertEquals(109, c109.getId());
-		assertEquals("Zambia", c109.getCountry());
-	}	
+  @Test
+  public void learnToQueryViaMapperClassReturningListOfCountries() throws Exception {
+    // TODO: create a mapper object
+    Koan05Mapper mapper = null;
+    // TODO: get List of all Countries via a mapper method invocation
+    List<Country> allCountries = null;
 
-	@Test
-	public void learnToQueryViaMapperClassReturningHashMapOfCountriesKeyedById() throws Exception {
-		// TODO: create a mapper object
-		Koan05Mapper mapper = null;
-		// TODO: query for a map of all Country objects
-		// TODO: fill in the "?" generic param placeholders
-		Map<?,?> countriesMap = null;
-		
-		assertEquals(109, countriesMap.size());
-		
-		// TODO: when you fill in the "?" generic placeholders above
-		//       this cast will no longer be necessary - remove it
-		Country c33 = (Country)countriesMap.get(33);
-		assertEquals(33, c33.getId());
-		assertEquals("Finland", c33.getCountry());
+    assertEquals(109, allCountries.size());
+    Country c109 = allCountries.get(0);
+
+    assertEquals(109, c109.getId());
+    assertEquals("Zambia", c109.getCountry());
+  }
+
+  @Test
+  public void learnToQueryViaMapperClassReturningHashMapOfCountriesKeyedById() throws Exception {
+    // TODO: create a mapper object
+    Koan05Mapper mapper = null;
+    // TODO: query for a map of all Country objects
+    // TODO: fill in the "?" generic param placeholders
+    Map<?,?> countriesMap = null;
+
+    assertEquals(109, countriesMap.size());
+
+    // TODO: when you fill in the "?" generic placeholders above
+    //       this cast will no longer be necessary - remove it
+    Country c33 = (Country)countriesMap.get(33);
+    assertEquals(33, c33.getId());
+    assertEquals("Finland", c33.getCountry());
 
     assertNotNull(c33.getLastUpdate());
     String dateStr = c33.getLastUpdate().toString();
@@ -106,5 +106,5 @@ public class Koan05 {
                 compile("Feb\\s+15.+2006").
                 matcher( dateStr ).
                 find() );
-	}
+  }
 }

@@ -5,56 +5,56 @@ import java.util.Date;
 /**
  * City domain object. This domain object references one other
  * domain object - Country.
- * 
+ *
  * We provide setters and getters as well as a single constructor
  * that takes entries for all of its fields.
  */
 public class City {
-	private int id;
-	private String city;
-	private Date lastUpdate;
-	private Country country;
-	
-	public City(int id) {
-		this.id = id;
-	}
+  private int id;
+  private String city;
+  private Date lastUpdate;
+  private Country country;
 
-	// ignore this constructor until Koan13
-	public City(int id, String city, Date lastUpdate) {
-		this.id = id;
-		this.city = city;
-		this.lastUpdate = lastUpdate;
-	}
-	
-	public int getId() {
-		return id;
-	}
+  public City(int id) {
+    this.id = id;
+  }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+  // ignore this constructor until Koan13
+  public City(int id, String city, Date lastUpdate) {
+    this.id = id;
+    this.city = city;
+    this.lastUpdate = lastUpdate;
+  }
 
-	public String getCity() {
-		return city;
-	}
+  public int getId() {
+    return id;
+  }
 
-	public void setCity(String city) {
-		this.city = city;
-	}
+  public void setId(int id) {
+    this.id = id;
+  }
 
-	public Date getLastUpdate() {
-		return lastUpdate;
-	}
+  public String getCity() {
+    return city;
+  }
 
-	public void setLastUpdate(Date lastUpdate) {
-		this.lastUpdate = lastUpdate;
-	}
+  public void setCity(String city) {
+    this.city = city;
+  }
 
-	public Country getCountry() {
-		return country;
-	}
+  public Date getLastUpdate() {
+    return lastUpdate;
+  }
 
-	public void setCountry(Country country) {
-		this.country = country;
-	}
+  public void setLastUpdate(Date lastUpdate) {
+    this.lastUpdate = lastUpdate;
+  }
+
+  public Country getCountry() {
+    return country;
+  }
+
+  public void setCountry(Country country) {
+    this.country = country;
+  }
 }

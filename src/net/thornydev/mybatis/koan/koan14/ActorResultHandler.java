@@ -8,8 +8,8 @@ import net.thornydev.mybatis.koan.domain.Actor;
 //       all Actors passed to it, filtering out those that have
 //       last name of length 4
 public class ActorResultHandler {
-	
-	public List<Actor> getActors() {
-		return null;
-	}
+
+  public List<Actor> getActors() {
+    return null;
+  }
 }

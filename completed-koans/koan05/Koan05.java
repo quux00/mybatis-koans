@@ -29,66 +29,66 @@ import org.junit.Test;
 // 2. the mapper xml file to have the right SQL queries and MyBatis XML entries
 public class Koan05 {
 
-	static SqlSessionFactory sessionFactory;
-	SqlSession session;
-	
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-		String resource = "net/thornydev/mybatis/koan/koan05/koan05-config.xml";  
-		InputStream inputStream = Resources.getResourceAsStream(resource);
-		sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-		inputStream.close();
-	}
+  static SqlSessionFactory sessionFactory;
+  SqlSession session;
 
-	@Before
-	public void setUp() throws Exception {
-		session = sessionFactory.openSession();
-	}
+  @BeforeClass
+  public static void setUpBeforeClass() throws Exception {
+    String resource = "net/thornydev/mybatis/koan/koan05/koan05-config.xml";
+    InputStream inputStream = Resources.getResourceAsStream(resource);
+    sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+    inputStream.close();
+  }
 
-	@After
-	public void tearDown() throws Exception {
-		if (session != null) session.close();
-	}
+  @Before
+  public void setUp() throws Exception {
+    session = sessionFactory.openSession();
+  }
 
-	@Test
-	public void learnToQueryViaMapperClassReturningCountryDomainObject() throws Exception {
-		Koan05Mapper mapper = session.getMapper(Koan05Mapper.class);
-		Country c = mapper.getCountryById(1);
-		
-		assertNotNull(c);
-		assertEquals(1, c.getId());
-		assertEquals("Afghanistan", c.getCountry());
-		
+  @After
+  public void tearDown() throws Exception {
+    if (session != null) session.close();
+  }
+
+  @Test
+  public void learnToQueryViaMapperClassReturningCountryDomainObject() throws Exception {
+    Koan05Mapper mapper = session.getMapper(Koan05Mapper.class);
+    Country c = mapper.getCountryById(1);
+
+    assertNotNull(c);
+    assertEquals(1, c.getId());
+    assertEquals("Afghanistan", c.getCountry());
+
     assertNotNull(c.getLastUpdate());
     String dateStr = c.getLastUpdate().toString();
     assertTrue( Pattern.
                 compile("Feb\\s+15.+2006").
                 matcher( dateStr ).
                 find() );
-	}
-	
-	@Test
-	public void learnToQueryViaMapperClassReturningListOfCountries() throws Exception {
-		Koan05Mapper mapper = session.getMapper(Koan05Mapper.class);
-		List<Country> allCountries = mapper.getAllCountries();
-		
-		assertEquals(109, allCountries.size());
-		Country c109 = allCountries.get(0);
+  }
 
-		assertEquals(109, c109.getId());
-		assertEquals("Zambia", c109.getCountry());
-	}	
+  @Test
+  public void learnToQueryViaMapperClassReturningListOfCountries() throws Exception {
+    Koan05Mapper mapper = session.getMapper(Koan05Mapper.class);
+    List<Country> allCountries = mapper.getAllCountries();
 
-	@Test
-	public void learnToQueryViaMapperClassReturningHashMapOfCountriesKeyedById() throws Exception {
-		Koan05Mapper mapper = session.getMapper(Koan05Mapper.class);
-		Map<Integer,Country> countriesMap = mapper.getAllCountriesMappedById();
-		
-		assertEquals(109, countriesMap.size());
-		
-		Country c33 = countriesMap.get(33);
-		assertEquals(33, c33.getId());
-		assertEquals("Finland", c33.getCountry());
+    assertEquals(109, allCountries.size());
+    Country c109 = allCountries.get(0);
+
+    assertEquals(109, c109.getId());
+    assertEquals("Zambia", c109.getCountry());
+  }
+
+  @Test
+  public void learnToQueryViaMapperClassReturningHashMapOfCountriesKeyedById() throws Exception {
+    Koan05Mapper mapper = session.getMapper(Koan05Mapper.class);
+    Map<Integer,Country> countriesMap = mapper.getAllCountriesMappedById();
+
+    assertEquals(109, countriesMap.size());
+
+    Country c33 = countriesMap.get(33);
+    assertEquals(33, c33.getId());
+    assertEquals("Finland", c33.getCountry());
 
     assertNotNull(c33.getLastUpdate());
     String dateStr = c33.getLastUpdate().toString();
@@ -96,5 +96,5 @@ public class Koan05 {
                 compile("Feb\\s+15.+2006").
                 matcher( dateStr ).
                 find() );
-	}
+  }
 }

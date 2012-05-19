@@ -11,114 +11,114 @@ import net.thornydev.mybatis.koan.util.Year;
  * but this Film domain object is unaware of the Language class.
  */
 public class Film {
-	private int id;
-	private String title;
-	private String description;
-	private int rentalDuration;
-	private int length;
-	private String rating;
-	private Date lastUpdate;
-	
-	// the next four need special type handlers (?)
-	private Year releaseYear;
-	private BigDecimal rentalRate;
-	private BigDecimal replacementCost;
-	private List<String> specialFeatures;
+  private int id;
+  private String title;
+  private String description;
+  private int rentalDuration;
+  private int length;
+  private String rating;
+  private Date lastUpdate;
 
-	// skipping "full text" column (or table) since it is treated differently
-	// in the different databases
+  // the next four need special type handlers (?)
+  private Year releaseYear;
+  private BigDecimal rentalRate;
+  private BigDecimal replacementCost;
+  private List<String> specialFeatures;
 
-	public Film() {}
+  // skipping "full text" column (or table) since it is treated differently
+  // in the different databases
 
-	public Film(int id) {
-		this.id = id;
-	}
+  public Film() {}
 
-	public int getId() {
-		return id;
-	}
+  public Film(int id) {
+    this.id = id;
+  }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+  public int getId() {
+    return id;
+  }
 
-	public String getTitle() {
-		return title;
-	}
+  public void setId(int id) {
+    this.id = id;
+  }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+  public String getTitle() {
+    return title;
+  }
 
-	public String getDescription() {
-		return description;
-	}
+  public void setTitle(String title) {
+    this.title = title;
+  }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+  public String getDescription() {
+    return description;
+  }
 
-	public Year getReleaseYear() {
-		return releaseYear;
-	}
+  public void setDescription(String description) {
+    this.description = description;
+  }
 
-	public void setReleaseYear(Year releaseYear) {
-		this.releaseYear = releaseYear;
-	}
+  public Year getReleaseYear() {
+    return releaseYear;
+  }
 
-	public int getRentalDuration() {
-		return rentalDuration;
-	}
+  public void setReleaseYear(Year releaseYear) {
+    this.releaseYear = releaseYear;
+  }
 
-	public void setRentalDuration(int rentalDuration) {
-		this.rentalDuration = rentalDuration;
-	}
+  public int getRentalDuration() {
+    return rentalDuration;
+  }
 
-	public BigDecimal getRentalRate() {
-		return rentalRate;
-	}
+  public void setRentalDuration(int rentalDuration) {
+    this.rentalDuration = rentalDuration;
+  }
 
-	public void setRentalRate(BigDecimal rentalRate) {
-		this.rentalRate = rentalRate;
-	}
+  public BigDecimal getRentalRate() {
+    return rentalRate;
+  }
 
-	public int getLength() {
-		return length;
-	}
+  public void setRentalRate(BigDecimal rentalRate) {
+    this.rentalRate = rentalRate;
+  }
 
-	public void setLength(int length) {
-		this.length = length;
-	}
+  public int getLength() {
+    return length;
+  }
 
-	public BigDecimal getReplacementCost() {
-		return replacementCost;
-	}
+  public void setLength(int length) {
+    this.length = length;
+  }
 
-	public void setReplacementCost(BigDecimal replacementCost) {
-		this.replacementCost = replacementCost;
-	}
+  public BigDecimal getReplacementCost() {
+    return replacementCost;
+  }
 
-	public String getRating() {
-		return rating;
-	}
+  public void setReplacementCost(BigDecimal replacementCost) {
+    this.replacementCost = replacementCost;
+  }
 
-	public void setRating(String rating) {
-		this.rating = rating;
-	}
+  public String getRating() {
+    return rating;
+  }
 
-	public Date getLastUpdate() {
-		return lastUpdate;
-	}
+  public void setRating(String rating) {
+    this.rating = rating;
+  }
 
-	public void setLastUpdate(Date lastUpdate) {
-		this.lastUpdate = lastUpdate;
-	}
+  public Date getLastUpdate() {
+    return lastUpdate;
+  }
 
-	public List<String> getSpecialFeatures() {
-		return specialFeatures;
-	}
+  public void setLastUpdate(Date lastUpdate) {
+    this.lastUpdate = lastUpdate;
+  }
 
-	public void setSpecialFeatures(List<String> specialFeatures) {
-		this.specialFeatures = specialFeatures;
-	}
+  public List<String> getSpecialFeatures() {
+    return specialFeatures;
+  }
+
+  public void setSpecialFeatures(List<String> specialFeatures) {
+    this.specialFeatures = specialFeatures;
+  }
 }

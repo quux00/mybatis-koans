@@ -16,14 +16,14 @@ import org.junit.Test;
 //    file that the MyBatis XML config file references
 public class Koan01 {
 
-	@Test
-	public void learnBasicConfigurationSetup() throws Exception {
-		String resource = "net/thornydev/mybatis/koan/koan01/koan01-config.xml";  
-		InputStream inputStream = Resources.getResourceAsStream(resource);
-		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-		inputStream.close();
-		
-		assertNotNull(sqlSessionFactory);
-	}
+  @Test
+  public void learnBasicConfigurationSetup() throws Exception {
+    String resource = "net/thornydev/mybatis/koan/koan01/koan01-config.xml";
+    InputStream inputStream = Resources.getResourceAsStream(resource);
+    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+    inputStream.close();
+
+    assertNotNull(sqlSessionFactory);
+  }
 
 }
