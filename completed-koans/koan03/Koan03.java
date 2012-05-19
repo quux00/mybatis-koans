@@ -3,9 +3,6 @@ package net.thornydev.mybatis.koan.koan03;
 import static org.junit.Assert.*;
 
 import java.io.InputStream;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
