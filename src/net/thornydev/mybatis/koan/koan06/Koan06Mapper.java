@@ -14,7 +14,7 @@ public interface Koan06Mapper {
   List<Country> getCountryRange2(int lowerBound, int upperBound);
 
   // TODO: create an interface method that maps to the "getCountries" query
-  //       in the xml mapping file and also can use a RowBounds objec to
+  //       in the xml mapping file and also can use a RowBounds object to
   //       limit what the query returns
 }
 

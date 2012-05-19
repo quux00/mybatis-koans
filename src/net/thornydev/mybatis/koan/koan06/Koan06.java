@@ -25,7 +25,9 @@ import org.junit.Test;
 // * passing in multiple arguments to a method and either using:
 //   * the default way to reference them, or
 //   * using a MyBatis annotation to specify how to reference them in the xml mapping
-// * using the MyBatis RowBounds object to limit the number of results returned
+// * learning to limit results returned with either a:
+//   * home grown "Range" object, or
+//   * using the MyBatis RowBounds object to limit the number of results returned
 //
 // To complete this koan test you will need to edit:
 // 1. all the TODO entries in this koan
@@ -105,6 +107,8 @@ public class Koan06 {
 
   }
 
+  // REMINDER: read the TODOs below carefully - this test should NOT use
+  // a Mapper class, but rather query off the session directly
   @Test
   public void learnToQueryWithRowBounds() throws Exception {
     // TODO: open a session
