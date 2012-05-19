@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import net.thornydev.mybatis.koan.domain.Country;
 
@@ -60,9 +61,12 @@ public class Koan03 {
 		assertEquals(1, c.getId());
 		assertEquals("Afghanistan", c.getCountry());
 		
-		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date date = format.parse("2006-02-15 09:44:00");
-		assertEquals(date, c.getLastUpdate());
+    assertNotNull(c.getLastUpdate());
+    String dateStr = c.getLastUpdate().toString();
+    assertTrue( Pattern.
+                compile("Feb\\s+15.+2006").
+                matcher( dateStr ).
+                find() );
 	}
 
 	@Test
@@ -77,6 +81,9 @@ public class Koan03 {
 		assertEquals("Zambia", c109.getCountry());
 	}
 	
+  // NOTE: you will only be able to do this koan test if you are
+  //       using MyBatis-3.0.3 or higher, as this feature was removed
+  //       and then added back at this release point
 	@Test
 	public void learnToQueryViaXmlMapperReturningHashMapOfCountriesKeyedById() throws Exception {
 		// TODO: call query to return a map of ids to Country object.
@@ -93,8 +100,11 @@ public class Koan03 {
 		assertEquals(33, c33.getId());
 		assertEquals("Finland", c33.getCountry());
 
-		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date date = format.parse("2006-02-15 09:44:00");
-		assertEquals(date, c33.getLastUpdate());
+    assertNotNull(c33.getLastUpdate());
+    String dateStr = c33.getLastUpdate().toString();
+    assertTrue( Pattern.
+                compile("Feb\\s+15.+2006").
+                matcher( dateStr ).
+                find() );    
 	}
 }
