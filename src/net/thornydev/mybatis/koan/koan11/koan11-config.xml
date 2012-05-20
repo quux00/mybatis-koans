@@ -7,7 +7,8 @@
 
   <typeAliases>
     <!-- TODO: set up the necessary TypeAlias entries -->
-    <!-- Use the alias "Film" for the SimpleFilm class -->
+    <!-- Use the alias "Film" for the FilmK11 class -->
+    <!-- Use the alias "Language" for the LanguageK11 class -->
   </typeAliases>
 
   <environments default="development">

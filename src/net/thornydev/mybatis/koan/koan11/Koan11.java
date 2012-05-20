@@ -21,7 +21,7 @@ import org.junit.Test;
 // In Koan11 we go the opposite direction and model the "has-many" directionality
 // of relationship. For that we use the language and film tables from the sakila
 // database. A language has many films, while a film has only one language.
-// The Language object has a list of films and we get to learn to do map that
+// The Language object has a list of films and we get to learn to do that mapping
 // using the MyBatis <collection> element.
 //
 // We also change the namespace of the mapper from the generic "KoanXXMapper" to
@@ -30,6 +30,10 @@ import org.junit.Test;
 // Take a look at the sakila data in the film and language tables. Not all
 // languages have films and we will test how to handle that as well.
 //
+// Note: For Koan11 you will use the FilmK11 and LanguageK11 classes in the koan11
+// directory/package. In a later koan, we will use the domain.Film and
+// domain.Language classes - ignore them for now.
+// 
 // To complete this koan test you will need to edit:
 // 1. the mapper xml file to have the right SQL queries and MyBatis XML entries
 // 2. the config xml file to set up type aliases and a proper namespace
