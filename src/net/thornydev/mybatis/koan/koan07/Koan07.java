@@ -2,13 +2,12 @@ package net.thornydev.mybatis.koan.koan07;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.InputStream;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import net.thornydev.mybatis.koan.domain.Country;
 
@@ -71,10 +70,11 @@ public class Koan07 {
       assertEquals(1, c.getId());
       assertEquals("Afghanistan", c.getCountry());
 
-      DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-      Date date = format.parse("2006-02-15 09:44:00");
-      assertEquals(date, c.getLastUpdate());
-
+      String dateStr = c.getLastUpdate().toString();
+      assertTrue( Pattern.
+                  compile("Feb\\s+15.+2006").
+                  matcher( dateStr ).
+                  find() );
     } finally {
       if (session != null) session.close();
     }
@@ -96,9 +96,11 @@ public class Koan07 {
       assertEquals(33, c33.getId());
       assertEquals("Finland", c33.getCountry());
 
-      DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-      Date date = format.parse("2006-02-15 09:44:00");
-      assertEquals(date, c33.getLastUpdate());
+      String dateStr = c33.getLastUpdate().toString();
+      assertTrue( Pattern.
+                  compile("Feb\\s+15.+2006").
+                  matcher( dateStr ).
+                  find() );
     } finally {
       if (session != null) session.close();
     }
