@@ -382,7 +382,7 @@ As noted above, my answers are in the completed-koans directory. For many koans,
 
 # A Note on Best Practices
 
-As you go through the koans, you'll see that I change styles/idioms from time to time. Sometimes I start a session for each test, then later not.  Sometimes I use mappers with a Java interface, sometimes not.  Sometimes I turn camelCase mapping on, sometimes not. These koans are not intended to recommend best practice, but rather to see the variations of possibilities that MyBatis 3 allows. I mix it up so you can be reminded of these variations. You should decide, in conjuction with the recommendations in the User Guide and reading other's tutorials and code examples, on what is best practice for your code base.
+As you go through the koans, you'll see that I change styles/idioms from time to time. Sometimes I start a session for each test, then later not.  Sometimes I use mappers with a Java interface, sometimes not.  Sometimes I turn camelCase mapping on, sometimes not. These koans are not intended to recommend best practice, but rather to see the variations of possibilities that MyBatis 3 allows. I mix it up so you can be reminded of these variations. You should decide, in conjuction with the recommendations in the User Guide and reading other tutorials and code examples, on what is best practice for your code base.
 
 ---
 
@@ -390,7 +390,7 @@ As you go through the koans, you'll see that I change styles/idioms from time to
 
 As of last writing in May 2012, these koans are still in progress and not complete.  Feel free to grab them and try them out.  Suggestions for improvements are welcome.
 
-So far, I have only tested them carefully with PostgreSQL 9.1.3 on Linux. I also intend to test them carefully with MySQL 5.5.  If you try them with other databases and have problems, let me know.
+So far, I have tested them carefully with PostgreSQL 9.1.3 and MySQL 5.5 on Linux. If you try them with other databases or operating systems and have problems, let me know.  (Suggested patches are welcome.)
 
 Right now these koans focus only on the MyBatis Persistence Framework. If there is interest, future koans could also focus on the other "modules" of MyBatis, such as Schema Migrations, the MyBatis code generator and MyBatis-Spring integration, Scala integration and Caches (such as EHCache and memcached).
 
