@@ -4,6 +4,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * A object wrapper that represents a Year entity.
@@ -15,13 +17,10 @@ public class Year {
   private Date date;
 
   public Year(String year) {
-    if (year.length() != 4) {
-      throw new IllegalArgumentException("Year must have four digits");
-    }
     try {
       DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
       // by convention set the date to first month, first day of the year it represents
-      this.date = format.parse(year + "-01-01");
+      this.date = format.parse( dateString(year) );
     } catch (Exception e) {
       throw new RuntimeException(e);
     }
@@ -31,6 +30,20 @@ public class Year {
     this.date = date;
   }
 
+  private String dateString(String year) {
+    Matcher m = Pattern.compile("\\d{4}(-\\d{2}-\\d{2})?").matcher(year);
+    if (! m.find() ) {
+      throw new IllegalArgumentException("Year must match pattern 'yyyy' or 'yyyy-MM-dd'. Was: " + year);
+    }
+
+    // if capturing parens group not found then add a month and day to the date string
+    if (m.group(1) == null) {
+      return year + "-01-01";
+    } else {
+      return year;
+    }
+  }
+  
   public String getYear() {
     Calendar cal = Calendar.getInstance();
     cal.setTime(date);
