@@ -27,7 +27,7 @@ import org.junit.Test;
 // data out (queries) and pushing data into the database (DML).
 //
 // In order to use the MyBatis TypeHandler extend
-// org.apache.ibatis.type.BaseTypeHandler<T>, where T is the data type of you
+// org.apache.ibatis.type.BaseTypeHandler<T>, where T is the data type you
 // want to return from queries or convert to a database type for DML statements.
 //
 // In this koan, we use net.thornydev.mybatis.koan.domain.Film, rather than
@@ -35,7 +35,8 @@ import org.junit.Test;
 // 1. the "releaseYear" field is of type net.thornydev.mybatis.koan.util.Year
 //    rather than a simple String
 // 2. the "specialFeatures" field is now a List<String>, rather than a simple
-//    String with multiple comma-separated entries
+//    String with multiple comma-separated entries (the comma delimited
+//    entries each become a separate String in the List)
 // 3. the rentalRate and replacementCost fields have been converted to
 //    BigDecimal types rather than floats.
 //
@@ -119,8 +120,8 @@ public class Koan12 {
       session = sessionFactory.openSession();
       FilmMapper mapper = session.getMapper(FilmMapper.class);
 
-      // TODO: create a Film object (id 1000) to pass the
-      //       with properties set to pass tests down below
+      // TODO: create a Film object (id 1000) with properties set
+      //       to pass tests down below
       Film f = null;
 
       int n = mapper.updateYearAndReplacementCost(f);
