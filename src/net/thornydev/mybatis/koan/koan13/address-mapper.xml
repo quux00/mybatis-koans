@@ -15,7 +15,7 @@
   </resultMap>  
   
   <select id="getAddressById" parameterType="int" resultMap="addressResultMap">
-    SELECT a.address_id, a.address, a.address2, a.district, a.postal_code, a.phone, a.last_update,
+    SELECT a.address_id, a.address, a.address2, a.district, a.postal_code, a.phone,
            ci.city_id, ci.city,
            co.country_id, co.country
     <!-- TODO: do a three table join (ideally using ANSI SQL join syntax) to do "eager loading" -->

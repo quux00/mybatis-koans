@@ -80,7 +80,6 @@ public class Koan13 {
   @AfterClass
   public static void tearDownAfterClass() throws Exception {
     // TODO: remember to close your resources
-    if (session != null) session.close();
   }
 
   @Test
@@ -118,7 +117,8 @@ public class Koan13 {
 
     // insert null as Id - let MyBatis fill it in
     // (Note: we switched to using Integer rather than int as type for id here
-    //        in order to allow null to be a sentinel value as a temp placeholder)
+    //        in order to allow null to be a sentinel value as a temp placeholder;
+    //        this is just a general principle and doesn't affect how MyBatis works)    
     Actor a = new Actor(null, "Sally", "Bazquux");
     int n = mapper.insertNewActorGetNextIdFromDb(a);
     assertEquals(1, n);
