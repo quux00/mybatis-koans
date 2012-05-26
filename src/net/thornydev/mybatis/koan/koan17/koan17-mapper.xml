@@ -5,13 +5,8 @@
 
 <mapper namespace="net.thornydev.mybatis.koan.koan17.Koan17Mapper">
 
-  <!-- DISCLAIMER: doesn't work; my best attempt without writing a TypeHandler :-( -->
-  <resultMap id="hashResultMap" type="hashmap">
-    <result column="inventory_id" />
-  </resultMap>
-  
   <resultMap id="filmInStockIdMap" type="FilmInStockId" autoMapping="true">
-    <result column="inventory_id" property="filmId"/>
+    <result column="film_in_stock" property="filmId"/>
   </resultMap>
   
 </mapper>
