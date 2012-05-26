@@ -15,6 +15,9 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import net.thornydev.mybatis.koan.util.FilmInStockParam;
+import net.thornydev.mybatis.koan.util.FilmInStockId;
+
 // http://loianegroner.com/2011/03/ibatis-mybatis-working-with-stored-procedures/
 public class Koan16 {
 
@@ -23,7 +26,7 @@ public class Koan16 {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		String resource = "net/thornydev/mybatis/koan/koan16/mysql/koan16-config.xml";
+		String resource = "net/thornydev/mybatis/koan/koan16/koan16-config.xml";
 		InputStream inputStream = Resources.getResourceAsStream(resource);
 		sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 		inputStream.close();

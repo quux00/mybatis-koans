@@ -1,4 +1,4 @@
-package net.thornydev.mybatis.koan.koan16;
+package net.thornydev.mybatis.koan.util;
 
 /**
  * Parameter class for the film_in_stock

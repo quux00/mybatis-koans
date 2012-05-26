@@ -6,8 +6,8 @@
   <properties resource="net/thornydev/mybatis/koan/config.properties"/>
 
   <typeAliases>
-    <typeAlias type="net.thornydev.mybatis.koan.koan16.FilmInStockParam" alias="FilmInStockParam"/>
-    <typeAlias type="net.thornydev.mybatis.koan.koan16.FilmInStockId" alias="FilmInStockId"/>
+    <typeAlias type="net.thornydev.mybatis.koan.util.FilmInStockParam" alias="FilmInStockParam"/>
+    <typeAlias type="net.thornydev.mybatis.koan.util.FilmInStockId" alias="FilmInStockId"/>
   </typeAliases>
 
   <environments default="development">

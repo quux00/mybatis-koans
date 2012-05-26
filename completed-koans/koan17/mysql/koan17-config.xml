@@ -23,6 +23,6 @@
   </environments>
   
   <mappers>
-    <mapper resource="net/thornydev/mybatis/koan/koan16/koan16-mapper.xml"/>
+    <mapper resource="net/thornydev/mybatis/koan/koan17/koan17-mapper.xml"/>
   </mappers>
 </configuration>
