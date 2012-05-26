@@ -374,6 +374,28 @@ Learn:
 
 ---
 
+### Koan 16
+
+**Calling stored procedures via XML mappings**
+
+Learn:
+
+* How to call a stored procedure from MyBatis using XML mapping
+* How to handle both IN and OUT parameter types
+
+---
+
+### Koan 17
+
+**Calling stored procedures via Java annotation mappings**
+
+Learn:
+
+* How to call a stored procedure from MyBatis using Java annotations
+* How to ???
+
+---
+
 # A Note on Solutions
 
 As noted above, my answers are in the completed-koans directory. For many koans, there are probably many ways to make it work (even within the constraints I set in order to exercise a given feature of MyBatis). If you have an alternative answer that you think is better or just as good and will help others see the possibilities, feel free to send it to me (or send a pull request) and I can add those to the repo.

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.thornydev.mybatis.koan.koan16.Koan16Mapper">
+  
+  <select id="callFilmInStockWithHashMaps_pg" parameterType="hashmap" 
+          resultType="hashmap" statementType="PREPARED">
+    SELECT film_in_stock( #{filmId}, #{storeId} )
+  </select>
+  
+  <resultMap id="filmInStockIdMap" type="FilmInStockId">
+    <result column="film_in_stock" property="filmId"/>
+  </resultMap>
+  
+  <select id="callFilmInStock_pg" parameterType="FilmInStockParam" 
+          resultMap="filmInStockIdMap" statementType="PREPARED">
+    SELECT film_in_stock( #{filmId}, #{storeId} )
+  </select>
+  
+  <select id="callFilmInStock2_pg" parameterType="FilmInStockParam" 
+          resultType="int" statementType="PREPARED">
+    SELECT film_in_stock( #{filmId}, #{storeId} )
+  </select>
+  
+  <select id="inventoryInStore_pg" parameterType="int" resultType="String"
+          statementType="PREPARED">
+    SELECT * FROM inventory_in_stock(#{id})
+  </select>
+
+  <select id="inventoryInStoreBoolean_pg" parameterType="int" resultType="Boolean"
+          statementType="PREPARED">
+    SELECT inventory_in_stock(#{id})
+  </select>
+
+</mapper>
