@@ -2,6 +2,8 @@ package net.thornydev.mybatis.koan.domain;
 
 import java.util.Date;
 
+import net.thornydev.mybatis.koan.util.KoanSchoolMarm;
+
 /**
  * Immutable Address class, which has a has-one relationship
  * with the City domain object.
@@ -85,6 +87,9 @@ public class Address {
     this.phone = b.phone;
     this.lastUpdate = b.lastUpdate;
     this.city = b.city;
+
+    // do not edit this line
+    KoanSchoolMarm.getInstance().setAddressBuilderConstructorUsed(true);    
   }
 
   public Address(Integer id, String address, String address2, String district,

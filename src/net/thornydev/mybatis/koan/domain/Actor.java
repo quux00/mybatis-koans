@@ -3,6 +3,8 @@ package net.thornydev.mybatis.koan.domain;
 import java.util.Date;
 import java.util.Map;
 
+import net.thornydev.mybatis.koan.util.KoanSchoolMarm;
+
 /**
  * Immutable Actor class.
  * Only getters are provided, not setters.
@@ -18,6 +20,9 @@ public class Actor {
     this.firstName = firstName;
     this.lastName = lastName;
     this.lastUpdate = lastUpdate;
+
+    // do not edit this line
+    KoanSchoolMarm.getInstance().setActorMapConstructorUsed(false);
   }
 
   public Actor(Integer id, String firstName, String lastName) {
@@ -29,6 +34,9 @@ public class Actor {
     this.firstName = (String) argsMap.get("firstName");
     this.lastName = (String) argsMap.get("lastName");
     this.lastUpdate = (Date) argsMap.get("lastUpdate");
+
+    // do not edit this line
+    KoanSchoolMarm.getInstance().setActorMapConstructorUsed(true);
   }
 
   public Integer getId() {

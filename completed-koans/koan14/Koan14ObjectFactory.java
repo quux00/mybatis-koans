@@ -8,7 +8,7 @@ import java.util.Map;
 import net.thornydev.mybatis.koan.domain.Actor;
 import net.thornydev.mybatis.koan.domain.Address;
 import net.thornydev.mybatis.koan.domain.City;
-import net.thornydev.mybatis.koan.util.ObjectFactoryCheck;
+import net.thornydev.mybatis.koan.util.KoanSchoolMarm;
 
 import org.apache.ibatis.reflection.factory.DefaultObjectFactory;
 
@@ -39,13 +39,13 @@ public class Koan14ObjectFactory extends DefaultObjectFactory {
    * behind the scenes with an ObjectFactory.
    */
   private <T> T createCity(List<Object> ctorArgs) {
-    ObjectFactoryCheck.getInstance().setObjectFactoryUsed(true);
+    KoanSchoolMarm.getInstance().setObjectFactoryUsed(true);
 
     final int expSize = 3;
     if (ctorArgs.size() != expSize) {
       throw new IllegalArgumentException("Expected "+expSize+" constructor args for City class");
     }
-    int id = (int) ctorArgs.get(0);
+    int id = (Integer) ctorArgs.get(0);
     String city = (String) ctorArgs.get(1);
     Date lastUpdate = (Date) ctorArgs.get(2);
     @SuppressWarnings("unchecked")
@@ -54,7 +54,7 @@ public class Koan14ObjectFactory extends DefaultObjectFactory {
   }
 
   private <T> T createActor(List<Object> ctorArgs) {
-    ObjectFactoryCheck.getInstance().setObjectFactoryUsed(true);
+    KoanSchoolMarm.getInstance().setObjectFactoryUsed(true);
 
     final int expSize = 4;
     if (ctorArgs.size() != expSize) {
@@ -73,7 +73,7 @@ public class Koan14ObjectFactory extends DefaultObjectFactory {
   }
 
   private <T> T createAddress(List<Object> ctorArgs) {
-    ObjectFactoryCheck.getInstance().setObjectFactoryUsed(true);
+    KoanSchoolMarm.getInstance().setObjectFactoryUsed(true);
 
     final int expSize = 7;
     if (ctorArgs.size() != expSize) {
@@ -82,14 +82,14 @@ public class Koan14ObjectFactory extends DefaultObjectFactory {
 
     // use the Builder
     Address addr = new Address.Builder().
-    id( (Integer) ctorArgs.get(0) ).
-    address( (String) ctorArgs.get(1) ).
-    address2( (String) ctorArgs.get(2) ).
-    district( (String) ctorArgs.get(3) ).
-    postalCode( (String) ctorArgs.get(4) ).
-    phone( (String) ctorArgs.get(5) ).
-    lastUpdate( (Date) ctorArgs.get(6) ).
-    build();
+      id( (Integer) ctorArgs.get(0) ).
+      address( (String) ctorArgs.get(1) ).
+      address2( (String) ctorArgs.get(2) ).
+      district( (String) ctorArgs.get(3) ).
+      postalCode( (String) ctorArgs.get(4) ).
+      phone( (String) ctorArgs.get(5) ).
+      lastUpdate( (Date) ctorArgs.get(6) ).
+      build();
 
     @SuppressWarnings("unchecked")
     T t = (T)addr;

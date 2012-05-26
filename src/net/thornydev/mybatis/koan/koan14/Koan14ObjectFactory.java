@@ -2,7 +2,7 @@ package net.thornydev.mybatis.koan.koan14;
 
 import java.util.List;
 
-import net.thornydev.mybatis.koan.util.ObjectFactoryCheck;
+import net.thornydev.mybatis.koan.util.KoanSchoolMarm;
 
 import org.apache.ibatis.reflection.factory.DefaultObjectFactory;
 
@@ -34,7 +34,7 @@ public class Koan14ObjectFactory extends DefaultObjectFactory {
    */
   private <T> T createCity(List<Object> ctorArgs) {
     // leave this intact
-    ObjectFactoryCheck.getInstance().setObjectFactoryUsed(true);
+    KoanSchoolMarm.getInstance().setObjectFactoryUsed(true);
 
     // TODO: fill in, using the three param constructor of City
     return null;
@@ -49,7 +49,7 @@ public class Koan14ObjectFactory extends DefaultObjectFactory {
    */
   private <T> T createActor(List<Object> ctorArgs) {
     // leave this intact
-    ObjectFactoryCheck.getInstance().setObjectFactoryUsed(true);
+    KoanSchoolMarm.getInstance().setObjectFactoryUsed(true);
 
     // TODO: fill in using the constructor of Actor that takes a Map
     return null;
@@ -63,7 +63,7 @@ public class Koan14ObjectFactory extends DefaultObjectFactory {
    */
   private <T> T createAddress(List<Object> ctorArgs) {
     // leave this intact
-    ObjectFactoryCheck.getInstance().setObjectFactoryUsed(true);
+    KoanSchoolMarm.getInstance().setObjectFactoryUsed(true);
 
     // TODO: fill in using the Address.Builder inner class of Address
     return null;
