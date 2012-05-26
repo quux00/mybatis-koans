@@ -6,7 +6,8 @@
   <properties resource="net/thornydev/mybatis/koan/config.properties"/>
 
   <typeAliases>
-    <typeAlias type="net.thornydev.mybatis.koan.koan16.FilmInStockParam" alias="FilmInStockParam"/>
+    <typeAlias type="net.thornydev.mybatis.koan.koan16.pg.FilmInStockParam" alias="FilmInStockParam"/>
+    <typeAlias type="net.thornydev.mybatis.koan.koan16.pg.FilmInStockId" alias="FilmInStockId"/>
   </typeAliases>
 
   <environments default="development">
@@ -22,6 +23,6 @@
   </environments>
   
   <mappers>
-    <mapper resource="net/thornydev/mybatis/koan/koan16/koan16-mapper.xml"/>
+    <mapper resource="net/thornydev/mybatis/koan/koan16/pg/koan16-mapper.xml"/>
   </mappers>
 </configuration>

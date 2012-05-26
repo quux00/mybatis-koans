@@ -14,6 +14,14 @@
 <!--            )} -->
 <!--   </select> -->
 
+<!--   <select id="callFilmInStockWithHashMaps_pg" parameterType="hashmap"  -->
+<!--           resultType="hashmap" statementType="PREPARED"> -->
+<!--     SELECT film_in_stock( -->
+<!--             #{filmId,  mode=IN,  jdbcType=INTEGER}, -->
+<!--             #{storeId, mode=IN,  jdbcType=INTEGER} -->
+<!--             ) -->
+<!--   </select> -->
+
   <!-- FIXME: remove this one later - doesn't return what we want; keeping for reference -->
   <select id="callFilmInStockWithHashMaps2_pg" parameterType="hashmap" 
           resultType="hashmap" statementType="CALLABLE">
@@ -22,28 +30,32 @@
             #{storeId, mode=IN,  jdbcType=INTEGER}
             )}
   </select>
-
-<!--   <select id="callFilmInStockWithHashMaps_pg" parameterType="hashmap"  -->
-<!--           resultType="hashmap" statementType="PREPARED"> -->
-<!--     SELECT film_in_stock( -->
-<!--             #{filmId,  mode=IN,  jdbcType=INTEGER}, -->
-<!--             #{storeId, mode=IN,  jdbcType=INTEGER} -->
-<!--             ) -->
-<!--   </select> -->
   
   <select id="callFilmInStockWithHashMaps_pg" parameterType="hashmap" 
           resultType="hashmap" statementType="PREPARED">
     SELECT film_in_stock( #{filmId}, #{storeId} )
   </select>
   
-  <!-- FIXME: make the resultType NOT a hashmap -->
+  <resultMap id="filmInStockIdMap" type="FilmInStockId">
+    <result column="film_in_stock" property="filmId"/>
+  </resultMap>
+  
   <select id="callFilmInStock_pg" parameterType="FilmInStockParam" 
-          resultType="hashmap" statementType="PREPARED">
+          resultMap="filmInStockIdMap" statementType="PREPARED">
     SELECT film_in_stock( #{filmId}, #{storeId} )
   </select>
   
-  <select id="inventoryInStore" parameterType="int" resultType="String" statementType="PREPARED">
+  <select id="callFilmInStock2_pg" parameterType="FilmInStockParam" 
+          resultType="int" statementType="PREPARED">
+    SELECT film_in_stock( #{filmId}, #{storeId} )
+  </select>
+  
+  <select id="inventoryInStore_pg" parameterType="int" resultType="String" statementType="PREPARED">
     SELECT * FROM inventory_in_stock(#{id})
+  </select>
+
+  <select id="inventoryInStore2_pg" parameterType="int" resultType="Boolean" statementType="PREPARED">
+    SELECT inventory_in_stock(#{id})
   </select>
 
 </mapper>

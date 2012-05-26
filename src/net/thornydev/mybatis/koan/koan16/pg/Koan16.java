@@ -1,4 +1,4 @@
-package net.thornydev.mybatis.koan.koan16;
+package net.thornydev.mybatis.koan.koan16.pg;
 
 import static org.junit.Assert.*;
 
@@ -23,7 +23,7 @@ public class Koan16 {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		String resource = "net/thornydev/mybatis/koan/koan16/koan16-config.xml";
+		String resource = "net/thornydev/mybatis/koan/koan16/pg/koan16-config.xml";
 		InputStream inputStream = Resources.getResourceAsStream(resource);
 		sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 		inputStream.close();
@@ -37,7 +37,7 @@ public class Koan16 {
 	}
 
 	@Test
-	public void learnToCallStoredProcWithHashMaps() {
+	public void learnToUseStoredProcWithHashMaps() {
 		Map<String,Integer> param = new HashMap<String,Integer>();
 		param.put("filmId", 12);
 		param.put("storeId", 1);
@@ -49,7 +49,58 @@ public class Koan16 {
 		assertEquals(62, results.get(2).get("film_in_stock").intValue());
 	}
 
+	
 	@Test
+	public void learnToUseStoredProcWithDomainObjects() {
+		FilmInStockParam param = new FilmInStockParam();
+		param.setFilmId(12);
+		param.setStoreId(1);
+		List<FilmInStockId> results = session.selectList("callFilmInStock_pg", param);
+
+		assertEquals(3, results.size());
+
+		FilmInStockId f = results.get(0);
+		assertNotNull(f);
+		assertEquals(60, f.getFilmId().intValue());
+
+		f = results.get(1);
+		assertNotNull(f);
+		assertEquals(61, f.getFilmId().intValue());
+
+		f = results.get(2);
+		assertNotNull(f);
+		assertEquals(62, f.getFilmId().intValue());
+	}
+	
+	@Test
+	public void learnToUseStoredProcWithDomainObjects2() {
+		FilmInStockParam param = new FilmInStockParam();
+		param.setFilmId(12);
+		param.setStoreId(1);
+		List<Integer> results = session.selectList("callFilmInStock2_pg", param);
+
+		assertEquals(3, results.size());
+		assertEquals(60, results.get(0).intValue());
+		assertEquals(61, results.get(1).intValue());
+		assertEquals(62, results.get(2).intValue());
+	}
+	
+	@Test
+	public void learnToCallStoredFunction() {
+		String s = session.selectOne("inventoryInStore_pg", 9);
+		assertNotNull(s);
+		assertEquals("f", s);
+	}
+
+	@Test
+	public void learnToCallStoredFunction2() {
+		Boolean b = session.selectOne("inventoryInStore2_pg", 1);
+		assertNotNull(b);
+		assertTrue(b);
+	}
+
+	/// REMOVE ME ///////////
+	//@Test
 	public void learnToCallStoredProcWithHashMaps2() {
 		Map<String,Object> param = new HashMap<String,Object>();
 		param.put("filmId", 12);
@@ -60,19 +111,5 @@ public class Koan16 {
 		System.out.println( param.toString() );
 		System.out.println("sz result map: " + results.size());
 		System.out.println(results.toString());
-	}
-
-	
-	@Test
-	public void learnToCallStoredProcWithParam() {
-		FilmInStockParam param = new FilmInStockParam();
-		param.setFilmId(12);
-		param.setStoreId(1);
-		List<Map<String,Integer>> results = session.selectList("callFilmInStock_pg", param);
-
-		assertEquals(3, results.size());
-		assertEquals(60, results.get(0).get("film_in_stock").intValue());
-		assertEquals(61, results.get(1).get("film_in_stock").intValue());
-		assertEquals(62, results.get(2).get("film_in_stock").intValue());
 	}
 }

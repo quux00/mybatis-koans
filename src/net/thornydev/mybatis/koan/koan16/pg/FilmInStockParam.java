@@ -1,4 +1,4 @@
-package net.thornydev.mybatis.koan.koan16;
+package net.thornydev.mybatis.koan.koan16.pg;
 
 /**
  * 
