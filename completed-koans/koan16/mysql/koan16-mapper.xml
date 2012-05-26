@@ -40,7 +40,7 @@
     SELECT inventory_in_stock(#{id})
   </select>
 
-  <select id="inventoryInStore2_mysql" parameterType="int" resultType="Boolean" statementType="PREPARED">
+  <select id="inventoryInStoreBoolean_mysql" parameterType="int" resultType="Boolean" statementType="PREPARED">
     SELECT inventory_in_stock(#{id})
   </select>
 

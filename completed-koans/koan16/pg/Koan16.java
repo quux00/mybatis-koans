@@ -1,4 +1,4 @@
-package net.thornydev.mybatis.koan.koan16.mysql;
+package net.thornydev.mybatis.koan.koan16.pg;
 
 import static org.junit.Assert.*;
 
@@ -23,7 +23,7 @@ public class Koan16 {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		String resource = "net/thornydev/mybatis/koan/koan16/mysql/koan16-config.xml";
+		String resource = "net/thornydev/mybatis/koan/koan16/pg/koan16-config.xml";
 		InputStream inputStream = Resources.getResourceAsStream(resource);
 		sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 		inputStream.close();
@@ -41,15 +41,12 @@ public class Koan16 {
 		Map<String,Integer> param = new HashMap<String,Integer>();
 		param.put("filmId", 12);
 		param.put("storeId", 1);
-		List<Map<String,Integer>> results = session.selectList("callFilmInStockWithHashMaps_mysql", param);
+		List<Map<String,Integer>> results = session.selectList("callFilmInStockWithHashMaps_pg", param);
 
-		// mysql will put count in the hash
-		assertEquals(3, param.get("count").intValue());
-		
 		assertEquals(3, results.size());
-		assertEquals(60, results.get(0).get("inventory_id").intValue());
-		assertEquals(61, results.get(1).get("inventory_id").intValue());
-		assertEquals(62, results.get(2).get("inventory_id").intValue());
+		assertEquals(60, results.get(0).get("film_in_stock").intValue());
+		assertEquals(61, results.get(1).get("film_in_stock").intValue());
+		assertEquals(62, results.get(2).get("film_in_stock").intValue());
 	}
 
 	
@@ -58,9 +55,8 @@ public class Koan16 {
 		FilmInStockParam param = new FilmInStockParam();
 		param.setFilmId(12);
 		param.setStoreId(1);
-		List<FilmInStockId> results = session.selectList("callFilmInStock_mysql", param);
+		List<FilmInStockId> results = session.selectList("callFilmInStock_pg", param);
 
-		assertEquals(3, param.getCount());
 		assertEquals(3, results.size());
 
 		FilmInStockId f = results.get(0);
@@ -81,10 +77,8 @@ public class Koan16 {
 		FilmInStockParam param = new FilmInStockParam();
 		param.setFilmId(12);
 		param.setStoreId(1);
-		List<Integer> results = session.selectList("callFilmInStock2_mysql", param);
-		
-		assertEquals(3, param.getCount());
-		
+		List<Integer> results = session.selectList("callFilmInStock2_pg", param);
+
 		assertEquals(3, results.size());
 		assertEquals(60, results.get(0).intValue());
 		assertEquals(61, results.get(1).intValue());
@@ -93,14 +87,14 @@ public class Koan16 {
 	
 	@Test
 	public void learnToCallStoredFunction() {
-		Integer g = session.selectOne("inventoryInStore_mysql", 9);
-		assertNotNull(g);
-		assertEquals(0, g.intValue());
+		String s = session.selectOne("inventoryInStore_pg", 9);
+		assertNotNull(s);
+		assertEquals("f", s);
 	}
 
 	@Test
 	public void learnToCallStoredFunction2() {
-		Boolean b = session.selectOne("inventoryInStore2_mysql", 1);
+		Boolean b = session.selectOne("inventoryInStoreBoolean_pg", 1);
 		assertNotNull(b);
 		assertTrue(b);
 	}

@@ -190,19 +190,11 @@
     </junit>
   </target>
 
-  <target name="koan16-pg" depends="compile" description="Run Koan16 for PostgreSQL">
+  <target name="koan16" depends="compile" description="Run Koan16">
     <junit haltonfailure="yes" printsummary="yes" fork="true">
       <classpath refid="project.classpath" />
       <formatter type="plain" usefile="${log.koan.output.to.file}" />
-      <test name="net.thornydev.mybatis.koan.koan16.pg.Koan16"/>
-    </junit>
-  </target>
-
-  <target name="koan16-mysql" depends="compile" description="Run Koan16 for MySQL">
-    <junit haltonfailure="yes" printsummary="yes" fork="true">
-      <classpath refid="project.classpath" />
-      <formatter type="plain" usefile="${log.koan.output.to.file}" />
-      <test name="net.thornydev.mybatis.koan.koan16.mysql.Koan16"/>
+      <test name="net.thornydev.mybatis.koan.koan16.Koan16"/>
     </junit>
   </target>
 
