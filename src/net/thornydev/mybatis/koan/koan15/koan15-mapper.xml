@@ -21,7 +21,9 @@
 
   <insert id="insertCity" parameterType="City">
     INSERT INTO city (city_id, city, country_id)
-    VALUES (#{id}, #{city}, #{country, typeHandler=CountryIdTypeHandler}) 
+    <!-- TODO: fill in values clause; for the country_id field
+               you will need to specify a TypeHandler -->
+    VALUES ( ??? )
   </insert>
 
   <resultMap id="cityResultMap" type="City">
@@ -42,8 +44,8 @@
   <insert id="insertAddress" parameterType="Address">
     INSERT INTO address (address_id, address, address2, district, city_id, 
                          postal_code, phone)
-    VALUES (#{id}, #{address}, #{address2, jdbcType=VARCHAR}, #{district}, 
-            #{city, typeHandler=CityIdTypeHandler}, #{postalCode, jdbcType=VARCHAR}, 
-            #{phone})
+   <!-- TODO: fill in values clause; specify a TypeHandler where needed
+              AND specify jdbcType for the fields that can be null -->
+    VALUES ( ??? )                         
   </insert>
 </mapper>

@@ -30,7 +30,7 @@ import org.junit.Test;
 // the city_id or country_id out of the City and Country domain objects,
 // so we must provide a TypeHandler.
 //
-// For the second challenge on inserting nulls, the MyBatis User Guide says
+// For the second challenge on inserting nulls, the MyBatis 3 User Guide says
 //    "The JDBC type is only required for
 //     nullable columns upon insert, update or delete."
 //      -and-
@@ -41,9 +41,11 @@ import org.junit.Test;
 // So we follow those instructions when inserting null values into the
 // nullable columns of the address table.
 //
-// Note: so far, using Java 1.7, MyBatis-3.1.1 and PostgreSQL 9.1 using
-//       postgresql-9.1-901.jdbc4.jar, I have not found that specifying
-//       the jdbcType for nullable columns is required.
+// Note: so far, I have not found that specifying the jdbcType for nullable
+//       columns is required.  I have tested this with using:
+//       - Java 6 and Java 7
+//       - MyBatis-3.1.1
+//       - PostgreSQL 9.1 and MySQL 5.5
 //
 // In order to complete this koan, you will need to:
 // 1. Complete the TODO entries in the koan15-mapper.xml file
