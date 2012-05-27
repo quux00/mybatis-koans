@@ -82,14 +82,14 @@ public class Koan14ObjectFactory extends DefaultObjectFactory {
 
     // use the Builder
     Address addr = new Address.Builder().
-      id( (Integer) ctorArgs.get(0) ).
-      address( (String) ctorArgs.get(1) ).
-      address2( (String) ctorArgs.get(2) ).
-      district( (String) ctorArgs.get(3) ).
-      postalCode( (String) ctorArgs.get(4) ).
-      phone( (String) ctorArgs.get(5) ).
-      lastUpdate( (Date) ctorArgs.get(6) ).
-      build();
+    id( (Integer) ctorArgs.get(0) ).
+    address( (String) ctorArgs.get(1) ).
+    address2( (String) ctorArgs.get(2) ).
+    district( (String) ctorArgs.get(3) ).
+    postalCode( (String) ctorArgs.get(4) ).
+    phone( (String) ctorArgs.get(5) ).
+    lastUpdate( (Date) ctorArgs.get(6) ).
+    build();
 
     @SuppressWarnings("unchecked")
     T t = (T)addr;

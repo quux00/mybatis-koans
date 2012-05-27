@@ -33,7 +33,7 @@ import org.junit.Test;
 // Note: For Koan11 you will use the FilmK11 and LanguageK11 classes in the koan11
 // directory/package. In a later koan, we will use the domain.Film and
 // domain.Language classes - ignore them for now.
-// 
+//
 // To complete this koan test you will need to edit:
 // 1. the mapper xml file to have the right SQL queries and MyBatis XML entries
 // 2. the config xml file to set up type aliases and a proper namespace

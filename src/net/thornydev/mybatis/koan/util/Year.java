@@ -43,7 +43,7 @@ public class Year {
       return year;
     }
   }
-  
+
   public String getYear() {
     Calendar cal = Calendar.getInstance();
     cal.setTime(date);

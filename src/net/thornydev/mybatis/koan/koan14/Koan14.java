@@ -67,9 +67,9 @@ import org.junit.Test;
 // project and stick to that.
 //
 // Lastly, in one of the koan tests we learn how to use the MyBatis
-// ResultHandler class. The ResultHandler can receive the output of 
+// ResultHandler class. The ResultHandler can receive the output of
 // the ObjectFactory and do something additional with it, such as add it
-// to lists, filter out the ones we don't want or whatever. In our koan, 
+// to lists, filter out the ones we don't want or whatever. In our koan,
 // we use it to filter out any Actors whose last name is 4 characters long.
 //
 // In order to complete this koan, you will need to:

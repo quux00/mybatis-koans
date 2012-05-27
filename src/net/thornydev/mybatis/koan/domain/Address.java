@@ -89,7 +89,7 @@ public class Address {
     this.city = b.city;
 
     // do not edit this line
-    KoanSchoolMarm.getInstance().setAddressBuilderConstructorUsed(true);    
+    KoanSchoolMarm.getInstance().setAddressBuilderConstructorUsed(true);
   }
 
   public Address(Integer id, String address, String address2, String district,

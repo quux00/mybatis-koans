@@ -6,13 +6,13 @@ package net.thornydev.mybatis.koan.util;
  * stored procedure.
  */
 public class FilmInStockId {
-	private Integer filmId;
+  private Integer filmId;
 
-	public Integer getFilmId() {
-		return filmId;
-	}
+  public Integer getFilmId() {
+    return filmId;
+  }
 
-	public void setFilmId(Integer filmId) {
-		this.filmId = filmId;
-	}
+  public void setFilmId(Integer filmId) {
+    this.filmId = filmId;
+  }
 }

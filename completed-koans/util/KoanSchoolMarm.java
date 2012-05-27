@@ -9,7 +9,7 @@ package net.thornydev.mybatis.koan.util;
  * and the test koan should call
  *   ObjectFactoryCheck.getInstance().setObjectFactoryUsed(false)
  * to reset it before the next test runs.
- * 
+ *
  * Same goes for the other rules it enforces.
  */
 public class KoanSchoolMarm {
@@ -22,7 +22,7 @@ public class KoanSchoolMarm {
   private boolean objectFactoryUsed = false;
   private boolean actorMapCtorUsed = false;
   private boolean addrBuilderUsed = false;
-  
+
   public void setObjectFactoryUsed(boolean b) {
     this.objectFactoryUsed = b;
   }
