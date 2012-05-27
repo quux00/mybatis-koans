@@ -33,6 +33,10 @@ require 'fileutils'
 SRCDIR = 'src/net/thornydev/mybatis/koan'
 COMPLETED_DIR = 'completed-koans'
 
+class Koan
+  
+end
+
 def setup_tmp_dir(koan)
   FileUtils.mkdir "tmp" unless Dir.exist? "tmp"
   if Dir.exist? "tmp/#{koan}"

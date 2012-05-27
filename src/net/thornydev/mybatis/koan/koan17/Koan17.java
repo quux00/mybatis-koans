@@ -37,7 +37,7 @@ import org.junit.Test;
 //
 // The tests below are exactly the same as koan16, except I removed one
 // of the inventory_in_stock tests to simplify it a bit and reduce
-// redundant busy work.
+// redundant busy work.	
 // 
 // In order to complete this koan, you will need to:
 // 1. Edit the TODO entries in this Koan17 Test
