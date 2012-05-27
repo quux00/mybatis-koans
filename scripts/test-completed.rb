@@ -33,67 +33,73 @@ require 'fileutils'
 SRCDIR = 'src/net/thornydev/mybatis/koan'
 COMPLETED_DIR = 'completed-koans'
 
+# ---[ Koan class ]--- #
+
 class Koan
+
+  attr_reader :name
+  attr_reader :db
   
+  def initialize(koan)
+    if m = koan.match(/(koan1[67])-(\w+)/)
+      @name = m[1]
+      @db = m[2]
+    else
+      @name = koan
+    end
+  end
 end
+
+# ---[ Main section ]--- #
 
 def setup_tmp_dir(koan)
   FileUtils.mkdir "tmp" unless Dir.exist? "tmp"
-  if Dir.exist? "tmp/#{koan}"
-    FileUtils.rm_rf "tmp/#{koan}/*"
-    puts "rm -rf tmp/#{koan}/*"
+  if Dir.exist? "tmp/#{koan.name}"
+    FileUtils.rm_rf "tmp/#{koan.name}/*"
+    puts "rm -rf tmp/#{koan.name}/*"
   else
-    FileUtils.mkdir "tmp/#{koan}"
-    puts "mkdir tmp/#{koan}"
+    FileUtils.mkdir "tmp/#{koan.name}"
+    puts "mkdir tmp/#{koan.name}"
   end
 end
 
 def copy_partials_to_tmp(koan)
-  FileUtils.cp_r "#{SRCDIR}/#{koan}", "tmp"
-  puts "cp -r #{SRCDIR}/#{koan}/ tmp"
+  FileUtils.cp_r "#{SRCDIR}/#{koan.name}", "tmp"
+  puts "cp -r #{SRCDIR}/#{koan.name}/ tmp"
 end
 
 def copy_completed_to_main_koan_area(koan)
-  if koan =~ /1[67]-mysql/
-    FileUtils.cp_r "#{COMPLETED_DIR}/#{koan}/mysql", SRCDIR
-    puts "cp -r #{COMPLETED_DIR}/#{koan}/mysql #{SRCDIR}"
-
-  elsif koan =~ /1[67]-pg/
-    FileUtils.cp_r "#{COMPLETED_DIR}/#{koan}/pg", SRCDIR
-    puts "cp -r #{COMPLETED_DIR}/#{koan}/pg #{SRCDIR}"
+  if koan.db
+    FileUtils.cp_r "#{COMPLETED_DIR}/#{koan.name}/#{koan.db}", SRCDIR
+    puts "cp -r #{COMPLETED_DIR}/#{koan.name}/#{koan.db} #{SRCDIR}"
     
   else
-    FileUtils.cp_r "#{COMPLETED_DIR}/#{koan}", SRCDIR
-    puts "cp -r #{COMPLETED_DIR}/#{koan}/ #{SRCDIR}"
+    FileUtils.cp_r "#{COMPLETED_DIR}/#{koan.name}", SRCDIR
+    puts "cp -r #{COMPLETED_DIR}/#{koan.name}/ #{SRCDIR}"
   end
 end
 
 def move_completed_in_src_back(koan)
-  if koan =~ /1[67]-mysql/
-    FileUtils.rm_r "#{COMPLETED_DIR}/#{koan}/mysql"
-    FileUtils.mv "#{SRCDIR}/#{koan}", "#{COMPLETED_DIR}/#{koan}/mysql"
-    puts "mv #{SRCDIR}/#{koan} #{COMPLETED_DIR}/#{koan}/mysql"
-
-  elsif koan =~ /1[67]-pg/
-    FileUtils.rm_r "#{COMPLETED_DIR}/#{koan}/pg"
-    FileUtils.mv "#{SRCDIR}/#{koan}", "#{COMPLETED_DIR}/#{koan}/pg"
-    puts "mv #{SRCDIR}/#{koan} #{COMPLETED_DIR}#{koan}/pg"
+  if koan.db
+    FileUtils.rm_r "#{COMPLETED_DIR}/#{koan.name}/#{koan.db}"
+    FileUtils.mv "#{SRCDIR}/#{koan.name}", "#{COMPLETED_DIR}/#{koan.name}/#{koan.db}"
+    puts "mv #{SRCDIR}/#{koan.name} #{COMPLETED_DIR}/#{koan.name}/#{koan.db}"
 
   else
-    FileUtils.rm_r "#{COMPLETED_DIR}/#{koan}"
-    FileUtils.mv "#{SRCDIR}/#{koan}", COMPLETED_DIR
-    puts "mv #{SRCDIR}/#{koan} #{COMPLETED_DIR}"
+    FileUtils.rm_r "#{COMPLETED_DIR}/#{koan.name}"
+    FileUtils.mv "#{SRCDIR}/#{koan.name}", COMPLETED_DIR
+    puts "mv #{SRCDIR}/#{koan.name} #{COMPLETED_DIR}"
   end
 end
 
 def copy_tmp_partials_to_src(koan)
-  FileUtils.cp_r "tmp/#{koan}", SRCDIR
-  puts "cp -r tmp/#{koan}, #{SRCDIR}"
+  FileUtils.cp_r "tmp/#{koan.name}", SRCDIR
+  puts "cp -r tmp/#{koan.name}, #{SRCDIR}"
 end
 
 def delete_tmp(koan)
-  FileUtils.rm_r "tmp/#{koan}"
-  puts "rm -r tmp/#{koan}"
+  FileUtils.rm_r "tmp/#{koan.name}"
+  puts "rm -r tmp/#{koan.name}"
 end
 
 def main(koan, direction)
@@ -101,6 +107,7 @@ def main(koan, direction)
     setup_tmp_dir(koan)
     copy_partials_to_tmp(koan)
     copy_completed_to_main_koan_area(koan)
+
   elsif direction == "reset"
     move_completed_in_src_back(koan)
     copy_tmp_partials_to_src(koan)
@@ -131,38 +138,56 @@ Note: koan16 and 17 are database specific, so you must include a
   END
 end
 
-if $0 == __FILE__
-  # check cmd line args
+def ensure_any_args
   if ARGV.size == 0
     $stderr.puts "ERROR: Must provide the name of a koan"
     exit -1
   end
-  
-  koan = ARGV.first.downcase
-  
+end
+
+def help_if_asked
   if ARGV.first == '-h' || ARGV.first == '--help'
     help
     exit
-  elsif ARGV.first !~ /koan\d\d/i
+  end
+end
+
+def ensure_koan_arg
+  koan = ARGV.first.downcase
+
+  if koan !~ /koan\d\d/i
     $stderr.puts "ERROR: Must provide the name of a koan of form koanNN"
     exit -1
   end
-  if ARGV.first =~ /koan1[67]/
-    if ARGV.first !~ /koan1[67]-(pg|mysql)/
+
+  if koan =~ /koan1[67]/
+    if koan !~ /koan1[67]-(pg|mysql)/
       $stderr.puts "ERROR: koan16 and 17 must have a db suffix"
       help
       exit -1
     end
   end
+  koan
+end
 
+def ensure_direction_arg
   direction = ARGV[1] || "test"
   direction = direction.downcase
   if direction != "test" && direction != "reset"
     $stderr.puts "ERROR: direction must be either 'test' or 'reset'"
     exit -1
   end
+  direction
+end
 
+if $0 == __FILE__
+  # check cmd line args
+  ensure_any_args
+  help_if_asked
+  koan = ensure_koan_arg
+  direction = ensure_direction_arg
+  
   # invoke script
-  main("util", direction)
-  main(koan, direction)
+  main(Koan.new("util"), direction)
+  main(Koan.new(koan), direction)
 end
