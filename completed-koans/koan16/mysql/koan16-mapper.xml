@@ -5,7 +5,7 @@
 
 <mapper namespace="net.thornydev.mybatis.koan.koan16.Koan16Mapper">
 
-  <select id="callFilmInStockWithHashMaps_mysql" parameterType="hashmap" 
+  <select id="callFilmInStockWithHashMaps" parameterType="hashmap" 
           resultType="hashmap" statementType="CALLABLE">
     { CALL film_in_stock(
            #{filmId,  mode=IN,  jdbcType=INTEGER},
@@ -18,7 +18,7 @@
     <result column="inventory_id" property="filmId"/>
   </resultMap>
   
-  <select id="callFilmInStock_mysql" parameterType="FilmInStockParam" 
+  <select id="callFilmInStock" parameterType="FilmInStockParam" 
           resultMap="filmInStockIdMap" statementType="CALLABLE">
     { CALL film_in_stock(
            #{filmId,  mode=IN,  jdbcType=INTEGER},
@@ -27,7 +27,7 @@
            )}
   </select>
   
-  <select id="callFilmInStock2_mysql" parameterType="FilmInStockParam" 
+  <select id="callFilmInStock2" parameterType="FilmInStockParam" 
           resultType="int" statementType="CALLABLE">
     { CALL film_in_stock(
            #{filmId,  mode=IN,  jdbcType=INTEGER},
@@ -36,11 +36,11 @@
            )}
   </select>
   
-  <select id="inventoryInStore_mysql" parameterType="int" resultType="int" statementType="PREPARED">
+  <select id="inventoryInStore" parameterType="int" resultType="int" statementType="PREPARED">
     SELECT inventory_in_stock(#{id})
   </select>
 
-  <select id="inventoryInStoreBoolean_mysql" parameterType="int" resultType="Boolean" statementType="PREPARED">
+  <select id="inventoryInStoreBoolean" parameterType="int" resultType="Boolean" statementType="PREPARED">
     SELECT inventory_in_stock(#{id})
   </select>
 

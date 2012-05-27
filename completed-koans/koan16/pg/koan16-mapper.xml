@@ -5,7 +5,7 @@
 
 <mapper namespace="net.thornydev.mybatis.koan.koan16.Koan16Mapper">
   
-  <select id="callFilmInStockWithHashMaps_pg" parameterType="hashmap" 
+  <select id="callFilmInStockWithHashMaps" parameterType="hashmap" 
           resultType="hashmap" statementType="PREPARED">
     SELECT film_in_stock( #{filmId}, #{storeId} )
   </select>
@@ -14,22 +14,22 @@
     <result column="film_in_stock" property="filmId"/>
   </resultMap>
   
-  <select id="callFilmInStock_pg" parameterType="FilmInStockParam" 
+  <select id="callFilmInStock" parameterType="FilmInStockParam" 
           resultMap="filmInStockIdMap" statementType="PREPARED">
     SELECT film_in_stock( #{filmId}, #{storeId} )
   </select>
   
-  <select id="callFilmInStock2_pg" parameterType="FilmInStockParam" 
+  <select id="callFilmInStock2" parameterType="FilmInStockParam" 
           resultType="int" statementType="PREPARED">
     SELECT film_in_stock( #{filmId}, #{storeId} )
   </select>
   
-  <select id="inventoryInStore_pg" parameterType="int" resultType="String"
+  <select id="inventoryInStore" parameterType="int" resultType="String"
           statementType="PREPARED">
     SELECT * FROM inventory_in_stock(#{id})
   </select>
 
-  <select id="inventoryInStoreBoolean_pg" parameterType="int" resultType="Boolean"
+  <select id="inventoryInStoreBoolean" parameterType="int" resultType="Boolean"
           statementType="PREPARED">
     SELECT inventory_in_stock(#{id})
   </select>

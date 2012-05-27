@@ -60,7 +60,7 @@ public class Koan17 {
 	}
 
 	// this one works if you define a resultmap in an xml file (see Koan17Mapper)
-	//@Test
+	@Test
 	public void learnToUseStoredProcWithDomainObjects() {
 		FilmInStockParam param = new FilmInStockParam();
 		param.setFilmId(12);

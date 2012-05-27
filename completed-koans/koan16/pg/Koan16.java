@@ -1,4 +1,4 @@
-package net.thornydev.mybatis.koan.koan16.pg;
+package net.thornydev.mybatis.koan.koan16;
 
 import static org.junit.Assert.*;
 
@@ -44,7 +44,7 @@ public class Koan16 {
 		Map<String,Integer> param = new HashMap<String,Integer>();
 		param.put("filmId", 12);
 		param.put("storeId", 1);
-		List<Map<String,Integer>> results = session.selectList("callFilmInStockWithHashMaps_pg", param);
+		List<Map<String,Integer>> results = session.selectList("callFilmInStockWithHashMaps", param);
 
 		assertEquals(3, results.size());
 		assertEquals(60, results.get(0).get("film_in_stock").intValue());
@@ -58,7 +58,7 @@ public class Koan16 {
 		FilmInStockParam param = new FilmInStockParam();
 		param.setFilmId(12);
 		param.setStoreId(1);
-		List<FilmInStockId> results = session.selectList("callFilmInStock_pg", param);
+		List<FilmInStockId> results = session.selectList("callFilmInStock", param);
 
 		assertEquals(3, results.size());
 
@@ -80,7 +80,7 @@ public class Koan16 {
 		FilmInStockParam param = new FilmInStockParam();
 		param.setFilmId(12);
 		param.setStoreId(1);
-		List<Integer> results = session.selectList("callFilmInStock2_pg", param);
+		List<Integer> results = session.selectList("callFilmInStock2", param);
 
 		assertEquals(3, results.size());
 		assertEquals(60, results.get(0).intValue());
@@ -90,14 +90,14 @@ public class Koan16 {
 	
 	@Test
 	public void learnToCallStoredFunction() {
-		String s = session.selectOne("inventoryInStore_pg", 9);
+		String s = session.selectOne("inventoryInStore", 9);
 		assertNotNull(s);
 		assertEquals("f", s);
 	}
 
 	@Test
 	public void learnToCallStoredFunction2() {
-		Boolean b = session.selectOne("inventoryInStoreBoolean_pg", 1);
+		Boolean b = session.selectOne("inventoryInStoreBoolean", 1);
 		assertNotNull(b);
 		assertTrue(b);
 	}

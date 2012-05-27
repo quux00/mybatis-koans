@@ -188,9 +188,9 @@ Open `src/net/thornydev/mybatis/koan/koan01/Koan01.java` in your editor of choic
 
 #### Tweaking the settings
 
-By default, the koan test output will be written to a plain text formatted file in the top directory called `TEST-net.thornydev.mybatis.koan.koan01.Koan01.txt` (and so on for the other koans).  If you do not want these files you can set the `log.koan.output.to.file` property to "false" in the build.xml file, like so:
+By default, the koan test output will be written to the console only. If you want the output to be written to a plain text formatted file in the top directory called `TEST-net.thornydev.mybatis.koan.koanXX.KoanXX.txt`, set the `log.koan.output.to.file` property to "true" in the build.xml file, like so:
 
-    <property name="log.koan.output.to.file" value="false"/>
+    <property name="log.koan.output.to.file" value="true"/>
 
 MyBatis uses log4j, so a log4j.properties file is provided in the src directory.  By default it will log WARN level messages and higher to the console only.  If you want other settings, edit this file.
 
@@ -380,7 +380,7 @@ Learn:
 
 Learn:
 
-* How to call a stored procedure from MyBatis using XML mapping
+* How to call a stored procedure and stored functions from MyBatis using XML mapping
 * How to handle both IN and OUT parameter types
 
 ---
@@ -391,8 +391,7 @@ Learn:
 
 Learn:
 
-* How to call a stored procedure from MyBatis using Java annotations
-* How to ???
+* How to call a stored procedure and stored functions from MyBatis using Java annotations
 
 ---
 
@@ -414,7 +413,7 @@ As of last writing in May 2012, these koans are still in progress and not comple
 
 So far, I have tested them carefully with PostgreSQL 9.1.3 and MySQL 5.5 on Linux. If you try them with other databases or operating systems and have problems, let me know.  (Suggested patches are welcome.)
 
-Right now these koans focus only on the MyBatis Persistence Framework. If there is interest, future koans could also focus on the other "modules" of MyBatis, such as Schema Migrations, the MyBatis code generator and MyBatis-Spring integration, Scala integration and Caches (such as EHCache and memcached).
+Right now these koans focus only on the MyBatis Persistence Framework. Future koans could also focus on the other "modules" of MyBatis, such as Schema Migrations, the MyBatis code generator and MyBatis-Spring integration, Scala integration and Caches (such as EHCache and memcached).
 
 Even within the Persistence Framework, these koans do **not** cover some functionality in MyBatis 3, such as:
 
@@ -424,6 +423,5 @@ Even within the Persistence Framework, these koans do **not** cover some functio
 * implementing our own TransactionFactory
 * JNDI lookups 
 * databaseIdProvider
-* more features, not listed here
 
 If you have found any of these to be really useful, feel free to suggest a new koan or write one yourself to add it here.
