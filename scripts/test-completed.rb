@@ -70,8 +70,10 @@ end
 
 def copy_completed_to_main_koan_area(koan)
   if koan.db
-    FileUtils.cp_r "#{COMPLETED_DIR}/#{koan.name}/#{koan.db}", SRCDIR
-    puts "cp -r #{COMPLETED_DIR}/#{koan.name}/#{koan.db} #{SRCDIR}"
+    Dir.glob("#{COMPLETED_DIR}/#{koan.name}/#{koan.db}/*").each do |f|
+      puts "cp #{f} #{SRCDIR}/#{koan.name}"
+      FileUtils.cp f, "#{SRCDIR}/#{koan.name}"
+    end
     
   else
     FileUtils.cp_r "#{COMPLETED_DIR}/#{koan.name}", SRCDIR
@@ -137,6 +139,8 @@ Note: koan16 and 17 are database specific, so you must include a
 
   END
 end
+
+# ---[ Cmd Line Arg processing functions ]--- #
 
 def ensure_any_args
   if ARGV.size == 0
