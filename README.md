@@ -395,6 +395,18 @@ Learn:
 
 ---
 
+### Koan 18
+
+**Statement Builders**
+
+Learn:
+
+* How to use the MyBatis SelectBuilder "DSL" to generate SQL statements
+* How to use the MyBatis SqlBuilder "DSL" to generate SQL insert, update and delete statements
+* How to use the MyBatis SqlBuilder "DSL" to generate compound SQL (subselects)
+
+---
+
 # A Note on Solutions
 
 As noted above, my answers are in the completed-koans directory. For many koans, there are probably many ways to make it work (even within the constraints I set in order to exercise a given feature of MyBatis). If you have an alternative answer that you think is better or just as good and will help others see the possibilities, feel free to send it to me (or send a pull request) and I can add those to the repo.
