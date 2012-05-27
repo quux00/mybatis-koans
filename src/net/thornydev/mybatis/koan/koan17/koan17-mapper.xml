@@ -6,7 +6,9 @@
 <mapper namespace="net.thornydev.mybatis.koan.koan17.Koan17Mapper">
 
   <resultMap id="filmInStockIdMap" type="FilmInStockId" autoMapping="true">
-    <result column="film_in_stock" property="filmId"/>
+    <!-- TODO: map the column to what your database returns from the 
+               film_in_stock stored proc call -->
+    <result column="???" property="filmId"/>
   </resultMap>
   
 </mapper>

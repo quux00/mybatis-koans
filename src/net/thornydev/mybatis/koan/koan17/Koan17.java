@@ -20,7 +20,29 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+// In Koan17 we take on the same stored proc and stored function mappings
+// that we did in Koan16, except that this time we try to do them entirely
+// or mostly with MyBatis Java annotations.
+// 
+// In addition to referencing Loiane Groner's blog entry from last time
+// (http://loianegroner.com/2011/03/ibatis-mybatis-working-with-stored-procedures)
+// I also found this entry useful:
 // http://code.google.com/p/mybatis/issues/detail?id=1
+//
+// As with koan16, my solutions for MySQL and PostgreSQL are to be found in
+// completed-koans/koan17/mysql and completed-koans/koan17/pg.
+// I was successful in getting all the tests to pass for PostgreSQL,
+// but I could not get the all hashmaps version to work for MySQL.
+// If you figure it out, let me know or contribute back to these koans.
+//
+// The tests below are exactly the same as koan16, except I removed one
+// of the inventory_in_stock tests to simplify it a bit and reduce
+// redundant busy work.
+// 
+// In order to complete this koan, you will need to:
+// 1. Edit the TODO entries in this Koan17 Test
+// 2. Edit the TODO entries in the koan17-mapper.xml file
+// 3. Edit the TODO entries in the Koan17Mapper class
 public class Koan17 {
 
 	static SqlSession session;
@@ -43,7 +65,6 @@ public class Koan17 {
 		if (session != null) session.close();
 	}
 
-	// can't get this one to work with only annotations
 	@Test
 	public void learnToUseStoredProcWithHashMaps() {
 		Map<String,Integer> param = new HashMap<String,Integer>();
@@ -51,7 +72,8 @@ public class Koan17 {
 		param.put("storeId", 1);
 		List<Map<String,Integer>> results = mapper.callFilmInStockWithHashMaps(param);
 
-//		assertEquals(3, param.get("count").intValue());
+		// TODO: remove next assert if your database doesn't populate the OUT param
+		assertEquals(3, param.get("count").intValue());
 
 		assertEquals(3, results.size());
 		assertEquals(Integer.valueOf(60), results.get(0).get("film_in_stock"));
@@ -59,7 +81,6 @@ public class Koan17 {
 		assertEquals(Integer.valueOf(62), results.get(2).get("film_in_stock"));
 	}
 
-	// this one works if you define a resultmap in an xml file (see Koan17Mapper)
 	@Test
 	public void learnToUseStoredProcWithDomainObjects() {
 		FilmInStockParam param = new FilmInStockParam();
@@ -67,7 +88,8 @@ public class Koan17 {
 		param.setStoreId(1);
 		List<FilmInStockId> results = mapper.callFilmInStock(param);
 
-//		assertEquals(3, results.size());
+		// TODO: remove next assert if your database doesn't populate the OUT param
+		assertEquals(3, results.size());
 
 		FilmInStockId f = results.get(0);
 		assertNotNull(f);
@@ -89,7 +111,8 @@ public class Koan17 {
 		param.setStoreId(1);
 		List<Integer> results = mapper.callFilmInStock2(param);
 
-//		assertEquals(3, param.getCount());
+		// TODO: remove next assert if your database doesn't populate the OUT param
+		assertEquals(3, param.getCount());
 
 		assertEquals(3, results.size());
 

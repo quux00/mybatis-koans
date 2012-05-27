@@ -50,14 +50,36 @@ def copy_partials_to_tmp(koan)
 end
 
 def copy_completed_to_main_koan_area(koan)
-  FileUtils.cp_r "#{COMPLETED_DIR}/#{koan}", SRCDIR
-  puts "cp -r #{COMPLETED_DIR}/#{koan}/ #{SRCDIR}"
+  if koan =~ /1[67]-mysql/
+    FileUtils.cp_r "#{COMPLETED_DIR}/#{koan}/mysql", SRCDIR
+    puts "cp -r #{COMPLETED_DIR}/#{koan}/mysql #{SRCDIR}"
+
+  elsif koan =~ /1[67]-pg/
+    FileUtils.cp_r "#{COMPLETED_DIR}/#{koan}/pg", SRCDIR
+    puts "cp -r #{COMPLETED_DIR}/#{koan}/pg #{SRCDIR}"
+    
+  else
+    FileUtils.cp_r "#{COMPLETED_DIR}/#{koan}", SRCDIR
+    puts "cp -r #{COMPLETED_DIR}/#{koan}/ #{SRCDIR}"
+  end
 end
 
 def move_completed_in_src_back(koan)
-  FileUtils.rm_r "#{COMPLETED_DIR}/#{koan}"
-  FileUtils.mv "#{SRCDIR}/#{koan}", COMPLETED_DIR
-  puts "mv #{SRCDIR}/#{koan} #{COMPLETED_DIR}"
+  if koan =~ /1[67]-mysql/
+    FileUtils.rm_r "#{COMPLETED_DIR}/#{koan}/mysql"
+    FileUtils.mv "#{SRCDIR}/#{koan}", "#{COMPLETED_DIR}/#{koan}/mysql"
+    puts "mv #{SRCDIR}/#{koan} #{COMPLETED_DIR}/#{koan}/mysql"
+
+  elsif koan =~ /1[67]-pg/
+    FileUtils.rm_r "#{COMPLETED_DIR}/#{koan}/pg"
+    FileUtils.mv "#{SRCDIR}/#{koan}", "#{COMPLETED_DIR}/#{koan}/pg"
+    puts "mv #{SRCDIR}/#{koan} #{COMPLETED_DIR}#{koan}/pg"
+
+  else
+    FileUtils.rm_r "#{COMPLETED_DIR}/#{koan}"
+    FileUtils.mv "#{SRCDIR}/#{koan}", COMPLETED_DIR
+    puts "mv #{SRCDIR}/#{koan} #{COMPLETED_DIR}"
+  end
 end
 
 def copy_tmp_partials_to_src(koan)
@@ -94,6 +116,14 @@ where koan is the name of a koan ("koan04")
 So you should always do it in order of test, then reset
 test-completed.rb koan07 test
 test-completed.rb koan07 reset
+
+Note: koan16 and 17 are database specific, so you must include a
+      suffix indicating which database koan set to test.
+      MySQL suffix: -mysql
+      PostgreSQL suffix: -pg
+
+  Example: test-completed.rb koan16-pg <test|reset>
+
   END
 end
 
@@ -102,14 +132,25 @@ if $0 == __FILE__
   if ARGV.size == 0
     $stderr.puts "ERROR: Must provide the name of a koan"
     exit -1
-  elsif ARGV.first == '-h' || ARGV.first == '--help'
+  end
+  
+  koan = ARGV.first.downcase
+  
+  if ARGV.first == '-h' || ARGV.first == '--help'
     help
     exit
   elsif ARGV.first !~ /koan\d\d/i
     $stderr.puts "ERROR: Must provide the name of a koan of form koanNN"
     exit -1
   end
-  koan = ARGV.first.downcase
+  if ARGV.first =~ /koan1[67]/
+    if ARGV.first !~ /koan1[67]-(pg|mysql)/
+      $stderr.puts "ERROR: koan16 and 17 must have a db suffix"
+      help
+      exit -1
+    end
+  end
+
   direction = ARGV[1] || "test"
   direction = direction.downcase
   if direction != "test" && direction != "reset"

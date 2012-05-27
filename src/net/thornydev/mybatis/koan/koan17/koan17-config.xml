@@ -23,6 +23,7 @@
   </environments>
   
   <mappers>
+    <!-- NOTE: if you find a way to get rid of this xml mapper, let me know -->
     <mapper resource="net/thornydev/mybatis/koan/koan17/koan17-mapper.xml"/>
   </mappers>
 </configuration>
