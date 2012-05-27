@@ -89,7 +89,7 @@ public class Koan17 {
 		param.setStoreId(1);
 		List<Integer> results = mapper.callFilmInStock2(param);
 
-//		assertEquals(3, param.getCount());
+		assertEquals(3, param.getCount());
 
 		assertEquals(3, results.size());
 

@@ -32,7 +32,8 @@ public interface Koan17Mapper {
 	@Options(statementType = StatementType.CALLABLE)
 	List<FilmInStockId> callFilmInStock(FilmInStockParam params);
 
-    @Select("SELECT film_in_stock( #{filmId}, #{storeId} )")
+	@Select("{ CALL film_in_stock( #{filmId, mode=IN, jdbcType=INTEGER}, #{storeId, mode=IN, jdbcType=INTEGER}, #{count, mode=OUT, jdbcType=INTEGER} )}")
+	@Options(statementType = StatementType.CALLABLE)
 	List<Integer> callFilmInStock2(FilmInStockParam params);
 
 	/* ---[ inventory_in_stock stored function mapper methods ]--- */

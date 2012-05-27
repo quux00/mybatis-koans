@@ -10,6 +10,7 @@
     <result column="inventory_id" />
   </resultMap>
   
+  <!-- This one works, but we had to resort to XML -->
   <resultMap id="filmInStockIdMap" type="FilmInStockId" autoMapping="true">
     <result column="inventory_id" property="filmId"/>
   </resultMap>
