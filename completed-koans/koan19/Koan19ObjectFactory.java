@@ -30,7 +30,7 @@ public class Koan19ObjectFactory extends DefaultObjectFactory {
 			email = new EmailImpl(emailStr);
 		}
 		
-		Staff staff = new Staff((int) ctorArgs.get(0), email);
+		Staff staff = new Staff((Integer) ctorArgs.get(0), email);
 
 		@SuppressWarnings("unchecked")
 		T t = (T) staff;
@@ -44,7 +44,7 @@ public class Koan19ObjectFactory extends DefaultObjectFactory {
 	@SuppressWarnings("unused")
 	private <T> T createStaff2(List<Object> ctorArgs) {
 		System.out.println("DEBUG aaa: " + ctorArgs.get(1));
-		Staff staff = new Staff((int) ctorArgs.get(0), (Email) ctorArgs.get(1));
+		Staff staff = new Staff((Integer) ctorArgs.get(0), (Email) ctorArgs.get(1));
 		@SuppressWarnings("unchecked")
 		T t = (T) staff;
 		return t;
