@@ -10,31 +10,21 @@ import net.thornydev.mybatis.koan.util.Email;
  * fields of the table.
  */
 public class Staff {
-	private final int id;
-	private final String firstName;
-	private final String lastName;
-	private final String username;
-	private final String password;
-	private final boolean active;
+	private int id;
+	private String firstName;
+	private String lastName;
+	private String username;
+	private String password;
+	private boolean active;
 	
-	private final Email email;
-	private final Address address;
+	private Email email;
+	private Address address;
+
+	public Staff() {}
 	
-	@SuppressWarnings("unused")
-	private Staff() {
-		this(Integer.MIN_VALUE, null, null, null, null, false, null, null);
-	}
-	
-	public Staff(int id, String firstName, String lastName, String username,
-			String password, boolean active, Email email, Address address) {
+	public Staff(int id, Email email) {
 		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.username = username;
-		this.password = password;
-		this.active = active;
 		this.email = email;
-		this.address = address;
 	}
 
 	public int getId() {
