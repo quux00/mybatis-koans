@@ -1,4 +1,4 @@
-package net.thornydev.mybatis.koan.koan19b;
+package net.thornydev.mybatis.koan.koan19;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import net.thornydev.mybatis.koan.util.NullEmail;
 
 import org.apache.ibatis.reflection.factory.DefaultObjectFactory;
 
-public class Koan19bObjectFactory extends DefaultObjectFactory {
+public class Koan19ObjectFactory extends DefaultObjectFactory {
 	private static final long serialVersionUID = 2339L;
 
 	@Override

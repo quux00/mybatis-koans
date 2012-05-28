@@ -3,7 +3,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="net.thornydev.mybatis.koan.koan19b.Koan19bMapper">
+<mapper namespace="net.thornydev.mybatis.koan.koan19.Koan19Mapper">
   <resultMap id="addressResultMap" type="Address">
     <constructor>
       <idArg column="address_id" javaType="int"/>

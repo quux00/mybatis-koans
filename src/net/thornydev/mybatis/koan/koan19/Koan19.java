@@ -1,4 +1,4 @@
-package net.thornydev.mybatis.koan.koan19b;
+package net.thornydev.mybatis.koan.koan19;
 
 import static org.junit.Assert.*;
 
@@ -19,21 +19,21 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class Koan19b {
+public class Koan19 {
 
 	static SqlSession session;
 	static SqlSessionFactory sessionFactory;
-	static Koan19bMapper mapper;
+	static Koan19Mapper mapper;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		String resource = "net/thornydev/mybatis/koan/koan19b/koan19b-config.xml";
+		String resource = "net/thornydev/mybatis/koan/koan19/koan19-config.xml";
 		InputStream inputStream = Resources.getResourceAsStream(resource);
 		sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 		inputStream.close();
 
 		session = sessionFactory.openSession();
-		mapper = session.getMapper(Koan19bMapper.class);
+		mapper = session.getMapper(Koan19Mapper.class);
 	}
 
 	@AfterClass
