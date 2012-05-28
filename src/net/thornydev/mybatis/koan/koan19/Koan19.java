@@ -1,4 +1,4 @@
-package net.thornydev.mybatis.koan.koan19;
+package net.thornydev.mybatis.koan.koan19b;
 
 import static org.junit.Assert.*;
 
@@ -13,28 +13,27 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class Koan19 {
+public class Koan19b {
 
 	static SqlSession session;
 	static SqlSessionFactory sessionFactory;
-	static Koan19Mapper mapper;
+	static Koan19bMapper mapper;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		String resource = "net/thornydev/mybatis/koan/koan19/koan19-config.xml";
+		String resource = "net/thornydev/mybatis/koan/koan19b/koan19b-config.xml";
 		InputStream inputStream = Resources.getResourceAsStream(resource);
 		sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 		inputStream.close();
 
 		session = sessionFactory.openSession();
-		mapper = session.getMapper(Koan19Mapper.class);
+		mapper = session.getMapper(Koan19bMapper.class);
 	}
 
 	@AfterClass
@@ -50,11 +49,13 @@ public class Koan19 {
 	@After
 	public void tearDown() throws Exception {
 		// restore it back to what it was
-		mapper.setEmail("Jon.Stephens@sakilastaff.com", 2);  // FIXME: maybe don't need to do this if do a session rollback?
+		mapper.setEmail("Jon.Stephens@sakilastaff.com", 2);
+		// Note: technically this is not needed if you don't have autocommit turned on,
+		//       but putting it in case someone does run the koan with autocommit on
 	}
 
 	@Test
-	public void learnToUseTypeHandlerAsFactory_firstStaffMemberShouldHaveNonNullEmail() {
+	public void firstStaffMemberShouldHaveNonNullEmail() {
 		Staff st = session.selectOne("getStaffById", 1);
 		assertNotNull(st);
 		assertEquals(1, st.getId());
@@ -89,5 +90,5 @@ public class Koan19 {
 		assertNotNull(e);
 		assertTrue(e instanceof NullEmail);
 		assertEquals("", e.getUsername());		
-	}	
+	}
 }

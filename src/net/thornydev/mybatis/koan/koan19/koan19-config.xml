@@ -17,6 +17,8 @@
                alias="EmailTypeHandler"/>
   </typeAliases>
 
+  <objectFactory type="net.thornydev.mybatis.koan.koan19b.Koan19bObjectFactory"/>
+
   <environments default="development">
     <environment id="development">
       <transactionManager type="JDBC" />
@@ -30,6 +32,6 @@
   </environments>
   
   <mappers>
-    <mapper resource="net/thornydev/mybatis/koan/koan19/koan19-mapper.xml"/>
+    <mapper resource="net/thornydev/mybatis/koan/koan19b/koan19b-mapper.xml"/>
   </mappers>
 </configuration>

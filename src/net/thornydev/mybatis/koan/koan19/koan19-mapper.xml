@@ -3,7 +3,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="net.thornydev.mybatis.koan.koan19.Koan19Mapper">
+<mapper namespace="net.thornydev.mybatis.koan.koan19b.Koan19bMapper">
   <resultMap id="addressResultMap" type="Address">
     <constructor>
       <idArg column="address_id" javaType="int"/>
@@ -26,14 +26,11 @@
   <resultMap id="staffResultMap" type="Staff" >
     <constructor>
       <idArg column="id" javaType="_int"/>
-      <arg column="first_name" javaType="String"/>
-      <arg column="last_name" javaType="String"/>
-      <arg column="username" javaType="String"/>
-      <arg column="password" javaType="String"/>
-      <arg column="active" javaType="_boolean"/>
-      <arg column="email" javaType="Email" typeHandler="EmailTypeHandler"/>
+      <arg column="email" javaType="String"/>
+      <!-- NOTE: using the typehandler below doesn't work - the ObjectFactor still gets
+                 null, not a NullEmail object.  Don't understand why. -->
+<!--       <arg column="email" javaType="Email" typeHandler="EmailTypeHandler"/> -->
     </constructor>
-<!--     <result column="email" property="email" typeHandler="EmailTypeHandler" javaType="Email" jdbcType="VARCHAR"/> -->
     <association property="address" column="address_id" javaType="Address" select="getAddressById"/>
   </resultMap>
 
@@ -45,7 +42,7 @@
   
   <update id="setEmail" >
     UPDATE staff
-    SET email = #{email}
-    WHERE staff_id = #{id}
+    SET email = #{param1}
+    WHERE staff_id = #{param2}
   </update>
 </mapper>
