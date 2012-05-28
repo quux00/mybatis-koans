@@ -5,7 +5,6 @@
 <configuration>
   <properties resource="net/thornydev/mybatis/koan/config.properties"/>
 
-  <!-- Note: you may or may not want this setting -->
   <settings>
     <setting name="mapUnderscoreToCamelCase" value="true" />
   </settings>
@@ -14,7 +13,11 @@
     <typeAlias type="net.thornydev.mybatis.koan.domain.Staff"   alias="Staff"/>
     <typeAlias type="net.thornydev.mybatis.koan.domain.Address" alias="Address"/>
     <typeAlias type="net.thornydev.mybatis.koan.util.Email"     alias="Email"/>
+    <typeAlias type="net.thornydev.mybatis.koan.util.EmailTypeHandler" 
+               alias="EmailTypeHandler"/>
   </typeAliases>
+
+  <objectFactory type="net.thornydev.mybatis.koan.koan19.Koan19ObjectFactory"/>
 
   <environments default="development">
     <environment id="development">

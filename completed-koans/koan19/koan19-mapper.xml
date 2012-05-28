@@ -24,7 +24,13 @@
 
 
   <resultMap id="staffResultMap" type="Staff" >
-    <!-- TODO: fill in resultMap -->
+    <constructor>
+      <idArg column="id" javaType="_int"/>
+      <arg column="email" javaType="String"/>
+      <!-- NOTE: using the typehandler below doesn't work - the ObjectFactor still gets
+                 null, not a NullEmail object.  Don't understand why. -->
+<!--       <arg column="email" javaType="Email" typeHandler="EmailTypeHandler"/> -->
+    </constructor>
     <association property="address" column="address_id" javaType="Address" select="getAddressById"/>
   </resultMap>
 

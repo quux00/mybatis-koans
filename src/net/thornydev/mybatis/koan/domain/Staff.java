@@ -27,6 +27,40 @@ public class Staff {
 		this.email = email;
 	}
 
+	/* ---[ GETTERS AND SETTERS ]--- */
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public void setEmail(Email email) {
+		this.email = email;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
 	public int getId() {
 		return id;
 	}
