@@ -14,38 +14,38 @@ import org.apache.ibatis.type.JdbcType;
  */
 public class EmailTypeHandler extends BaseTypeHandler<Email> {
 
-	@Override
-	public Email getNullableResult(ResultSet rs, String colName) throws SQLException {
-		System.out.println("DEBUG1");
-		return createEmail(rs.getString(colName));
-	}
+  @Override
+  public Email getNullableResult(ResultSet rs, String colName) throws SQLException {
+    System.out.println("DEBUG1");
+    return createEmail(rs.getString(colName));
+  }
 
-	@Override
-	public Email getNullableResult(ResultSet rs, int colNum) throws SQLException {
-		System.out.println("DEBUG2");
-		return createEmail(rs.getString(colNum));
-	}
+  @Override
+  public Email getNullableResult(ResultSet rs, int colNum) throws SQLException {
+    System.out.println("DEBUG2");
+    return createEmail(rs.getString(colNum));
+  }
 
 
-	private Email createEmail(String s) {
-		System.out.println(s);
-		if (s == null || s.equals("")) {
-			System.out.println("DEBUG3");
-			return new NullEmail();
-		} else {
-			System.out.println("DEBUG4");
-			return new EmailImpl(s);
-		}
-	}
-	
-	@Override
-	public Email getNullableResult(CallableStatement arg0, int arg1) throws SQLException {
-		return null;
-	}
+  private Email createEmail(String s) {
+    System.out.println(s);
+    if (s == null || s.equals("")) {
+      System.out.println("DEBUG3");
+      return new NullEmail();
+    } else {
+      System.out.println("DEBUG4");
+      return new EmailImpl(s);
+    }
+  }
 
-	@Override
-	public void setNonNullParameter(PreparedStatement ps, int colNum,
-			Email e, JdbcType t) throws SQLException {
-	}
+  @Override
+  public Email getNullableResult(CallableStatement arg0, int arg1) throws SQLException {
+    return null;
+  }
+
+  @Override
+  public void setNonNullParameter(PreparedStatement ps, int colNum,
+                                  Email e, JdbcType t) throws SQLException {
+  }
 
 }

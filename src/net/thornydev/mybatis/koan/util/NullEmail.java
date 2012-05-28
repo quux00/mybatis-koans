@@ -7,19 +7,19 @@ package net.thornydev.mybatis.koan.util;
  */
 public class NullEmail implements Email {
 
-	@Override
-	public String getUsername() {
-		return "";
-	}
+  @Override
+  public String getUsername() {
+    return "";
+  }
 
-	@Override
-	public String getDomain() {
-		return "";
-	}
+  @Override
+  public String getDomain() {
+    return "";
+  }
 
-	@Override
-	public String getEmailAddress() {
-		return "";
-	}
+  @Override
+  public String getEmailAddress() {
+    return "";
+  }
 
 }

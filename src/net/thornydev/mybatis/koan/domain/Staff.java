@@ -4,92 +4,92 @@ import net.thornydev.mybatis.koan.util.Email;
 
 /**
  * Domain object that maps to the Staff table
- * of the sakila database. 
- * 
+ * of the sakila database.
+ *
  * Currently, this is an incomplete impl of all
  * fields of the table.
  */
 public class Staff {
-	private int id;
-	private String firstName;
-	private String lastName;
-	private String username;
-	private String password;
-	private boolean active;
-	
-	private Email email;
-	private Address address;
+  private int id;
+  private String firstName;
+  private String lastName;
+  private String username;
+  private String password;
+  private boolean active;
 
-	public Staff() {}
-	
-	public Staff(int id, Email email) {
-		this.id = id;
-		this.email = email;
-	}
+  private Email email;
+  private Address address;
 
-	/* ---[ GETTERS AND SETTERS ]--- */
-	
-	public void setId(int id) {
-		this.id = id;
-	}
+  public Staff() {}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+  public Staff(int id, Email email) {
+    this.id = id;
+    this.email = email;
+  }
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+  /* ---[ GETTERS AND SETTERS ]--- */
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+  public void setId(int id) {
+    this.id = id;
+  }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
 
-	public void setActive(boolean active) {
-		this.active = active;
-	}
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
 
-	public void setEmail(Email email) {
-		this.email = email;
-	}
+  public void setUsername(String username) {
+    this.username = username;
+  }
 
-	public void setAddress(Address address) {
-		this.address = address;
-	}
+  public void setPassword(String password) {
+    this.password = password;
+  }
 
-	public int getId() {
-		return id;
-	}
+  public void setActive(boolean active) {
+    this.active = active;
+  }
 
-	public String getFirstName() {
-		return firstName;
-	}
+  public void setEmail(Email email) {
+    this.email = email;
+  }
 
-	public String getLastName() {
-		return lastName;
-	}
+  public void setAddress(Address address) {
+    this.address = address;
+  }
 
-	public String getUsername() {
-		return username;
-	}
+  public int getId() {
+    return id;
+  }
 
-	public String getPassword() {
-		return password;
-	}
+  public String getFirstName() {
+    return firstName;
+  }
 
-	public boolean isActive() {
-		return active;
-	}
+  public String getLastName() {
+    return lastName;
+  }
 
-	public Email getEmail() {
-		return email;
-	}
+  public String getUsername() {
+    return username;
+  }
 
-	public Address getAddress() {
-		return address;
-	}
+  public String getPassword() {
+    return password;
+  }
+
+  public boolean isActive() {
+    return active;
+  }
+
+  public Email getEmail() {
+    return email;
+  }
+
+  public Address getAddress() {
+    return address;
+  }
 }
