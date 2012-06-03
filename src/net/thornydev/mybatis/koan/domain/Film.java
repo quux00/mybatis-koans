@@ -18,11 +18,11 @@ public class Film {
   private int length;
   private String rating;
   private Date lastUpdate;
-
-  // the next four need special type handlers (?)
-  private Year releaseYear;
   private BigDecimal rentalRate;
   private BigDecimal replacementCost;
+
+  // the next two need special type handlers
+  private Year releaseYear;
   private List<String> specialFeatures;
 
   // skipping "full text" column (or table) since it is treated differently

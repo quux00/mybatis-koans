@@ -417,6 +417,19 @@ Learn:
 
 ---
 
+### Koan 20
+
+**Dynamic SQL**
+
+Learn:
+
+* How to use the `<if>` conditional to build a SQL statement
+* How to use the `<choose>`-`<when>`-`<otherwise>` "switch statement" to build a SQL statement
+* How to most effectively build a compound where and set clause using the `<where>` and `<set>` features
+* How to loop over lists when building SQL using `<foreach>`
+
+---
+
 # A Note on Solutions
 
 As noted above, my answers are in the completed-koans directory. For many koans, there are probably many ways to make it work (even within the constraints I set in order to exercise a given feature of MyBatis). If you have an alternative answer that you think is better or just as good and will help others see the possibilities, feel free to send it to me (or send a pull request) and I can add those to the repo.
@@ -433,7 +446,7 @@ As you go through the koans, you'll see that I change styles/idioms from time to
 
 As of last writing in May 2012, these koans are still in progress and not complete.  Feel free to grab them and try them out.  Suggestions for improvements are welcome.
 
-So far, I have tested them carefully with PostgreSQL 9.1.3 and MySQL 5.5 on Linux. If you try them with other databases or operating systems and have problems, let me know.  (Suggested patches are welcome.)
+So far, I have tested them carefully with MyBatis-3.1.1 using PostgreSQL 9.1.3 and MySQL 5.5 on Linux. If you try them with other databases or operating systems and have problems, let me know.  (Suggested patches are welcome.)
 
 Right now these koans focus only on the MyBatis Persistence Framework. Future koans could also focus on the other "modules" of MyBatis, such as Schema Migrations, the MyBatis code generator and MyBatis-Spring integration, Scala integration and Caches (such as EHCache and memcached).
 
