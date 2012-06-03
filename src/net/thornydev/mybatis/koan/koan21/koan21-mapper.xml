@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.thornydev.mybatis.koan.koan21.Koan21Mapper">
+
+  <select id="selectLongFilmsByTitleOrRating" parameterType="Film" resultType="String">
+    SELECT title FROM film
+    WHERE length > 90
+    <if test="title != null">
+      AND title LIKE #{title}
+    </if>
+    <if test="rating != null">
+      AND rating = '${rating}'
+    </if>
+    ORDER BY length DESC
+  </select>
+</mapper>

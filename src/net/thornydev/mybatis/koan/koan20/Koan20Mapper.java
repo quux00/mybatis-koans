@@ -5,5 +5,7 @@ import java.util.List;
 import net.thornydev.mybatis.koan.domain.Film;
 
 public interface Koan20Mapper {
-  List<String> selectLongFilmsByTitleOrRating(Film f);
+  List<String> selectLongFilmsByTitleWithPound(Film f);
+  List<String> selectLongFilmsByTitleWithDollar(Film f);
+  List<String> selectLongFilmsByTitleAndRating(Film f);
 }

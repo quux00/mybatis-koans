@@ -5,15 +5,25 @@
 
 <mapper namespace="net.thornydev.mybatis.koan.koan20.Koan20Mapper">
 
-  <select id="selectLongFilmsByTitleOrRating" parameterType="Film" resultType="String">
+  <select id="selectLongFilmsByTitleWithPound" parameterType="Film" resultType="String">
     SELECT title FROM film
     WHERE length > 90
-    <if test="title != null">
       AND title LIKE #{title}
-    </if>
-    <if test="rating != null">
+    ORDER BY length DESC
+  </select>
+
+  <select id="selectLongFilmsByTitleWithDollar" parameterType="Film" resultType="String">
+    SELECT title FROM film
+    WHERE length > 90
+      AND title LIKE '%${title}%'
+    ORDER BY length DESC
+  </select>
+
+  <select id="selectLongFilmsByTitleAndRating" parameterType="Film" resultType="String">
+    SELECT title FROM film
+    WHERE length > 90
+      AND title LIKE '${title}'
       AND rating = '${rating}'
-    </if>
     ORDER BY length DESC
   </select>
 </mapper>
