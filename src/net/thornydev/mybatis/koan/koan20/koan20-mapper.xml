@@ -8,22 +8,27 @@
   <select id="selectLongFilmsByTitleWithPound" parameterType="Film" resultType="String">
     SELECT title FROM film
     WHERE length > 90
-      AND title LIKE #{title}
+      <!-- TODO: fill in variable where ??? is -->
+      AND title LIKE ???
     ORDER BY length DESC
   </select>
 
   <select id="selectLongFilmsByTitleWithDollar" parameterType="Film" resultType="String">
     SELECT title FROM film
     WHERE length > 90
-      AND title LIKE '%${title}%'
+      <!-- TODO: fill in variable where ??? is - should be different from one above -->
+      AND title LIKE ???
     ORDER BY length DESC
   </select>
 
   <select id="selectLongFilmsByTitleAndRating" parameterType="Film" resultType="String">
     SELECT title FROM film
     WHERE length > 90
-      AND title LIKE '%${title}%'
-      AND rating = '${rating}'
+      <!-- TODO: fill in variables where ???'s are -->
+      AND title LIKE ???
+      <!-- NOTE: if your database uses an enum for the rating column in the film table, 
+                 your options are more constrained here -->
+      AND rating = ???
     ORDER BY length DESC
   </select>
 </mapper>

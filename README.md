@@ -419,6 +419,18 @@ Learn:
 
 ### Koan 20
 
+**Prepared vs. non-prepared statements in MyBatis**
+
+Learn:
+
+* The difference between the #{} variable notation and ${}
+* How to use the ${} notation with a domain object
+* How to deal with an enum type in your sakila database (if using PostgreSQL or MySQL)
+
+---
+
+### Koan 21
+
 **Dynamic SQL**
 
 Learn:
