@@ -4,6 +4,8 @@ A [koan](http://en.wikipedia.org/wiki/K%C5%8Dan) is a question or statement to b
 
 A software koan comes in the form of a broken unit test that you must fix to get it to pass, usually by filling in the blanks or entire missing sections.  The koan is intended to teach one or a small set of cohesive features about the language or tool being studied.
 
+This set of koans focus on the excellent [MyBatis data mapper framework](http://code.google.com/p/mybatis/wiki/Welcome?tm=6) for Java.  MyBatis 3 has made significant changes from the previous iBATIS framework and these koans are designed to help you learn how MyBatis 3 works.
+
 The structure of these koans is inspired by the challenging and informative [Neo4j koans](https://github.com/jimwebber/neo4j-tutorial) by Jim Webber and colleagues.
 
 ---
@@ -436,7 +438,6 @@ Learn:
 Learn:
 
 * How to use the `<if>` conditional to build a SQL statement
-* How to use the `<choose>`-`<when>`-`<otherwise>` "switch statement" to build a SQL statement
 * How to most effectively build a compound where and set clause using the `<where>` and `<set>` features
 * How to loop over lists when building SQL using `<foreach>`
 
