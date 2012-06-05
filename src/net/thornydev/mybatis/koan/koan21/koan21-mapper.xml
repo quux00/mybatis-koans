@@ -8,64 +8,42 @@
   <select id="selectLongFilmsByTitleOrRating" parameterType="Film" resultType="String">
     SELECT title FROM film
     WHERE length > 90
-    <if test="title != null">
+      <!-- make the next two clauses optional by using MyBatis dynamic SQL tag(s) -->
       AND title LIKE #{title}
-    </if>
-    <if test="rating != null">
       AND rating = '${rating}'
-    </if>
     ORDER BY length DESC
   </select>
   
   <select id="selectFilmByTitleRatingAndOrMinLength" parameterType="Film" resultType="String">
     SELECT title FROM film
-    <where>
-      <if test="length > 0">
+    <!-- make the whole where clause and its parts optional by using MyBatis dynamic SQL tag(s) -->
+    <!-- WHERE ... -->
         length > #{length}
-      </if>
-      <if test="title != null">
+
         AND title LIKE #{title}
-      </if>
-      <if test="rating != null">
+
         AND rating = '${rating}'
-      </if>
-    </where>
+
   </select>
   
   <select id="selectFilmByRentalRates" resultType="String">
     SELECT title FROM film
     WHERE rental_rate IN
-    <foreach collection="array" item="item" open="(" separator="," close=")">
-      #{item}
-    </foreach>
+    <!-- use a dynamic SQL tag to loop over all the elements being passed in -->
   </select>
 
   <select id="selectFilmByRentalRates2" resultType="String">
     SELECT title FROM film
-    <where>
-      <if test="rates != null">
+    <!-- make the whole where clause and its parts optional by using MyBatis dynamic SQL tag(s) -->
+    <!-- WHERE ... -->
         rental_rate IN
-        <foreach collection="rates" item="item" open="(" separator="," close=")">
-          #{item}
-        </foreach>
-      </if>
-    </where>
+    <!-- use a dynamic SQL tag to loop over all the elements being passed in -->
   </select>
   
   <update id="updateFilmIfNecessary" parameterType="Film">
     UPDATE film
-    <set>
-      film_id = #{id},
-      <if test="title != null">
-        title = #{title},
-      </if>
-      <if test="rentalDuration > 0">
-        rental_duration = #{rentalDuration},
-      </if>
-      <if test="rentalRate > 0">
-        rental_rate = #{rentalRate}
-      </if>
-    </set>
+    <!-- SET -->
+    <!-- use dynamic sql clause(s) to optionally update title, rental_duration and/or rental_rate -->
     WHERE film_id = #{id}
   </update>
 

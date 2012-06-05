@@ -20,7 +20,29 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-// make sure you do Koan20 before this one, as it picks up where that one left off
+// Make sure you do Koan20 before this one, as it picks up where that one left off.
+// 
+// In Koan20, we did some queries that had multiple fields in the WHERE clause.
+// Thus, we had a query like "selectLongFilmsByTitleAndRating", which allowed you
+// and required you to specify both title and rating and had a fixed min length.
+// 
+// What if you want to be more dynamic and allow the query to fill any number of
+// fields that may have come up - both for queries and updates?  That is where
+// MyBatis dynamic SQL tags come in to play. You can avoid writing tedious and
+// error prone dynamic clauses, having to remove extra AND or OR connectors,
+// commas, etc.
+// 
+// In this koan, we explore the following dynamic SQL tags in our MyBatis
+// mappings:
+// * <if>
+// * <where>
+// * <foreach>
+// * <set> (in an update)
+// * and we have some that combine one or more of those.
+// 
+// Your job is to fill out koan21-mapper.xml with these dynamic tags 
+// and the appropriate SQL to make all the tests in Koan21.java pass.
+// You will also need to make one edit to the Koan21Mapper class.
 public class Koan21 {
 
   static SqlSession session;

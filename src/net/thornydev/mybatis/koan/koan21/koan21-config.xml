@@ -11,7 +11,6 @@
 
   <typeAliases>
     <typeAlias type="net.thornydev.mybatis.koan.domain.Film" alias="Film"/>
-    <typeAlias type="org.apache.ibatis.type.EnumTypeHandler" alias="EnumTypeHandler"/>
   </typeAliases>
 
   <environments default="development">
