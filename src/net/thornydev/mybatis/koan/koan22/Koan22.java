@@ -15,6 +15,25 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+// In Koan22, we take a mappings that are a little more complex
+// than earlier koans. In fact, we have two facets of interest:
+// 
+// 1. We deal with a three table join between film, category_film
+//    and category tables.  We represent film with the 
+//    koan22.FilmWithCategories object, rather than the domain.Film
+//    class we have used before in order to capture the has-many
+//    relationship that Film has with Category.  In the mapping
+//    code you will need to handle a three table join.
+// 
+// 2. We do inserts into the category_film table, which requires
+//    extracting an id from a Category object and an id from a
+//    FilmWithCategories object.  We haven't had a DML mapping yet
+//    where we had to extract fields from two different domain
+//    objects.  We learn how to do that here.
+//
+// To complete this koan, you will need to complete the TODOs in 
+// koan22-mapping.xml.  You may also want to complete the optional 
+// TODO in Koan22Mapper.
 public class Koan22 {
 
   static SqlSessionFactory sessionFactory;

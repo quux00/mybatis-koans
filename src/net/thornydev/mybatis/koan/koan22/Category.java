@@ -1,5 +1,9 @@
 package net.thornydev.mybatis.koan.koan22;
 
+/**
+ * Simple DTO representation of the Category table
+ * (ignoring the last_update field)
+ */
 public class Category {
   private int id;
   private String name;

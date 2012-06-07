@@ -445,6 +445,17 @@ Learn:
 
 ### Koan 22
 
+**(Slightly) More Complicated Mappings**
+
+Learn:
+
+* How to do an insert that takes two domain objects and extract the appropriate ids from them in the MyBatis mapping
+* How to map a three table join
+
+---
+
+### Koan 23
+
 **Using Java Enums with MyBatis**
 
 Learn:
