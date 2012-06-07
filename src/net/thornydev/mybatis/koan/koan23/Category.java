@@ -33,19 +33,14 @@ public enum Category {
   public int getId() {
     return id;
   }
-  
+
+  // TODO: override the toString method in order to map between the
+  // sakila database version of the name (title case) with the Java
+  // version (all caps)
   @Override
   public String toString() {
-    String std = super.toString(); 
-    return std.substring(0, 1).toUpperCase() + std.substring(1, std.length()).toLowerCase();
+    return null;
   }
 
-  // following Josh Bloch's recommendation in Effective Java, 2e
-  // to define a static from fromString method if you need to 
-  // tweak expected incoming strings to match what the default
-  // valueOf method can handle
-//  public static Category fromString(String s) {
-//    return Category.valueOf(s.toUpperCase());
-//  }
 }
 

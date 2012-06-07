@@ -7,16 +7,20 @@ public enum Rating {
   PG_13, 
   R;
 
+  // TODO: override the toString method in order to map between the
+  // sakila database version of the name (title case) with the Java
+  // version (all caps)
   @Override
   public String toString() {
-    return super.toString().replace('_', '-');
+    return null;
   }
   
-  // following Josh Bloch's recommendation in Effective Java, 2e
-  // to define a static from fromString method if you need to 
+  // Follow Josh Bloch's recommendation in Effective Java, 2ed
+  // to define a static fromString method when you need to 
   // tweak expected incoming strings to match what the default
   // valueOf method can handle
   public static Rating fromString(String s) {
-    return Rating.valueOf(s.replace('-', '_').toUpperCase());
+    // TODO: implement this method
+    return null;
   }
 }

@@ -16,11 +16,38 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-// Recommended that you do Koan22 before this one, as it builds on the pattern
+// It is recommended that you do Koan22 before this one, as it builds on the pattern
 // and lessons learned there.
-// there is also an enum type handler
-// http://stackoverflow.com/questions/10219253/mybatis-enum-usage
-// http://stackoverflow.com/questions/10562895/enum-constant-in-mybatiss-sql-query
+// 
+// On stackoverflow and in the MyBatis google group I have seen a number of
+// questions on how to use/handle Java enums and database enums with MyBatis.
+// In this koan, we take those on.
+// 
+// We model the sakila category table as a single Java enum and we model
+// the rating field in the film table as a Java enum.  In MySQL and PostgreSQL,
+// the rating column is also implemented as database enum, which poses some
+// special handling requirements in the case of PostgreSQL.
+// 
+// To start, familiarize yourself with the built-in MyBatis EnumTypeHandler.
+// Use it and get a feel for how it works. Once you understand, you'll be
+// able to see circumstances in which you need to supplement its functionality
+// with your own handler.
+// 
+// A few notes from my explorations (with mybatis 3.1.1):
+// * Implementing a MyBatis ObjectFactory will not help you, as that is not
+//   called for a Java enum type (at least I couldn't get it to work).
+// * In the case of the Category enum, there are actually two pieces of
+//   information - its id and its name. I was not able to find a way to get
+//   MyBatis to load both from a database query (you can do one or the other), 
+//   so I modeled the Category enum to hard code its ID to match the IDs in 
+//   the sakila db. If you find a way to load both (that isn't more trouble 
+//   than it's worth), I'd love to see your solution.
+// 
+// To complete this koan, you will need to:
+// 1. Complete all TODOs in the koan23-mapper.xml
+// 2. Implement/override toString method of the Category enum.
+// 3. Implement/override the fromString and toString methods of the Rating enum.
+// 4. Implement a RatingTypeHandler and declare it in the koan23-config.xml file.
 public class Koan23 {
 
   static SqlSessionFactory sessionFactory;

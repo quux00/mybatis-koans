@@ -3,6 +3,10 @@ package net.thornydev.mybatis.koan.koan23;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class is similar to koan22.FilmWithCategories
+ * except that it uses two enums: Rating and Category.
+ */
 public class FilmWithCategories {
   private int id;
   private String title;
@@ -44,5 +48,4 @@ public class FilmWithCategories {
     if (categories == null) categories = new ArrayList<Category>();
     categories.add(c);
   }
-  
 }

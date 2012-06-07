@@ -6,21 +6,22 @@
 <mapper namespace="net.thornydev.mybatis.koan.koan23.Koan23Mapper">
 
   <select id="getCategoryByName" resultType="Category" parameterType="String">
-    SELECT UPPER(name)
-    FROM category
-    WHERE name = #{name}
+    <!-- TODO: you can use MyBatis' built in EnumTypeHandler without
+               having to declare it to create a Java Category enum. And as 
+               long as you carefully craft this SQL query it will work.
+               without doing anything else. -->
   </select>
 
   <resultMap id="filmWithCategoriesMap" type="FilmWithCategories">
-    <id column="id" property="id" javaType="_int"/>
-    <result column="title" property="title"/>
-    <collection property="categories" ofType="Category">
-      <result column="cat_name"/>
-    </collection>
+    <!-- TODO: fill in the result map to create a FilmWithCategories
+               object that has id, title and List<Category> fields filled in.
+               (You do not need to handle Rating property for this query.) -->
   </resultMap>
 
   <select id="getFilmById" parameterType="int" resultMap="filmWithCategoriesMap">
-    SELECT f.film_id AS id, f.title, c.category_id, UPPER(c.name) as cat_name
+    <!-- TODO: write the select clause for the above resultMap -->
+    <!-- NOTE: you do not need to retrieve and handle "rating" in this test -->
+    SELECT ???
     FROM film f
     JOIN film_category fc ON f.film_id = fc.film_id
     JOIN category c ON fc.category_id = c.category_id
@@ -28,9 +29,12 @@
   </select>
 
   <resultMap id="filmWithRatingMap" type="FilmWithCategories">
-    <id column="id" property="id" javaType="_int"/>
-    <result column="title" property="title"/>
-    <result column="rating" property="rating" typeHandler="RatingTypeHandler"/>
+     <!-- TODO: fill in -->
+     <!-- With Rating, you will not be so lucky to use the default MyBatis
+          EnumTypeHandler, since it will try to invoke one like
+          Rating.NC-17, which doesn't exist (Rating.NC_17 does exist).
+          So you will need to define the appropriate handler to tell
+          MyBatis how to do it. -->
   </resultMap>
 
   <select id="getFilmWithRatingById" parameterType="int" resultMap="filmWithRatingMap">
@@ -41,9 +45,14 @@
 
   <update id="updateFilmRating" parameterType="FilmWithCategories">
     UPDATE film
-    SET rating = #{rating, typeHandler=RatingTypeHandler}
-    <!-- Note: If you are using PostgreSQL, you have to cast as shown on the next line -->
-<!--     SET rating = #{rating, typeHandler=RatingTypeHandler}::mpaa_rating -->
+    <!-- TODO: fill in the rating variable. Consider again whether you will
+               need a handler here to make it work. -->
+    <!-- Note: special note for PostgreSQL users - because its mpaa_rating
+          enum is a different type from a VARCHAR/String, you will need
+          to put an explicit cast in the SQL to make it work. The link
+          below can help guide you:
+          http://stackoverflow.com/questions/4527311/setting-postgresql-enums-using-a-jdbc-resultset -->
+    SET rating = #{???}
     WHERE film_id = #{id}
   </update>
 
@@ -54,7 +63,8 @@
 
   <insert id="addCategoryForFilm">
     INSERT INTO film_category (film_id, category_id)
-    VALUES(#{film.id}, #{category.id})
+    <!-- TODO: FILL in the values clause -->
+    VALUES( ??? )
   </insert>
 
 </mapper>
