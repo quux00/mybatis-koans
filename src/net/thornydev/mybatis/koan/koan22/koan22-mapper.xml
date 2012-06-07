@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.thornydev.mybatis.koan.koan22.Koan22Mapper">
+
+  <select id="getCategoryByName" resultType="Category" parameterType="String">
+    SELECT category_id AS id, name
+    FROM category
+    WHERE name = #{name}
+  </select>
+
+  <resultMap id="filmWithCategoriesMap" type="FilmWithCategories">
+    <id column="id" property="id" javaType="_int"/>
+    <result column="title" property="title"/>
+    <collection property="categories" ofType="Category">
+      <id column="category_id" property="id"/>
+      <result column="name" property="name"/>
+    </collection>
+  </resultMap>
+
+  <select id="getFilmById" parameterType="int" resultMap="filmWithCategoriesMap">
+    SELECT f.film_id AS id, f.title, c.category_id, c.name
+    FROM film f
+    JOIN film_category fc ON f.film_id = fc.film_id
+    JOIN category c ON fc.category_id = c.category_id
+    WHERE f.film_id = #{id}
+  </select>
+
+  <delete id="deleteAllCategoriesForFilm" parameterType="FilmWithCategories">
+    DELETE FROM film_category
+    WHERE film_id = #{id} 
+  </delete>
+
+  <insert id="addCategoryForFilm">
+    INSERT INTO film_category (film_id, category_id)
+    VALUES(#{film.id}, #{category.id})
+  </insert>
+
+</mapper>

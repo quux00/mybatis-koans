@@ -16,13 +16,11 @@ public class EmailTypeHandler extends BaseTypeHandler<Email> {
 
   @Override
   public Email getNullableResult(ResultSet rs, String colName) throws SQLException {
-    System.out.println("DEBUG1");
     return createEmail(rs.getString(colName));
   }
 
   @Override
   public Email getNullableResult(ResultSet rs, int colNum) throws SQLException {
-    System.out.println("DEBUG2");
     return createEmail(rs.getString(colNum));
   }
 
@@ -30,10 +28,8 @@ public class EmailTypeHandler extends BaseTypeHandler<Email> {
   private Email createEmail(String s) {
     System.out.println(s);
     if (s == null || s.equals("")) {
-      System.out.println("DEBUG3");
       return new NullEmail();
     } else {
-      System.out.println("DEBUG4");
       return new EmailImpl(s);
     }
   }
