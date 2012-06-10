@@ -17,15 +17,15 @@ public class FilmWithCategories {
   public int getId() {
     return id;
   }
-  
+
   public void setId(int id) {
     this.id = id;
   }
-  
+
   public String getTitle() {
     return title;
   }
-  
+
   public void setTitle(String title) {
     this.title = title;
   }
@@ -33,11 +33,11 @@ public class FilmWithCategories {
   public List<Category> getCategories() {
     return categories;
   }
-  
+
   public void setCategories(List<Category> categories) {
     this.categories = categories;
   }
-  
+
   public void addCategory(Category c) {
     if (categories == null) categories = new ArrayList<Category>();
     categories.add(c);

@@ -4,7 +4,7 @@ package net.thornydev.mybatis.koan.koan23;
  * Model the category table as a Java enum
  */
 public enum Category {
-  
+
   ACTION(1),
   ANIMATION(2),
   CHILDREN(3),
@@ -22,14 +22,14 @@ public enum Category {
   SPORTS(15),
   TRAVEL(16);
 
-  // corresponds to the ID in the category table 
+  // corresponds to the ID in the category table
   // in the sakila database
   private int id;
 
   Category(int id) {
     this.id = id;
   }
-  
+
   public int getId() {
     return id;
   }

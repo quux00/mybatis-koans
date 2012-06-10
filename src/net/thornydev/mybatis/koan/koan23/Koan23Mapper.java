@@ -5,7 +5,7 @@ import net.thornydev.mybatis.koan.koan23.FilmWithCategories;
 import org.apache.ibatis.annotations.Param;
 
 public interface Koan23Mapper {
-  
+
   Category getCategoryByName(String catName);
   FilmWithCategories getFilmById(int id);
   FilmWithCategories getFilmWithRatingById(int id);

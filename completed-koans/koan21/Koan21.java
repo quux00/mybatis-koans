@@ -81,16 +81,16 @@ public class Koan21 {
   public void learnToUseDynamicWhereTag() {
     // first pass - give it no data at all => should return all films
     Film f = new Film();
-    List<String> films = mapper.selectFilmByTitleRatingAndOrMinLength(f);    
+    List<String> films = mapper.selectFilmByTitleRatingAndOrMinLength(f);
     assertNotNull(films);
     assertEquals(1000, films.size());
-    
+
     // now give it a rating
     f.setRating("NC-17");
     films = mapper.selectFilmByTitleRatingAndOrMinLength(f);
     assertNotNull(films);
     assertEquals(210, films.size());
-    
+
     // now give it a title word (or partial word)
     f.setTitle("%GO%");
     films = mapper.selectFilmByTitleRatingAndOrMinLength(f);
@@ -103,7 +103,7 @@ public class Koan21 {
     assertNotNull(films);
     assertEquals(3, films.size());
   }
-  
+
   @Test
   public void learnToUseForeachTag() {
     List<String> films = mapper.selectFilmByRentalRates(new double[] {4.99, 2.99});
@@ -126,19 +126,19 @@ public class Koan21 {
     assertNotNull(films);
     assertEquals(1000, films.size());
   }
-  
+
   @Test
   public void learnToUseDynamicSetTagToAllowVariableNumberOfSetClauses() {
     Film orig = mapper.getFilmById(222);
-    
+
     // first try update with no fields add - should result in no update
     Film modFilm = new Film(222);
     mapper.updateFilmIfNecessary(modFilm);
-    
+
     Film firstUpdateFilm = mapper.getFilmById(222);
     assertNotNull(firstUpdateFilm);
     assertTrue(orig.equals(firstUpdateFilm));
-    
+
     // next update rentalRate only
     modFilm.setRentalRate(BigDecimal.valueOf(10.00));
     mapper.updateFilmIfNecessary(modFilm);
@@ -158,7 +158,7 @@ public class Koan21 {
     assertFalse(orig.equals(secondUpdateFilm));
     assertEquals(newTitle, thirdUpdateFilm.getTitle());
     assertEquals(4, thirdUpdateFilm.getRentalDuration());  // original value
-    
+
     // finally update rentalDuration
     modFilm.setRentalDuration(40);
     mapper.updateFilmIfNecessary(modFilm);

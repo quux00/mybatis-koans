@@ -40,7 +40,7 @@ public class Koan23 {
     session = sessionFactory.openSession();
     mapper = session.getMapper(Koan23Mapper.class);
   }
-    
+
   @After
   public void tearDown() throws Exception {
     if (session != null) session.close();
@@ -51,7 +51,7 @@ public class Koan23 {
     Category c = mapper.getCategoryByName("Horror");
     assertEquals(c, Category.HORROR);
   }
-  
+
   @Test
   public void learnToUseJavaEnumsInComplexQuery() {
     FilmWithCategories fwc = mapper.getFilmById(25);
@@ -64,7 +64,7 @@ public class Koan23 {
     assertEquals(Category.NEW, lc.get(0));
     assertEquals("New", lc.get(0).toString());
   }
-  
+
   @Test
   public void learnToConvertFromDatabaseEnumToJavaEnum() {
     FilmWithCategories fwc = mapper.getFilmWithRatingById(25);
@@ -72,7 +72,7 @@ public class Koan23 {
     assertEquals(25, fwc.getId());
     assertEquals("ANGELS LIFE", fwc.getTitle());
     assertEquals(Rating.G, fwc.getRating());
-    
+
     // now query for one with a NC-17 rating => this one can't
     // be autoconverted by MyBatic because NC-17 != NC_17 textually
     fwc = mapper.getFilmWithRatingById(38);
@@ -81,30 +81,30 @@ public class Koan23 {
     assertEquals("ARK RIDGEMONT", fwc.getTitle());
     assertEquals(Rating.NC_17, fwc.getRating());
   }
-  
+
   @Test
   public void learnToConvertFromJavaEnumToDatabaseEnum() {
     FilmWithCategories fwc = mapper.getFilmWithRatingById(25);
     fwc.setRating(Rating.PG_13);
-    
+
     int n = mapper.updateFilmRating(fwc);
     assertEquals(1, n);
   }
-  
+
   @Test
   public void learnToInsertFromJavaEnum() {
     FilmWithCategories fwc = mapper.getFilmById(25);
     fwc.addCategory(Category.FAMILY);
     fwc.addCategory(Category.COMEDY);
-    
+
     int n = mapper.deleteAllCategoriesForFilm(fwc);
     assertEquals(1, n);
-    
+
     for (Category c: fwc.getCategories()) {
       n = mapper.addCategoryForFilm(fwc, c);
       assertEquals(1, n);
     }
-    
+
     FilmWithCategories fwc25 = mapper.getFilmById(25);
     assertNotNull(fwc25);
     assertEquals("ANGELS LIFE", fwc.getTitle());

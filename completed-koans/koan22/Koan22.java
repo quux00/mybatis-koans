@@ -34,7 +34,7 @@ public class Koan22 {
     session = sessionFactory.openSession();
     mapper = session.getMapper(Koan22Mapper.class);
   }
-    
+
   @After
   public void tearDown() throws Exception {
     if (session != null) session.close();
@@ -44,22 +44,22 @@ public class Koan22 {
   public void learnToInsertFromMultipleObjectsAsParams() {
     Category familyCat = mapper.getCategoryByName("Family");
     Category comedyCat = mapper.getCategoryByName("Comedy");
-    
+
     FilmWithCategories fwc = mapper.getFilmById(25);
     assertNotNull(fwc.getCategories().get(0));
     assertEquals("New", fwc.getCategories().get(0).getName());
     Category newCat = fwc.getCategories().get(0);
     fwc.addCategory(familyCat);
     fwc.addCategory(comedyCat);
-    
+
     int n = mapper.deleteAllCategoriesForFilm(fwc);
     assertEquals(1, n);
-    
+
     for (Category c: fwc.getCategories()) {
       n = mapper.addCategoryForFilm(fwc, c);
       assertEquals(1, n);
     }
-    
+
     FilmWithCategories fwc25 = mapper.getFilmById(25);
     assertNotNull(fwc25);
     assertEquals("ANGELS LIFE", fwc.getTitle());

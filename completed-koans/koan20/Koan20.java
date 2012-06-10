@@ -60,7 +60,7 @@ public class Koan20 {
     assertEquals("NECKLACE OUTBREAK", films2.get(0));
     assertEquals("OPPOSITE NECKLACE", films2.get(2));
   }
-  
+
   @Test
   public void learnToUseDollarNotationForDbEnumTypes() {
     Film f = new Film();

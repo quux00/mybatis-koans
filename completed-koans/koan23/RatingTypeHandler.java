@@ -26,8 +26,8 @@ public class RatingTypeHandler extends BaseTypeHandler<Rating> {
   }
 
   @Override
-  public void setNonNullParameter(PreparedStatement ps, int idx, Rating r, JdbcType t) 
-      throws SQLException {
+  public void setNonNullParameter(PreparedStatement ps, int idx, Rating r, JdbcType t)
+  throws SQLException {
     ps.setString(idx, r.toString());
   }
 
