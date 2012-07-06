@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+          PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+          "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- TODO: add a setting to auto-map underscores in database column names
+           to camelCase in object field/property names. -->
+<!-- NOTE: the order of elements in the MyBatis config file is significant. -->
+<configuration>
+  <properties resource="net/thornydev/mybatis/koan/config.properties"/>
+
+  <typeAliases>
+    <typeAlias type="net.thornydev.mybatis.koan.domain.Country" alias="Country" />
+  </typeAliases>
+
+  <environments default="development">
+    <environment id="development">
+      <transactionManager type="JDBC" />
+      <dataSource type="UNPOOLED">
+        <property name="driver"   value="${driver}" />
+        <property name="url"      value="${url}" />
+        <property name="username" value="${username}" />
+        <property name="password" value="${password}" />
+      </dataSource>
+    </environment>
+  </environments>
+  
+  <mappers>
+    <mapper resource="net/thornydev/mybatis/koan/koan04/koan04-mapper.xml"/>
+  </mappers>
+</configuration>

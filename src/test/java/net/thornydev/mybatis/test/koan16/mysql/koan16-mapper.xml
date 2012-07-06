@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.thornydev.mybatis.test.koan16.Koan16Mapper">
+
+  <select id="callFilmInStockWithHashMaps" parameterType="hashmap" 
+          resultType="hashmap" statementType="CALLABLE">
+    { CALL film_in_stock(
+           #{filmId,  mode=IN,  jdbcType=INTEGER},
+           #{storeId, mode=IN,  jdbcType=INTEGER},
+           #{count,   mode=OUT, jdbcType=INTEGER}           
+           )}
+  </select>
+
+  <resultMap id="filmInStockIdMap" type="FilmInStockId">
+    <result column="inventory_id" property="filmId"/>
+  </resultMap>
+  
+  <select id="callFilmInStock" parameterType="FilmInStockParam" 
+          resultMap="filmInStockIdMap" statementType="CALLABLE">
+    { CALL film_in_stock(
+           #{filmId,  mode=IN,  jdbcType=INTEGER},
+           #{storeId, mode=IN,  jdbcType=INTEGER},
+           #{count,   mode=OUT, jdbcType=INTEGER}           
+           )}
+  </select>
+  
+  <select id="callFilmInStock2" parameterType="FilmInStockParam" 
+          resultType="int" statementType="CALLABLE">
+    { CALL film_in_stock(
+           #{filmId,  mode=IN,  jdbcType=INTEGER},
+           #{storeId, mode=IN,  jdbcType=INTEGER},
+           #{count,   mode=OUT, jdbcType=INTEGER}           
+           )}
+  </select>
+  
+  <select id="inventoryInStore" parameterType="int" resultType="int" statementType="PREPARED">
+    SELECT inventory_in_stock(#{id})
+  </select>
+
+  <select id="inventoryInStoreBoolean" parameterType="int" resultType="Boolean" statementType="PREPARED">
+    SELECT inventory_in_stock(#{id})
+  </select>
+
+</mapper>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.thornydev.mybatis.koan.koan08.Koan08Mapper">
+
+  <!-- TODO: the update xml element needs additional information to know 
+             what's being passed in -->
+  <update id="updateCountry">
+    <!-- TODO: fill in question marks below -->
+    UPDATE country
+    SET country = ???, last_update = ???
+    WHERE country_id = ???
+  </update>
+
+  <!-- TODO: the insert xml element needs additional information to know 
+             what's being passed in -->
+  <insert id="insertCountry">
+    INSERT INTO country (country_id, country, last_update)
+    VALUES (<!-- TODO: fill in how the values clause will be set with values passed in -->)
+  </insert>
+
+  <insert id="insertCountry2" parameterType="Country">
+    <!-- TODO: the selectKey xml element needs attributes to know how to operate -->
+    <selectKey>
+      SELECT max(country_id) + 1 AS id FROM country
+    </selectKey>
+    INSERT INTO country (country_id, country, last_update)
+	  VALUES (<!-- TODO: fill in how the values clause will be set with values passed in -->)
+  </insert>
+
+  <select id="getCountryCount" resultType="int">
+    SELECT count(*) FROM country 
+  </select>
+
+  <!-- TODO: create a getMaxCountryId mapping -->
+  <select id="getMaxCountryId">
+  </select>
+
+  <select id="getCountryById" resultType="Country">
+    SELECT country_id AS id, country, last_update AS lastUpdate 
+    FROM country 
+    WHERE country_id = #{id}
+  </select>
+
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- TODO: set the namespace of the mapper element to match the Mapper
+           object we created for Koan05 -->
+<mapper namespace="???">
+
+  <!-- TODO: specify the id of this select mapping corresponding to
+             the appropriate interface method in Koan05Mapper -->
+  <!-- TODO: specify parameterType and resultType -->
+  <select id="???">
+    SELECT country_id as id, country, last_update as lastUpdate
+    FROM country 
+    WHERE country_id = #{id}
+  </select>
+
+  <select id="getAllCountries" resultType="Country">
+    SELECT country_id AS id, country, last_update AS lastUpdate 
+    FROM country
+    ORDER BY country_id DESC
+  </select>
+
+  <!-- TODO: create a select mapping that corresponds to the
+             getAllCountriesMappedById method in Koan05Mapper interface -->
+
+</mapper>

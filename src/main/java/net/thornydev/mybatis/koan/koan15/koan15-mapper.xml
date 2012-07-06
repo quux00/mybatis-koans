@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.thornydev.mybatis.koan.koan15.Koan15Mapper">
+
+  <select id="getCount" parameterType="String" resultType="int">
+    SELECT count(*) FROM ${value}
+  </select>
+  
+  <!-- COUNTRY mappings -->
+
+  <select id="getCountryById" resultType="Country">
+    SELECT country_id AS id, country, last_update AS lastUpdate 
+    FROM country 
+    WHERE country_id = #{id}
+  </select>  
+
+  <!-- CITY mappings -->
+
+  <insert id="insertCity" parameterType="City">
+    INSERT INTO city (city_id, city, country_id)
+    <!-- TODO: fill in values clause; for the country_id field
+               you will need to specify a TypeHandler -->
+    VALUES ( ??? )
+  </insert>
+
+  <resultMap id="cityResultMap" type="City">
+    <constructor>
+      <idArg column="city_id" javaType="_integer"/>
+    </constructor>
+    <association property="country" column="country_id" javaType="Country" select="getCountryById"/>
+  </resultMap>
+
+  <select id="getCityById" resultMap="cityResultMap">
+    SELECT city_id, city, last_update AS lastUpdate, country_id
+    FROM city 
+    WHERE city_id = #{id} 
+  </select>  
+
+  <!-- ADDRESS mappings -->
+
+  <insert id="insertAddress" parameterType="Address">
+    INSERT INTO address (address_id, address, address2, district, city_id, 
+                         postal_code, phone)
+   <!-- TODO: fill in values clause; specify a TypeHandler where needed
+              AND specify jdbcType for the fields that can be null -->
+    VALUES ( ??? )                         
+  </insert>
+</mapper>
