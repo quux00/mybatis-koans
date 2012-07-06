@@ -26,7 +26,9 @@ public class Koan16 {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		final String resource = "net/thornydev/mybatis/test/koan16/koan16-config.xml";
+
+		final String resource = "net/thornydev/mybatis/test/koan16/mysql/koan16-config.xml";
+
 		final InputStream inputStream = Resources.getResourceAsStream(resource);
 		sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 		inputStream.close();
@@ -42,9 +44,11 @@ public class Koan16 {
 
 	@Test
 	public void learnToUseStoredProcWithHashMaps() {
+
 		final Map<String, Integer> param = new HashMap<String, Integer>();
 		param.put("filmId", 12);
 		param.put("storeId", 1);
+
 		final List<Map<String, Integer>> results = session.selectList(
 				"callFilmInStockWithHashMaps", param);
 
@@ -55,13 +59,16 @@ public class Koan16 {
 		assertEquals(60, results.get(0).get("inventory_id").intValue());
 		assertEquals(61, results.get(1).get("inventory_id").intValue());
 		assertEquals(62, results.get(2).get("inventory_id").intValue());
+
 	}
 
 	@Test
 	public void learnToUseStoredProcWithDomainObjects() {
+
 		final FilmInStockParam param = new FilmInStockParam();
 		param.setFilmId(12);
 		param.setStoreId(1);
+
 		final List<FilmInStockId> results = session.selectList(
 				"callFilmInStock", param);
 
@@ -79,13 +86,16 @@ public class Koan16 {
 		f = results.get(2);
 		assertNotNull(f);
 		assertEquals(62, f.getFilmId().intValue());
+
 	}
 
 	@Test
 	public void learnToUseStoredProcWithDomainObjects2() {
+
 		final FilmInStockParam param = new FilmInStockParam();
 		param.setFilmId(12);
 		param.setStoreId(1);
+
 		final List<Integer> results = session.selectList("callFilmInStock2",
 				param);
 

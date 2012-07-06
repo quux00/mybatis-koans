@@ -3,6 +3,7 @@
           PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
           "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+
   <properties resource="net/thornydev/mybatis/test/config.properties"/>
 
   <typeAliases>
@@ -30,4 +31,5 @@
     <mapper resource="net/thornydev/mybatis/test/koan13/city-mapper.xml"/>
     <mapper resource="net/thornydev/mybatis/test/koan13/address-mapper.xml"/>
   </mappers>
+  
 </configuration>

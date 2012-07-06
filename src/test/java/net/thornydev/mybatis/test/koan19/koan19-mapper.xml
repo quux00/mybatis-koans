@@ -4,6 +4,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="net.thornydev.mybatis.test.koan19.Koan19Mapper">
+
   <resultMap id="addressResultMap" type="Address">
     <constructor>
       <idArg column="address_id" javaType="int"/>
@@ -21,7 +22,6 @@
     FROM address a
     WHERE a.address_id = #{id}
   </select>
-
 
   <resultMap id="staffResultMap" type="Staff" >
     <constructor>
@@ -45,4 +45,5 @@
     SET email = #{param1}
     WHERE staff_id = #{param2}
   </update>
+  
 </mapper>

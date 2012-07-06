@@ -3,7 +3,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="net.thornydev.mybatis.test.koan16.Koan16Mapper">
+<mapper namespace="net.thornydev.mybatis.test.koan16.mysql.Koan16Mapper">
 
   <select id="callFilmInStockWithHashMaps" parameterType="hashmap" 
           resultType="hashmap" statementType="CALLABLE">

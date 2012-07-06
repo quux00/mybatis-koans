@@ -16,92 +16,105 @@ import org.junit.Test;
 
 public class Koan09 {
 
-  static SqlSessionFactory sessionFactory;
+	static SqlSessionFactory sessionFactory;
 
-  @BeforeClass
-  public static void setUpBeforeClass() throws Exception {
-    String resource = "net/thornydev/mybatis/test/koan09/koan09-config.xml";
-    InputStream inputStream = Resources.getResourceAsStream(resource);
-    sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-    inputStream.close();
-  }
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+		final String resource = "net/thornydev/mybatis/test/koan09/koan09-config.xml";
+		final InputStream inputStream = Resources.getResourceAsStream(resource);
+		sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+		inputStream.close();
+	}
 
+	@Test
+	public void learnToSpecifyOrderViaDynamicStringSubstitutionVariableInXml()
+			throws Exception {
+		SqlSession session = null;
 
-  @Test
-  public void learnToSpecifyOrderViaDynamicStringSubstitutionVariableInXml() throws Exception {
-    SqlSession session = null;
+		try {
 
-    try {
-      session = sessionFactory.openSession();
-      List<Country> lc = session.selectList("getCountriesOrdered", "country DESC");
-      assertEquals(109, lc.size());
-      Country c = lc.get(0);
-      assertEquals("Zambia", c.getCountry());
+			session = sessionFactory.openSession();
 
-    } finally {
-      if (session != null) {
-        session.rollback();
-        session.close();
-      }
-    }
-  }
+			final List<Country> lc = session.selectList("getCountriesOrdered",
+					"country DESC");
 
-  @Test
-  public void learnToSpecifyOrderViaDynamicStringSubstitutionVariableInMapperClass() throws Exception {
-    SqlSession session = null;
+			assertEquals(109, lc.size());
 
-    try {
-      session = sessionFactory.openSession();
-      Koan09Mapper mapper = session.getMapper(Koan09Mapper.class);
-      List<Country> lc = mapper.getCountriesOrdered2("country DESC");
+			final Country c = lc.get(0);
 
-      assertEquals(109, lc.size());
-      Country c = lc.get(0);
-      assertEquals("Zambia", c.getCountry());
+			assertEquals("Zambia", c.getCountry());
 
-      lc = session.selectList("getCountries", null);
-      assertEquals(109, lc.size());
-      c = lc.get(0);
-      assertEquals("Afghanistan", c.getCountry());
+		} finally {
+			if (session != null) {
+				session.rollback();
+				session.close();
+			}
+		}
+	}
 
-    } finally {
-      if (session != null) {
-        session.rollback();
-        session.close();
-      }
-    }
-  }
+	@Test
+	public void learnToSpecifyOrderViaDynamicStringSubstitutionVariableInMapperClass()
+			throws Exception {
+		SqlSession session = null;
 
-  @Test
-  public void learnToSpecifyDynamicClausesInXml() throws Exception {
-    SqlSession session = null;
+		try {
+			session = sessionFactory.openSession();
+			final Koan09Mapper mapper = session.getMapper(Koan09Mapper.class);
+			List<Country> lc = mapper.getCountriesOrdered2("country DESC");
 
-    try {
-      session = sessionFactory.openSession();
-      // use an order by clause
-      List<Country> lc = session.selectList("getCountries", "ORDER BY country DESC");
-      assertEquals(109, lc.size());
-      Country c = lc.get(0);
-      assertEquals("Zambia", c.getCountry());
+			assertEquals(109, lc.size());
+			Country c = lc.get(0);
+			assertEquals("Zambia", c.getCountry());
 
-      // use no clause at all
-      lc = session.selectList("getCountries", null);
-      assertEquals(109, lc.size());
-      c = lc.get(0);
-      assertEquals("Afghanistan", c.getCountry());
+			lc = session.selectList("getCountries", null);
+			assertEquals(109, lc.size());
+			c = lc.get(0);
+			assertEquals("Afghanistan", c.getCountry());
 
-      // specify a range via an SQL clause
-      lc = session.selectList("getCountries", "WHERE country_id BETWEEN 22 and 33");
-      assertEquals(12, lc.size());
-      c = lc.get(11);
-      assertEquals(33, c.getId());
-      assertEquals("Finland", c.getCountry());
+		} finally {
+			if (session != null) {
+				session.rollback();
+				session.close();
+			}
+		}
+	}
 
-    } finally {
-      if (session != null) {
-        session.rollback();
-        session.close();
-      }
-    }
-  }
+	@Test
+	public void learnToSpecifyDynamicClausesInXml() throws Exception {
+		SqlSession session = null;
+
+		try {
+			session = sessionFactory.openSession();
+			// use an order by clause
+			List<Country> lc = session.selectList("getCountries",
+					"ORDER BY country DESC");
+			assertEquals(109, lc.size());
+			Country c = lc.get(0);
+			assertEquals("Zambia", c.getCountry());
+
+			// use no clause at all
+			lc = session.selectList("getCountries", null);
+			assertEquals(109, lc.size());
+			c = lc.get(0);
+			assertEquals("Afghanistan", c.getCountry());
+
+			// specify a range via an SQL clause
+			lc = session.selectList("getCountries",
+					"WHERE country_id BETWEEN 22 and 33");
+			assertEquals(12, lc.size());
+			c = lc.get(11);
+			assertEquals(33, c.getId());
+			assertEquals("Finland", c.getCountry());
+
+		} finally {
+
+			if (session != null) {
+				session.rollback();
+				session.close();
+			}
+
+		}
+
+	}
+
 }

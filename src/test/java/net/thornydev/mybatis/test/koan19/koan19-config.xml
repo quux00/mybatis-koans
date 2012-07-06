@@ -3,6 +3,7 @@
           PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
           "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+
   <properties resource="net/thornydev/mybatis/test/config.properties"/>
 
   <settings>
@@ -34,4 +35,5 @@
   <mappers>
     <mapper resource="net/thornydev/mybatis/test/koan19/koan19-mapper.xml"/>
   </mappers>
+  
 </configuration>

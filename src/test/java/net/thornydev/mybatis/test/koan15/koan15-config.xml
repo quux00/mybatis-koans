@@ -28,4 +28,5 @@
   <mappers>
     <mapper resource="net/thornydev/mybatis/test/koan15/koan15-mapper.xml"/>
   </mappers>
+  
 </configuration>

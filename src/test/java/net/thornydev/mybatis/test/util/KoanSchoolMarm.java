@@ -1,49 +1,49 @@
 package net.thornydev.mybatis.test.util;
 
 /**
- * Simplistic singleton global to enforce rules of use in Koan14.
- * Koan students will not need to edit this class or use it directly.
- *
+ * Simplistic singleton global to enforce rules of use in Koan14. Koan students
+ * will not need to edit this class or use it directly.
+ * 
  * To use it, the ObjectFactory create method(s) you implement should call
- *   ObjectFactoryCheck.getInstance().setObjectFactoryUsed(true)
- * and the test koan should call
- *   ObjectFactoryCheck.getInstance().setObjectFactoryUsed(false)
- * to reset it before the next test runs.
- *
+ * ObjectFactoryCheck.getInstance().setObjectFactoryUsed(true) and the test koan
+ * should call ObjectFactoryCheck.getInstance().setObjectFactoryUsed(false) to
+ * reset it before the next test runs.
+ * 
  * Same goes for the other rules it enforces.
  */
 public class KoanSchoolMarm {
-  private static final KoanSchoolMarm INSTANCE = new KoanSchoolMarm();
 
-  public static KoanSchoolMarm getInstance() {
-    return INSTANCE;
-  }
+	private static final KoanSchoolMarm INSTANCE = new KoanSchoolMarm();
 
-  private boolean objectFactoryUsed = false;
-  private boolean actorMapCtorUsed = false;
-  private boolean addrBuilderUsed = false;
+	public static KoanSchoolMarm getInstance() {
+		return INSTANCE;
+	}
 
-  public void setObjectFactoryUsed(boolean b) {
-    this.objectFactoryUsed = b;
-  }
+	private boolean objectFactoryUsed = false;
+	private boolean actorMapCtorUsed = false;
+	private boolean addrBuilderUsed = false;
 
-  public boolean getObjectFactoryUsed() {
-    return objectFactoryUsed;
-  }
+	public void setObjectFactoryUsed(final boolean b) {
+		this.objectFactoryUsed = b;
+	}
 
-  public void setActorMapConstructorUsed(boolean b) {
-    actorMapCtorUsed = b;
-  }
+	public boolean getObjectFactoryUsed() {
+		return objectFactoryUsed;
+	}
 
-  public boolean getActorMapConstructorUsed() {
-    return actorMapCtorUsed;
-  }
+	public void setActorMapConstructorUsed(final boolean b) {
+		actorMapCtorUsed = b;
+	}
 
-  public void setAddressBuilderConstructorUsed(boolean b) {
-    addrBuilderUsed = b;
-  }
+	public boolean getActorMapConstructorUsed() {
+		return actorMapCtorUsed;
+	}
 
-  public boolean setAddressBuilderConstructorUsed() {
-    return addrBuilderUsed;
-  }
+	public void setAddressBuilderConstructorUsed(final boolean b) {
+		addrBuilderUsed = b;
+	}
+
+	public boolean setAddressBuilderConstructorUsed() {
+		return addrBuilderUsed;
+	}
 }

@@ -12,6 +12,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.mapping.StatementType;
 
 public interface Koan17Mapper {
+
 	/* ---[ film_in_stock stored proc mapper methods ]--- */
 
 	// doesn't work

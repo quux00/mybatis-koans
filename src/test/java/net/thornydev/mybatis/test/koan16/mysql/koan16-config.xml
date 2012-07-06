@@ -3,6 +3,7 @@
           PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
           "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+
   <properties resource="net/thornydev/mybatis/test/config.properties"/>
 
   <typeAliases>
@@ -23,6 +24,7 @@
   </environments>
   
   <mappers>
-    <mapper resource="net/thornydev/mybatis/test/koan16/koan16-mapper.xml"/>
+    <mapper resource="net/thornydev/mybatis/test/koan16/mysql/koan16-mapper.xml"/>
   </mappers>
+  
 </configuration>

@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import java.io.InputStream;
 import java.sql.Timestamp;
 import java.util.Date;
-import java.util.List;
 
 import net.thornydev.mybatis.test.domain.Country;
 
@@ -40,163 +39,179 @@ import org.junit.Test;
 // 3. the koan config xml file to tell it where to find the SQL mappings
 public class Koan08 {
 
-  static SqlSessionFactory sessionFactory;
-  static final Date NOW = new Date();
+	static SqlSessionFactory sessionFactory;
+	static final Date NOW = new Date();
 
-  @BeforeClass
-  public static void setUpBeforeClass() throws Exception {
-    String resource = "net/thornydev/mybatis/test/koan08/koan08-config.xml";
-    InputStream inputStream = Resources.getResourceAsStream(resource);
-    sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-    inputStream.close();
-  }
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+		final String resource = "net/thornydev/mybatis/test/koan08/koan08-config.xml";
+		final InputStream inputStream = Resources.getResourceAsStream(resource);
+		sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+		inputStream.close();
+	}
 
-  @Test
-  public void learnToInsertViaXmlMapping() throws Exception {
-    SqlSession session = null;
+	@Test
+	public void learnToInsertViaXmlMapping() throws Exception {
 
-    try {
-      session = sessionFactory.openSession();
-      Country c = new Country();
-      c.setId(1000);
-      c.setCountry("South Sudan");  // new country as of July 2011
-      c.setLastUpdate(NOW);
-      int n = session.insert("insertCountry", c);
+		SqlSession session = null;
 
-      assertEquals(1, n);
+		try {
 
-      int totalCountries = (Integer) session.selectOne("getCountryCount");
-      assertEquals(110, totalCountries);
+			session = sessionFactory.openSession();
 
-      Country southSudan = session.selectOne("getCountryById", 1000);
-      assertNotNull(southSudan);
-      assertEquals(1000, southSudan.getId());
-      assertEquals("South Sudan", southSudan.getCountry());
-      Timestamp newTs = new Timestamp(southSudan.getLastUpdate().getTime());
-      Timestamp origTs = Timestamp.valueOf("2006-02-15 09:44:00");
-      assertTrue(newTs.after(origTs));
+			final Country c = new Country();
+			c.setId(1000);
+			c.setCountry("South Sudan"); // new country as of July 2011
+			c.setLastUpdate(NOW);
 
-    } finally {
-      if (session != null) {
-        session.rollback();
-        session.close();
-      }
-    }
-  }
+			final int n = session.insert("insertCountry", c);
 
-  @Test
-  public void learnToUpdateViaXmlMapping() throws Exception {
-    SqlSession session = null;
+			assertEquals(1, n);
 
-    try {
-      session = sessionFactory.openSession();
-      Country c = new Country();
-      c.setId(89);
-      c.setCountry("North Sudan");  // adjust the name
-      c.setLastUpdate(NOW);
-      int n = session.update("updateCountry", c);
+			final int totalCountries = (Integer) session
+					.selectOne("getCountryCount");
+			assertEquals(110, totalCountries);
 
-      assertEquals(1, n);
+			final Country southSudan = session
+					.selectOne("getCountryById", 1000);
+			assertNotNull(southSudan);
+			assertEquals(1000, southSudan.getId());
+			assertEquals("South Sudan", southSudan.getCountry());
+			final Timestamp newTs = new Timestamp(southSudan.getLastUpdate()
+					.getTime());
+			final Timestamp origTs = Timestamp.valueOf("2006-02-15 09:44:00");
+			assertTrue(newTs.after(origTs));
 
-      int totalCountries = (Integer) session.selectOne("getCountryCount");
-      assertEquals(109, totalCountries);
+		} finally {
 
-      Country northSudan = session.selectOne("getCountryById", 89);
-      assertNotNull(northSudan);
-      assertEquals("North Sudan", northSudan.getCountry());
-      Timestamp newTs = new Timestamp(northSudan.getLastUpdate().getTime());
-      Timestamp origTs = Timestamp.valueOf("2006-02-15 09:44:00");
-      assertTrue(newTs.after(origTs));
+			if (session != null) {
+				session.rollback();
+				session.close();
+			}
 
-    } finally {
-      if (session != null) {
-        session.rollback();
-        session.close();
-      }
-    }
-  }
+		}
 
-  @Test
-  public void learnToDeleteViaAnnotationMapping() throws Exception {
-    SqlSession session = null;
+	}
 
-    try {
-      // first insert a new record via xml mapped SQL
-      session = sessionFactory.openSession();
-      Country c1000 = new Country();
-      c1000.setId(1000);
-      c1000.setCountry("The Shire");
-      c1000.setLastUpdate(NOW);
-      int n = session.insert("insertCountry", c1000);
+	@Test
+	public void learnToUpdateViaXmlMapping() throws Exception {
+		SqlSession session = null;
 
-      Country c1001 = new Country();
-      c1001.setId(1001);
-      c1001.setCountry("Mordor");
-      c1001.setLastUpdate(NOW);
-      n = session.insert("insertCountry", c1001);
-      assertEquals(1, n);
+		try {
+			session = sessionFactory.openSession();
+			final Country c = new Country();
+			c.setId(89);
+			c.setCountry("North Sudan"); // adjust the name
+			c.setLastUpdate(NOW);
+			final int n = session.update("updateCountry", c);
 
-      int totalCountries = (Integer) session.selectOne("getCountryCount");
-      assertEquals(111, totalCountries);
+			assertEquals(1, n);
 
-      // second delete it via mapper class
-      Koan08Mapper mapper = session.getMapper(Koan08Mapper.class);
-      n = mapper.deleteCountryById( c1000.getId() );
-      assertEquals(1, n);
-      totalCountries = (Integer) session.selectOne("getCountryCount");
-      assertEquals(110, totalCountries);
+			final int totalCountries = (Integer) session
+					.selectOne("getCountryCount");
+			assertEquals(109, totalCountries);
 
-      n = mapper.deleteCountry(c1001);
-      assertEquals(1, n);
-      totalCountries = (Integer) session.selectOne("getCountryCount");
-      assertEquals(109, totalCountries);
+			final Country northSudan = session.selectOne("getCountryById", 89);
+			assertNotNull(northSudan);
+			assertEquals("North Sudan", northSudan.getCountry());
+			final Timestamp newTs = new Timestamp(northSudan.getLastUpdate()
+					.getTime());
+			final Timestamp origTs = Timestamp.valueOf("2006-02-15 09:44:00");
+			assertTrue(newTs.after(origTs));
 
-    } finally {
-      if (session != null) {
-        session.rollback();
-        session.close();
-      }
-    }
-  }
+		} finally {
+			if (session != null) {
+				session.rollback();
+				session.close();
+			}
+		}
+	}
 
-  // In this test we use the <selectKey> feature of MyBatis xml mapping
-  // in order to dynamically set the next country_id primary key to use.
-  // In this case, do NOT fill in the id field of the Country class
-  // when you create it.  Rather let MyBatis fill it in according to the
-  // logic in the <selectKey> section.
-  @Test
-  public void learnToInsertUsingKeyProperty() throws Exception {
-    SqlSession session = null;
+	@Test
+	public void learnToDeleteViaAnnotationMapping() throws Exception {
+		SqlSession session = null;
 
-    try {
-      session = sessionFactory.openSession();
-      // first get max country id and cache it for assert testing later
-      int maxId = (Integer) session.selectOne("getMaxCountryId");
+		try {
+			// first insert a new record via xml mapped SQL
+			session = sessionFactory.openSession();
+			final Country c1000 = new Country();
+			c1000.setId(1000);
+			c1000.setCountry("The Shire");
+			c1000.setLastUpdate(NOW);
+			int n = session.insert("insertCountry", c1000);
 
-      Country c = new Country();
-      c.setCountry("South Sudan");
-      c.setLastUpdate(NOW);
-      int n = session.insert("insertCountry2", c);
+			final Country c1001 = new Country();
+			c1001.setId(1001);
+			c1001.setCountry("Mordor");
+			c1001.setLastUpdate(NOW);
+			n = session.insert("insertCountry", c1001);
+			assertEquals(1, n);
 
-      assertEquals(1, n);
-      assertEquals(maxId + 1, c.getId());  // id should have been filled in and set to new maxId
+			int totalCountries = (Integer) session.selectOne("getCountryCount");
+			assertEquals(111, totalCountries);
 
-      int totalCountries = (Integer) session.selectOne("getCountryCount");
-      assertEquals(110, totalCountries);
+			// second delete it via mapper class
+			final Koan08Mapper mapper = session.getMapper(Koan08Mapper.class);
+			n = mapper.deleteCountryById(c1000.getId());
+			assertEquals(1, n);
+			totalCountries = (Integer) session.selectOne("getCountryCount");
+			assertEquals(110, totalCountries);
 
-      Country southSudan = session.selectOne("getCountryById", maxId + 1);
-      assertNotNull(southSudan);
-      assertEquals(maxId + 1, southSudan.getId());
-      assertEquals("South Sudan", southSudan.getCountry());
-      Timestamp newTs = new Timestamp(southSudan.getLastUpdate().getTime());
-      Timestamp origTs = Timestamp.valueOf("2006-02-15 09:44:00");
-      assertTrue(newTs.after(origTs));
+			n = mapper.deleteCountry(c1001);
+			assertEquals(1, n);
+			totalCountries = (Integer) session.selectOne("getCountryCount");
+			assertEquals(109, totalCountries);
 
-    } finally {
-      if (session != null) {
-        session.rollback();
-        session.close();
-      }
-    }
-  }
+		} finally {
+			if (session != null) {
+				session.rollback();
+				session.close();
+			}
+		}
+	}
+
+	// In this test we use the <selectKey> feature of MyBatis xml mapping
+	// in order to dynamically set the next country_id primary key to use.
+	// In this case, do NOT fill in the id field of the Country class
+	// when you create it. Rather let MyBatis fill it in according to the
+	// logic in the <selectKey> section.
+	@Test
+	public void learnToInsertUsingKeyProperty() throws Exception {
+		SqlSession session = null;
+
+		try {
+			session = sessionFactory.openSession();
+			// first get max country id and cache it for assert testing later
+			final int maxId = (Integer) session.selectOne("getMaxCountryId");
+
+			final Country c = new Country();
+			c.setCountry("South Sudan");
+			c.setLastUpdate(NOW);
+			final int n = session.insert("insertCountry2", c);
+
+			assertEquals(1, n);
+			assertEquals(maxId + 1, c.getId()); // id should have been filled in
+												// and set to new maxId
+
+			final int totalCountries = (Integer) session
+					.selectOne("getCountryCount");
+			assertEquals(110, totalCountries);
+
+			final Country southSudan = session.selectOne("getCountryById",
+					maxId + 1);
+			assertNotNull(southSudan);
+			assertEquals(maxId + 1, southSudan.getId());
+			assertEquals("South Sudan", southSudan.getCountry());
+			final Timestamp newTs = new Timestamp(southSudan.getLastUpdate()
+					.getTime());
+			final Timestamp origTs = Timestamp.valueOf("2006-02-15 09:44:00");
+			assertTrue(newTs.after(origTs));
+
+		} finally {
+			if (session != null) {
+				session.rollback();
+				session.close();
+			}
+		}
+	}
 }

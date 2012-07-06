@@ -17,83 +17,94 @@ import org.junit.Test;
 
 public class Koan10 {
 
-  static SqlSessionFactory sessionFactory;
+	static SqlSessionFactory sessionFactory;
 
-  @BeforeClass
-  public static void setUpBeforeClass() throws Exception {
-    String resource = "net/thornydev/mybatis/test/koan10/koan10-config.xml";
-    InputStream inputStream = Resources.getResourceAsStream(resource);
-    sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-    inputStream.close();
-  }
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+		final String resource = "net/thornydev/mybatis/test/koan10/koan10-config.xml";
+		final InputStream inputStream = Resources.getResourceAsStream(resource);
+		sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+		inputStream.close();
+	}
 
-  @Test
-  public void learnToUseResultMapForSingleTableQuery() {
-    SqlSession session = null;
-    try {
-      session = sessionFactory.openSession();
-      Koan10Mapper mapper = session.getMapper(Koan10Mapper.class);
-      Country c = mapper.getCountryById(33);
+	@Test
+	public void learnToUseResultMapForSingleTableQuery() {
 
-      assertEquals(33, c.getId());
-      assertEquals("Finland", c.getCountry());
-      assertNotNull(c.getLastUpdate());
+		SqlSession session = null;
 
-    } finally {
-      if (session != null) session.close();
-    }
-  }
+		try {
 
-  @Test
-  public void learnToUseResultMapForTwoTableAssociation() {
-    SqlSession session = null;
-    try {
-      session = sessionFactory.openSession();
-      Koan10Mapper mapper = session.getMapper(Koan10Mapper.class);
-      City city = mapper.getCityById(544);
+			session = sessionFactory.openSession();
 
-      assertEquals(544, city.getId());
-      assertEquals("Toulouse", city.getCity());
-      assertNotNull(city.getLastUpdate());
+			final Koan10Mapper mapper = session.getMapper(Koan10Mapper.class);
 
-      Country co = city.getCountry();
-      assertNotNull(co);
-      assertEquals("France", co.getCountry());
-      assertNotNull(co.getLastUpdate());
+			final Country c = mapper.getCountryById(33);
 
-    } finally {
-      if (session != null) session.close();
-    }
-  }
+			assertEquals(33, c.getId());
+			assertEquals("Finland", c.getCountry());
+			assertNotNull(c.getLastUpdate());
 
-  @Test
-  public void learnToUseNestedSelectForAssociation() {
-    SqlSession session = null;
-    try {
-      session = sessionFactory.openSession();
-      int cityCount = (Integer) session.selectOne("getCityCount");
+		} finally {
+			if (session != null)
+				session.close();
+		}
+	}
 
-      Koan10Mapper mapper = session.getMapper(Koan10Mapper.class);
-      List<City> lc = mapper.getCities();
+	@Test
+	public void learnToUseResultMapForTwoTableAssociation() {
 
-      City first = lc.iterator().next();
-      assertEquals(1, first.getId());
-      assertNotNull(first.getCountry());
+		SqlSession session = null;
 
-      assertEquals(cityCount, lc.size());
-      City city = lc.get(543);
-      assertEquals(544, city.getId());
-      assertEquals("Toulouse", city.getCity());
-      assertNotNull(city.getLastUpdate());
+		try {
 
-      Country co = city.getCountry();
-      assertNotNull(co);
-      assertEquals("France", co.getCountry());
-      assertNotNull(co.getLastUpdate());
+			session = sessionFactory.openSession();
+			final Koan10Mapper mapper = session.getMapper(Koan10Mapper.class);
+			final City city = mapper.getCityById(544);
 
-    } finally {
-      if (session != null) session.close();
-    }
-  }
+			assertEquals(544, city.getId());
+			assertEquals("Toulouse", city.getCity());
+			assertNotNull(city.getLastUpdate());
+
+			final Country co = city.getCountry();
+			assertNotNull(co);
+			assertEquals("France", co.getCountry());
+			assertNotNull(co.getLastUpdate());
+
+		} finally {
+			if (session != null)
+				session.close();
+		}
+	}
+
+	@Test
+	public void learnToUseNestedSelectForAssociation() {
+		SqlSession session = null;
+		try {
+			session = sessionFactory.openSession();
+			final int cityCount = (Integer) session.selectOne("getCityCount");
+
+			final Koan10Mapper mapper = session.getMapper(Koan10Mapper.class);
+			final List<City> lc = mapper.getCities();
+
+			final City first = lc.iterator().next();
+			assertEquals(1, first.getId());
+			assertNotNull(first.getCountry());
+
+			assertEquals(cityCount, lc.size());
+			final City city = lc.get(543);
+			assertEquals(544, city.getId());
+			assertEquals("Toulouse", city.getCity());
+			assertNotNull(city.getLastUpdate());
+
+			final Country co = city.getCountry();
+			assertNotNull(co);
+			assertEquals("France", co.getCountry());
+			assertNotNull(co.getLastUpdate());
+
+		} finally {
+			if (session != null)
+				session.close();
+		}
+	}
 
 }

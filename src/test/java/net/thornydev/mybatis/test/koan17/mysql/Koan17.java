@@ -27,7 +27,9 @@ public class Koan17 {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		final String resource = "net/thornydev/mybatis/test/koan17/koan17-config.xml";
+
+		final String resource = "net/thornydev/mybatis/test/koan17/mysql/koan17-config.xml";
+
 		final InputStream inputStream = Resources.getResourceAsStream(resource);
 		sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 		inputStream.close();

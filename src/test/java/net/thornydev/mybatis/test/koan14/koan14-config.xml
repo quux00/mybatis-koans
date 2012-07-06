@@ -33,4 +33,5 @@
     <mapper resource="net/thornydev/mybatis/test/koan14/city-mapper.xml"/>
     <mapper resource="net/thornydev/mybatis/test/koan14/address-mapper.xml"/>
   </mappers>
+  
 </configuration>

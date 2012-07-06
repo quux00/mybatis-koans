@@ -3,6 +3,7 @@
           PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
           "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+
   <properties resource="net/thornydev/mybatis/test/config.properties"/>
 
   <typeAliases>
@@ -31,4 +32,5 @@
     <mapper resource="net/thornydev/mybatis/test/koan12/koan12-mapper.xml"/>
     <mapper class="net.thornydev.mybatis.test.koan12.FilmMapper"/>
   </mappers>
+  
 </configuration>

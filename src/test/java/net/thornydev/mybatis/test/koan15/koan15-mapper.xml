@@ -46,4 +46,5 @@
             #{city, typeHandler=CityIdTypeHandler}, #{postalCode, jdbcType=VARCHAR}, 
             #{phone})
   </insert>
+  
 </mapper>

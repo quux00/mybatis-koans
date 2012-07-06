@@ -74,4 +74,5 @@
     FROM film
     WHERE film_id = #{id}
   </select>
+  
 </mapper>
