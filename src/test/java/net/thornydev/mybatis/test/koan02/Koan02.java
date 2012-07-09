@@ -25,6 +25,7 @@ import org.junit.Test;
 // 1. all the TODO entries in this koan
 // 2. the koan02-config.xml file to specify the mapper xml file to use
 // 3. the mapper xml file to have the right SQL queries and MyBatis XML entries
+
 public class Koan02 {
 
 	static SqlSessionFactory sessionFactory;

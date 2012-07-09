@@ -1,12 +1,26 @@
 
+#
+# eclipse ide meta data
+#
 .classpath
 .project
+.settings/
+
+#
+# eclipse ide build folder
+#
 bin/
 
+#
+# maven build folder
+#
 target/
 
-sql/Sakila/
+#
+# ???
+#
 
+sql/Sakila/
 
 lib/*.jar
 
