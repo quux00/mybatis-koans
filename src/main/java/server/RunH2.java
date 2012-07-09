@@ -19,7 +19,7 @@ public class RunH2 {
 
 		final File source = new File("db/h2/sakila.h2.db");
 
-		final File target = new File("target/h2/sakila.h2.db");
+		final File target = new File("target/h2/interactive/sakila.h2.db");
 
 		FileUtils.copyFile(source, target);
 
