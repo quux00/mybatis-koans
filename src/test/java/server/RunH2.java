@@ -7,6 +7,9 @@ import org.h2.tools.Server;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * you can use provided server classes to work with koans interactively
+ */
 public class RunH2 {
 
 	private static final Logger log = LoggerFactory.getLogger(RunH2.class);
