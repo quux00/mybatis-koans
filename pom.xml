@@ -3,7 +3,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>sql_mybatis-koans</groupId>
+	<groupId>net.thornydev.mybatis</groupId>
 	<artifactId>sql_mybatis-koans</artifactId>
 	<version>1.0.1-SNAPSHOT</version>
 
