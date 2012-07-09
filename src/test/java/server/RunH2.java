@@ -32,12 +32,12 @@ public class RunH2 {
 		/** web console */
 		final Server serverWEB = Server.createWebServer();
 		serverWEB.start();
-		log.debug("web port : {}", serverWEB.getPort());
+		log.debug("web conlsole port : {}", serverWEB.getPort());
 
 		/** jdbc server */
 		final Server serverTCP = Server.createTcpServer(conf);
 		serverTCP.start();
-		log.debug("jdbc port : {}", serverTCP.getPort());
+		log.debug("jdbc driver port : {}", serverTCP.getPort());
 
 		log.debug("ready for koans");
 
