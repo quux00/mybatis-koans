@@ -48,6 +48,7 @@ public class Koan15 {
 
     City city = new City(1000, "FooCity", new Date());
     city.setCountry(c);
+    city.setLastUpdate(new Date());
 
     session.insert("insertCity", city);
     int cntAfter = (Integer) session.selectOne("getCount", "city");
@@ -73,6 +74,7 @@ public class Koan15 {
     city(city).
     postalCode(null).
     phone("555-8675-309").
+    lastUpdate(new Date()).
     build();
 
     int before = (Integer) session.selectOne("getCount", "address");

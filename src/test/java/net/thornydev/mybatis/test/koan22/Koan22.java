@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.io.InputStream;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.io.Resources;
@@ -57,8 +58,9 @@ public class Koan22 {
 		int n = mapper.deleteAllCategoriesForFilm(fwc);
 		assertEquals(1, n);
 
+		Date now = new Date();
 		for (final Category c : fwc.getCategories()) {
-			n = mapper.addCategoryForFilm(fwc, c);
+			n = mapper.addCategoryForFilm(fwc, c, now);
 			assertEquals(1, n);
 		}
 

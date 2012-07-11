@@ -34,8 +34,8 @@
   </delete>
 
   <insert id="addCategoryForFilm">
-    INSERT INTO film_category (film_id, category_id)
-    VALUES(#{film.id}, #{category.id})
+    INSERT INTO film_category (film_id, category_id, last_update)
+    VALUES(#{film.id}, #{category.id}, #{date})
   </insert>
 
 </mapper>
