@@ -55,20 +55,20 @@
 
 		<!-- MySQL JDBC driver -->
     <!-- TODO: uncomment if you want to use MySQL -->
-    <dependency>
-	    <groupId>mysql</groupId>
-	    <artifactId>mysql-connector-java</artifactId>
-	    <version>5.1.21</version>
-    </dependency>
+    <!-- <dependency> -->
+	  <!--   <groupId>mysql</groupId> -->
+	  <!--   <artifactId>mysql-connector-java</artifactId> -->
+	  <!--   <version>5.1.21</version> -->
+    <!-- </dependency> -->
 
 
 		<!-- PostgreSQL JDBC driver -->
     <!-- TODO: uncomment if you want to use PostgreSQL (you may need to modify the version) -->
-    <dependency>
-	    <groupId>postgresql</groupId>
-	    <artifactId>postgresql</artifactId>
-	    <version>9.1-901.jdbc4</version>
-    </dependency>
+    <!-- <dependency> -->
+	  <!--   <groupId>postgresql</groupId> -->
+	  <!--   <artifactId>postgresql</artifactId> -->
+	  <!--   <version>9.1-901.jdbc4</version> -->
+    <!-- </dependency> -->
     
 		<!-- utilities to copy files http://commons.apache.org/io/ -->
 		<dependency>
