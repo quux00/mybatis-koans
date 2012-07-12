@@ -171,7 +171,7 @@
 			<!-- run all tests by default -->
 			<properties>
 				<!-- you can provide koan class name to the mvn invocation, for example 
-					to test only first koan, use: "mvn clean verify -D koanName=Koan01" -->
+					to test only first koan, use: "mvn clean verify -P run-test-koans-h2 -D koanName=Koan01" -->
 				<koanName>*</koanName>
 				<includeTestPath>**/${koanName}.class</includeTestPath>
 			</properties>
