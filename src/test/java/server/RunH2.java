@@ -13,6 +13,9 @@ import org.slf4j.LoggerFactory;
  * note: h2 stored procedures are compiled on demand from java source; java
  * version used for starting this tool must be compatible with java version of
  * unit test invocations
+ * 
+ * note: this server instance will interfere with batch mode ant or maven
+ * invocations; remember to stop it before doing batch work;
  */
 public class RunH2 {
 
