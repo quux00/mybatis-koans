@@ -22,7 +22,10 @@ target/
 
 sql/Sakila/
 
-lib/*.jar
+#
+# keep jars in the project
+#
+#lib/*.jar
 
 tmp
 
