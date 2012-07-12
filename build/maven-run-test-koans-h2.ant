@@ -33,6 +33,8 @@
 			<arg value="--activate-profiles" />
 			<arg value="run-test-koans-h2" />
 
+			<arg value="--show-version" />
+
 		</exec>
 
 	</target>
