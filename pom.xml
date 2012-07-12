@@ -168,6 +168,14 @@
 
 			<id>run-test-koans-h2</id>
 
+			<!-- run all tests by default -->
+			<properties>
+				<!-- you can provide koan class name to the mvn invocation, for example 
+					to test only first koan, use: "mvn clean verify -D koanName=Koan01" -->
+				<koanName>*</koanName>
+				<includeTestPath>**/${koanName}.class</includeTestPath>
+			</properties>
+
 			<build>
 				<plugins>
 
@@ -236,7 +244,7 @@
 									<!-- exclude all flavors but H2 -->
 									<excludedGroups>util.FlavorMySQL,util.FlavorPostgreSQL</excludedGroups>
 									<includes>
-										<path>**/*.class</path>
+										<path>${includeTestPath}</path>
 									</includes>
 								</configuration>
 							</execution>
@@ -245,6 +253,20 @@
 
 				</plugins>
 			</build>
+
+		</profile>
+
+		<!-- TODO -->
+		<profile>
+
+			<id>run-test-koans-mysql</id>
+
+		</profile>
+
+		<!-- TODO -->
+		<profile>
+
+			<id>run-test-koans-postgre</id>
 
 		</profile>
 
