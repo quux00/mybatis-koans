@@ -48,7 +48,7 @@ public class RunH2 {
 
 		log.debug("ready for koans");
 
-		Thread.sleep(1000 * 1000);
+		Thread.sleep(3 * 1000 * 1000);
 
 		serverTCP.stop();
 		serverWEB.stop();
