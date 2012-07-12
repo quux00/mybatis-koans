@@ -67,8 +67,7 @@
           resultMap="filmInStockIdMap" statementType="CALLABLE">
     { CALL film_in_stock(
            #{filmId,  mode=IN,  jdbcType=INTEGER},
-           #{storeId, mode=IN,  jdbcType=INTEGER},
-           #{count,   mode=OUT, jdbcType=INTEGER}           
+           #{storeId, mode=IN,  jdbcType=INTEGER}
            )}
   </select>
   
@@ -76,11 +75,11 @@
           resultType="int" statementType="CALLABLE">
     { CALL film_in_stock(
            #{filmId,  mode=IN,  jdbcType=INTEGER},
-           #{storeId, mode=IN,  jdbcType=INTEGER},
-           #{count,   mode=OUT, jdbcType=INTEGER}           
+           #{storeId, mode=IN,  jdbcType=INTEGER}
            )}
   </select>
   
+  <!-- FIXME -->
   <select id="inventoryInStore" parameterType="int" resultType="int" statementType="PREPARED">
     SELECT inventory_in_stock(#{id})
   </select>

@@ -9,6 +9,10 @@ import org.slf4j.LoggerFactory;
 
 /**
  * you can use provided server classes to work with koans interactively
+ * 
+ * note: h2 stored procedures are compiled on demand from java source; java
+ * version used for starting this tool must be compatible with java version of
+ * unit test invocations
  */
 public class RunH2 {
 

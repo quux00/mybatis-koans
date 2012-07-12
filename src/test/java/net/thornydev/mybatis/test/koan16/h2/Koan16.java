@@ -16,6 +16,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.slf4j.Logger;
@@ -81,8 +82,7 @@ public class Koan16 {
 
 	}
 
-	/** FIXME */
-	// @Test
+	@Test
 	public void learnToUseStoredProcWithDomainObjects() {
 
 		final FilmInStockParam param = new FilmInStockParam();
@@ -92,7 +92,8 @@ public class Koan16 {
 		final List<FilmInStockId> results = session.selectList(
 				"callFilmInStock", param);
 
-		assertEquals(3, param.getCount());
+		log.debug("results : {}", results);
+
 		assertEquals(3, results.size());
 
 		FilmInStockId f = results.get(0);
@@ -109,8 +110,7 @@ public class Koan16 {
 
 	}
 
-	/** FIXME */
-	// @Test
+	@Test
 	public void learnToUseStoredProcWithDomainObjects2() {
 
 		final FilmInStockParam param = new FilmInStockParam();
@@ -120,7 +120,7 @@ public class Koan16 {
 		final List<Integer> results = session.selectList("callFilmInStock2",
 				param);
 
-		assertEquals(3, param.getCount());
+		log.debug("results : {}", results);
 
 		assertEquals(3, results.size());
 		assertEquals(60, results.get(0).intValue());
@@ -129,14 +129,14 @@ public class Koan16 {
 	}
 
 	/** FIXME */
-	// @Test
+	@Ignore
+	@Test
 	public void learnToCallStoredFunction() {
 		final Integer g = session.selectOne("inventoryInStore", 9);
 		assertNotNull(g);
 		assertEquals(0, g.intValue());
 	}
 
-	/** FIXME */
 	@Test
 	public void learnToCallStoredFunction2() {
 		final Boolean b = session.selectOne("inventoryInStoreBoolean", 1);
