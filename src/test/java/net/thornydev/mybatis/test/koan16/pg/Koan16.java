@@ -16,24 +16,17 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
+
+import util.FlavorPostgreSQL;
 
 // http://loianegroner.com/2011/03/ibatis-mybatis-working-with-stored-procedures/
 
 /**
  * 
- * FIXME
- * 
- * options to make this work
- * 
- * 1) use actual POSTGRE with stored procedures
- * 
- * 2) TODO inject java stored procedures in H2 and use H2 in PG mode
- * http://www.h2database.com/html/features.html#user_defined_functions
- * 
  */
-@Ignore
+@Category(FlavorPostgreSQL.class)
 public class Koan16 {
 
 	static SqlSession session;

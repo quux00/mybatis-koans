@@ -17,13 +17,16 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
+
+import util.FlavorH2;
 
 // http://loianegroner.com/2011/03/ibatis-mybatis-working-with-stored-procedures/
 
 /**
  * 
- * 
  */
+@Category(FlavorH2.class)
 public class Koan16 {
 
 	static SqlSession session;

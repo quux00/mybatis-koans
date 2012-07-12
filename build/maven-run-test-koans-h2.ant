@@ -1,6 +1,11 @@
-<!-- 
-	note: maven instalation must be visible
-	from O/S PATH 
+<!--
+
+	this ant snippet can be invoked from ide:
+		Eclipse -> Run As -> Ant Buld
+	
+	it is equivalent to the following command line invocation:
+		mvn clean verify -P run-test-koans-h2  
+	  
 -->
 
 <project default="maven" basedir="./..">
@@ -9,6 +14,10 @@
 
 	<target name="maven">
 
+		<!-- 
+			note: maven instalation must be visible
+			from O/S PATH 
+		-->
 		<condition property="executable" value="mvn">
 			<os family="unix" />
 		</condition>
@@ -22,7 +31,7 @@
 			<arg value="verify" />
 
 			<arg value="--activate-profiles" />
-			<arg value="run-test-koans" />
+			<arg value="run-test-koans-h2" />
 
 		</exec>
 

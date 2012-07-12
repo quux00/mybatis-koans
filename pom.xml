@@ -136,7 +136,7 @@
 				</configuration>
 			</plugin>
 
-			<!-- do not run any tests by default; instead, activate appropriate profiles -->
+			<!-- note: activate appropriate profiles to actually run tests -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
@@ -149,7 +149,12 @@
 					</dependency>
 				</dependencies>
 				<configuration>
+					<!-- do not run any tests by default -->
 					<skip>true</skip>
+					<configuration>
+						<!-- ignore all flavored tests by default -->
+						<excludedGroups>util.FlavorH2,util.FlavorMySQL,util.FlavorPostgreSQL</excludedGroups>
+					</configuration>
 				</configuration>
 			</plugin>
 
@@ -161,7 +166,7 @@
 
 		<profile>
 
-			<id>run-test-koans</id>
+			<id>run-test-koans-h2</id>
 
 			<build>
 				<plugins>
@@ -226,13 +231,13 @@
 									<goal>test</goal>
 								</goals>
 								<configuration>
+									<!-- do run tests -->
 									<skip>false</skip>
+									<!-- exclude all flavors but H2 -->
+									<excludedGroups>util.FlavorMySQL,util.FlavorPostgreSQL</excludedGroups>
 									<includes>
-										<path>**/test/**/*.java</path>
+										<path>**/*.class</path>
 									</includes>
-									<excludes>
-										<path>**/main/**/*.java</path>
-									</excludes>
 								</configuration>
 							</execution>
 						</executions>
