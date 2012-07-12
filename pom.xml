@@ -46,7 +46,7 @@
 			<version>1.0.6</version>
 		</dependency>
 
-		<!-- H2 driver and tools http://www.h2database.com/html/main.html -->
+		<!-- H2 JDBC driver and tools http://www.h2database.com/html/main.html -->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
@@ -54,22 +54,19 @@
 		</dependency>
 
 		<!-- MySQL JDBC driver -->
-    <!-- TODO: uncomment if you want to use MySQL -->
-    <!-- <dependency> -->
-	  <!--   <groupId>mysql</groupId> -->
-	  <!--   <artifactId>mysql-connector-java</artifactId> -->
-	  <!--   <version>5.1.21</version> -->
-    <!-- </dependency> -->
-
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.21</version>
+		</dependency>
 
 		<!-- PostgreSQL JDBC driver -->
-    <!-- TODO: uncomment if you want to use PostgreSQL (you may need to modify the version) -->
-    <!-- <dependency> -->
-	  <!--   <groupId>postgresql</groupId> -->
-	  <!--   <artifactId>postgresql</artifactId> -->
-	  <!--   <version>9.1-901.jdbc4</version> -->
-    <!-- </dependency> -->
-    
+		<dependency>
+			<groupId>postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>9.1-901.jdbc4</version>
+		</dependency>
+
 		<!-- utilities to copy files http://commons.apache.org/io/ -->
 		<dependency>
 			<groupId>commons-io</groupId>
