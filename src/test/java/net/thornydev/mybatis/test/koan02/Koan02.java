@@ -60,7 +60,6 @@ public class Koan02 {
 		final Map<String, Object> map = session
 				.selectOne("selectFirstCountryAsMap");
 
-		System.out.println(map);
 		assertEquals(1, ((Number)map.get( column("country_id") )).intValue());
 		assertEquals("Afghanistan", map.get( column("country") ));
 		assertNotNull(map.get( column("last_update") ));

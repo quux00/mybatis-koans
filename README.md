@@ -495,3 +495,30 @@ Even within the Persistence Framework, these koans do **not** cover some functio
 * databaseIdProvider
 
 If you have found any of these to be really useful, feel free to suggest a new koan or write one yourself to add it here.
+
+
+## Notes for adding to official README once we have the new system up and running
+
+When using Ant on its own, you will not have any dependency management system. You will need to put (or symlink to) the jar file dependencies in the `mybatis-koans/lib` directory.  For example, here is what my `lib` directory looks like:
+
+    $ ls -l
+    lrwxrwxrwx 1 (...) junit4.jar -> /home/midpeter444/java/lib/junit4.jar
+    lrwxrwxrwx 1 (...) mybatis.jar -> /home/midpeter444/java/lib/mybatis.jar
+    lrwxrwxrwx 1 (...) mysql-connector-java.jar -> /home/midpeter444/java/lib/mysql-connector-java.jar
+    lrwxrwxrwx 1 (...) postgresql.jar -> /home/midpeter444/java/lib/postgresql.jar
+
+
+To run with H2, you will also need to have:
+Apache Commons IO:  [http://commons.apache.org/io/download_io.cgi](http://commons.apache.org/io/download_io.cgi)
+The H2 db jar: [http://www.h2database.com/html/download.html](http://www.h2database.com/html/download.html)
+The slf4j jar: [http://www.slf4j.org/download.html](http://www.slf4j.org/download.html)
+
+    $ ls -l
+    lrwxrwxrwx 1 (...) junit4.jar -> /home/midpeter444/java/lib/junit4.jar
+    lrwxrwxrwx 1 (...) mybatis.jar -> /home/midpeter444/java/lib/mybatis.jar
+    lrwxrwxrwx 1 (...) mysql-connector-java.jar -> /home/midpeter444/java/lib/mysql-connector-java.jar
+    lrwxrwxrwx 1 (...) postgresql.jar -> /home/midpeter444/java/lib/postgresql.jar
+    lrwxrwxrwx 1 (...) slf4j-api.jar -> /home/midpeter444/java/lib/slf4j-1.6.6/slf4j-api-1.6.6.jar
+    lrwxrwxrwx 1 (...) commons-io.jar -> /home/midpeter444/java/lib/commons-io-2.4/commons-io-2.4.jar
+    lrwxrwxrwx 1 (...) h2.jar -> /home/midpeter444/java/lib/h2/bin/h2-1.3.166.jar
+

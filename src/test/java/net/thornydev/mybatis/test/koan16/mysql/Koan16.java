@@ -33,7 +33,7 @@ import org.junit.Test;
  * http://www.h2database.com/html/features.html#user_defined_functions
  * 
  */
-@Ignore
+//@Ignore
 public class Koan16 {
 
 	static SqlSession session;
