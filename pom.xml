@@ -149,6 +149,8 @@
 					</dependency>
 				</dependencies>
 				<configuration>
+					<!-- keep non random test order -->
+					<runOrder>alphabetical</runOrder>
 					<!-- do not run any tests by default -->
 					<skip>true</skip>
 					<configuration>
