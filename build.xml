@@ -85,10 +85,10 @@
   <!-- run the H2 server -->
   <!-- ================= -->
 
-  <target name="compileH2" depends="init,prepare-resources">
+  <target name="compileH2" depends="init">
     <javac
         srcdir="${src-completed.dir}"
-        includes="**/server/**"
+        includes="**/h2server/**"
         destdir="${build-completed.dir}"
         debug="${compile.debug}"
         debuglevel="${compile.debuglevel}"
@@ -99,9 +99,9 @@
   </target>
 
   <!-- TODO: finish ... -->
-  <target name="runH2" depends="init,prepare-resources"
+  <target name="runH2" depends="compileH2"
           description="Run the H2 database to test koans">
-    <java classname="server.RunH2">
+    <java classname="h2server.RunH2">
       <classpath refid="completed-koan.classpath" />
     </java>
   </target>
@@ -323,7 +323,7 @@
     <javac
         srcdir="${src-completed.dir}"
         destdir="${build-completed.dir}"
-        excludes="**/server/**"
+        excludes="**/h2server/**"
         debug="${compile.debug}"
         debuglevel="${compile.debuglevel}"
         includeantruntime="false">

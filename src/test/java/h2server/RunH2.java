@@ -1,4 +1,4 @@
-package server;
+package h2server;
 
 import java.io.File;
 
