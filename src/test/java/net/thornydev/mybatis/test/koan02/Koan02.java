@@ -3,12 +3,9 @@ package net.thornydev.mybatis.test.koan02;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import java.io.File;
-import java.io.FileReader;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -60,21 +57,20 @@ public class Koan02 {
 		final Map<String, Object> map = session
 				.selectOne("selectFirstCountryAsMap");
 
-		assertEquals(1, ((Number)map.get( column("country_id") )).intValue());
-		assertEquals("Afghanistan", map.get( column("country") ));
-		assertNotNull(map.get( column("last_update") ));
+    assertEquals(1, ((Number) getFromMap(map, "country_id") ).intValue());
+    assertEquals("Afghanistan", getFromMap(map, "country"));
+    assertNotNull(getFromMap(map, "last_update"));
 
 	}
 
 	@Test
-	public void learnToQueryMapperReturningHashMapWithParameterInput()
-			throws Exception {
-		final Map<Object, Object> map = session.selectOne(
-				"selectOneAsMapDynamic", 33);
+	public void learnToQueryMapperReturningHashMapWithParameterInput() throws Exception {
+		final Map<String, Object> map = 
+		    session.selectOne("selectOneAsMapDynamic", 33);
 
-		assertEquals(33, ((Number)map.get( column("country_id") )).intValue());
-		assertEquals("Finland", map.get( column("country") ));
-		assertNotNull(map.get( column("last_update") ));
+		assertEquals(33, ((Number)getFromMap(map, "country_id")).intValue());
+		assertEquals("Finland", getFromMap(map, "country"));
+		assertNotNull(getFromMap(map, "last_update"));
 	}
 
 	@Test
@@ -86,21 +82,18 @@ public class Koan02 {
 		assertEquals(109, lmap.size());
 		final Map<String, Object> map109 = lmap.get(0);
 
-		assertEquals(109, ((Number)map109.get( column("country_id") )).intValue());
-		assertEquals("Zambia", map109.get( column("country") ));
+		assertEquals(109, ((Number)getFromMap(map109, "country_id")).intValue());
+		assertEquals("Zambia", getFromMap(map109, "country"));
 	}
 
 	
 	/* ---[ Helper method ]--- */
-	private String column(String name) throws Exception {
-	  String config = "src/test/java/net/thornydev/mybatis/test/config.properties";
-    Properties p = new Properties();
-	  p.load( new FileReader(new File(config)) );
-	  String driver = p.getProperty("driver");
-	  if (driver != null && driver.indexOf("org.h2.Driver") >= 0) {
-	    return name.toUpperCase();
+	
+	private Object getFromMap(Map<String, Object> map, String key) {
+	  if (map.containsKey(key.toLowerCase())) {
+	    return map.get(key.toLowerCase());
 	  } else {
-	    return name.toLowerCase();
+	    return map.get(key.toUpperCase());
 	  }
 	}
 }
