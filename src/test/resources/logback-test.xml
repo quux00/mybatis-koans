@@ -4,6 +4,9 @@
 
 <configuration>
 
+	<!-- sends logs to logback-beagle http://logback.qos.ch/beagle/ -->
+	<consolePlugin />
+	
 	<!-- use only console logger -->
 	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
