@@ -157,14 +157,25 @@
 					</dependency>
 				</dependencies>
 				<configuration>
+				
 					<!-- keep non random test order -->
 					<runOrder>alphabetical</runOrder>
+					
 					<!-- do not run any tests by default -->
 					<skip>true</skip>
-					<configuration>
-						<!-- ignore all flavored tests by default -->
-						<excludedGroups>util.FlavorH2,util.FlavorMySQL,util.FlavorPostgreSQL</excludedGroups>
-					</configuration>
+					
+					<!-- ignore all flavored tests by default -->
+					<excludedGroups>util.FlavorH2,util.FlavorMySQL,util.FlavorPostgreSQL</excludedGroups>
+					
+					<!-- do not fail, in case we need to stop h2 -->
+					<failIfNoTests>false</failIfNoTests>
+					<testFailureIgnore>true</testFailureIgnore>
+					
+					<!-- produce per-method report entries on console -->
+					<useFile>false</useFile>
+					<printSummary>true</printSummary>
+					<reportFormat>plain</reportFormat>
+					
 				</configuration>
 			</plugin>
 
