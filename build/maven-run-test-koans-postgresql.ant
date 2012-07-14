@@ -4,7 +4,7 @@
 		Eclipse -> Run As -> Ant Build
 	
 	it is equivalent to the following command line invocation:
-		mvn clean verify -P run-test-koans-postgre
+		mvn clean verify -P run-test-koans-postgresql
 	  
 -->
 
@@ -31,7 +31,7 @@
 			<arg value="verify" />
 
 			<arg value="--activate-profiles" />
-			<arg value="run-test-koans-postgre" />
+			<arg value="run-test-koans-postgresql" />
 
 			<arg value="--show-version" />
 

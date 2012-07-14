@@ -18,6 +18,8 @@
 
 	</properties>
 
+	<!-- NOTE: feel free to change "version" values here to try out different 
+		batis or driver versions -->
 	<dependencies>
 
 		<!-- batis http://www.mybatis.org/core/ -->
@@ -25,25 +27,6 @@
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
 			<version>3.1.1</version>
-		</dependency>
-
-		<!-- test framework http://www.junit.org/ -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.10</version>
-		</dependency>
-
-		<!-- logging framework http://logback.qos.ch/ -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.6.4</version>
-		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<version>1.0.6</version>
 		</dependency>
 
 		<!-- H2 JDBC driver and tools http://www.h2database.com/html/main.html -->
@@ -67,6 +50,25 @@
 			<version>9.1-901.jdbc4</version>
 		</dependency>
 
+		<!-- test framework http://www.junit.org/ -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.10</version>
+		</dependency>
+
+		<!-- logging framework http://logback.qos.ch/ -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.6.4</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.0.6</version>
+		</dependency>
+
 		<!-- utilities to copy files http://commons.apache.org/io/ -->
 		<dependency>
 			<groupId>commons-io</groupId>
@@ -78,8 +80,10 @@
 
 	<build>
 
+		<!-- support custom main resources -->
 		<resources>
 
+			<!-- custom -->
 			<resource>
 				<directory>src/main/java</directory>
 				<includes>
@@ -88,6 +92,7 @@
 				</includes>
 			</resource>
 
+			<!-- default -->
 			<resource>
 				<directory>src/main/resources</directory>
 				<includes>
@@ -97,8 +102,10 @@
 
 		</resources>
 
+		<!-- support custom test resources -->
 		<testResources>
 
+			<!-- custom -->
 			<testResource>
 				<directory>src/test/java</directory>
 				<includes>
@@ -107,6 +114,7 @@
 				</includes>
 			</testResource>
 
+			<!-- default -->
 			<testResource>
 				<directory>src/test/resources</directory>
 				<includes>
@@ -118,14 +126,14 @@
 
 		<plugins>
 
-			<!-- -->
+			<!-- use specific plugin version -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
 				<version>2.5</version>
 			</plugin>
 
-			<!-- enforce java version -->
+			<!-- enforce java compiler version -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -166,6 +174,7 @@
 
 	<profiles>
 
+		<!-- run src/test/java with H2 flavor only -->
 		<profile>
 
 			<id>run-test-koans-h2</id>
@@ -260,6 +269,7 @@
 		</profile>
 
 		<!-- TODO -->
+		<!-- run src/test/java with MySQL flavor only -->
 		<profile>
 
 			<id>run-test-koans-mysql</id>
@@ -267,6 +277,7 @@
 		</profile>
 
 		<!-- TODO -->
+		<!-- run src/test/java with PostgreSQL flavor only -->
 		<profile>
 
 			<id>run-test-koans-postgresql</id>
