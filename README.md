@@ -479,6 +479,8 @@ As you go through the koans, you'll see that I change styles/idioms from time to
 
 # Current Status
 
+**July 2012**
+
 [Andrei Pozolotin](https://github.com/carrot-garden) and I are currently working on some improvements to the koans. In particular, Andrei is adding maven integration and the [H2 database](http://www.h2database.com/html/main.html), so you'll be able to do the koans without installing and setting up a database, if that is what you prefer.  We are leaving this repo intact until our changes are complete and then will merge them into this one.  We expect the new koans structure to be ready by the end of July.
 
 
