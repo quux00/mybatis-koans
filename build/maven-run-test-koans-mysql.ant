@@ -1,7 +1,7 @@
 <!--
 
-	this ant snippet can be invoked from ide:
-		Eclipse -> Run As -> Ant Buld
+	this ant snippet can be invoked from IDE:
+		Eclipse -> Run As -> Ant Build
 	
 	it is equivalent to the following command line invocation:
 		mvn clean verify -P run-test-koans-mysql
@@ -15,7 +15,7 @@
 	<target name="maven">
 
 		<!-- 
-			note: maven instalation must be visible
+			note: maven installation must be visible
 			from O/S PATH 
 		-->
 		<condition property="executable" value="mvn">

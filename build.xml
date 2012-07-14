@@ -8,11 +8,13 @@
   <property name="log.koan.output.to.file" value="false"/>
 
   <!-- default folder location properties -->
-  <property name="src.dir"             value="src/main/java"/>
-  <property name="build.dir"           value="bin"/>
-  <property name="lib.dir"             value="lib"/>
-  <property name="src-completed.dir"   value="src/test/java"/>
-  <property name="build-completed.dir" value="bin-comp"/>
+  <property name="src.dir"                 value="src/main/java"/>
+  <property name="resources.dir"           value="src/main/resources"/>
+  <property name="build.dir"               value="bin"/>
+  <property name="lib.dir"                 value="lib"/>
+  <property name="src-completed.dir"       value="src/test/java"/>
+  <property name="resources-completed.dir" value="src/test/resources"/>
+  <property name="build-completed.dir"     value="bin-comp"/>
 
   <!-- koan classpath -->
 
@@ -42,22 +44,30 @@
     <mkdir dir="${build-completed.dir}"/>
   </target>
 
+  <target name="prepare-resources" depends="init">
+    <copy todir="${build.dir}" overwrite="true">
+      <fileset dir="${src.dir}"       includes="**/*.properties,**/*.xml" excludes="" />
+      <fileset dir="${resources.dir}" includes="**/*.properties,**/*.xml" excludes="" />
+    </copy>
+  </target>
+
+  <target name="prepare-resources-completed" depends="init">
+    <copy todir="${build-completed.dir}" overwrite="true">
+      <fileset dir="${src-completed.dir}"       includes="**/*.properties,**/*.xml" excludes="" />
+      <fileset dir="${resources-completed.dir}" includes="**/*.properties,**/*.xml" excludes="" />
+    </copy>
+  </target>
+
   <target name="clean" description="Remove binary files">
     <delete dir="${build.dir}" failonerror="false" deleteonexit="true" />
     <delete dir="${build-completed.dir}" failonerror="false" deleteonexit="true" />
     <delete file="TEST-net.thornydev*" failonerror="false" deleteonexit="true" />
   </target>
 
+  
   <!-- ======= -->
   <!-- compile -->
   <!-- ======= -->
-
-  <target name="prepare-resources" depends="init">
-    <!-- description="Prepare application resource files" -->
-    <copy todir="${build.dir}" overwrite="true">
-      <fileset dir="${src.dir}" includes="**/*.properties,**/*.xml" excludes="" />
-    </copy>
-  </target>
 
   <property name="compile.debug"      value="true" />
   <property name="compile.debuglevel" value="lines,vars,source" />
@@ -81,6 +91,7 @@
     </copy>
   </target>
 
+  
   <!-- ================= -->
   <!-- run the H2 server -->
   <!-- ================= -->
@@ -318,7 +329,7 @@
   <!-- targets for the already completed "test" koans -->
   <!-- ============================================== -->
 
-  <target name="compile-completed" depends="init,prepare-completed-resources"
+  <target name="compile-completed" depends="init,prepare-resources-completed"
           description="Compile already completed koans">
     <javac
         srcdir="${src-completed.dir}"

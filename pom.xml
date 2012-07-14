@@ -269,7 +269,7 @@
 		<!-- TODO -->
 		<profile>
 
-			<id>run-test-koans-postgre</id>
+			<id>run-test-koans-postgresql</id>
 
 		</profile>
 
