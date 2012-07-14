@@ -479,7 +479,12 @@ As you go through the koans, you'll see that I change styles/idioms from time to
 
 # Current Status
 
-As of last writing in May 2012, these koans are still in progress and not complete.  Feel free to grab them and try them out.  Suggestions for improvements are welcome.
+[Andrei Pozolotin](https://github.com/carrot-garden) and I are currently working on some improvements to the koans. In particular, Andrei is adding maven integration and the [H2 database](http://www.h2database.com/html/main.html), so you'll be able to do the koans without installing and setting up a database, if that is what you prefer.  We are leaving this repo intact until our changes are complete and then will merge them into this one.  We expect the new koans structure to be ready by the end of July.
+
+
+**May 2012**
+
+These koans are still in progress and not complete.  Feel free to grab them and try them out.  Suggestions for improvements are welcome.
 
 So far, I have tested them carefully with MyBatis-3.1.1 using PostgreSQL 9.1.3 and MySQL 5.5 on Linux. If you try them with other databases or operating systems and have problems, let me know.  (Suggested patches are welcome.)
 
