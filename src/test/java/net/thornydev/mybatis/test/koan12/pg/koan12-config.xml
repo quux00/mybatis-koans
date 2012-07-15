@@ -29,8 +29,8 @@
   </environments>
   
   <mappers>
-    <mapper resource="net/thornydev/mybatis/test/koan12/koan12-mapper.xml"/>
-    <mapper class="net.thornydev.mybatis.test.koan12.FilmMapper"/>
+    <mapper resource="net/thornydev/mybatis/test/koan12/pg/koan12-mapper.xml"/>
+    <mapper class="net.thornydev.mybatis.test.koan12.pg.FilmMapper"/>
   </mappers>
   
 </configuration>
