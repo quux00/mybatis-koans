@@ -1,6 +1,8 @@
 package net.thornydev.mybatis.test.koan12.h2;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.InputStream;
 import java.math.BigDecimal;
@@ -17,7 +19,11 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
+import util.FlavorH2;
+
+@Category(FlavorH2.class)
 public class Koan12 {
 
 	static SqlSessionFactory sessionFactory;

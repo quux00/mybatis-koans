@@ -17,8 +17,11 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
+import util.FlavorMySQL;
 
+@Category(FlavorMySQL.class)
 public class Koan12 {
 
 	static SqlSessionFactory sessionFactory;
