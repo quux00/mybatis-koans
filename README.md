@@ -21,7 +21,7 @@ In order to do the koans, you must have:
   * Ideally MyBatis 3.0.3 or higher
 * [JUnit 4](http://www.junit.org/)
 * A database server (and client) installed
-  * These koans come have been specifically tested with MySQL and PostgreSQL and come with some instructions around using those databases.  You should be able to use (or adapt) them to work with Oracle and other databases if you desire.
+  * These koans have been specifically tested with MySQL and PostgreSQL and come with some instructions around using those databases.  You should be able to use (or adapt) them to work with Oracle and other databases if you desire.
 * The _sakila_ database and dataset (the PostgreSQL version is called "pagila").  See "Set up" section below for details.
 * JDBC driver for your database of choice.
 
