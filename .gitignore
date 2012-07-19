@@ -1,4 +1,3 @@
-
 #
 # eclipse ide meta data
 #
@@ -19,19 +18,10 @@ target/
 #
 # ???
 #
-
 sql/Sakila/
-
-#
-# keep jars in the project
-#
-#lib/*.jar
-
+lib/*.jar
 tmp
-
 TEST-*
-
 TODO.org
-
 *.orig
 bin-comp
