@@ -499,6 +499,88 @@ If you have found any of these to be really useful, feel free to suggest a new k
 
 ## Notes for adding to official README once we have the new system up and running
 
+# Getting Started
+
+We provide three ways to run the koans (that we have tested):
+
+1. Load them into Eclipse (as a maven project) and run them one at a time using JUnit built into Eclipse
+2. Run/build them as pure maven targets -- either within an IDE or run from the command line
+3. Run/build them as pure ant targets  -- either within an IDE or run from the command line
+
+We also have tested and have examples for three databases:
+
+1. PostgreSQL
+2. MySQL
+3. H2, a pure Java database
+
+You can also download the sakila database schema and dataset that we use and try it with other databases.
+
+So you will need to decide what option you'd like to take.  The closest thing we have to "push-button" is to use maven and H2.  To get the koans set up for that route, the only thing you will need to have pre-installed is maven and Java.  On the other side the most labor intensive to set up is to use ant with some other database (especially one not on the list above).  Below we provide instructions for these scenarios, starting with the simplest.
+
+
+## Prerequisites
+
+In order to do the koans, you must have:
+
+* An understanding of relational databases and SQL
+* Experience programming in Java
+* the Java JDK installed (preferably version 6 or higher)
+* [Maven](http://maven.apache.org/download.html) installed (preferabley version 3 or higher)
+
+#### Database
+
+* If you are going to use H2 as your database, everything you need comes with the koan download
+* If you are going to use PostgreSQL or MySQL as your database, you will need to install the database server (and client) software and get it configured to have at least one user with a username and password.  You will NOT need to download the sakila database schema and dataset - we have that for you.
+* If you are going to use some other database, you will need to:
+  * install that database server and client
+  * download and create the sakila schema and load the dataset
+  * download and set up the JDBC driver for that database, or add that JDBC dependency to the maven pom.xml file, if you are going to use maven
+
+
+## Clone the koans repo (or download it)
+
+If you have [git](http://git-scm.com/downloads) installed, you clone the repo:
+
+    git clone git@github.com:midpeter444/mybatis-koans.git
+
+If you don't have git, you can just [download a zip or tarball](https://github.com/midpeter444/mybatis-koans/downloads) of the koans.
+
+### The koan directory structure
+
+There are tree main directories.
+
+**db:** 
+The sakila database files are here. For H2, we provide the actual binary db file.  For MySQL and PostgreSQL, we provide the SQL files for the schema and default dataset.  In addition, we provide documentation of the scheam in the `doc` subdirectory in the mysql and postgresql directories.
+
+**lib:** 
+This is where to put jars (or links to jars) if you will be using ant.  If you use maven or Eclipse without ant, then you can ignore this directory.
+
+**src:** 
+The koan source code is organized using maven's default directory structure.  Maven splits src into `main` and `test`.  The koans are organized such that the incomplete koans that you will work on are in `main` and the completed koans are in `test`.
+
+You can still use ant if you don't want to use maven.  The ant build.xml file is set up to handle this directory structure.
+
+
+
+## Maven + H2: I just want to get going fast!
+
+If you have the prerequisites in place, the fastest way to get going is to use maven.  You can use the [Eclipse m2e plugin](http://www.eclipse.org/m2e/) if you want the best support for doing it all in Eclipse.  The instructions below assume you don't have m2e, but will ultimately work the same with it.
+
+### From the command line
+
+From the top dir of the koans, type:
+
+    $ mvn compile
+
+This will download all the dependencies for running the mybatis koans with H2 and then compile both the incomplete and completed koans.  (true??)
+
+**LEFT OFF HERE.**
+
+
+
+
+
+
 When using Ant on its own, you will not have any dependency management system. You will need to put (or symlink to) the jar file dependencies in the `mybatis-koans/lib` directory.  For example, here is what my `lib` directory looks like:
 
     $ ls -l
