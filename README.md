@@ -312,7 +312,11 @@ To run all the tests for a given database, leave off the -D target:
 
     $ mvn clean verify -P run-comp-koans-h2
 
-Ideally, among all the verbiage that maven spits out, you will see output that includes this:
+To see a list of the "profiles" defined in the maven pom, you can run:
+
+    $ mvn help:all-profiles
+
+Ideally, among all the verbiage that maven spits out, when you run a completed koan test, you will see output that includes this:
 
     [INFO] H2 server spawned at tcp://localhost:9092
     [INFO] 

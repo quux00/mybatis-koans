@@ -81,6 +81,7 @@
 
   </dependencies>
 
+
   <build>
     <!-- support custom main resources -->
     <resources>
@@ -143,6 +144,15 @@
         </configuration>
       </plugin>
 
+      <!-- use specific plugin version -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-help-plugin</artifactId>
+        <version>2.1.1</version>
+        <!-- <configuration> -->
+        <!-- </configuration> -->
+      </plugin>
+      
       <!-- note: activate appropriate profiles to actually run tests -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -156,7 +166,7 @@
           </dependency>
         </dependencies>
         <configuration>
-
+          
           <!-- keep non random test order -->
           <runOrder>alphabetical</runOrder>
 
@@ -182,6 +192,19 @@
 
   <profiles>
 
+    <!-- <profile> -->
+    <!--   <id>targets</id> -->
+    <!--   <goal> -->
+    <!--     <echo> -->
+    <!--       maven goals&#58; -->
+    <!--       preparedocs .. o Extra preparation for the documentation -->
+    <!--       docclean ....... o Delete temporary and distribution directories -->
+    <!--       docpdf .......... o Compile reference documentation to pdf -->
+    <!--     </echo> -->
+    <!--   </goal> -->
+    <!-- </profile> -->
+
+    
     <!--[ RUN COMPLETED KOANS ]-->
     <!-- run src/test/java with H2 flavor only -->
     <profile>
@@ -356,6 +379,46 @@
       </build>
     </profile>
 
+
+    <!--[ RUN USER "MAIN" KOANS ]-->
+    <profile>
+      <id>run-koans</id>
+      <!-- run all tests by default -->
+      <properties>
+        <!-- you can provide koan class name to the mvn invocation,
+             for example to test only first koan, use:
+             mvn clean verify -P run-comp-koans-pg -D koanName=Koan01 -->
+        <koanName>*</koanName>
+        <includeTestPath>**/${koanName}.class</includeTestPath>
+      </properties>
+
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>main-koans</id>
+                <phase>integration-test</phase>
+                <goals>
+                  <goal>test</goal>
+                </goals>
+                <configuration>
+                  <!-- do run tests -->
+                  <skip>false</skip>
+                  <includes>
+                    <path>${includeTestPath}</path>
+                  </includes>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    
   </profiles>
 
 </project>
