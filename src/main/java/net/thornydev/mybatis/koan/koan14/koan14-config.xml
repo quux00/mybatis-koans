@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+          PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+          "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  <properties resource="net/thornydev/mybatis/koan/config.properties"/>
+
+  <typeAliases>
+    <typeAlias type="net.thornydev.mybatis.koan.domain.Actor"   alias="Actor"/>
+    <typeAlias type="net.thornydev.mybatis.koan.domain.Address" alias="Address"/>
+    <typeAlias type="net.thornydev.mybatis.koan.domain.City"    alias="City"/>
+    <typeAlias type="net.thornydev.mybatis.koan.domain.Country" alias="Country"/>
+    <typeAlias type="net.thornydev.mybatis.koan.util.Range"     alias="Range"/>
+  </typeAliases>
+
+  <environments default="development">
+    <environment id="development">
+      <transactionManager type="JDBC" />
+      <dataSource type="UNPOOLED">
+        <property name="driver"   value="${driver}" />
+        <property name="url"      value="${url}" />
+        <property name="username" value="${username}" />
+        <property name="password" value="${password}" />
+      </dataSource>
+    </environment>
+  </environments>
+
+  <!-- TODO: register an objectFactory here -->
+  <!-- NOTE: even after you configure this, it will give you an error.
+       HINT: the order of elements in the MyBatis config file is important. -->
+  <objectFactory type="???"/>
+  
+  <mappers>
+    <mapper resource="net/thornydev/mybatis/koan/koan14/actor-mapper.xml"/>
+    <mapper resource="net/thornydev/mybatis/koan/koan14/country-mapper.xml"/>
+    <mapper resource="net/thornydev/mybatis/koan/koan14/city-mapper.xml"/>
+    <mapper resource="net/thornydev/mybatis/koan/koan14/address-mapper.xml"/>
+  </mappers>
+</configuration>

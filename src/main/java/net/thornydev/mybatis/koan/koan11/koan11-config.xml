@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+          PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+          "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  <properties resource="net/thornydev/mybatis/koan/config.properties"/>
+
+  <typeAliases>
+    <!-- TODO: set up the necessary TypeAlias entries -->
+    <!-- Use the alias "Film" for the FilmK11 class -->
+    <!-- Use the alias "Language" for the LanguageK11 class -->
+  </typeAliases>
+
+  <environments default="development">
+    <environment id="development">
+      <transactionManager type="JDBC" />
+      <dataSource type="UNPOOLED">
+        <property name="driver"   value="${driver}" />
+        <property name="url"      value="${url}" />
+        <property name="username" value="${username}" />
+        <property name="password" value="${password}" />
+      </dataSource>
+    </environment>
+  </environments>
+  
+  <mappers>
+    <mapper resource="net/thornydev/mybatis/koan/koan11/koan11-mapper.xml"/>
+  </mappers>
+</configuration>

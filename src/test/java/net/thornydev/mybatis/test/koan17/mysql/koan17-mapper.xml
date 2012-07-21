@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.thornydev.mybatis.test.koan17.mysql.Koan17Mapper">
+
+  <!-- DISCLAIMER: doesn't work; my best attempt without writing a TypeHandler :-( -->
+  <resultMap id="hashResultMap" type="hashmap">
+    <result column="inventory_id" />
+  </resultMap>
+  
+  <!-- This one works, but we had to resort to XML -->
+  <resultMap id="filmInStockIdMap" type="FilmInStockId" autoMapping="true">
+    <result column="inventory_id" property="filmId"/>
+  </resultMap>
+  
+</mapper>

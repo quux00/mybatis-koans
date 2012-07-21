@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+          PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+          "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  <properties resource="net/thornydev/mybatis/koan/config.properties"/>
+
+  <!-- Note: you may or may not want this setting -->
+  <settings>
+    <setting name="mapUnderscoreToCamelCase" value="true" />
+  </settings>
+
+  <typeAliases>
+    <typeAlias type="net.thornydev.mybatis.koan.domain.Staff"   alias="Staff"/>
+    <typeAlias type="net.thornydev.mybatis.koan.domain.Address" alias="Address"/>
+    <typeAlias type="net.thornydev.mybatis.koan.util.Email"     alias="Email"/>
+  </typeAliases>
+
+  <environments default="development">
+    <environment id="development">
+      <transactionManager type="JDBC" />
+      <dataSource type="UNPOOLED">
+        <property name="driver"   value="${driver}" />
+        <property name="url"      value="${url}" />
+        <property name="username" value="${username}" />
+        <property name="password" value="${password}" />
+      </dataSource>
+    </environment>
+  </environments>
+  
+  <mappers>
+    <mapper resource="net/thornydev/mybatis/koan/koan19/koan19-mapper.xml"/>
+  </mappers>
+</configuration>

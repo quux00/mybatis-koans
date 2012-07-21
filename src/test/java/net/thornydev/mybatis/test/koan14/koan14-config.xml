@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+          PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+          "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  <properties resource="net/thornydev/mybatis/test/config.properties"/>
+
+  <typeAliases>
+    <typeAlias type="net.thornydev.mybatis.test.domain.Actor"   alias="Actor"/>
+    <typeAlias type="net.thornydev.mybatis.test.domain.Address" alias="Address"/>
+    <typeAlias type="net.thornydev.mybatis.test.domain.City"    alias="City"/>
+    <typeAlias type="net.thornydev.mybatis.test.domain.Country" alias="Country"/>
+    <typeAlias type="net.thornydev.mybatis.test.util.Range"     alias="Range"/>
+  </typeAliases>
+
+  <objectFactory type="net.thornydev.mybatis.test.koan14.Koan14ObjectFactory"/>
+
+  <environments default="development">
+    <environment id="development">
+      <transactionManager type="JDBC" />
+      <dataSource type="UNPOOLED">
+        <property name="driver"   value="${driver}" />
+        <property name="url"      value="${url}" />
+        <property name="username" value="${username}" />
+        <property name="password" value="${password}" />
+      </dataSource>
+    </environment>
+  </environments>
+  
+  <mappers>
+    <mapper resource="net/thornydev/mybatis/test/koan14/actor-mapper.xml"/>
+    <mapper resource="net/thornydev/mybatis/test/koan14/country-mapper.xml"/>
+    <mapper resource="net/thornydev/mybatis/test/koan14/city-mapper.xml"/>
+    <mapper resource="net/thornydev/mybatis/test/koan14/address-mapper.xml"/>
+  </mappers>
+  
+</configuration>

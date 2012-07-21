@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.thornydev.mybatis.koan.koan16.Koan16Mapper">
+
+  <!-- TODO: fill in statementType -->
+  <select id="callFilmInStockWithHashMaps" parameterType="hashmap" 
+          resultType="hashmap" statementType="???">
+    <!-- TODO: call the film_in_stock stored procedure, passing in the appropriate
+               IN and OUT params as needed by your database -->
+  </select>
+
+  <resultMap id="filmInStockIdMap" type="FilmInStockId">
+    <!-- TODO: fill in this result map, mapping the column name returned
+               by the stored proc (which varies by database) to the
+               property of the FilmInStockId class -->
+  </resultMap>
+  
+  <!-- TODO: fill in statementType -->
+  <select id="callFilmInStock" parameterType="FilmInStockParam" 
+          resultMap="filmInStockIdMap" statementType="???">
+    <!-- TODO: call the film_in_stock stored procedure, passing in the appropriate
+               IN and OUT params as needed by your database -->
+  </select>
+  
+  <!-- TODO: fill in statementType -->
+  <!-- TODO: fill in resultType -->
+  <select id="callFilmInStock2" parameterType="FilmInStockParam" 
+          resultType="???" statementType="???">
+    <!-- TODO: call the film_in_stock stored procedure, passing in the appropriate
+               IN and OUT params as needed by your database -->
+    <!-- HINT: if this code is redundant with code above, consider putting it
+               in a MyBatis <sql> wrapper and see if that works -->
+  </select>
+  
+  
+  <!-- TODO: fill in statementType -->
+  <!-- TODO: fill in resultType - try something that seems natural for the data type
+             your database stores - either an int or String, for example -->
+  <select id="inventoryInStore" parameterType="int" resultType="???" 
+          statementType="???">
+    <!-- TODO: call the inventory_in_stock stored function, passing in 
+               the appropriate param(s) -->
+  </select>
+
+  <!-- TODO: fill in statementType -->
+  <select id="inventoryInStoreBoolean" parameterType="int" resultType="Boolean" 
+          statementType="???">
+    <!-- TODO: call the inventory_in_stock stored function, passing in 
+               the appropriate param(s) -->
+    <!-- HINT: if this code is redundant with code above, consider putting it
+               in a MyBatis <sql> wrapper and see if that works -->
+  </select>
+
+</mapper>

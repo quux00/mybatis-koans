@@ -1,0 +1,45 @@
+<!--
+
+	This ant snippet can be invoked from IDE:
+		Eclipse -> Run As -> Ant Build
+	
+	It is equivalent to the following command line invocation:
+		mvn clean verify -P run-test-koans-h2 -D koanName=Koan01
+	  
+-->
+
+<project default="maven" basedir="./..">
+
+	<echo message="basedir : ${basedir}" />
+
+	<target name="maven">
+
+		<!-- 
+			note: maven installation must be visible
+			from O/S PATH 
+		-->
+		<condition property="executable" value="mvn">
+			<os family="unix" />
+		</condition>
+		<condition property="executable" value="mvn.bat">
+			<os family="windows" />
+		</condition>
+
+		<exec executable="${executable}">
+
+			<arg value="clean" />
+			<arg value="verify" />
+
+			<arg value="--activate-profiles" />
+			<arg value="run-test-koans-h2" />
+
+			<arg value="--define" />
+			<arg value="koanName=Koan01" />
+
+			<arg value="--show-version" />
+
+		</exec>
+
+	</target>
+
+</project>

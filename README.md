@@ -10,6 +10,318 @@ The structure of these koans is inspired by the challenging and informative [Neo
 
 ---
 
+# Overview
+
+To do the koans you will need a relational database, the Java JDK, JDBC drivers, JUnit, the MyBatis Persistence Framework, a Java build tool and an editor/IDE.  The koan set up tries be flexible to allow you to use your build tool and database of choice.
+
+The koans come twice - once in "uncompleted" form and once in "completed" form.
+
+The "uncompleted" koans are the ones you will fill in. They are JUnit 4 tests in the `src/main/java/net/thornydev/mybatis/koan/koanXX` directories.  Each koan has its own directory (and thus package name) in order to have separate MyBatis config files to exercise different aspects of the MyBatis data mapper framework.
+
+The completed koans are there for reference in case you get stuck and need to see the solution and also to test that you have your environment set up.  They are in the `src/test/java/net/thornydev/mybatis/koan/koanXX` directories.
+
+_Note_: where different solutions were required between MySQL, PostgreSQL and/or H2, we have created additional subdirectories named after the database.
+
+While MyBatis can be used with [other JVM languages](http://www.fdmtech.org/2011/12/mybatis-for-scala-1-0-beta-released), these koans are all in pure Java.
+
+To do these koans, the [sakila](http://dev.mysql.com/doc/sakila/en/index.html) example datbase is chosen.  It is a sample database schema and dataset originally built in MySQL that has been created for many other relational databases: [http://code.google.com/p/sakila-sample-database-ports/](http://code.google.com/p/sakila-sample-database-ports/).  In addition to one-to-many and many-to-many relationships for us to model, it has stored procedures and stored functions that we will learn to access via MyBatis.
+
+
+## Prerequisites
+
+In order to do the koans, you must have:
+
+* An understanding of relational databases and SQL
+* Experience programming in Java
+* The Java JDK installed (preferably version 6 or higher)
+* Either:
+  * [Maven](http://maven.apache.org/download.html) (preferabley version 3 or higher), or
+  * [Ant](http://ant.apache.org/) (preferably 1.8 or higher)
+* An editor or IDE (We have tested with Eclipse only)
+  * You may also want to have the [m2e Eclipse plugin](http://www.eclipse.org/m2e/) installed if you plan to use maven  
+
+
+## Main steps to doing the koans
+
+To give you sense the flow here are the steps for getting set up and then working through the koans. In the sections that follow we provide more details on these steps.
+
+**[Step 0](#chooseDatabase):**  Choose the database server you want to use and the build tool
+
+**Step 1:**  Install any missing prerequisites from above
+
+**[Step 2](#cloneRepo):**  Clone or download the mybatis-koans from GitHub and take a look at the directory structure
+
+**[Step 3](#createSakila):**  Create the sakila database and load the dataset (not necessary for H2)
+
+**[Step 4](#studySakila):**  Study the provided sakila database diagrams and structure to get familiar with it
+
+**[Step 5](#getDeps):**  Run maven to download the dependencies or, if using ant, download the dependencies manually and install them in the koan lib directory
+
+**[Step 6](#runComp):**  Run a few of the completed koans to make sure everything is working on your system
+
+**[Step 7](#eclipse):**  Start working on the koans in your editor / IDE of choice
+
+**[Step 8](#runMainKoans):**  Run the koan you are working on to see if it passes the tests
+
+**Step 9:**  If you are having trouble completing the koan, research your options online, using the [MyBatis User Guide](http://www.mybatis.org/core/), or */as a last resort/* take a peek at the completed koan we provide.  Try not to have to do the latter until you have finished your koan successfully to see if you came up with a different solution.
+
+**Step 10:**  Repeat Steps 8 and 9 until all the koans are finished.
+
+**Step 11:**  Think of additional koans that exercise MyBatis features you'd like to learn better. 
+
+**Step 12:**  Fork this repo on GitHub, write your own and make a pull request to add back to the MyBatis community.
+
+<br /><br />
+# Setup
+
+We provide three ways to run the koans (that we have tested):
+
+1. Load them into Eclipse (as a maven project) and run them one at a time using JUnit built into Eclipse
+2. Run/build them as pure maven targets -- either within an IDE or run from the command line
+3. Run/build them as pure ant targets  -- either within an IDE or run from the command line
+
+We have completed and tested koans for three databases:
+
+1. [PostgreSQL](http://www.postgresql.org/)
+2. [MySQL](http://www.mysql.com/)
+3. [H2](http://www.h2database.com/html/main.html), a pure Java database
+
+You can also download the sakila database schema and dataset that we use and try it with other databases.
+
+So you will need to decide what options you'd like to take.  The closest thing we have to "push-button" is to use maven and H2.  To get the koans set up for that route, the only thing you will need to have pre-installed is maven and Java.  Using ant and/or a different database will require additional setup, as described below.
+
+
+<a id="chooseDatabase"></a>
+
+#### Database
+
+* If you are going to use H2 as your database, everything you need comes with the koan download
+* If you are going to use PostgreSQL or MySQL as your database, you will need to install the database server (and client) software and get it configured to have at least one user with a username and password.  You will NOT need to download the sakila database schema and dataset - they come with the koans.
+* If you are going to use some other database, you will need to:
+  * install that database server and client
+  * download and create the sakila schema and load the dataset
+    * Recommended site: [http://code.google.com/p/sakila-sample-database-ports/](http://code.google.com/p/sakila-sample-database-ports/)
+  * download and set up the JDBC driver for that database, or add that JDBC dependency to the maven pom.xml file, if you are going to use maven
+
+
+<a id="cloneRepo""></a>
+
+## Clone the koans repo (or download it)
+
+If you have [git](http://git-scm.com/downloads) installed, clone this repo:
+
+    git clone git@github.com:midpeter444/mybatis-koans.git
+
+If you don't have git, you can just [download a zip or tarball](https://github.com/midpeter444/mybatis-koans/downloads) of the koans.
+
+### The koan directory structure
+
+There are tree main directories.
+
+**db:** 
+The sakila database files are here. For H2, we provide the actual binary db file.  For MySQL and PostgreSQL, we provide the SQL files for the schema and default dataset.  In addition, we provide documentation of the scheam in the `doc` subdirectory in the mysql and postgresql directories.
+
+**lib:** 
+This is where to put jars (or links to jars) if you will be using ant.  If you use maven or Eclipse without ant, then you can ignore this directory.
+
+**src:** 
+The koan source code is organized using maven's default directory structure.  Maven splits src into `main` and `test`.  The koans are organized such that the incomplete koans that you will work on are in `main` and the completed koans are in `test`.
+
+You can still use ant if you don't want to use maven.  The ant build.xml file is set up to handle this directory structure.
+
+
+<a id="createSakila"></a>
+
+## PostgreSQL or MySQL : Some assembly required
+
+If you want to use a more enterprise-strength database, then you will need to not only install those database servers first, but also populate them with the sakila schema and dataset.  I provide instructions on how to do this from the command line (tested on a Linux machine):
+
+<div style="border: 2px solid grey; margin: 10px; padding: 0px 10px;">
+  <p><strong>Creating and loading the PostgreSQL sakila database</strong></p>
+  <pre>
+  $ cd src/main/sql/Sakila/postgres-sakila-db
+  # edit the next line to have your username rather than mine
+  $ echo "GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO midpeter444;" >> postgres-sakila-schema.sql
+  $ sudo su postgres
+  $ createdb sakila
+  $ psql sakila &lt; postgres-sakila-schema.sql
+  $ psql sakila &lt; postgres-sakila-data.sql
+  $ &lt;Ctrl-D&gt; (log-out as postgres back to your user)
+  $ psql -h localhost  # log in here and check that the tables were created and that you can query them</pre>
+</div>
+
+
+<div style="border: 2px solid grey; margin: 10px; padding: 0px 10px;">
+  <p><strong>Creating and loading the MySQL sakila database</strong></p>
+  <pre>
+  $ cd src/main/sql/Sakila/mysql-sakila-db
+  $ mysql -p
+  mysql> create database sakila;
+  Query OK, 1 row affected (0.00 sec)
+  mysql> exit
+  $ mysql sakila -p &lt; sakila-schema.sql
+  $ mysql sakila -p &lt; sakila-data.sql
+  $ mysql -p  # log in here and check that the tables were created and that you can query them</pre>
+</div>
+
+For other databases (other than H2), get the sakila schema and dataset from [here](http://code.google.com/p/sakila-sample-database-ports/).
+
+
+<a id="studySakila""></a>
+
+#### Visual aids for the sakila schema
+
+In the `db/postgesql/doc` and `db/mysql/doc` directories, I have provided some analysis documents and visualizations reverse engineered from the PostgreSQL and MySQL sakila databases.
+
+View PNG files in the `postgres-viz/dbvis` or `mysql-viz/dbvis` directories to see physical data models and relationships between tables.  These were generated using the free version of [DbVisualizer](http://www.dbvis.com/).
+
+For a deeper analysis open the `index.html` in either `doc/schemaSpy` directory.  These were generated using the open source [SchemaSpy](http://schemaspy.sourceforge.net/) tool.
+
+Finally, you can also read through the documentation that MySQL provides for the sakila database: [http://dev.mysql.com/doc/sakila/en/index.html](http://dev.mysql.com/doc/sakila/en/index.html)
+
+
+
+<a id="getDeps"></a>
+
+## Maven + H2: I just want to get going fast!
+
+If you have the prerequisites in place, the fastest way to get going is to use maven.  You can use the [Eclipse m2e plugin](http://www.eclipse.org/m2e/) if you want the best support for doing it all in Eclipse.  The instructions below assume you don't have m2e, but will ultimately work the same with it.
+
+H2 is the default database in the pom.  If you want to use MySQL or PostgreSQL, uncomment that section of the pom dependencies to get their JDBC driver.  If you want to use another database, add its JDBC driver to the maven pom.
+
+### From the command line
+
+From the top dir of the koans, type:
+
+    $ mvn compile
+
+This will download all the dependencies for running the mybatis koans with H2 and then compile both the incomplete and completed koans.  (**TODO: true??**)
+
+Hopefully you will see no errors while downloading and compiling. Next, try running a couple of the completed koans in the "test" directory to see if everything seems to be working.
+
+
+## I prefer Apache Ant
+
+When using Ant on its own, you will not have any dependency management system. You will need to put (or symlink to) the jar file dependencies in the `mybatis-koans/lib` directory.  For example, here is what my `lib` directory looks like:
+
+    $ ls -l
+    lrwxrwxrwx 1 (...) junit4.jar -> /home/midpeter444/java/lib/junit4.jar
+    lrwxrwxrwx 1 (...) mybatis.jar -> /home/midpeter444/java/lib/mybatis.jar
+    lrwxrwxrwx 1 (...) mysql-connector-java.jar -> /home/midpeter444/java/lib/mysql-connector-java.jar
+    lrwxrwxrwx 1 (...) postgresql.jar -> /home/midpeter444/java/lib/postgresql.jar
+
+
+To run with H2, you will also need to have: (**TODO: Test all these - true?**)
+
+* Apache Commons IO:  [http://commons.apache.org/io/download_io.cgi](http://commons.apache.org/io/download_io.cgi)
+* The H2 db jar: [http://www.h2database.com/html/download.html](http://www.h2database.com/html/download.html)
+* The logback-class and logback-core jars: [http://logback.qos.ch/download.html](http://logback.qos.ch/download.html)
+* The slf4j-api jar: [http://www.slf4j.org/download.html](http://www.slf4j.org/download.html)
+
+So in the end you'll need to have the lib directory have those jars or links to those jars, such as I have here:
+
+    $ ls -l
+    lrwxrwxrwx 1 (...) junit4.jar -> /home/midpeter444/java/lib/junit4.jar
+    lrwxrwxrwx 1 (...) mybatis.jar -> /home/midpeter444/java/lib/mybatis.jar
+    lrwxrwxrwx 1 (...) mysql-connector-java.jar -> /home/midpeter444/java/lib/mysql-connector-java.jar
+    lrwxrwxrwx 1 (...) postgresql.jar -> /home/midpeter444/java/lib/postgresql.jar
+    lrwxrwxrwx 1 (...) slf4j-api.jar -> /home/midpeter444/java/lib/slf4j-1.6.6/slf4j-api-1.6.6.jar
+    lrwxrwxrwx 1 (...) commons-io.jar -> /home/midpeter444/java/lib/commons-io-2.4/commons-io-2.4.jar
+    lrwxrwxrwx 1 (...) h2.jar -> /home/midpeter444/java/lib/h2/bin/h2-1.3.166.jar
+    lrwxrwxrwx 1 (...) xxx -> lib/logback-classic-1.0.6.jar
+    lrwxrwxrwx 1 (...) xxx -> lib/logback-core-1.0.6.jar
+
+
+<br />
+<a id="runComp"></a>
+
+### Run the completed koans
+
+#### maven
+
+To run individual completed koans from the command line, use this syntax:
+
+    $ mvn clean verify -P run-test-koans-h2 -D koanName=Koan02
+
+This says to use the H2 database and run Koan02.  Change the koan name to run different ones.  To use mysql or postgres, change the suffix of the -P argument, like so:
+
+    $ mvn clean verify -P run-test-koans-pg -D koanName=Koan03
+    $ mvn clean verify -P run-test-koans-mysql -D koanName=Koan04
+
+Ideally, among all the verbage that maven spits out, you will see output that includes this:
+
+    [INFO] H2 server spawned at tcp://localhost:9092
+    [INFO] 
+    [INFO] --- maven-surefire-plugin:2.12:test (test-koans) @ sql_mybatis-koans ---
+    [INFO] Surefire report directory: /home/midpeter444/databases/mybatis/sql_mybatis-koans/target/surefire-reports
+    [INFO] Using configured provider org.apache.maven.surefire.junitcore.JUnitCoreProvider
+    
+    -------------------------------------------------------
+     T E S T S
+    -------------------------------------------------------
+    Concurrency config is parallel='none', perCoreThreadCount=true, threadCount=2, useUnlimitedThreads=false
+    Running net.thornydev.mybatis.test.koan02.Koan02
+    Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.749 sec
+    learnToQueryViaXmlMapperReturningHashMap(net.thornydev.mybatis.test.koan02.Koan02)  Time elapsed: 0.704 seclearnToQueryMapperReturningHashMapWithParameterInput(net.thornydev.mybatis.test.koan02.Koan02)  Time elapsed: 0.009 seclearnToQueryViaXmlMapperReturningListOfHashMaps(net.thornydev.mybatis.test.koan02.Koan02)  Time elapsed: 0.036 sec
+    Results :
+    
+    Tests run: 3, Failures: 0, Errors: 0, Skipped: 0
+    
+    [INFO] 
+    [INFO] --- h2-maven-plugin:1.0:stop (h2-finish) @ sql_mybatis-koans ---
+    [INFO] H2 server stopped
+    [INFO] ------------------------------------------------------------------------
+    [INFO] BUILD SUCCESS
+    [INFO] ------------------------------------------------------------------------
+
+Note that for the H2 version it starts ("spawns") the H2 database, runs the koan (Koan02 in this case), which has three test targets and then stops the H2 server.  If you choose mysql or postgres it will just run the koan, **not** start and stop the db server.
+
+#### ant
+
+To run individual completed koans from the command line, use this syntax:
+
+    $ ant comp-koan04
+
+You can also run all the koans for the database you've chosen with:
+
+    $ ant comp-all-xx  # replace xx with the database name
+
+You can get a full listing of all ant targets with `ant -p`.
+
+_Note_: If you are using H2, you need to first run the ant target `runH2` in one window and then run the koans in another window.
+
+<a id="eclipse"></a>
+
+#### Eclipse
+
+Load the koans into Eclipse as a maven project.  From there you can run them either from maven targets, ant targets or by running each with the JUnit built into Eclipse.
+
+**Need more details here??**
+==> Need to document how to start H2 server from Eclipse
+
+
+<a id="runMainKoans"></a>
+
+### Test your koans
+
+Once you are satisfied that the completed koans work, you should then begin to work on the incomplete koans.  To run the koans you are completing, do:
+
+    $ mvn clean verify -P run-koans-h2 -D koanName=Koan01
+
+or
+
+    $ ant koan01   # remember to do ant runH2 first if using H2
+
+or run them from within Eclipse as JUnit tests.
+
+**TODO: the above target doesn't exist --- need to build**
+
+
+----
+----
+----
+# PREVIOUS README FOLLOWS
+
 # Getting Started
 
 ## Prerequisites
@@ -123,13 +435,6 @@ Follow the standard process for your database of choice for creating a database,
 <br/>
 **Step 4:**  Study the database diagrams and structure to get familiar with it
 
-In the `src/main/sql` directory, I have provided some analysis documents and visualizations reverse engineered from the PostgreSQL and MySQL sakila databases.
-
-View the PNG files in the `postgres-viz/dbvis` or `mysql-viz/dbvis` directories to see physical data models and relationships between tables.  These were generated using the free version of [DbVisualizer](http://www.dbvis.com/).
-
-For a deeper analysis open the `index.html` in either `postgres-viz/schemaSpy` or `mysql-viz/schemaSpy`.  These were generated using the open source [SchemaSpy](http://schemaspy.sourceforge.net/) tool.
-
-Finally, you can also view the documentation that MySQL provides for the sakila database: [http://dev.mysql.com/doc/sakila/en/index.html](http://dev.mysql.com/doc/sakila/en/index.html)
 
 ---
 
@@ -502,3 +807,8 @@ Even within the Persistence Framework, these koans do **not** cover some functio
 * databaseIdProvider
 
 If you have found any of these to be really useful, feel free to suggest a new koan or write one yourself to add it here.
+
+----
+----
+----
+

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.thornydev.mybatis.test.koan17.h2.Koan17Mapper">
+
+  <!-- http://www.h2database.com/html/features.html#user_defined_functions -->
+  <update id="defineStoredProcedures">
+
+  	DROP ALIAS IF EXISTS inventory_in_stock;
+  	CREATE ALIAS IF NOT EXISTS inventory_in_stock AS $$
+  	
+  		import java.sql.*;
+  		
+  		@CODE
+		boolean inventory_in_stock(Connection conn, int inventory_id)  throws SQLException  {
+			
+			String sql = 
+		  	" SELECT COUNT(*) " + 
+		    " FROM rental " +
+		    " WHERE inventory_id = " + inventory_id;
+     		
+     		ResultSet result = conn.createStatement().executeQuery(sql);
+     		
+			return result.next();
+			
+		}
+
+	    
+	$$;
+  
+  	DROP ALIAS IF EXISTS film_in_stock;
+  	CREATE ALIAS IF NOT EXISTS film_in_stock AS $$
+  	
+  		import java.sql.*;
+  		
+  		@CODE
+		ResultSet film_in_stock(Connection conn, int film_id, int store_id)  throws SQLException  {
+			
+			String sql = 
+			" SELECT inventory_id FROM inventory " +   
+			" WHERE film_id = " + film_id +  
+     		" AND store_id = " + store_id +
+     		" AND inventory_in_stock(inventory_id);";
+     		
+			return conn.createStatement().executeQuery(sql);
+			
+		}
+		
+	$$;
+  </update>
+
+  <!-- DISCLAIMER: doesn't work; my best attempt without writing a TypeHandler :-( -->
+  <resultMap id="hashResultMap" type="hashmap">
+    <result column="inventory_id" />
+  </resultMap>
+  
+  <!-- This one works, but we had to resort to XML -->
+  <resultMap id="filmInStockIdMap" type="FilmInStockId" autoMapping="true">
+    <result column="inventory_id" property="filmId"/>
+  </resultMap>
+  
+</mapper>
