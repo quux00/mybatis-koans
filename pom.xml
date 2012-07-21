@@ -19,7 +19,7 @@
   </properties>
 
   <!-- NOTE: feel free to change "version" values here to try out different
-    mybatis or driver versions -->
+       mybatis or driver versions -->
   <dependencies>
 
     <!-- batis http://www.mybatis.org/core/ -->
@@ -36,19 +36,22 @@
       <version>1.3.167</version>
     </dependency>
 
+    <!-- Add other dependencies if you want to use another db -->
+    <!-- Uncomment these if you want them -->
+
     <!-- MySQL JDBC driver -->
-    <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-      <version>5.1.21</version>
-    </dependency>
+    <!-- <dependency> -->
+    <!--   <groupId>mysql</groupId> -->
+    <!--   <artifactId>mysql-connector-java</artifactId> -->
+    <!--   <version>5.1.21</version> -->
+    <!-- </dependency> -->
 
     <!-- PostgreSQL JDBC driver -->
-    <dependency>
-      <groupId>postgresql</groupId>
-      <artifactId>postgresql</artifactId>
-      <version>9.1-901.jdbc4</version>
-    </dependency>
+    <!-- <dependency> -->
+    <!--   <groupId>postgresql</groupId> -->
+    <!--   <artifactId>postgresql</artifactId> -->
+    <!--   <version>9.1-901.jdbc4</version> -->
+    <!-- </dependency> -->
 
     <!-- test framework http://www.junit.org/ -->
     <dependency>
@@ -79,10 +82,8 @@
   </dependencies>
 
   <build>
-
     <!-- support custom main resources -->
     <resources>
-
       <!-- custom -->
       <resource>
         <directory>src/main/java</directory>
@@ -99,7 +100,6 @@
           <include>**/*</include>
         </includes>
       </resource>
-
     </resources>
 
     <!-- support custom test resources -->
@@ -125,7 +125,6 @@
     </testResources>
 
     <plugins>
-
       <!-- use specific plugin version -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -178,21 +177,20 @@
 
         </configuration>
       </plugin>
-
     </plugins>
-
   </build>
 
   <profiles>
 
+    <!--[ RUN COMPLETED KOANS ]-->
     <!-- run src/test/java with H2 flavor only -->
     <profile>
-      <id>run-test-koans-h2</id>
+      <id>run-comp-koans-h2</id>
 
       <!-- run all tests by default -->
       <properties>
         <!-- you can provide koan class name to the mvn invocation, for example
-          to test only first koan, use: "mvn clean verify -P run-test-koans-h2 -D koanName=Koan01" -->
+          to test only first koan, use: "mvn clean verify -P run-comp-koans-h2 -D koanName=Koan01" -->
         <koanName>*</koanName>
         <includeTestPath>**/${koanName}.class</includeTestPath>
       </properties>
@@ -279,20 +277,19 @@
 
     <!-- run src/test/java with MySQL flavor only -->
     <profile>
-      <id>run-test-koans-mysql</id>
+      <id>run-comp-koans-mysql</id>
 
       <!-- run all tests by default -->
       <properties>
         <!-- you can provide koan class name to the mvn invocation,
              for example to test only first koan, use:
-             mvn clean verify -P run-test-koans-mysql -D koanName=Koan01 -->
+             mvn clean verify -P run-comp-koans-mysql -D koanName=Koan01 -->
         <koanName>*</koanName>
         <includeTestPath>**/${koanName}.class</includeTestPath>
       </properties>
 
       <build>
         <plugins>
-          <!-- run tests inside H2 invocation -->
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
@@ -321,19 +318,18 @@
 
     <!-- run src/test/java with PostgreSQL flavor only -->
     <profile>
-      <id>run-test-koans-pg</id>
+      <id>run-comp-koans-pg</id>
       <!-- run all tests by default -->
       <properties>
         <!-- you can provide koan class name to the mvn invocation,
              for example to test only first koan, use:
-             mvn clean verify -P run-test-koans-pg -D koanName=Koan01 -->
+             mvn clean verify -P run-comp-koans-pg -D koanName=Koan01 -->
         <koanName>*</koanName>
         <includeTestPath>**/${koanName}.class</includeTestPath>
       </properties>
 
       <build>
         <plugins>
-          <!-- run tests inside H2 invocation -->
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>

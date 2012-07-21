@@ -301,16 +301,16 @@ Before you try running the completed koans, modify the `src/test/java/net/thorny
 
 To run individual completed koans from the command line, use this syntax:
 
-    $ mvn clean verify -P run-test-koans-h2 -D koanName=Koan02
+    $ mvn clean verify -P run-comp-koans-h2 -D koanName=Koan02
 
 This says to use the H2 database and run Koan02.  Change the koan name to run different ones.  To use mysql or postgresql, change the suffix of the -P argument, like so:
 
-    $ mvn clean verify -P run-test-koans-pg -D koanName=Koan03
-    $ mvn clean verify -P run-test-koans-mysql -D koanName=Koan04
+    $ mvn clean verify -P run-comp-koans-pg -D koanName=Koan03
+    $ mvn clean verify -P run-comp-koans-mysql -D koanName=Koan04
 
 To run all the tests for a given database, leave off the -D target:
 
-    $ mvn clean verify -P run-test-koans-h2
+    $ mvn clean verify -P run-comp-koans-h2
 
 Ideally, among all the verbiage that maven spits out, you will see output that includes this:
 
