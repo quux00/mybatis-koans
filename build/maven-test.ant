@@ -1,28 +1,28 @@
 <!-- 
-	note: maven installation must be visible
-	from O/S PATH 
+  note: maven installation must be visible
+  from O/S PATH 
 -->
 
 <project default="maven" basedir="./..">
 
-	<echo message="basedir : ${basedir}" />
+  <echo message="basedir : ${basedir}" />
 
-	<target name="maven">
+  <target name="maven">
 
-		<condition property="executable" value="mvn">
-			<os family="unix" />
-		</condition>
-		<condition property="executable" value="mvn.bat">
-			<os family="windows" />
-		</condition>
+    <condition property="executable" value="mvn">
+      <os family="unix" />
+    </condition>
+    <condition property="executable" value="mvn.bat">
+      <os family="windows" />
+    </condition>
 
-		<exec executable="${executable}">
+    <exec executable="${executable}">
 
-			<arg value="clean" />
-			<arg value="test" />
+      <arg value="clean" />
+      <arg value="test" />
 
-		</exec>
+    </exec>
 
-	</target>
+  </target>
 
 </project>
