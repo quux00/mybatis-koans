@@ -1,9 +1,9 @@
 <!--
 
-	this ant snippet can be invoked from IDE:
+	This ant snippet can be invoked from IDE:
 		Eclipse -> Run As -> Ant Build
 	
-	it is equivalent to the following command line invocation:
+	It is equivalent to the following command line invocation:
 		mvn clean verify -P run-test-koans-h2 -D koanName=Koan01
 	  
 -->
