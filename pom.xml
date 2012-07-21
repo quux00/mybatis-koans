@@ -1,300 +1,365 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-	<modelVersion>4.0.0</modelVersion>
+  <modelVersion>4.0.0</modelVersion>
 
-	<groupId>net.thornydev.mybatis</groupId>
-	<artifactId>sql_mybatis-koans</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+  <groupId>net.thornydev.mybatis</groupId>
+  <artifactId>sql_mybatis-koans</artifactId>
+  <version>1.0.1-SNAPSHOT</version>
 
-	<properties>
+  <properties>
 
-		<!-- enforce java version -->
-		<koansJavaVersion>1.6</koansJavaVersion>
+    <!-- enforce java version -->
+    <koansJavaVersion>1.6</koansJavaVersion>
 
-		<!-- default file encoding -->
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <!-- default file encoding -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-	</properties>
+  </properties>
 
-	<!-- NOTE: feel free to change "version" values here to try out different 
-		batis or driver versions -->
-	<dependencies>
+  <!-- NOTE: feel free to change "version" values here to try out different
+    mybatis or driver versions -->
+  <dependencies>
 
-		<!-- batis http://www.mybatis.org/core/ -->
-		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis</artifactId>
-			<version>3.1.1</version>
-		</dependency>
+    <!-- batis http://www.mybatis.org/core/ -->
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis</artifactId>
+      <version>3.1.1</version>
+    </dependency>
 
-		<!-- H2 JDBC driver and tools http://www.h2database.com/html/main.html -->
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<version>1.3.167</version>
-		</dependency>
+    <!-- H2 JDBC driver and tools http://www.h2database.com/html/main.html -->
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>1.3.167</version>
+    </dependency>
 
-		<!-- MySQL JDBC driver -->
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.21</version>
-		</dependency>
+    <!-- MySQL JDBC driver -->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>5.1.21</version>
+    </dependency>
 
-		<!-- PostgreSQL JDBC driver -->
-		<dependency>
-			<groupId>postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<version>9.1-901.jdbc4</version>
-		</dependency>
+    <!-- PostgreSQL JDBC driver -->
+    <dependency>
+      <groupId>postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>9.1-901.jdbc4</version>
+    </dependency>
 
-		<!-- test framework http://www.junit.org/ -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.10</version>
-		</dependency>
+    <!-- test framework http://www.junit.org/ -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.10</version>
+    </dependency>
 
-		<!-- logging framework http://logback.qos.ch/ -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.6.4</version>
-		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<version>1.0.6</version>
-		</dependency>
+    <!-- logging framework http://logback.qos.ch/ -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.6.4</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.0.6</version>
+    </dependency>
 
-		<!-- utilities to copy files http://commons.apache.org/io/ -->
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>2.3</version>
-		</dependency>
+    <!-- utilities to copy files http://commons.apache.org/io/ -->
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.3</version>
+    </dependency>
 
-	</dependencies>
+  </dependencies>
 
-	<build>
+  <build>
 
-		<!-- support custom main resources -->
-		<resources>
+    <!-- support custom main resources -->
+    <resources>
 
-			<!-- custom -->
-			<resource>
-				<directory>src/main/java</directory>
-				<includes>
-					<include>**/*.xml</include>
-					<include>**/*.properties</include>
-				</includes>
-			</resource>
+      <!-- custom -->
+      <resource>
+        <directory>src/main/java</directory>
+        <includes>
+          <include>**/*.xml</include>
+          <include>**/*.properties</include>
+        </includes>
+      </resource>
 
-			<!-- default -->
-			<resource>
-				<directory>src/main/resources</directory>
-				<includes>
-					<include>**/*</include>
-				</includes>
-			</resource>
+      <!-- default -->
+      <resource>
+        <directory>src/main/resources</directory>
+        <includes>
+          <include>**/*</include>
+        </includes>
+      </resource>
 
-		</resources>
+    </resources>
 
-		<!-- support custom test resources -->
-		<testResources>
+    <!-- support custom test resources -->
+    <testResources>
 
-			<!-- custom -->
-			<testResource>
-				<directory>src/test/java</directory>
-				<includes>
-					<include>**/*.xml</include>
-					<include>**/*.properties</include>
-				</includes>
-			</testResource>
+      <!-- custom -->
+      <testResource>
+        <directory>src/test/java</directory>
+        <includes>
+          <include>**/*.xml</include>
+          <include>**/*.properties</include>
+        </includes>
+      </testResource>
 
-			<!-- default -->
-			<testResource>
-				<directory>src/test/resources</directory>
-				<includes>
-					<include>**/*</include>
-				</includes>
-			</testResource>
+      <!-- default -->
+      <testResource>
+        <directory>src/test/resources</directory>
+        <includes>
+          <include>**/*</include>
+        </includes>
+      </testResource>
 
-		</testResources>
+    </testResources>
 
-		<plugins>
+    <plugins>
 
-			<!-- use specific plugin version -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.5</version>
-			</plugin>
+      <!-- use specific plugin version -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>2.5</version>
+      </plugin>
 
-			<!-- enforce java compiler version -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.5.1</version>
-				<configuration>
-					<source>${koansJavaVersion}</source>
-					<target>${koansJavaVersion}</target>
-				</configuration>
-			</plugin>
+      <!-- enforce java compiler version -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.5.1</version>
+        <configuration>
+          <source>${koansJavaVersion}</source>
+          <target>${koansJavaVersion}</target>
+        </configuration>
+      </plugin>
 
-			<!-- note: activate appropriate profiles to actually run tests -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.12</version>
-				<dependencies>
-					<dependency>
-						<groupId>org.apache.maven.surefire</groupId>
-						<artifactId>surefire-junit47</artifactId>
-						<version>2.12</version>
-					</dependency>
-				</dependencies>
-				<configuration>
-				
-					<!-- keep non random test order -->
-					<runOrder>alphabetical</runOrder>
-					
-					<!-- do not run any tests by default -->
-					<skip>true</skip>
-					
-					<!-- ignore all flavored tests by default -->
-					<excludedGroups>util.FlavorH2,util.FlavorMySQL,util.FlavorPostgreSQL</excludedGroups>
-					
-					<!-- do not fail, in case we need to stop h2 -->
-					<failIfNoTests>false</failIfNoTests>
-					<testFailureIgnore>true</testFailureIgnore>
-					
-					<!-- produce per-method report entries on console -->
-					<useFile>false</useFile>
-					<printSummary>true</printSummary>
-					<reportFormat>plain</reportFormat>
-					
-				</configuration>
-			</plugin>
+      <!-- note: activate appropriate profiles to actually run tests -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.12</version>
+        <dependencies>
+          <dependency>
+            <groupId>org.apache.maven.surefire</groupId>
+            <artifactId>surefire-junit47</artifactId>
+            <version>2.12</version>
+          </dependency>
+        </dependencies>
+        <configuration>
 
-		</plugins>
+          <!-- keep non random test order -->
+          <runOrder>alphabetical</runOrder>
 
-	</build>
+          <!-- do not run any tests by default -->
+          <skip>true</skip>
 
-	<profiles>
+          <!-- ignore all flavored tests by default -->
+          <excludedGroups>util.FlavorH2,util.FlavorMySQL,util.FlavorPostgreSQL</excludedGroups>
 
-		<!-- run src/test/java with H2 flavor only -->
-		<profile>
+          <!-- do not fail, in case we need to stop h2 -->
+          <failIfNoTests>false</failIfNoTests>
+          <testFailureIgnore>true</testFailureIgnore>
 
-			<id>run-test-koans-h2</id>
+          <!-- produce per-method report entries on console -->
+          <useFile>false</useFile>
+          <printSummary>true</printSummary>
+          <reportFormat>plain</reportFormat>
 
-			<!-- run all tests by default -->
-			<properties>
-				<!-- you can provide koan class name to the mvn invocation, for example 
-					to test only first koan, use: "mvn clean verify -P run-test-koans-h2 -D koanName=Koan01" -->
-				<koanName>*</koanName>
-				<includeTestPath>**/${koanName}.class</includeTestPath>
-			</properties>
+        </configuration>
+      </plugin>
 
-			<build>
-				<plugins>
+    </plugins>
 
-					<!-- make a working copy of H2 databases -->
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-resources-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>copy-resources</id>
-								<phase>validate</phase>
-								<goals>
-									<goal>copy-resources</goal>
-								</goals>
-								<configuration>
-									<resources>
-										<resource>
-											<directory>db/h2</directory>
-										</resource>
-									</resources>
-									<outputDirectory>target/h2/test-koans</outputDirectory>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
+  </build>
 
-					<!-- start/stop H2 around tests -->
-					<plugin>
-						<groupId>com.edugility</groupId>
-						<artifactId>h2-maven-plugin</artifactId>
-						<version>1.0</version>
-						<configuration>
-							<baseDirectory>target/h2/test-koans</baseDirectory>
-						</configuration>
-						<executions>
-							<execution>
-								<id>h2-start</id>
-								<phase>pre-integration-test</phase>
-								<goals>
-									<goal>spawn</goal>
-								</goals>
-							</execution>
-							<execution>
-								<id>h2-finish</id>
-								<phase>post-integration-test</phase>
-								<goals>
-									<goal>stop</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
+  <profiles>
 
-					<!-- run tests inside H2 invocation -->
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-surefire-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>test-koans</id>
-								<phase>integration-test</phase>
-								<goals>
-									<goal>test</goal>
-								</goals>
-								<configuration>
-									<!-- do run tests -->
-									<skip>false</skip>
-									<!-- exclude all flavors but H2 -->
-									<excludedGroups>util.FlavorMySQL,util.FlavorPostgreSQL</excludedGroups>
-									<includes>
-										<path>${includeTestPath}</path>
-									</includes>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
+    <!-- run src/test/java with H2 flavor only -->
+    <profile>
+      <id>run-test-koans-h2</id>
 
-				</plugins>
-			</build>
+      <!-- run all tests by default -->
+      <properties>
+        <!-- you can provide koan class name to the mvn invocation, for example
+          to test only first koan, use: "mvn clean verify -P run-test-koans-h2 -D koanName=Koan01" -->
+        <koanName>*</koanName>
+        <includeTestPath>**/${koanName}.class</includeTestPath>
+      </properties>
 
-		</profile>
+      <build>
+        <plugins>
 
-		<!-- TODO -->
-		<!-- run src/test/java with MySQL flavor only -->
-		<profile>
+          <!-- make a working copy of H2 databases -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-resources-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>copy-resources</id>
+                <phase>validate</phase>
+                <goals>
+                  <goal>copy-resources</goal>
+                </goals>
+                <configuration>
+                  <resources>
+                    <resource>
+                      <directory>db/h2</directory>
+                    </resource>
+                  </resources>
+                  <outputDirectory>target/h2/test-koans</outputDirectory>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
 
-			<id>run-test-koans-mysql</id>
+          <!-- start/stop H2 around tests -->
+          <plugin>
+            <groupId>com.edugility</groupId>
+            <artifactId>h2-maven-plugin</artifactId>
+            <version>1.0</version>
+            <configuration>
+              <baseDirectory>target/h2/test-koans</baseDirectory>
+            </configuration>
+            <executions>
+              <execution>
+                <id>h2-start</id>
+                <phase>pre-integration-test</phase>
+                <goals>
+                  <goal>spawn</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>h2-finish</id>
+                <phase>post-integration-test</phase>
+                <goals>
+                  <goal>stop</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
 
-		</profile>
+          <!-- run tests inside H2 invocation -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>test-koans</id>
+                <phase>integration-test</phase>
+                <goals>
+                  <goal>test</goal>
+                </goals>
+                <configuration>
+                  <!-- do run tests -->
+                  <skip>false</skip>
+                  <!-- exclude all flavors but H2 -->
+                  <excludedGroups>util.FlavorMySQL,util.FlavorPostgreSQL</excludedGroups>
+                  <includes>
+                    <path>${includeTestPath}</path>
+                  </includes>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
 
-		<!-- TODO -->
-		<!-- run src/test/java with PostgreSQL flavor only -->
-		<profile>
+    </profile>
 
-			<id>run-test-koans-postgresql</id>
+    <!-- run src/test/java with MySQL flavor only -->
+    <profile>
+      <id>run-test-koans-mysql</id>
 
-		</profile>
+      <!-- run all tests by default -->
+      <properties>
+        <!-- you can provide koan class name to the mvn invocation,
+             for example to test only first koan, use:
+             mvn clean verify -P run-test-koans-mysql -D koanName=Koan01 -->
+        <koanName>*</koanName>
+        <includeTestPath>**/${koanName}.class</includeTestPath>
+      </properties>
 
-	</profiles>
+      <build>
+        <plugins>
+          <!-- run tests inside H2 invocation -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>test-koans</id>
+                <phase>integration-test</phase>
+                <goals>
+                  <goal>test</goal>
+                </goals>
+                <configuration>
+                  <!-- do run tests -->
+                  <skip>false</skip>
+                  <!-- exclude all flavors but MySQL -->
+                  <excludedGroups>util.FlavorH2,util.FlavorPostgreSQL</excludedGroups>
+                  <includes>
+                    <path>${includeTestPath}</path>
+                  </includes>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <!-- run src/test/java with PostgreSQL flavor only -->
+    <profile>
+      <id>run-test-koans-pg</id>
+      <!-- run all tests by default -->
+      <properties>
+        <!-- you can provide koan class name to the mvn invocation,
+             for example to test only first koan, use:
+             mvn clean verify -P run-test-koans-pg -D koanName=Koan01 -->
+        <koanName>*</koanName>
+        <includeTestPath>**/${koanName}.class</includeTestPath>
+      </properties>
+
+      <build>
+        <plugins>
+          <!-- run tests inside H2 invocation -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>test-koans</id>
+                <phase>integration-test</phase>
+                <goals>
+                  <goal>test</goal>
+                </goals>
+                <configuration>
+                  <!-- do run tests -->
+                  <skip>false</skip>
+                  <!-- exclude all flavors but PostgreSQL -->
+                  <excludedGroups>util.FlavorH2,util.FlavorMySQL</excludedGroups>
+                  <includes>
+                    <path>${includeTestPath}</path>
+                  </includes>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+  </profiles>
 
 </project>

@@ -1,3 +1,5 @@
+**Note: IN PROGRESS!** This repo is a fork of the [original mybatis-koans repo](https://github.com/midpeter444/mybatis-koans) and is in progress to add maven support.  When it is completed and ready-to-go, it will be merged back into the original mybatis-koans repo.  For now we recommended that you use the original mybatis-koans repo unless you want to help us finish this one.
+
 # MyBatis Koans
 
 A [koan](http://en.wikipedia.org/wiki/K%C5%8Dan) is a question or statement to be meditated upon in order to improve and test a student's progress. Among programmers, software koans have become a clever way to learn a software language or tool.  As the [Ruby koan website](http://rubykoans.com/) says: "The Koans walk you along the path to enlightenment" -- in this case to learn and practice with the [MyBatis 3](http://www.mybatis.org/core/) data mapper framework.
@@ -10,6 +12,31 @@ The structure of these koans is inspired by the challenging and informative [Neo
 
 ---
 
+# Directory of Contents
+
+* [Overview](#Overview)
+  * [Prerequisites](#Prerequisites)
+  * [Setup overview](#SetUpOverview)
+  * [Main steps to doing the koans](#MainSteps)
+* [Setup](#Setup)
+  * [Clone the koans repo](#cloneRepo)
+    * [The koan directory structure](#koanDirStr)
+  * [Setup the sakila database](#createSakila)
+  * [Build Tools](#getDeps)
+    * [Maven](#getDepsMaven)
+    * [Ant](#getDepsAnt)
+  * [Run completed koans](#runComp)
+* [Do the koans](#doKoans)
+  * [Test your koans](#runMainKoans)
+* [Directory of Koans](#koanDirectory)
+* [A Note on Solutions](#noteOnSolutions)
+* [A Note on Best Practices](#noteOnBestPractices)
+* [Current Status](#currentStatus)
+* [Contributors](#contributors)
+
+---
+
+<a name="Overview"></a>
 # Overview
 
 To do the koans you will need a relational database, the Java JDK, JDBC drivers, JUnit, the MyBatis Persistence Framework, a Java build tool and an editor/IDE.  The mybatis-koan setup tries be flexible to allow you to use your build tool and database of choice.
@@ -27,6 +54,9 @@ While MyBatis can be used with [other JVM languages](http://www.fdmtech.org/2011
 To do these koans, the [sakila](http://dev.mysql.com/doc/sakila/en/index.html) example database was chosen.  It is a sample database schema and dataset originally built in MySQL that has been created for [many other relational databases](http://code.google.com/p/sakila-sample-database-ports/). In addition to one-to-many and many-to-many relationships for us to model, it has stored procedures and stored functions that we will learn to access via MyBatis.
 
 
+
+<a name="Prerequisites"></a>
+
 ## Prerequisites
 
 More specifically you must have:
@@ -35,18 +65,21 @@ More specifically you must have:
 * Experience programming in Java
 * The Java JDK installed (preferably version 6 or higher)
 * Either:
-  * [Maven](http://maven.apache.org/download.html) (preferabley version 3 or higher), or
+  * [Maven](http://maven.apache.org/download.html) (preferably version 3 or higher), or
   * [Ant](http://ant.apache.org/) (preferably 1.8 or higher)
 * An editor or IDE (We have tested with Eclipse only)
   * You may also want to have the [m2e Eclipse plugin](http://www.eclipse.org/m2e/) installed if you plan to use maven  
 
 
-## Set up
+<a name="SetUpOverview"></a>
+
+## Set up overview
 
 Unfortunately, the setup for the MyBatis koans is not as simple as the Ruby koans, since you have to set up and configure a database, load a standard dataset, and configure the MyBatis system for it.  So you'll need to roll up your sleeves a bit before you can get started meditating on the koans themselves.
 
-However, we now provide a fast-track way: using maven and the H2 database is the fastest way to get going.  Using maven with PostgreSQL or MySQL requires only a little more work.
+However, we now provide a fast-track: using maven and the H2 database is the fastest way to get going.  Using maven with PostgreSQL or MySQL requires only a little more work.
 
+<a name="MainSteps"></a>
 
 ## Main steps to doing the koans
 
@@ -78,6 +111,8 @@ To give you sense the flow here are the steps for getting set up and then workin
 **Step 12:**  Fork this repo on GitHub, write your own and make a pull request to add back to the MyBatis community.
 
 <br />
+<a name="Setup"></a>
+
 # Setup
 
 We provide three ways to run the koans (that we have tested):
@@ -94,12 +129,12 @@ We have completed the koans for three databases:
 
 You are welcome to do the koans a different database and contribute solutions back.
 
-So you will need to decide what options you'd like to take.  The closest thing to a "push-button" soluion is to use maven and H2.  To get the koans set up for that route, the only thing you will need to have pre-installed is maven and Java.  Using any other database or ant will require additional setup, as described below.
+So you will need to decide what options you'd like to take.  The closest thing to a "push-button" solution is to use maven and H2.  To get the koans set up for that route, the only thing you will need to have pre-installed is maven and Java.  Using any other database or ant will require additional setup, as described below.
 
 
 <a name="chooseDatabase"></a>
 
-#### Database
+### Database
 
 * If you are going to use H2 as your database, everything you need comes with the koan download
 * If you are going to use PostgreSQL or MySQL, you will need to install the database server (and client) software and get it configured to have at least one user with a username and password.  You will NOT need to download the sakila database schema and dataset - they come with the koans - but you will need to load the sakila schema and dataset.
@@ -109,8 +144,8 @@ So you will need to decide what options you'd like to take.  The closest thing t
      ** recommended site: [http://code.google.com/p/sakila-sample-database-ports/](http://code.google.com/p/sakila-sample-database-ports/)
   * download and set up the JDBC driver for that database, or add that JDBC dependency to the maven pom.xml file, if you are going to use maven
 
-
-<a name="cloneRepo""></a>
+<br />
+<a name="cloneRepo"></a>
 
 ## Clone the koans repo (or download it)
 
@@ -120,12 +155,14 @@ If you have [git](http://git-scm.com/downloads) installed, clone this repo:
 
 If you don't have git, you can just [download a zip or tarball](https://github.com/midpeter444/mybatis-koans/downloads) of the koans.
 
+<a name="koanDirStr"></a>
+
 ### The koan directory structure
 
 There are tree main directories.
 
 **db:** 
-The sakila database files are here. For H2, we provide the actual binary db file.  For MySQL and PostgreSQL, we provide the SQL files for the schema and default dataset.  In addition, documentation of the schema is available in the `postgessql/doc` and `mysql/doc` subdirectories.
+The sakila database files are here. For H2, we provide the actual binary db file.  For MySQL and PostgreSQL, we provide the SQL files for the schema and default dataset.  In addition, documentation of the schema is available in the `postgesql/doc` and `mysql/doc` subdirectories.
 
 **lib:** 
 This is where to put jars (or links to jars) if you will be using ant.  If you use maven, then you can ignore this directory.
@@ -138,7 +175,7 @@ You can still use ant if you don't want to use maven.  The ant build.xml file is
 <br />
 <a name="createSakila"></a>
 
-## Setup your database
+## Setup the sakila database
 
 ### H2
 
@@ -200,6 +237,8 @@ Finally, you can also read through the documentation that MySQL provides for the
 
 ## Build Tools
 
+<a name="getDepsMaven"></a>
+
 ### Maven: I just want to get going!
 
 If you have the prerequisites in place, the fastest way to get going is to use maven.  You can use the [Eclipse m2e plugin](http://www.eclipse.org/m2e/) if you want the best support for doing it all in Eclipse.  The instructions below assume you don't have m2e, but will ultimately work the same with it.
@@ -216,6 +255,8 @@ This will download all the dependencies for running the mybatis koans with H2 an
 
 If you see no errors while downloading and compiling, then try [running a couple of the completed koans](#runComp) in the "test" directory to see if everything seems to be working.
 
+
+<a name="getDepsAnt"></a>
 
 ### I prefer Apache Ant
 
@@ -254,6 +295,8 @@ So in the end you'll need to have the lib directory have those jars or links to 
 
 ### Run the completed koans
 
+Before you try running the completed koans, modify the `src/test/java/net/thornydev/mybatis/test/config.properties` file to set up the database driver, and username and password to use.  (If you are using H2, then you can leave the defaults.)
+
 #### maven
 
 To run individual completed koans from the command line, use this syntax:
@@ -265,7 +308,11 @@ This says to use the H2 database and run Koan02.  Change the koan name to run di
     $ mvn clean verify -P run-test-koans-pg -D koanName=Koan03
     $ mvn clean verify -P run-test-koans-mysql -D koanName=Koan04
 
-Ideally, among all the verbage that maven spits out, you will see output that includes this:
+To run all the tests for a given database, leave off the -D target:
+
+    $ mvn clean verify -P run-test-koans-h2
+
+Ideally, among all the verbiage that maven spits out, you will see output that includes this:
 
     [INFO] H2 server spawned at tcp://localhost:9092
     [INFO] 
@@ -342,11 +389,21 @@ Read the instructions in the Koan.  You will have a series of TODOs to complete.
 ==> Need to document how to start H2 server from Eclipse
 
 
+<a name="doKoans"></a>
+
+# Do the koans
+
+Once you are satisfied that the completed koans work, you should then begin to work on the incomplete koans. Start with Koan01 in the `src/main/java/net/thornydev/mybatis/koan/koan01` directory. 
+
+Before you start, modify the `src/main/java/net/thornydev/mybatis/config.properties` file to set up the database driver, and username and password to use.  (If you are using H2, then you can leave the defaults.)
+
+Whenever you start a new koan, open the file KoanXX.java and read the overview and instructions in the javadoc comments at the top of the file. The goal is to fill in all the TODOs that get the tests already set up to pass.
+
 <a name="runMainKoans"></a>
 
-### Test your koans
+## Test your koans
 
-Once you are satisfied that the completed koans work, you should then begin to work on the incomplete koans.  To run the koans you are completing, do:
+To run the koans you are completing, do:
 
     $ mvn clean verify -P run-koans-h2 -D koanName=Koan01
 
@@ -361,11 +418,15 @@ or run them from within Eclipse as JUnit tests.
 
 ---
 
+<a name="koanDirectory"></a>
+
 # Directory of Koans
 
-See the [directory of koans](KOANS.html) for a description of what each koan tests.
+See the [directory of koans](sql_mybatis-koans/KOANS.md) for a description of what each koan tests.
 
 ---
+
+<a name="noteOnSolutions"></a>
 
 # A Note on Solutions
 
@@ -373,11 +434,15 @@ For many koans, there are probably many ways to make it work (even within the co
 
 ---
 
+<a name="noteOnBestPractices"></a>
+
 # A Note on Best Practices
 
-As you go through the koans, you'll see that I change styles/idioms from time to time. Sometimes I start a session for each test, then later not.  Sometimes I use mappers with a Java interface, sometimes not.  Sometimes I turn camelCase mapping on, sometimes not. These koans are not intended to recommend best practice, but rather to see the variations of possibilities that MyBatis 3 allows. I mix it up so you can be reminded of these variations. You should decide, in conjuction with the recommendations in the User Guide and reading other tutorials and code examples, on what is best practice for your code base.
+As you go through the koans, you'll see that I change styles/idioms from time to time. Sometimes I start a session for each test, then later not.  Sometimes I use mappers with a Java interface, sometimes not.  Sometimes I turn camelCase mapping on, sometimes not. These koans are not intended to recommend best practice, but rather to see the variations of possibilities that MyBatis 3 allows. I mix it up so you can be reminded of these variations. You should decide, in conjunction with the recommendations in the User Guide and reading other tutorials and code examples, on what is best practice for your code base.
 
 ---
+
+<a name="currentStatus"></a>
 
 # Current Status
 
@@ -400,6 +465,8 @@ If you have found any of these to be really useful, feel free to suggest a new k
 
 
 ---
+
+<a name="contributors"></a>
 
 # Contributors
 
