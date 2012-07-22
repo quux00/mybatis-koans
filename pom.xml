@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>net.thornydev.mybatis</groupId>
-  <artifactId>sql_mybatis-koans</artifactId>
+  <artifactId>sql_mybatis-koans</artifactId>  <!-- TODO: Change this after switch back to thornydev repo -->
   <version>1.0.1-SNAPSHOT</version>
 
   <properties>
@@ -40,11 +40,11 @@
     <!-- Uncomment these if you want them -->
 
     <!-- MySQL JDBC driver -->
-    <!-- <dependency> -->
-    <!--   <groupId>mysql</groupId> -->
-    <!--   <artifactId>mysql-connector-java</artifactId> -->
-    <!--   <version>5.1.21</version> -->
-    <!-- </dependency> -->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>5.1.21</version>
+    </dependency>
 
     <!-- PostgreSQL JDBC driver -->
     <!-- <dependency> -->
@@ -149,8 +149,6 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-help-plugin</artifactId>
         <version>2.1.1</version>
-        <!-- <configuration> -->
-        <!-- </configuration> -->
       </plugin>
       
       <!-- note: activate appropriate profiles to actually run tests -->
@@ -173,9 +171,6 @@
           <!-- do not run any tests by default -->
           <skip>true</skip>
 
-          <!-- ignore all flavored tests by default -->
-          <excludedGroups>util.FlavorH2,util.FlavorMySQL,util.FlavorPostgreSQL</excludedGroups>
-
           <!-- do not fail, in case we need to stop h2 -->
           <failIfNoTests>false</failIfNoTests>
           <testFailureIgnore>true</testFailureIgnore>
@@ -192,19 +187,6 @@
 
   <profiles>
 
-    <!-- <profile> -->
-    <!--   <id>targets</id> -->
-    <!--   <goal> -->
-    <!--     <echo> -->
-    <!--       maven goals&#58; -->
-    <!--       preparedocs .. o Extra preparation for the documentation -->
-    <!--       docclean ....... o Delete temporary and distribution directories -->
-    <!--       docpdf .......... o Compile reference documentation to pdf -->
-    <!--     </echo> -->
-    <!--   </goal> -->
-    <!-- </profile> -->
-
-    
     <!--[ RUN COMPLETED KOANS ]-->
     <!-- run src/test/java with H2 flavor only -->
     <profile>
@@ -301,12 +283,11 @@
     <!-- run src/test/java with MySQL flavor only -->
     <profile>
       <id>run-comp-koans-mysql</id>
-
       <!-- run all tests by default -->
       <properties>
         <!-- you can provide koan class name to the mvn invocation,
              for example to test only first koan, use:
-             mvn clean verify -P run-comp-koans-mysql -D koanName=Koan01 -->
+             mvn clean test -P run-comp-koans-mysql -D koanName=Koan01 -->
         <koanName>*</koanName>
         <includeTestPath>**/${koanName}.class</includeTestPath>
       </properties>
@@ -319,13 +300,17 @@
             <executions>
               <execution>
                 <id>test-koans</id>
-                <phase>integration-test</phase>
+                <!-- <phase>integration-test</phase> -->
+                <phase>test</phase>
                 <goals>
                   <goal>test</goal>
                 </goals>
                 <configuration>
                   <!-- do run tests -->
                   <skip>false</skip>
+                  <systemPropertyVariables>
+                    <buildDirectory>target/test-classes</buildDirectory>
+                  </systemPropertyVariables>                  
                   <!-- exclude all flavors but MySQL -->
                   <excludedGroups>util.FlavorH2,util.FlavorPostgreSQL</excludedGroups>
                   <includes>
@@ -359,13 +344,17 @@
             <executions>
               <execution>
                 <id>test-koans</id>
-                <phase>integration-test</phase>
+                <!-- <phase>integration-test</phase> -->
+                <phase>test</phase>
                 <goals>
                   <goal>test</goal>
                 </goals>
                 <configuration>
                   <!-- do run tests -->
                   <skip>false</skip>
+                  <systemPropertyVariables>
+                    <buildDirectory>target/test-classes</buildDirectory>
+                  </systemPropertyVariables>                  
                   <!-- exclude all flavors but PostgreSQL -->
                   <excludedGroups>util.FlavorH2,util.FlavorMySQL</excludedGroups>
                   <includes>
@@ -387,8 +376,9 @@
       <properties>
         <!-- you can provide koan class name to the mvn invocation,
              for example to test only first koan, use:
-             mvn clean verify -P run-comp-koans-pg -D koanName=Koan01 -->
+             mvn clean test -P run-koans -D koanName=Koan01 -->
         <koanName>*</koanName>
+        <excludeTestPath>**/test/**</excludeTestPath>  <!-- TODO: remove this ... -->
         <includeTestPath>**/${koanName}.class</includeTestPath>
       </properties>
 
@@ -405,8 +395,9 @@
                   <goal>test</goal>
                 </goals>
                 <configuration>
-                  <!-- do run tests -->
                   <skip>false</skip>
+                  <testSourceDirectory>src/main/java</testSourceDirectory>
+                  <testClassesDirectory>target/classes</testClassesDirectory>                  
                   <includes>
                     <path>${includeTestPath}</path>
                   </includes>
