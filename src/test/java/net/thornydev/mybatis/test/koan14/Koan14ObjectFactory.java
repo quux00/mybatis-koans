@@ -21,13 +21,13 @@ public class Koan14ObjectFactory extends DefaultObjectFactory {
 			final List<Object> ctorArgs) {
 
 		if (type.equals(Actor.class)) {
-			return createActor(ctorArgs);
+			return this.<T>createActor(ctorArgs);
 		} else if (type.equals(Address.class)) {
-			return createAddress(ctorArgs);
+			return this.<T>createAddress(ctorArgs);
 		} else if (type.equals(City.class)) {
-			return createCity(ctorArgs);
+			return this.<T>createCity(ctorArgs);
 		} else {
-			return super.create(type, ctorArgTypes, ctorArgs);
+			return super.<T>create(type, ctorArgTypes, ctorArgs);
 		}
 	}
 

@@ -15,9 +15,9 @@ public class Koan19ObjectFactory extends DefaultObjectFactory {
   @Override
   public <T> T create(Class<T> type, List<Class<?>> ctorArgTypes, List<Object> ctorArgs) {
     if (type.equals(Staff.class)) {
-      return createStaff(ctorArgs);
+      return this.<T>createStaff(ctorArgs);
     } else {
-      return super.create(type, ctorArgTypes, ctorArgs);
+      return super.<T>create(type, ctorArgTypes, ctorArgs);
     }
   }
 

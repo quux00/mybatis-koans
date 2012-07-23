@@ -12,7 +12,7 @@ The structure of these koans is inspired by the challenging and informative [Neo
 
 ---
 
-# Directory of Contents
+# Contents
 
 * [Overview](#Overview)
   * [Prerequisites](#Prerequisites)
@@ -86,6 +86,7 @@ However, we now provide a fast-track: using maven and the H2 database is the fas
 To give you sense the flow here are the steps for getting set up and then working through the koans. In the sections that follow we provide more details on these steps.
 
 **[Step 0](#chooseDatabase):**  Choose the database server and build tool you want to use
+
 **Step 1:**  Install any missing prerequisites listed above
 
 **[Step 2](#cloneRepo):**  Clone or download the mybatis-koans from GitHub and take a look at the directory structure
@@ -151,7 +152,7 @@ So you will need to decide what options you'd like to take.  The closest thing t
 
 If you have [git](http://git-scm.com/downloads) installed, clone this repo:
 
-    git clone git@github.com:midpeter444/mybatis-koans.git
+    git clone git://github.com/midpeter444/mybatis-koans.git
 
 If you don't have git, you can just [download a zip or tarball](https://github.com/midpeter444/mybatis-koans/downloads) of the koans.
 
@@ -241,7 +242,9 @@ Finally, you can also read through the documentation that MySQL provides for the
 
 ### Maven: I just want to get going!
 
-If you have the prerequisites in place, the fastest way to get going is to use maven.  You can use the [Eclipse m2e plugin](http://www.eclipse.org/m2e/) if you want the best support for doing it all in Eclipse.  The instructions below assume you don't have m2e, but will ultimately work the same with it.
+If you have the prerequisites in place, the fastest way to get going is to use maven.  You can use the [Eclipse m2e plugin](http://www.eclipse.org/m2e/) if you want the best support for doing it all in Eclipse.  The instructions below do not assume you have m2e, but will ultimately work the same with it.
+
+**TODO: NEED TO TEST WITH m2e - any differences??**
 
 H2 is the default database in the pom.  If you want to use MySQL or PostgreSQL, uncomment that section of the pom dependencies to get their JDBC driver.  If you want to use another database, add its JDBC driver to the maven pom.
 
@@ -303,16 +306,16 @@ To run individual completed koans from the command line, use this syntax:
 
     $ mvn clean verify -P run-comp-koans-h2 -D koan=Koan02
 
-This says to use the H2 database and run Koan02.  Change the koan name to run different ones.  To use mysql or postgresql, change the suffix of the -P argument, like so:
+This says to use the H2 database and run Koan02.  Change the koan name to run different ones.  To use mysql or postgresql, change the suffix of the -P argument (you can also change the target from verify to test - either works with pg and mysql), like so:
 
-    $ mvn clean verify -P run-comp-koans-pg -D koan=Koan03
-    $ mvn clean verify -P run-comp-koans-mysql -D koan=Koan04
+    $ mvn clean test -P run-comp-koans-pg -D koan=Koan03
+    $ mvn clean test -P run-comp-koans-mysql -D koan=Koan04
 
 To run all the tests for a given database, leave off the -D target:
 
     $ mvn clean verify -P run-comp-koans-h2
 
-To see a list of the "profiles" defined in the maven pom, you can run:
+The `-P` switch to maven identifies a "profile" that you want to run. To see a list of the profiles defined in the maven pom, you can run:
 
     $ mvn help:all-profiles
 
@@ -330,7 +333,9 @@ Ideally, among all the verbiage that maven spits out, when you run a completed k
     Concurrency config is parallel='none', perCoreThreadCount=true, threadCount=2, useUnlimitedThreads=false
     Running net.thornydev.mybatis.test.koan02.Koan02
     Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.749 sec
-    learnToQueryViaXmlMapperReturningHashMap(net.thornydev.mybatis.test.koan02.Koan02)  Time elapsed: 0.704 seclearnToQueryMapperReturningHashMapWithParameterInput(net.thornydev.mybatis.test.koan02.Koan02)  Time elapsed: 0.009 seclearnToQueryViaXmlMapperReturningListOfHashMaps(net.thornydev.mybatis.test.koan02.Koan02)  Time elapsed: 0.036 sec
+    learnToQueryViaXmlMapperReturningHashMap(net.thornydev.mybatis.test.koan02.Koan02)  Time elapsed: 0.704 sec
+    learnToQueryMapperReturningHashMapWithParameterInput(net.thornydev.mybatis.test.koan02.Koan02)  Time elapsed: 0.009 sec
+    learnToQueryViaXmlMapperReturningListOfHashMaps(net.thornydev.mybatis.test.koan02.Koan02)  Time elapsed: 0.036 sec
     Results :
     
     Tests run: 3, Failures: 0, Errors: 0, Skipped: 0
@@ -342,7 +347,7 @@ Ideally, among all the verbiage that maven spits out, when you run a completed k
     [INFO] BUILD SUCCESS
     [INFO] ------------------------------------------------------------------------
 
-Note that for the H2 version it starts ("spawns") the H2 database, runs the koan (Koan02 in this case), which has three test targets and then stops the H2 server.  If you choose mysql or postgresql it will just run the koan, **not** start and stop the db server.
+Note that for the H2 version it starts ("spawns") the H2 database, runs the koan (Koan02 in this case), which has three test targets, and then stops the H2 server.  If you choose mysql or postgresql it will just run the koan; it will **not** start and stop the db server.
 
 #### ant
 

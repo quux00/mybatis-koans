@@ -38,11 +38,11 @@
     <!-- Uncomment these if you want them -->
 
     <!-- MySQL JDBC driver -->
-    <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-      <version>5.1.21</version>
-    </dependency>
+    <!-- <dependency> -->
+    <!--   <groupId>mysql</groupId> -->
+    <!--   <artifactId>mysql-connector-java</artifactId> -->
+    <!--   <version>5.1.21</version> -->
+    <!-- </dependency> -->
 
     <!-- PostgreSQL JDBC driver -->
     <!-- <dependency> -->
@@ -62,7 +62,7 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
-      <version>1.6.4</version>
+      <version>1.6.5</version>
     </dependency>
     <dependency>
       <groupId>ch.qos.logback</groupId>
