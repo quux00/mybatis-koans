@@ -368,7 +368,7 @@
         <fileset dir="${build-completed.dir}"
                  includes="**/Koan*.class"
                  excludes="**/*Mapper.class,**/*ObjectFactory.class,
-                           **/mysql/**,**/h2/**">
+                           **/mysql/**,**/h2/**,**/koan23/Koan23.class">
         </fileset>
         
       </batchtest>
@@ -490,10 +490,31 @@
     </junit>
   </target>
 
-  <target name="comp-koan12" depends="compile-completed" description="Run Already Completed Koan12">
+  <target name="comp-koan12-h2" depends="compile-completed"
+          description="Run Already Completed Koan12 Using H2">
     <junit haltonfailure="yes" printsummary="yes" fork="true">
       <classpath refid="completed-koan.classpath" />
-      <test name="net.thornydev.mybatis.test.koan12.Koan12">
+      <test name="net.thornydev.mybatis.test.koan12.h2.Koan12">
+        <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      </test>
+    </junit>
+  </target>
+
+  <target name="comp-koan12-mysql" depends="compile-completed"
+          description="Run Already Completed Koan12 Using MySQL">
+    <junit haltonfailure="yes" printsummary="yes" fork="true">
+      <classpath refid="completed-koan.classpath" />
+      <test name="net.thornydev.mybatis.test.koan12.mysql.Koan12">
+        <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      </test>
+    </junit>
+  </target>
+
+  <target name="comp-koan12-pg" depends="compile-completed"
+          description="Run Already Completed Koan12 Using PostgreSQL">
+    <junit haltonfailure="yes" printsummary="yes" fork="true">
+      <classpath refid="completed-koan.classpath" />
+      <test name="net.thornydev.mybatis.test.koan12.pg.Koan12">
         <formatter type="plain" usefile="${log.koan.output.to.file}" />
       </test>
     </junit>
@@ -526,11 +547,13 @@
     </junit>
   </target>
 
-  <target name="comp-koan16-pg" depends="compile-completed"
-          description="Run Already Completed Koan16 Using PostgreSQL">
+  <!-- TODO: do we need variants of 16 and 17 for H2??? -->
+  
+  <target name="comp-koan16-h2" depends="compile-completed"
+          description="Run Already Completed Koan16 Using H2">
     <junit haltonfailure="yes" printsummary="yes" fork="true">
       <classpath refid="completed-koan.classpath" />
-      <test name="net.thornydev.mybatis.test.koan16.pg.Koan16">
+      <test name="net.thornydev.mybatis.test.koan16.h2.Koan16">
         <formatter type="plain" usefile="${log.koan.output.to.file}" />
       </test>
     </junit>
@@ -546,11 +569,21 @@
     </junit>
   </target>
 
-  <target name="comp-koan17-pg" depends="compile-completed"
-          description="Run Already Completed Koan17 Using PostgreSQL">
+  <target name="comp-koan16-pg" depends="compile-completed"
+          description="Run Already Completed Koan16 Using PostgreSQL">
     <junit haltonfailure="yes" printsummary="yes" fork="true">
       <classpath refid="completed-koan.classpath" />
-      <test name="net.thornydev.mybatis.test.koan17.pg.Koan17">
+      <test name="net.thornydev.mybatis.test.koan16.pg.Koan16">
+        <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      </test>
+    </junit>
+  </target>
+
+  <target name="comp-koan17-h2" depends="compile-completed"
+          description="Run Already Completed Koan17 Using H2">
+    <junit haltonfailure="yes" printsummary="yes" fork="true">
+      <classpath refid="completed-koan.classpath" />
+      <test name="net.thornydev.mybatis.test.koan17.h2.Koan17">
         <formatter type="plain" usefile="${log.koan.output.to.file}" />
       </test>
     </junit>
@@ -561,6 +594,16 @@
     <junit haltonfailure="yes" printsummary="yes" fork="true">
       <classpath refid="completed-koan.classpath" />
       <test name="net.thornydev.mybatis.test.koan17.mysql.Koan17">
+        <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      </test>
+    </junit>
+  </target>
+
+  <target name="comp-koan17-pg" depends="compile-completed"
+          description="Run Already Completed Koan17 Using PostgreSQL">
+    <junit haltonfailure="yes" printsummary="yes" fork="true">
+      <classpath refid="completed-koan.classpath" />
+      <test name="net.thornydev.mybatis.test.koan17.pg.Koan17">
         <formatter type="plain" usefile="${log.koan.output.to.file}" />
       </test>
     </junit>
@@ -615,6 +658,16 @@
     <junit haltonfailure="yes" printsummary="yes" fork="true">
       <classpath refid="completed-koan.classpath" />
       <test name="net.thornydev.mybatis.test.koan23.Koan23">
+        <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      </test>
+    </junit>
+  </target>
+
+  <target name="comp-koan23-pg" depends="compile-completed"
+          description="Run Already Completed Koan23 - PostgreSQL variant">
+    <junit haltonfailure="yes" printsummary="yes" fork="true">
+      <classpath refid="completed-koan.classpath" />
+      <test name="net.thornydev.mybatis.test.koan23.pg.Koan23">
         <formatter type="plain" usefile="${log.koan.output.to.file}" />
       </test>
     </junit>

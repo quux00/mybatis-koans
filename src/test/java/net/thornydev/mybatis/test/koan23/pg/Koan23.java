@@ -1,4 +1,4 @@
-package net.thornydev.mybatis.test.koan23;
+package net.thornydev.mybatis.test.koan23.pg;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -17,15 +17,15 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import util.FlavorH2;
-import util.FlavorMySQL;
+import util.FlavorPostgreSQL;
 
 // Recommended that you do Koan22 before this one, as it builds on the pattern
 // and lessons learned there.
 // there is also an enum type handler
 // http://stackoverflow.com/questions/10219253/mybatis-enum-usage
 // http://stackoverflow.com/questions/10562895/enum-constant-in-mybatiss-sql-query
-@org.junit.experimental.categories.Category({FlavorMySQL.class, FlavorH2.class})
+
+@org.junit.experimental.categories.Category(FlavorPostgreSQL.class)
 public class Koan23 {
 
   static SqlSessionFactory sessionFactory;
@@ -34,7 +34,7 @@ public class Koan23 {
 
   @BeforeClass
   public static void setUpBeforeClass() throws Exception {
-    String resource = "net/thornydev/mybatis/test/koan23/koan23-config.xml";
+    String resource = "net/thornydev/mybatis/test/koan23/pg/koan23-config.xml";
     InputStream inputStream = Resources.getResourceAsStream(resource);
     sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
     inputStream.close();
