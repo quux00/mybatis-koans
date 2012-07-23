@@ -4,18 +4,16 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>net.thornydev.mybatis</groupId>
-  <artifactId>sql_mybatis-koans</artifactId>  <!-- TODO: Change this after switch back to thornydev repo -->
+  <artifactId>mybatis-koans</artifactId>
   <version>1.0.1-SNAPSHOT</version>
 
   <properties>
-
     <!-- enforce java version -->
     <koansJavaVersion>1.6</koansJavaVersion>
 
     <!-- default file encoding -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
   </properties>
 
   <!-- NOTE: feel free to change "version" values here to try out different
@@ -195,15 +193,15 @@
       <!-- run all tests by default -->
       <properties>
         <!-- you can provide koan class name to the mvn invocation, for example
-          to test only first koan, use: "mvn clean verify -P run-comp-koans-h2 -D koanName=Koan01" -->
-        <koanName>*</koanName>
-        <includeTestPath>**/${koanName}.class</includeTestPath>
+          to test only first koan, use: "mvn clean verify -P run-comp-koans-h2 -D koan=Koan01" -->
+        <koan>*</koan>
+        <includeTestPath>**/${koan}.class</includeTestPath>
       </properties>
 
       <build>
         <plugins>
 
-          <!-- make a working copy of H2 databases -->
+          <!-- make a working copy of H2 database -->
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-resources-plugin</artifactId>
@@ -277,7 +275,6 @@
           </plugin>
         </plugins>
       </build>
-
     </profile>
 
     <!-- run src/test/java with MySQL flavor only -->
@@ -287,9 +284,9 @@
       <properties>
         <!-- you can provide koan class name to the mvn invocation,
              for example to test only first koan, use:
-             mvn clean test -P run-comp-koans-mysql -D koanName=Koan01 -->
-        <koanName>*</koanName>
-        <includeTestPath>**/${koanName}.class</includeTestPath>
+             mvn clean test -P run-comp-koans-mysql -D koan=Koan01 -->
+        <koan>*</koan>
+        <includeTestPath>**/${koan}.class</includeTestPath>
       </properties>
 
       <build>
@@ -300,7 +297,6 @@
             <executions>
               <execution>
                 <id>test-koans</id>
-                <!-- <phase>integration-test</phase> -->
                 <phase>test</phase>
                 <goals>
                   <goal>test</goal>
@@ -331,9 +327,9 @@
       <properties>
         <!-- you can provide koan class name to the mvn invocation,
              for example to test only first koan, use:
-             mvn clean verify -P run-comp-koans-pg -D koanName=Koan01 -->
-        <koanName>*</koanName>
-        <includeTestPath>**/${koanName}.class</includeTestPath>
+             mvn clean verify -P run-comp-koans-pg -D koan=Koan01 -->
+        <koan>*</koan>
+        <includeTestPath>**/${koan}.class</includeTestPath>
       </properties>
 
       <build>
@@ -369,21 +365,71 @@
     </profile>
 
 
-    <!--[ RUN USER "MAIN" KOANS ]-->
+    <!--[ RUN MAIN USER KOANS WITH H2 DB ]-->
     <profile>
-      <id>run-koans</id>
+      <id>run-koans-h2</id>
       <!-- run all tests by default -->
       <properties>
         <!-- you can provide koan class name to the mvn invocation,
              for example to test only first koan, use:
-             mvn clean test -P run-koans -D koanName=Koan01 -->
-        <koanName>*</koanName>
+             mvn clean verify -P run-koans-h2 -D koan=Koan01 -->
+        <koan>*</koan>
         <excludeTestPath>**/test/**</excludeTestPath>  <!-- TODO: remove this ... -->
-        <includeTestPath>**/${koanName}.class</includeTestPath>
+        <includeTestPath>**/${koan}.class</includeTestPath>
       </properties>
 
       <build>
         <plugins>
+          <!-- make a working copy of H2 database -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-resources-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>copy-resources</id>
+                <phase>validate</phase>
+                <goals>
+                  <goal>copy-resources</goal>
+                </goals>
+                <configuration>
+                  <resources>
+                    <resource>
+                      <directory>db/h2</directory>
+                    </resource>
+                  </resources>
+                  <outputDirectory>target/h2/test-koans</outputDirectory>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+
+          <!-- start/stop H2 around tests -->
+          <plugin>
+            <groupId>com.edugility</groupId>
+            <artifactId>h2-maven-plugin</artifactId>
+            <version>1.0</version>
+            <configuration>
+              <baseDirectory>target/h2/test-koans</baseDirectory>
+            </configuration>
+            <executions>
+              <execution>
+                <id>h2-start</id>
+                <phase>pre-integration-test</phase>
+                <goals>
+                  <goal>spawn</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>h2-finish</id>
+                <phase>post-integration-test</phase>
+                <goals>
+                  <goal>stop</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          
+          <!-- run tests inside H2 invocation -->          
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
@@ -409,7 +455,48 @@
       </build>
     </profile>
 
+    <!--[ RUN MAIN USER KOANS FOR DB OTHER THAN H2) ]-->
+    <profile>
+      <id>run-koans</id>
+      <!-- run all tests by default -->
+      <properties>
+        <!-- you can provide koan class name to the mvn invocation,
+             for example to test only first koan, use:
+             mvn clean test -P run-koans -D koan=Koan01 -->
+        <koan>*</koan>
+        <excludeTestPath>**/test/**</excludeTestPath>  <!-- TODO: remove this ... -->
+        <includeTestPath>**/${koan}.class</includeTestPath>
+      </properties>
+
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>main-koans</id>
+                <phase>test</phase>
+                <goals>
+                  <goal>test</goal>
+                </goals>
+                <configuration>
+                  <skip>false</skip>
+                  <systemPropertyVariables>  <!-- TODO: need this?  Just added ... -->
+                    <buildDirectory>target/classes</buildDirectory>
+                  </systemPropertyVariables>                  
+                  <testSourceDirectory>src/main/java</testSourceDirectory>
+                  <testClassesDirectory>target/classes</testClassesDirectory>                  
+                  <includes>
+                    <path>${includeTestPath}</path>
+                  </includes>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
     
   </profiles>
-
 </project>

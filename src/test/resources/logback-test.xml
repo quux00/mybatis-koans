@@ -4,27 +4,27 @@
 
 <configuration>
 
-	<!-- sends logs to logback-beagle http://logback.qos.ch/beagle/ -->
-	<consolePlugin />
-	
-	<!-- use only console logger -->
-	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
-		<encoder>
-			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
-			</pattern>
-		</encoder>
-	</appender>
+  <!-- sends logs to logback-beagle http://logback.qos.ch/beagle/ -->
+  <consolePlugin />
+  
+  <!-- use only console logger -->
+  <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+      </pattern>
+    </encoder>
+  </appender>
 
-	<!-- log at debug level by default -->
-	<root level="debug">
-		<appender-ref ref="console" />
-	</root>
+  <!-- log at info level by default -->
+  <root level="info">
+    <appender-ref ref="console" />
+  </root>
 
-	<!-- elevate test koans to info level -->
-	<logger name="net.thornydev.mybatis.test" level="info" />
+  <!-- elevate test koans to info level -->
+  <logger name="net.thornydev.mybatis.test" level="info" />
 
-	<!-- elevate mybatis & libraries to info level -->
-	<logger name="java.sql" level="info" />
-	<logger name="org.apache.ibatis" level="info" />
+  <!-- elevate mybatis & libraries to info level -->
+  <logger name="java.sql" level="info" />
+  <logger name="org.apache.ibatis" level="info" />
 
 </configuration>

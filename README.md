@@ -301,12 +301,12 @@ Before you try running the completed koans, modify the `src/test/java/net/thorny
 
 To run individual completed koans from the command line, use this syntax:
 
-    $ mvn clean verify -P run-comp-koans-h2 -D koanName=Koan02
+    $ mvn clean verify -P run-comp-koans-h2 -D koan=Koan02
 
 This says to use the H2 database and run Koan02.  Change the koan name to run different ones.  To use mysql or postgresql, change the suffix of the -P argument, like so:
 
-    $ mvn clean verify -P run-comp-koans-pg -D koanName=Koan03
-    $ mvn clean verify -P run-comp-koans-mysql -D koanName=Koan04
+    $ mvn clean verify -P run-comp-koans-pg -D koan=Koan03
+    $ mvn clean verify -P run-comp-koans-mysql -D koan=Koan04
 
 To run all the tests for a given database, leave off the -D target:
 
@@ -409,16 +409,28 @@ Whenever you start a new koan, open the file KoanXX.java and read the overview a
 
 To run the koans you are completing, do:
 
-    $ mvn clean verify -P run-koans-h2 -D koanName=Koan01
+    # if you are using H2, this will start the H2 database, 
+    # run the koan(s) and stop the H2 db
+    $ mvn clean verify -P run-koans-h2 -D koan=Koan01  # run one koan
+    $ mvn clean verify -P run-koans-h2                 # run all koans
 
-or
+    # if you are NOT using H2, then use this:
+    $ mvn clean test -P run-koans -D koan=Koan01  # run one koan
+    $ mvn clean test -P run-koans                 # run all koans
 
-    $ ant koan01   # remember to do 'ant runH2' first in another console if using H2
+**or**
+
+    # remember to do 'ant runH2' first in another console if using H2
+    $ ant koan01    # run one
+    $ ant run-all   # <- what he said
 
 or run them from within Eclipse as JUnit tests.
 
-**TODO: the above target doesn't exist --- need to build**
+### Adjust logging verbosity
 
+If you want more logging information when running your koan tests, adjust the logging levels in the `src/main/resources/logback.xml` file.  There are four knobs: root level, the koans, java.sql and the ibatis levels.
+
+To have less logging (none if the koans passing), set logging levels to "info".  For more, set levels to "debug".  Mix and match to get the output you want.
 
 ---
 
@@ -426,7 +438,7 @@ or run them from within Eclipse as JUnit tests.
 
 # Directory of Koans
 
-See the [directory of koans](sql_mybatis-koans/KOANS.md) for a description of what each koan tests.
+See the [directory of koans](sql_mybatis-koans/blob/master/KOANS.md) for a description of what each koan tests.
 
 ---
 
