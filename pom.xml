@@ -5,7 +5,7 @@
 
   <groupId>net.thornydev.mybatis</groupId>
   <artifactId>mybatis-koans</artifactId>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>1.2</version>
 
   <properties>
     <!-- enforce java version -->
@@ -45,11 +45,11 @@
     </dependency>
 
     <!-- PostgreSQL JDBC driver -->
-    <!-- <dependency> -->
-    <!--   <groupId>postgresql</groupId> -->
-    <!--   <artifactId>postgresql</artifactId> -->
-    <!--   <version>9.1-901.jdbc4</version> -->
-    <!-- </dependency> -->
+    <dependency>
+      <groupId>postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>9.1-901.jdbc4</version>
+    </dependency>
 
     <!-- test framework http://www.junit.org/ -->
     <dependency>
@@ -62,7 +62,7 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
-      <version>1.6.4</version>
+      <version>1.6.5</version>
     </dependency>
     <dependency>
       <groupId>ch.qos.logback</groupId>
@@ -374,7 +374,6 @@
              for example to test only first koan, use:
              mvn clean verify -P run-koans-h2 -D koan=Koan01 -->
         <koan>*</koan>
-        <excludeTestPath>**/test/**</excludeTestPath>  <!-- TODO: remove this ... -->
         <includeTestPath>**/${koan}.class</includeTestPath>
       </properties>
 
@@ -464,7 +463,6 @@
              for example to test only first koan, use:
              mvn clean test -P run-koans -D koan=Koan01 -->
         <koan>*</koan>
-        <excludeTestPath>**/test/**</excludeTestPath>  <!-- TODO: remove this ... -->
         <includeTestPath>**/${koan}.class</includeTestPath>
       </properties>
 
@@ -482,9 +480,6 @@
                 </goals>
                 <configuration>
                   <skip>false</skip>
-                  <systemPropertyVariables>  <!-- TODO: need this?  Just added ... -->
-                    <buildDirectory>target/classes</buildDirectory>
-                  </systemPropertyVariables>                  
                   <testSourceDirectory>src/main/java</testSourceDirectory>
                   <testClassesDirectory>target/classes</testClassesDirectory>                  
                   <includes>

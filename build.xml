@@ -351,7 +351,7 @@
       <batchtest>
         <fileset dir="${build-completed.dir}"
                  includes="**/Koan*.class"
-                 excludes="**/*Mapper.class,**/*ObjectFactory.class,**/*SchoolMarm.class,
+                 excludes="**/*Mapper.class,**/*ObjectFactory.class,**/*SchoolMarm*,
                            **/pg/**,**/h2/**">
         </fileset>
         
@@ -367,7 +367,7 @@
       <batchtest>
         <fileset dir="${build-completed.dir}"
                  includes="**/Koan*.class"
-                 excludes="**/*Mapper.class,**/*ObjectFactory.class,
+                 excludes="**/*Mapper.class,**/*ObjectFactory.class,**/*SchoolMarm*,
                            **/mysql/**,**/h2/**,**/koan23/Koan23.class">
         </fileset>
         
@@ -383,10 +383,9 @@
       <batchtest>
         <fileset dir="${build-completed.dir}"
                  includes="**/Koan*.class"
-                 excludes="**/*Mapper.class,**/*ObjectFactory.class,
+                 excludes="**/*Mapper.class,**/*ObjectFactory.class,**/*SchoolMarm*,
                            **/pg/**,**/mysql/**">
         </fileset>
-        
       </batchtest>
     </junit>
   </target>

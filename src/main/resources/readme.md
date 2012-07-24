@@ -1,2 +1,0 @@
-###
-resource for main koans

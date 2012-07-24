@@ -243,6 +243,8 @@ Finally, you can also read through the documentation that MySQL provides for the
 
 If you have the prerequisites in place, the fastest way to get going is to use maven.  You can use the [Eclipse m2e plugin](http://www.eclipse.org/m2e/) if you want the best support for doing it all in Eclipse.  The instructions below assume you don't have m2e, but will ultimately work the same with it.
 
+**TODO: NEED TO TEST WITH m2e - any differences??**
+
 H2 is the default database in the pom.  If you want to use MySQL or PostgreSQL, uncomment that section of the pom dependencies to get their JDBC driver.  If you want to use another database, add its JDBC driver to the maven pom.
 
 #### From the command line
@@ -251,7 +253,7 @@ From the top dir of the koans, type:
 
     $ mvn compile
 
-This will download all the dependencies for running the mybatis koans with H2 and then compile both the incomplete and completed koans.  (**TODO: true??**)
+This will download the dependencies for compiling the mybatis koans with H2 and then compile both the incomplete and completed koans. (You will get more dependencies downloaded when you run later targets.)
 
 If you see no errors while downloading and compiling, then try [running a couple of the completed koans](#runComp) in the "test" directory to see if everything seems to be working.
 
@@ -364,11 +366,6 @@ _Note_: If you are using H2, you need to **first** run the ant target `runH2` in
 By default, the koan test output will be written to the console only. If you want the output to be written to a plain text formatted file in the top directory called `TEST-net.thornydev.mybatis.koan.koanXX.KoanXX.txt`, set the `log.koan.output.to.file` property to "true" in the build.xml file, like so:
 
     <property name="log.koan.output.to.file" value="true"/>
-
-MyBatis uses log4j, so a log4j.properties file is provided in the src directory.  By default it will log WARN level messages and higher to the console only.  If you want other settings, edit this file.
-
-**TODO: need to check if this is still right with the new setup**
-
 
 <br />
 <a name="eclipse"></a>

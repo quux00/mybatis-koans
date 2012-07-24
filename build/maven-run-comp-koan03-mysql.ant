@@ -3,7 +3,7 @@
     Eclipse -> Run As -> Ant Build
   
   It is equivalent to the following command line invocation:
-    mvn clean verify -P run-comp-koans-h2 -D koan=Koan01
+    mvn clean verify -P run-comp-koans-mysql -D koan=Koan03
 -->
 <project default="maven" basedir="./..">
 
@@ -26,10 +26,10 @@
       <arg value="verify" />
 
       <arg value="--activate-profiles" />
-      <arg value="run-comp-koans-h2" />
+      <arg value="run-comp-koans-mysql" />
 
       <arg value="--define" />
-      <arg value="koan=Koan01" />
+      <arg value="koan=Koan03" />
 
       <arg value="--show-version" />
     </exec>

@@ -1,21 +1,26 @@
 #!/usr/bin/env groovy
 
-def tmplFile = new File('build/maven-run.ant.tmpl');
+// Script to generate the .ant targets in the build directory
+//   -> one file for each database flavor and one for each koan
+// If you add a different database flavor or a new koan, just
+// edit the dbs and koans variables at the top of the file.
 
 def dbs = ['h2', 'mysql', 'pg'];
 def koans = 1 .. 23;
 
+def tmplFile = new File('build/maven-run.ant.tmpl');
+
 dbs.each { db ->
   koans.each { k ->
     def n = leftPad(k)
-    def f = new File("build/maven-run-test-koan${n}-${db}.ant")
-    f.withWriter { w ->
+    def f = new File("build/maven-run-comp-koan${n}-${db}.ant")
+    f.withPrintWriter { w ->
       tmplFile.eachLine { line ->
-        line = line.replaceAll(~/run-test-koans-h2/,
-                               "run-test-koans-${db}")
-        line = line.replaceAll(~/koanName=Koan01/,
-                               "koanName=Koan${n}")
-        w.write(line)
+        line = line.replaceAll(~/run-comp-koans-h2/,
+                               "run-comp-koans-${db}")
+        line = line.replaceAll(~/koan=Koan01/,
+                               "koan=Koan${n}")
+        w.println(line)
       }
     }
   }

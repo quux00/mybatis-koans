@@ -1,2 +1,0 @@
-###
-resource for test koans
