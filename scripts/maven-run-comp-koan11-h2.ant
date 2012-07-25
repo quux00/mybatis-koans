@@ -1,0 +1,29 @@
+<!--
+  This ant snippet can be invoked from Eclipse.
+    Open file in Eclipse, right click in file:
+    Run As -> Ant Build
+  
+  It is equivalent to the following command line invocation:
+    mvn clean verify -P run-comp-koans-h2 -D koan=Koan11
+-->
+<project default="maven" basedir="./..">
+
+	<property file="build/mvn.properties"/>
+
+  <target name="maven">
+  	
+  	<exec executable="${mvn}">
+      <arg value="clean" />
+      <arg value="verify" />
+
+      <arg value="--activate-profiles" />
+      <arg value="run-comp-koans-h2" />
+
+      <arg value="--define" />
+      <arg value="koan=Koan11" />
+
+      <arg value="--show-version" />
+    </exec>
+
+  </target>
+</project>

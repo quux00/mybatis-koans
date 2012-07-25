@@ -1,4 +1,4 @@
-<project name="mybatis-koans" default="run" basedir=".">
+<project name="mybatis-koans" default="compile" basedir=".">
   <description>MyBatis Koans</description>
 
   <!-- load environment variables as properties -->
@@ -384,7 +384,7 @@
         <fileset dir="${build-completed.dir}"
                  includes="**/Koan*.class"
                  excludes="**/*Mapper.class,**/*ObjectFactory.class,**/*SchoolMarm*,
-                           **/pg/**,**/mysql/**">
+                           **/pg/**,**/mysql/**,**/koan12/Koan12.class">
         </fileset>
       </batchtest>
     </junit>
@@ -499,21 +499,17 @@
     </junit>
   </target>
 
-  <target name="comp-koan12-mysql" depends="compile-completed"
+  <!-- The MySQL and PostgreSQL code for Koan12 is the same, so one
+       just invokes the other-->
+  <target name="comp-koan12-mysql" depends="comp-koan12-pg"
           description="Run Already Completed Koan12 Using MySQL">
-    <junit haltonfailure="yes" printsummary="yes" fork="true">
-      <classpath refid="completed-koan.classpath" />
-      <test name="net.thornydev.mybatis.test.koan12.mysql.Koan12">
-        <formatter type="plain" usefile="${log.koan.output.to.file}" />
-      </test>
-    </junit>
   </target>
 
   <target name="comp-koan12-pg" depends="compile-completed"
           description="Run Already Completed Koan12 Using PostgreSQL">
     <junit haltonfailure="yes" printsummary="yes" fork="true">
       <classpath refid="completed-koan.classpath" />
-      <test name="net.thornydev.mybatis.test.koan12.pg.Koan12">
+      <test name="net.thornydev.mybatis.test.koan12.Koan12">
         <formatter type="plain" usefile="${log.koan.output.to.file}" />
       </test>
     </junit>

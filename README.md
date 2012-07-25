@@ -68,7 +68,7 @@ More specifically you must have:
   * [Maven](http://maven.apache.org/download.html) (preferably version 3 or higher), or
   * [Ant](http://ant.apache.org/) (preferably 1.8 or higher)
 * An editor or IDE (We have tested with Eclipse only)
-  * You may also want to have the [m2e Eclipse plugin](http://www.eclipse.org/m2e/) installed if you plan to use maven  
+  * To use Eclipse, you will want to have the [m2e Eclipse plugin](http://www.eclipse.org/m2e/) installed, even if you don't plan to use maven. The organization of the project follows maven standards, so this will allow Eclipse to understand the structure of the koan project.
 
 
 <a name="SetUpOverview"></a>
@@ -242,11 +242,7 @@ Finally, you can also read through the documentation that MySQL provides for the
 
 ### Maven: I just want to get going!
 
-If you have the prerequisites in place, the fastest way to get going is to use maven.  You can use the [Eclipse m2e plugin](http://www.eclipse.org/m2e/) if you want the best support for doing it all in Eclipse.  The instructions below do not assume you have m2e, but will ultimately work the same with it.
-
-**TODO: NEED TO TEST WITH m2e - any differences??**
-
-**TODO: NEED TO TEST WITH m2e - any differences??**
+If you have the prerequisites in place, the fastest way to get going is to use maven.  
 
 H2 is the default database in the pom.  If you want to use MySQL or PostgreSQL, uncomment that section of the pom dependencies to get their JDBC driver.  If you want to use another database, add its JDBC driver to the maven pom.
 
@@ -377,15 +373,38 @@ By default, the koan test output will be written to the console only. If you wan
 
 ### Do the Koans in Eclipse
 
-Load the koans into Eclipse as a maven project.  From there you can run them either from maven targets, ant targets or by running each with the JUnit built into Eclipse.
+Load the koans into Eclipse as a maven project (get the [m2e plugin](http://www.eclipse.org/m2e/) for that).  Give it the project name "mybatis-koans" and uncheck the "Use default location" option.  Browse to the mybatis-koans directory where you downloaded the koans from GitHub.
+
+It should find your maven dependencies and download those or reference them if you've already done the maven commands from the command line.
+
+Once you have the mybatis-koans project created in Eclipse and have all the previous steps done (such as jar dependencies in place), you can run the koans (the main ones you will do and the already completed ones) by:
+
+* running them individually in Eclipse using JUnit
+* running them via ant targets
+* running them via maven targets
+
+**Example Instructions: Run koans as Eclipse JUnit tests**
+
+If you need to modify the config.properties for src/main and src/test, do that first.
+
+Then navigate to `src/test/java/koan01/Koan01.java` and open it.  Right click in the Koan01.java file and click Run As > JUnit Test.  It should run the test and it will hopefully pass.  If not, you may not have your dependencies in place or your config file is not right.
+
+**Example Instructions: Run koans from the ant targets in Eclipse**
+
+To run the koans from the Ant targets, first open the Ant view: Window > Show View > Ant.  Drag build.xml to the Ant view.  You will see all the ant targets displayed.  Click comp-koan01.  It should run in the console and hopefully pass.
+
+**Example Instructions: Run koans from the maven targets in Eclipse**
+
+You can either set up the targets one by one by editing the Run As -> Maven Build option provided by m2e. I don't recommend it, but here is a reference that gives a little more information: http://stackoverflow.com/a/2808748/871012
+
+Instead, in the scripts directory, we provide a bunch of little ant scripts that will run each maven target.  To make this work, first edit `scripts/mvn.properties` to set the path to your mvn or mvn.bat executable.  (For some reason I couldn't get Eclipse to find mvn on the PATH, so had to resort to this.)
+
+Then in Eclipse double click on one of the .ant files, such as `maven-run-comp-koan01-mysql.ant` (assuming you are using MySQL).  Right click in the file and choose Run As -> Ant Build.  The "ant build" script will invoke the maven pom with the correct targets and profiles and run it via maven.  I don't think you need to have ant installed separately, as Eclipse (I believe) has ant built into it by default.
+
+**Need to add instructions on running all tests -> also need to add target to run main koans.  Too many files -> need to put in subdirs!**
+
 
 **OLD INSTRUCTIONS**
-
-Open Eclipse and start a new Java Project.  Give it the project name "mybatis-koans" and uncheck the "Use default location" option.  Browse to the mybatis-koans directory where you downloaded the koans from GitHub.
-
-Set up your Java Build Path to have the mybatis-3.x.x jar file, the JDBC library of your choice, and JUnit 4.
-
-Navigate to Koan01.java in the net.thornydev.mybatis.koan.koan1 package.  Run it as a JUnit test by right-clicking in the editing screen and choose Run As > JUnit Test.  It should fail.  If it passes, then you are probably in the completed koans section.
 
 Read the instructions in the Koan.  You will have a series of TODOs to complete.  Fill those in, using the [MyBatis User Guide](http://www.mybatis.org/core/) as help until the koan passes.  Then move to the next one.
 

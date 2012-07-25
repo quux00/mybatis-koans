@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+          PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+          "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+  <properties resource="net/thornydev/mybatis/test/config.properties"/>
+
+  <typeAliases>
+    <typeAlias type="net.thornydev.mybatis.test.domain.Film"     alias="Film"/>
+    <typeAlias type="net.thornydev.mybatis.test.domain.Language" alias="Language"/>
+    <typeAlias type="net.thornydev.mybatis.test.util.Year"       alias="Year"/>
+  </typeAliases>
+
+  <typeHandlers>
+    <typeHandler handler="net.thornydev.mybatis.test.util.YearTypeHandler" javaType="Year"/>
+  </typeHandlers>
+
+  <environments default="development">
+    <environment id="development">
+      <transactionManager type="JDBC" />
+      <dataSource type="UNPOOLED">
+        <property name="driver"   value="${driver}" />
+        <property name="url"      value="${url}" />
+        <property name="username" value="${username}" />
+        <property name="password" value="${password}" />
+      </dataSource>
+    </environment>
+  </environments>
+  
+  <mappers>
+    <mapper resource="net/thornydev/mybatis/test/koan12/koan12-mapper.xml"/>
+    <mapper class="net.thornydev.mybatis.test.koan12.FilmMapper"/>
+  </mappers>
+  
+</configuration>
