@@ -32,6 +32,7 @@ The structure of these koans is inspired by the challenging and informative [Neo
 * [A Note on Solutions](#noteOnSolutions)
 * [A Note on Best Practices](#noteOnBestPractices)
 * [Current Status](#currentStatus)
+* [I Prefer the Previous Koan Structure](#prevKoans)
 * [Contributors](#contributors)
 
 ---
@@ -269,7 +270,7 @@ When using the ant for the koans, you will not have any dependency management sy
     lrwxrwxrwx 1 (...) postgresql.jar -> /home/midpeter444/java/lib/postgresql.jar
 
 
-To run with H2, you will also need to have: (**TODO: Test all these - true?**)
+To run with H2, you will also need to have:
 
 * Apache Commons IO:  [http://commons.apache.org/io/download_io.cgi](http://commons.apache.org/io/download_io.cgi)
 * The H2 db jar: [http://www.h2database.com/html/download.html](http://www.h2database.com/html/download.html)
@@ -379,9 +380,10 @@ By default, the koan test output will be written to the console only. If you wan
 
 ### Do the Koans in Eclipse
 
-Load the koans into Eclipse as a maven project (get the [m2e plugin](http://www.eclipse.org/m2e/) for that).  Give it the project name "mybatis-koans" and uncheck the "Use default location" option.  Browse to the mybatis-koans directory where you downloaded the koans from GitHub.
+Import > Maven > Existing Maven Project
+Navigate to the mybatis-koans directory for the "root directory". It should find the pom.xml and name the project "mybatis-koans". Click finish.
 
-It should find your maven dependencies and download those or reference them if you've already done the maven commands from the command line.
+It should find your maven dependencies and download those or reference them if you've already done the maven commands from the command line.  If something doesn't work, try going to the command line and type `mvn verify` to download and compile and verify the setup described in the pom.
 
 Once you have the mybatis-koans project created in Eclipse and have all the previous steps done (such as jar dependencies in place), you can run the koans (the main ones you will do and the already completed ones) by:
 
@@ -391,7 +393,7 @@ Once you have the mybatis-koans project created in Eclipse and have all the prev
 
 If you need to modify the config.properties for src/main and src/test, do that first.
 
-If you are using the H2 database and using the Eclipse JUnit test runner or ant targets, you must first start the H2 database: in `src/test/java/h2server` right click on RunH2.java and select "Run As Java Application".  Then run your koans.  When finished, stop the h2server by clicking the terminate button in the Eclipse Console window.  Or you can start it on with ant by invoking the runH2 target.
+If you are using the H2 database and using the Eclipse JUnit test runner or ant targets, you must first start the H2 database: in `src/test/java/h2server` right click on `RunH2.java` and select "Run As Java Application".  Then run your koans.  When finished, stop the h2server by clicking the terminate button in the Eclipse Console window (you will probably have to click the "Remove Launch" button next to it first).  Or you can start it on with ant by invoking the runH2 target.
 
 **Example Instructions: Run koans as Eclipse JUnit tests**
 
@@ -401,7 +403,7 @@ If you get the error `Class not found net.thornydev.mybatis.test.koan01.Koan01`,
 
 **Example Instructions: Run koans from the ant targets in Eclipse**
 
-To run the koans from the Ant targets, first open the Ant view: Window > Show View > Ant.  Drag build.xml to the Ant view window.  You will see all the ant targets displayed.  Click comp-koan01.  It should run in the console and hopefully pass.
+To run the koans from the Ant targets, first open the Ant view: Window > Show View > Ant.  Drag build.xml to the Ant view window.  You will see all the ant targets displayed.  If you are using H2, make sure you have the RunH2 programming running, either by runnign it from Eclipse (see above section) or running it with the ant runH2 target from the command line. Next double click the `comp-koan01` target.  It should run in the console and hopefully pass.
 
 **Example Instructions: Run koans from the maven targets in Eclipse**
 
@@ -427,7 +429,7 @@ In Eclipse, right click (or double click to open and right click) one of these .
      [exec] [INFO] BUILD SUCCESS
      [exec] [INFO] ------------------------------------------------------------------------
 
-If anyone has a patch to these scriptlets to fix this, I'd welcome that.
+If anyone has a patch to these scriptlets to fix this inconsistency, I'd welcome that.
 
 
 <a name="doKoans"></a>
@@ -516,6 +518,20 @@ Even within the Persistence Framework, these koans do **not** cover some functio
 
 If you have found any of these to be really useful, feel free to suggest a new koan or write one yourself to add it here with a [pull request](https://help.github.com/articles/using-pull-requests/).
 
+---
+
+<a name="prevKoans"></a>
+
+# Previous Koan Structure
+
+Anyone that wants to use the previous Eclipse / ant-centric version of the koans can still get them from the repo. I've tagged that last commit with `koans-v1`.  You can revert to that version by cloning the current repo and then checking out the tag:
+
+    git checkout tags/koans-v1
+    
+**CHECK THIS**
+  >> This might result in detached head, if so, see: http://stackoverflow.com/a/792030/871012
+
+*One caution*: any new koans will not be added to this version/setup of the repo, although you could add them yourself.
 
 ---
 

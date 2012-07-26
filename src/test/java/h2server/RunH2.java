@@ -23,7 +23,7 @@ public class RunH2 {
 
 	public static void main(final String... args) throws Exception {
 
-		log.debug("init");
+		log.info("info");
 
 		/** make a working copy of the data base */
 
@@ -42,21 +42,21 @@ public class RunH2 {
 		/** web console */
 		final Server serverWEB = Server.createWebServer();
 		serverWEB.start();
-		log.debug("web conlsole port : {}", serverWEB.getPort());
+		log.info("web conlsole port : {}", serverWEB.getPort());
 
 		/** jdbc server */
 		final Server serverTCP = Server.createTcpServer(conf);
 		serverTCP.start();
-		log.debug("jdbc driver port : {}", serverTCP.getPort());
+		log.info("jdbc driver port : {}", serverTCP.getPort());
 
-		log.debug("ready for koans");
+		log.info("ready for koans");
 
 		Thread.sleep(3 * 1000 * 1000);
 
 		serverTCP.stop();
 		serverWEB.stop();
 
-		log.debug("done");
+		log.info("done");
 
 	}
 
