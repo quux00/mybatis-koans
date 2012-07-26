@@ -6,9 +6,9 @@
   It is equivalent to the following command line invocation:
     mvn clean verify -P run-comp-koans-mysql -D koan=Koan18
 -->
-<project default="maven" basedir="./..">
+<project default="maven" basedir="./../../..">
 
-	<property file="build/mvn.properties"/>
+	<property file="scripts/mvn.properties"/>
 
   <target name="maven">
   	

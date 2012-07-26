@@ -397,21 +397,32 @@ To run the koans from the Ant targets, first open the Ant view: Window > Show Vi
 
 You can either set up the targets one by one by editing the Run As -> Maven Build option provided by m2e. I don't recommend it, but here is a reference that gives a little more information: http://stackoverflow.com/a/2808748/871012
 
-Instead, in the scripts directory, we provide a bunch of little ant scripts that will run each maven target.  To make this work, first edit `scripts/mvn.properties` to set the path to your mvn or mvn.bat executable.  (For some reason I couldn't get Eclipse to find mvn on the PATH, so had to resort to this.)
+Instead, in the scripts directory, we provide a bunch of little ant scriptlets that will run each maven target.  To make this work, first edit `scripts/mvn.properties` to set the path to the mvn or mvn.bat script that came with your maven installation.  (For some reason I couldn't get Eclipse to find mvn on the PATH, so had to resort to this.)
 
-Then in Eclipse double click on one of the .ant files, such as `maven-run-comp-koan01-mysql.ant` (assuming you are using MySQL).  Right click in the file and choose Run As -> Ant Build.  The "ant build" script will invoke the maven pom with the correct targets and profiles and run it via maven.  I don't think you need to have ant installed separately, as Eclipse (I believe) has ant built into it by default.
+Navigate to the scripts that match the db you are using and whether you want to run the completed koan or the one in main that you are working on.  For example, `scripts/main/h2` will run the main koans targeting the H2 database (the H2 db has its own target since maven will start and stop the H2 db server for each run).  `scripts/main/default` will be the scriptlets for other dbs.
 
-**Need to add instructions on running all tests -> also need to add target to run main koans.  Too many files -> need to put in subdirs!**
+In Eclipse, double click on one of these .ant scriptlets, such as `maven-run-comp-koan01-mysql.ant` (assuming you are using MySQL).  Right click in the file and choose Run As -> Ant Build.  The "ant build" script will invoke the maven pom with the correct targets and profiles and run it via maven.  I don't think you need to have ant installed separately, as Eclipse (I believe) has ant built into it by default.
 
+**Caution**: Overall, within Eclipse I recommend that you run the koans using Eclipse's JUnit runner as it will give you nice red/green output.  Currently, when these scriptlets run it is very hard to tell if a test fails. Maven will report an error, but the ant scriptlet still reports SUCCESS like so:
 
-**OLD INSTRUCTIONS**
+     [exec] Tests in error: 
+     [exec]   net.thornydev.mybatis.koan.koan03.Koan03: (..)
+     [exec] Tests run: 1, Failures: 0, Errors: 1, Skipped: 0
+     [exec] [ERROR] There are test failures.
+     [exec] Please refer to /home/midpeter444/databases/mybatis/sql_mybatis-koans/target/surefire-reports for the indi
+vidual test results.
+     [exec] [INFO] 
+     [exec] [INFO] --- maven-jar-plugin:2.3.1:jar (default-jar) @ mybatis-koans ---
+     [exec] [INFO] Building jar: /home/midpeter444/databases/mybatis/sql_mybatis-koans/target/mybatis-koans-1.2.jar
+     [exec] [INFO] ------------------------------------------------------------------------
+     [exec] [INFO] BUILD SUCCESS
+     [exec] [INFO] ------------------------------------------------------------------------
 
-Read the instructions in the Koan.  You will have a series of TODOs to complete.  Fill those in, using the [MyBatis User Guide](http://www.mybatis.org/core/) as help until the koan passes.  Then move to the next one.
-
+If anyone has a patch to these scriptlets to fix this, I'd welcome that.
 
 
 **Need more details here??**
-==> Need to document how to start H2 server from Eclipse
+==> Need to document how to start H2 server from Eclipse for ANT
 
 
 <a name="doKoans"></a>

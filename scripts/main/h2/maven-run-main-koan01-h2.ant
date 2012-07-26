@@ -4,11 +4,11 @@
     Run As -> Ant Build
   
   It is equivalent to the following command line invocation:
-    mvn clean verify -P run-comp-koans-h2 -D koan=Koan01
+    mvn clean verify -P run-koans-h2 -D koan=Koan01
 -->
-<project default="maven" basedir="./..">
+<project default="maven" basedir="./../../..">
 
-	<property file="build/mvn.properties"/>
+	<property file="scripts/mvn.properties"/>
 
   <target name="maven">
   	
@@ -17,7 +17,7 @@
       <arg value="verify" />
 
       <arg value="--activate-profiles" />
-      <arg value="run-comp-koans-h2" />
+      <arg value="run-koans-h2" />
 
       <arg value="--define" />
       <arg value="koan=Koan01" />
