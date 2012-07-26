@@ -28,7 +28,7 @@ The structure of these koans is inspired by the challenging and informative [Neo
   * [Run completed koans](#runComp)
 * [Do the koans](#doKoans)
   * [Test your koans](#runMainKoans)
-* [Directory of Koans](#koanDirectory)
+* [Directory of Koan Topics](#koanDirectory)
 * [A Note on Solutions](#noteOnSolutions)
 * [A Note on Best Practices](#noteOnBestPractices)
 * [Current Status](#currentStatus)
@@ -39,15 +39,13 @@ The structure of these koans is inspired by the challenging and informative [Neo
 <a name="Overview"></a>
 # Overview
 
-To do the koans you will need a relational database, the Java JDK, JDBC drivers, JUnit, the MyBatis Persistence Framework, a Java build tool and an editor/IDE.  The mybatis-koan setup tries be flexible to allow you to use your build tool and database of choice.
+To do the koans you will need a relational database, the Java JDK, JDBC drivers, JUnit, the MyBatis Persistence Framework, a Java build tool and an editor/IDE.  The mybatis-koan setup tries be flexible to allow you to use your build tool, database of choice and run the koans either from the command line or within your IDE.
 
 The koans come twice - once in "uncompleted" form and once in "completed" form.
 
 The "uncompleted" koans are the ones you will fill in. They are JUnit 4 tests in the `src/main/java/net/thornydev/mybatis/koan/koanXX` directories.  Each koan has its own directory (and thus package name) in order to have separate MyBatis config files to exercise different aspects of the MyBatis data mapper framework.
 
 The completed koans are there for reference in case you get stuck and need to see the solution and also to test that you have your environment set up.  They are in the `src/test/java/net/thornydev/mybatis/koan/koanXX` directories.
-
-_Note_: where different solutions were required between MySQL, PostgreSQL and/or H2, we have created additional subdirectories named after the database.
 
 While MyBatis can be used with [other JVM languages](http://www.fdmtech.org/2011/12/mybatis-for-scala-1-0-beta-released), these koans are all in pure Java.
 
@@ -77,13 +75,13 @@ More specifically you must have:
 
 Unfortunately, the setup for the MyBatis koans is not as simple as the Ruby koans, since you have to set up and configure a database, load a standard dataset, and configure the MyBatis system for it.  So you'll need to roll up your sleeves a bit before you can get started meditating on the koans themselves.
 
-However, we now provide a fast-track: using maven and the H2 database is the fastest way to get going.  Using maven with PostgreSQL or MySQL requires only a little more work.
+However, we now provide a fast-track: using maven and the H2 database is the fastest way to get going.  Using maven with PostgreSQL or MySQL requires only a little more work.  Using ant requires a little more work still, since you will need to download and set up the depedencies yourself.
 
 <a name="MainSteps"></a>
 
 ## Main steps to doing the koans
 
-To give you sense the flow here are the steps for getting set up and then working through the koans. In the sections that follow we provide more details on these steps.
+To give you sense of the flow, here are the steps for getting set up and then working through the koans. In the sections that follow we provide more details.
 
 **[Step 0](#chooseDatabase):**  Choose the database server and build tool you want to use
 
@@ -142,8 +140,8 @@ So you will need to decide what options you'd like to take.  The closest thing t
 * If you are going to use some other database, you will need to:
   * install that database server and client
   * download and create the sakila schema and load the dataset
-     ** recommended site: [http://code.google.com/p/sakila-sample-database-ports/](http://code.google.com/p/sakila-sample-database-ports/)
-  * download and set up the JDBC driver for that database, or add that JDBC dependency to the maven pom.xml file, if you are going to use maven
+     * recommended site: [http://code.google.com/p/sakila-sample-database-ports/](http://code.google.com/p/sakila-sample-database-ports/)
+  * download and set up the JDBC driver for that database, or, if using maven, add that JDBC dependency to the pom.xml file
 
 <br />
 <a name="cloneRepo"></a>
@@ -160,7 +158,7 @@ If you don't have git, you can just [download a zip or tarball](https://github.c
 
 ### The koan directory structure
 
-There are tree main directories.
+There are four top-level directories.
 
 **db:** 
 The sakila database files are here. For H2, we provide the actual binary db file.  For MySQL and PostgreSQL, we provide the SQL files for the schema and default dataset.  In addition, documentation of the schema is available in the `postgesql/doc` and `mysql/doc` subdirectories.
@@ -168,10 +166,11 @@ The sakila database files are here. For H2, we provide the actual binary db file
 **lib:** 
 This is where to put jars (or links to jars) if you will be using ant.  If you use maven, then you can ignore this directory.
 
-**src:** 
-The koan source code is organized using maven's default directory structure.  Maven splits src into `main` and `test`.  The koans are organized such that the incomplete koans that you will work on are in `main` and the completed koans are in `test`.
+**scripts:** 
+A number of ant "scriptlets" are provided as one way to run individual koans as maven targets within Eclipse. The groovy script that generates the ant scriptlets is also provided.  If you are not using maven, you can ignore this directory.
 
-You can still use ant if you don't want to use maven.  The ant build.xml file is set up to handle this directory structure.
+**src:** 
+The koan source code is organized using maven's default directory structure.  Maven splits src into `main` and `test`.  The koans are organized such that the incomplete koans that you will work on are in `main` and the already completed koans are in `test`.  Note that even though this directory structure is set up for maven, you do not need to use maven. You can still use ant (or just Eclipse's JUnit runner).  The ant build.xml file provided is set up to handle this directory structure.
 
 <br />
 <a name="createSakila"></a>
@@ -184,12 +183,12 @@ Nothing to do here - the binary database is provided in the `db/h2` directory.
 
 ### PostgreSQL or MySQL : Some assembly required
 
-If you want to use a more enterprise-strength database, then you will need to not only install those database servers first, but also populate them with the sakila schema and dataset.  I provide instructions on how to do this from the command line (tested on a Linux machine):
+To use PostgreSQL or MySQL you will need to both install the database server and also populate it with the sakila schema and dataset.  I provide instructions on how to do this from the command line (tested on a Linux machine):
 
 <div style="border: 2px solid grey; margin: 10px; padding: 0px 10px;">
   <p><strong>Creating and loading the PostgreSQL sakila database</strong></p>
   <pre>
-  $ cd src/main/sql/Sakila/postgres-sakila-db
+  $ cd db/postgresql
   # edit the next line to have your username rather than mine
   $ echo "GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO midpeter444;" >> postgres-sakila-schema.sql
   $ sudo su postgres
@@ -204,7 +203,7 @@ If you want to use a more enterprise-strength database, then you will need to no
 <div style="border: 2px solid grey; margin: 10px; padding: 0px 10px;">
   <p><strong>Creating and loading the MySQL sakila database</strong></p>
   <pre>
-  $ cd src/main/sql/Sakila/mysql-sakila-db
+  $ cd db/mysql
   $ mysql -p
   mysql> create database sakila;
   Query OK, 1 row affected (0.00 sec)
@@ -296,7 +295,10 @@ So in the end you'll need to have the lib directory have those jars or links to 
 
 ### Run the completed koans
 
-Before you try running the completed koans, modify the `src/test/java/net/thornydev/mybatis/test/config.properties` file to set up the database driver, and username and password to use.  (If you are using H2, then you can leave the defaults.)
+Before you try running the completed koans, modify the `src/test/java/net/thornydev/mybatis/test/config.properties` file to set up the database driver and username and password to use.  (If you are using H2, then you can leave the defaults.)
+
+_Note_: where different solutions were required between MySQL, PostgreSQL and/or H2, we have created additional subdirectories named after the database.
+
 
 #### maven
 
@@ -304,7 +306,7 @@ To run individual completed koans from the command line, use this syntax:
 
     $ mvn clean verify -P run-comp-koans-h2 -D koan=Koan02
 
-This says to use the H2 database and run Koan02.  Change the koan name to run different ones.  To use mysql or postgresql, change the suffix of the -P argument (you can also change the target from verify to test - either works with pg and mysql), like so:
+This says to use the H2 database and run Koan02.  Change the koan name to run different ones.  To use mysql or postgresql, change the suffix of the -P argument (you can also change the target from `verify` to `test` when using pg or mysql), like so:
 
     $ mvn clean test -P run-comp-koans-pg -D koan=Koan03
     $ mvn clean test -P run-comp-koans-mysql -D koan=Koan04
@@ -316,6 +318,10 @@ To run all the tests for a given database, leave off the -D target:
 The `-P` switch to maven identifies a "profile" that you want to run. To see a list of the profiles defined in the maven pom, you can run:
 
     $ mvn help:all-profiles
+
+**Example Output**
+
+    $ mvn clean verify -P run-comp-koans-h2 -D koan=Koan02
 
 Ideally, among all the verbiage that maven spits out, when you run a completed koan test, you will see output that includes this:
 
@@ -379,19 +385,23 @@ It should find your maven dependencies and download those or reference them if y
 
 Once you have the mybatis-koans project created in Eclipse and have all the previous steps done (such as jar dependencies in place), you can run the koans (the main ones you will do and the already completed ones) by:
 
-* running them individually in Eclipse using JUnit
+* running them individually in Eclipse using its JUnit runner
 * running them via ant targets
 * running them via maven targets
 
-**Example Instructions: Run koans as Eclipse JUnit tests**
-
 If you need to modify the config.properties for src/main and src/test, do that first.
 
-Then navigate to `src/test/java/koan01/Koan01.java` and open it.  Right click in the Koan01.java file and click Run As > JUnit Test.  It should run the test and it will hopefully pass.  If not, you may not have your dependencies in place or your config file is not right.
+If you are using the H2 database and using the Eclipse JUnit test runner or ant targets, you must first start the H2 database: in `src/test/java/h2server` right click on RunH2.java and select "Run As Java Application".  Then run your koans.  When finished, stop the h2server by clicking the terminate button in the Eclipse Console window.  Or you can start it on with ant by invoking the runH2 target.
+
+**Example Instructions: Run koans as Eclipse JUnit tests**
+
+Navigate to `src/test/java/koan01/Koan01.java` and open it.  Right click in the Koan01.java file and click Run As > JUnit Test.  It should run the test and it will hopefully pass.  If not, you may not have your dependencies in place or your config file is not right.
+
+If you get the error `Class not found net.thornydev.mybatis.test.koan01.Koan01`, this means that the koans have not yet been compiled by maven.  The easiest fix is to run `mvn verify` and try again.
 
 **Example Instructions: Run koans from the ant targets in Eclipse**
 
-To run the koans from the Ant targets, first open the Ant view: Window > Show View > Ant.  Drag build.xml to the Ant view.  You will see all the ant targets displayed.  Click comp-koan01.  It should run in the console and hopefully pass.
+To run the koans from the Ant targets, first open the Ant view: Window > Show View > Ant.  Drag build.xml to the Ant view window.  You will see all the ant targets displayed.  Click comp-koan01.  It should run in the console and hopefully pass.
 
 **Example Instructions: Run koans from the maven targets in Eclipse**
 
@@ -401,7 +411,7 @@ Instead, in the scripts directory, we provide a bunch of little ant scriptlets t
 
 Navigate to the scripts that match the db you are using and whether you want to run the completed koan or the one in main that you are working on.  For example, `scripts/main/h2` will run the main koans targeting the H2 database (the H2 db has its own target since maven will start and stop the H2 db server for each run).  `scripts/main/default` will be the scriptlets for other dbs.
 
-In Eclipse, double click on one of these .ant scriptlets, such as `maven-run-comp-koan01-mysql.ant` (assuming you are using MySQL).  Right click in the file and choose Run As -> Ant Build.  The "ant build" script will invoke the maven pom with the correct targets and profiles and run it via maven.  I don't think you need to have ant installed separately, as Eclipse (I believe) has ant built into it by default.
+In Eclipse, right click (or double click to open and right click) one of these .ant scriptlets, such as `maven-run-comp-koan01-mysql.ant` (assuming you are using MySQL).  Choose Run As -> Ant Build.  The "ant build" script will invoke the maven pom with the correct targets and profiles and run it via maven.  I don't think you need to have ant installed separately, as Eclipse (I believe) has ant built into it by default.
 
 **Caution**: Overall, within Eclipse I recommend that you run the koans using Eclipse's JUnit runner as it will give you nice red/green output.  Currently, when these scriptlets run it is very hard to tell if a test fails. Maven will report an error, but the ant scriptlet still reports SUCCESS like so:
 
@@ -409,8 +419,7 @@ In Eclipse, double click on one of these .ant scriptlets, such as `maven-run-com
      [exec]   net.thornydev.mybatis.koan.koan03.Koan03: (..)
      [exec] Tests run: 1, Failures: 0, Errors: 1, Skipped: 0
      [exec] [ERROR] There are test failures.
-     [exec] Please refer to /home/midpeter444/databases/mybatis/sql_mybatis-koans/target/surefire-reports for the indi
-vidual test results.
+     [exec] Please refer to /home/midpeter444/databases/mybatis/sql_mybatis-koans/target/surefire-reports for the individual test results.
      [exec] [INFO] 
      [exec] [INFO] --- maven-jar-plugin:2.3.1:jar (default-jar) @ mybatis-koans ---
      [exec] [INFO] Building jar: /home/midpeter444/databases/mybatis/sql_mybatis-koans/target/mybatis-koans-1.2.jar
@@ -419,10 +428,6 @@ vidual test results.
      [exec] [INFO] ------------------------------------------------------------------------
 
 If anyone has a patch to these scriptlets to fix this, I'd welcome that.
-
-
-**Need more details here??**
-==> Need to document how to start H2 server from Eclipse for ANT
 
 
 <a name="doKoans"></a>
@@ -441,8 +446,8 @@ Whenever you start a new koan, open the file KoanXX.java and read the overview a
 
 To run the koans you are completing, do:
 
-    # if you are using H2, this will start the H2 database, 
-    # run the koan(s) and stop the H2 db
+    # if you are using H2, this will start the H2 database, run
+    #   the koan(s) and stop the H2 db
     $ mvn clean verify -P run-koans-h2 -D koan=Koan01  # run one koan
     $ mvn clean verify -P run-koans-h2                 # run all koans
 
@@ -468,7 +473,7 @@ To have less logging (none if the koans passing), set logging levels to "info". 
 
 <a name="koanDirectory"></a>
 
-# Directory of Koans
+# Directory of Koan Topics
 
 See the [directory of koans](sql_mybatis-koans/blob/master/KOANS.md) for a description of what each koan tests.
 
