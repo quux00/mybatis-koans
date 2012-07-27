@@ -6,10 +6,10 @@ import net.thornydev.mybatis.test.domain.Film;
 
 public interface Koan20Mapper {
 
-	List<String> selectLongFilmsByTitleWithPound(Film f);
+  List<String> selectLongFilmsByTitleWithPound(Film f);
 
-	List<String> selectLongFilmsByTitleWithDollar(Film f);
+  List<String> selectLongFilmsByTitleWithDollar(Film f);
 
-	List<String> selectLongFilmsByTitleAndRating(Film f);
+  List<String> selectLongFilmsByTitleAndRating(Film f);
 
 }

@@ -9,14 +9,14 @@ import org.apache.ibatis.session.RowBounds;
 
 public interface Koan06Mapper {
 
-	int getCountryCount();
+  int getCountryCount();
 
-	List<Country> getCountryRange(//
-			int lowerBound, int upperBound);
+  List<Country> getCountryRange(//
+    int lowerBound, int upperBound);
 
-	List<Country> getCountryRange2(//
-			@Param("id1") int lowerBound, @Param("id2") int upperBound);
+  List<Country> getCountryRange2(//
+    @Param("id1") int lowerBound, @Param("id2") int upperBound);
 
-	List<Country> getCountries(RowBounds rb);
+  List<Country> getCountries(RowBounds rb);
 
 }

@@ -8,6 +8,6 @@ import org.apache.ibatis.annotations.Param;
 
 public interface Koan09Mapper {
 
-	List<Country> getCountriesOrdered2(@Param("columnName") String columnName);
+  List<Country> getCountriesOrdered2(@Param("columnName") String columnName);
 
 }

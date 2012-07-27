@@ -10,21 +10,21 @@ import org.apache.ibatis.session.ResultHandler;
 
 public class ActorResultHandler implements ResultHandler {
 
-	private final List<Actor> actors = new ArrayList<Actor>();
+  private final List<Actor> actors = new ArrayList<Actor>();
 
-	@Override
-	public void handleResult(final ResultContext rc) {
+  @Override
+  public void handleResult(final ResultContext rc) {
 
-		final Actor actor = (Actor) rc.getResultObject();
+    final Actor actor = (Actor) rc.getResultObject();
 
-		if (actor.getLastName().length() != 4) {
-			actors.add(actor);
-		}
+    if (actor.getLastName().length() != 4) {
+      actors.add(actor);
+    }
 
-	}
+  }
 
-	public List<Actor> getActors() {
-		return actors;
-	}
+  public List<Actor> getActors() {
+    return actors;
+  }
 
 }

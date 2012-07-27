@@ -25,7 +25,7 @@ import util.FlavorMySQL;
 // there is also an enum type handler
 // http://stackoverflow.com/questions/10219253/mybatis-enum-usage
 // http://stackoverflow.com/questions/10562895/enum-constant-in-mybatiss-sql-query
-@org.junit.experimental.categories.Category({FlavorMySQL.class, FlavorH2.class})
+@org.junit.experimental.categories.Category( {FlavorMySQL.class, FlavorH2.class})
 public class Koan23 {
 
   static SqlSessionFactory sessionFactory;

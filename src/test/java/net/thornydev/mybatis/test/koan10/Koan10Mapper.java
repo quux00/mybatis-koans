@@ -7,10 +7,10 @@ import net.thornydev.mybatis.test.domain.Country;
 
 public interface Koan10Mapper {
 
-	Country getCountryById(int id);
+  Country getCountryById(int id);
 
-	City getCityById(int id);
+  City getCityById(int id);
 
-	List<City> getCities();
+  List<City> getCities();
 
 }

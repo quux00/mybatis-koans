@@ -9,16 +9,16 @@ import org.apache.ibatis.annotations.Param;
 
 public interface Koan21Mapper {
 
-	List<String> selectLongFilmsByTitleOrRating(Film f);
+  List<String> selectLongFilmsByTitleOrRating(Film f);
 
-	List<String> selectFilmByTitleRatingAndOrMinLength(Film f);
+  List<String> selectFilmByTitleRatingAndOrMinLength(Film f);
 
-	List<String> selectFilmByRentalRates(double[] rates);
+  List<String> selectFilmByRentalRates(double[] rates);
 
-	List<String> selectFilmByRentalRates2(@Param("rates") List<BigDecimal> rates);
+  List<String> selectFilmByRentalRates2(@Param("rates") List<BigDecimal> rates);
 
-	void updateFilmIfNecessary(Film f);
+  void updateFilmIfNecessary(Film f);
 
-	Film getFilmById(int id);
+  Film getFilmById(int id);
 
 }

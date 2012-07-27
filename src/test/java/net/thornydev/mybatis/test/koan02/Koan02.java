@@ -29,71 +29,71 @@ import org.junit.Test;
 
 public class Koan02 {
 
-	static SqlSessionFactory sessionFactory;
-	SqlSession session;
+  static SqlSessionFactory sessionFactory;
+  SqlSession session;
 
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-		final String resource = "net/thornydev/mybatis/test/koan02/koan02-config.xml";
-		final InputStream inputStream = Resources.getResourceAsStream(resource);
-		sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-		inputStream.close();
-	}
+  @BeforeClass
+  public static void setUpBeforeClass() throws Exception {
+    final String resource = "net/thornydev/mybatis/test/koan02/koan02-config.xml";
+    final InputStream inputStream = Resources.getResourceAsStream(resource);
+    sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+    inputStream.close();
+  }
 
-	@Before
-	public void setUp() throws Exception {
-		session = sessionFactory.openSession();
-	}
+  @Before
+  public void setUp() throws Exception {
+    session = sessionFactory.openSession();
+  }
 
-	@After
-	public void tearDown() throws Exception {
-		if (session != null)
-			session.close();
-	}
+  @After
+  public void tearDown() throws Exception {
+    if (session != null)
+      session.close();
+  }
 
-	@Test
-	public void learnToQueryViaXmlMapperReturningHashMap() throws Exception {
+  @Test
+  public void learnToQueryViaXmlMapperReturningHashMap() throws Exception {
 
-		final Map<String, Object> map = session
-				.selectOne("selectFirstCountryAsMap");
+    final Map<String, Object> map = session
+                                    .selectOne("selectFirstCountryAsMap");
 
     assertEquals(1, ((Number) getFromMap(map, "country_id") ).intValue());
     assertEquals("Afghanistan", getFromMap(map, "country"));
     assertNotNull(getFromMap(map, "last_update"));
 
-	}
+  }
 
-	@Test
-	public void learnToQueryMapperReturningHashMapWithParameterInput() throws Exception {
-		final Map<String, Object> map = 
-		    session.selectOne("selectOneAsMapDynamic", 33);
+  @Test
+  public void learnToQueryMapperReturningHashMapWithParameterInput() throws Exception {
+    final Map<String, Object> map =
+      session.selectOne("selectOneAsMapDynamic", 33);
 
-		assertEquals(33, ((Number)getFromMap(map, "country_id")).intValue());
-		assertEquals("Finland", getFromMap(map, "country"));
-		assertNotNull(getFromMap(map, "last_update"));
-	}
+    assertEquals(33, ((Number)getFromMap(map, "country_id")).intValue());
+    assertEquals("Finland", getFromMap(map, "country"));
+    assertNotNull(getFromMap(map, "last_update"));
+  }
 
-	@Test
-	public void learnToQueryViaXmlMapperReturningListOfHashMaps()
-			throws Exception {
-		final List<Map<String, Object>> lmap = session
-				.selectList("selectAsListOfMaps");
+  @Test
+  public void learnToQueryViaXmlMapperReturningListOfHashMaps()
+  throws Exception {
+    final List<Map<String, Object>> lmap = session
+                                           .selectList("selectAsListOfMaps");
 
-		assertEquals(109, lmap.size());
-		final Map<String, Object> map109 = lmap.get(0);
+    assertEquals(109, lmap.size());
+    final Map<String, Object> map109 = lmap.get(0);
 
-		assertEquals(109, ((Number)getFromMap(map109, "country_id")).intValue());
-		assertEquals("Zambia", getFromMap(map109, "country"));
-	}
+    assertEquals(109, ((Number)getFromMap(map109, "country_id")).intValue());
+    assertEquals("Zambia", getFromMap(map109, "country"));
+  }
 
-	
-	/* ---[ Helper method ]--- */
-	
-	private Object getFromMap(Map<String, Object> map, String key) {
-	  if (map.containsKey(key.toLowerCase())) {
-	    return map.get(key.toLowerCase());
-	  } else {
-	    return map.get(key.toUpperCase());
-	  }
-	}
+
+  /* ---[ Helper method ]--- */
+
+  private Object getFromMap(Map<String, Object> map, String key) {
+    if (map.containsKey(key.toLowerCase())) {
+      return map.get(key.toLowerCase());
+    } else {
+      return map.get(key.toUpperCase());
+    }
+  }
 }
