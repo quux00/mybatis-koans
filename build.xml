@@ -1,4 +1,4 @@
-<project name="mybatis-koans" default="run" basedir=".">
+<project name="mybatis-koans" default="compile" basedir=".">
   <description>MyBatis Koans</description>
 
   <!-- load environment variables as properties -->
@@ -8,13 +8,17 @@
   <property name="log.koan.output.to.file" value="false"/>
 
   <!-- default folder location properties -->
-  <property name="src.dir"   value="src"/>
-  <property name="build.dir" value="bin"/>
-  <property name="lib.dir"   value="lib"/>
+  <property name="src.dir"                 value="src/main/java"/>
+  <property name="resources.dir"           value="src/main/resources"/>
+  <property name="build.dir"               value="bin"/>
+  <property name="lib.dir"                 value="lib"/>
+  <property name="src-completed.dir"       value="src/test/java"/>
+  <property name="resources-completed.dir" value="src/test/resources"/>
+  <property name="build-completed.dir"     value="bin-comp"/>
 
-  <!-- project classpath -->
+  <!-- koan classpath -->
 
-  <path id="project.classpath">
+  <path id="koan.classpath">
     <!-- compiled classes -->
     <pathelement location="${build.dir}" />
     <!-- libraries -->
@@ -23,32 +27,52 @@
     </fileset>
   </path>
 
+  <path id="completed-koan.classpath">
+    <!-- compiled classes -->
+    <pathelement location="${build-completed.dir}" />
+    <!-- libraries -->
+    <fileset dir="${lib.dir}">
+      <include name="*.jar" />
+    </fileset>
+  </path>
+
+  
   <!-- basic -->
 
   <target name="init">
     <mkdir dir="${build.dir}"/>
+    <mkdir dir="${build-completed.dir}"/>
+  </target>
+
+  <target name="prepare-resources" depends="init">
+    <copy todir="${build.dir}" overwrite="true">
+      <fileset dir="${src.dir}"       includes="**/*.properties,**/*.xml" excludes="" />
+      <fileset dir="${resources.dir}" includes="**/*.properties,**/*.xml" excludes="" />
+    </copy>
+  </target>
+
+  <target name="prepare-resources-completed" depends="init">
+    <copy todir="${build-completed.dir}" overwrite="true">
+      <fileset dir="${src-completed.dir}"       includes="**/*.properties,**/*.xml" excludes="" />
+      <fileset dir="${resources-completed.dir}" includes="**/*.properties,**/*.xml" excludes="" />
+    </copy>
   </target>
 
   <target name="clean" description="Remove binary files">
     <delete dir="${build.dir}" failonerror="false" deleteonexit="true" />
-    <delete file="TEST-net.thornydev*" failonerror="false" deleteonexit="true" />  <!-- TODO: CHECK THIS!!!!! -->
+    <delete dir="${build-completed.dir}" failonerror="false" deleteonexit="true" />
+    <delete file="TEST-net.thornydev*" failonerror="false" deleteonexit="true" />
   </target>
 
+  
   <!-- ======= -->
   <!-- compile -->
   <!-- ======= -->
 
-  <target name="prepare-resources" depends="init">
-    <!-- description="Prepare application resource files" -->
-    <copy todir="${build.dir}" overwrite="true">
-      <fileset dir="${src.dir}" includes="**/*.properties,**/*.xml" excludes="" />
-    </copy>
-  </target>
-
   <property name="compile.debug"      value="true" />
   <property name="compile.debuglevel" value="lines,vars,source" />
 
-  <target name="compile" depends="init,prepare-resources" description="Compile java classes">
+  <target name="compile" depends="init,prepare-resources" description="Compile your koan classes">
     <javac
         srcdir="${src.dir}"
         destdir="${build.dir}"
@@ -56,18 +80,52 @@
         debuglevel="${compile.debuglevel}"
         includeantruntime="false"> <!-- to overcome misfeature in Ant 1.8 -->
       <compilerarg line="-Xlint:unchecked" />
-      <classpath refid="project.classpath" />
+      <classpath refid="koan.classpath" />
     </javac>
   </target>
 
+  <target name="prepare-completed-resources" depends="init">
+    <!-- description="Prepare application resource files" -->
+    <copy todir="${build-completed.dir}" overwrite="true">
+      <fileset dir="${src-completed.dir}" includes="**/*.properties,**/*.xml" excludes="" />
+    </copy>
+  </target>
+
   
-  <!-- ========= -->
-  <!-- run koans -->
-  <!-- ========= -->
+  <!-- ================= -->
+  <!-- run the H2 server -->
+  <!-- ================= -->
+
+  <target name="compileH2" depends="init">
+    <javac
+        srcdir="${src-completed.dir}"
+        includes="**/h2server/**"
+        destdir="${build-completed.dir}"
+        debug="${compile.debug}"
+        debuglevel="${compile.debuglevel}"
+        includeantruntime="false">
+      <compilerarg line="-Xlint:unchecked" />
+      <classpath refid="koan.classpath" />
+    </javac>
+  </target>
+
+  <!-- TODO: finish ... -->
+  <target name="runH2" depends="compileH2"
+          description="Run the H2 database to test koans">
+    <java classname="h2server.RunH2">
+      <classpath refid="completed-koan.classpath" />
+    </java>
+  </target>
+
+
+  
+  <!-- ============== -->
+  <!-- run your koans -->
+  <!-- ============== -->
 
   <target name="koan01" depends="compile" description="Run Koan01">
     <junit haltonfailure="yes" printsummary="yes" fork="true">
-      <classpath refid="project.classpath" />
+      <classpath refid="koan.classpath" />
       <test name="net.thornydev.mybatis.koan.koan01.Koan01">
         <formatter type="plain" usefile="${log.koan.output.to.file}" />
       </test>
@@ -76,7 +134,7 @@
 
   <target name="koan02" depends="compile" description="Run Koan02">
     <junit haltonfailure="yes" printsummary="yes" fork="true">
-      <classpath refid="project.classpath" />
+      <classpath refid="koan.classpath" />
       <test name="net.thornydev.mybatis.koan.koan02.Koan02">
         <formatter type="plain" usefile="${log.koan.output.to.file}" />
       </test>
@@ -85,7 +143,7 @@
 
   <target name="koan03" depends="compile" description="Run Koan03">
     <junit haltonfailure="yes" printsummary="yes" fork="true">
-      <classpath refid="project.classpath" />
+      <classpath refid="koan.classpath" />
       <test name="net.thornydev.mybatis.koan.koan03.Koan03">
         <formatter type="plain" usefile="${log.koan.output.to.file}" />
       </test>
@@ -94,7 +152,7 @@
 
   <target name="koan04" depends="compile" description="Run Koan04">
     <junit haltonfailure="yes" printsummary="yes" fork="true">
-      <classpath refid="project.classpath" />
+      <classpath refid="koan.classpath" />
       <test name="net.thornydev.mybatis.koan.koan04.Koan04">
         <formatter type="plain" usefile="${log.koan.output.to.file}" />
       </test>
@@ -103,7 +161,7 @@
   
   <target name="koan05" depends="compile" description="Run Koan05">
     <junit haltonfailure="yes" printsummary="yes" fork="true">
-      <classpath refid="project.classpath" />
+      <classpath refid="koan.classpath" />
       <test name="net.thornydev.mybatis.koan.koan05.Koan05">
         <formatter type="plain" usefile="${log.koan.output.to.file}" />
       </test>
@@ -112,7 +170,7 @@
 
   <target name="koan06" depends="compile" description="Run Koan06">
     <junit haltonfailure="yes" printsummary="yes" fork="true">
-      <classpath refid="project.classpath" />
+      <classpath refid="koan.classpath" />
       <formatter type="plain" usefile="${log.koan.output.to.file}" />
       <test name="net.thornydev.mybatis.koan.koan06.Koan06"/>
     </junit>
@@ -120,7 +178,7 @@
 
   <target name="koan07" depends="compile" description="Run Koan07">
     <junit haltonfailure="yes" printsummary="yes" fork="true">
-      <classpath refid="project.classpath" />
+      <classpath refid="koan.classpath" />
       <formatter type="plain" usefile="${log.koan.output.to.file}" />
       <test name="net.thornydev.mybatis.koan.koan07.Koan07"/>
     </junit>
@@ -128,7 +186,7 @@
 
   <target name="koan08" depends="compile" description="Run Koan08">
     <junit haltonfailure="yes" printsummary="yes" fork="true">
-      <classpath refid="project.classpath" />
+      <classpath refid="koan.classpath" />
       <formatter type="plain" usefile="${log.koan.output.to.file}" />
       <test name="net.thornydev.mybatis.koan.koan08.Koan08"/>
     </junit>
@@ -136,7 +194,7 @@
 
   <target name="koan09" depends="compile" description="Run Koan09">
     <junit haltonfailure="yes" printsummary="yes" fork="true">
-      <classpath refid="project.classpath" />
+      <classpath refid="koan.classpath" />
       <formatter type="plain" usefile="${log.koan.output.to.file}" />
       <test name="net.thornydev.mybatis.koan.koan09.Koan09"/>
     </junit>
@@ -144,7 +202,7 @@
 
   <target name="koan10" depends="compile" description="Run Koan10">
     <junit haltonfailure="yes" printsummary="yes" fork="true">
-      <classpath refid="project.classpath" />
+      <classpath refid="koan.classpath" />
       <formatter type="plain" usefile="${log.koan.output.to.file}" />
       <test name="net.thornydev.mybatis.koan.koan10.Koan10"/>
     </junit>
@@ -152,7 +210,7 @@
 
   <target name="koan11" depends="compile" description="Run Koan11">
     <junit haltonfailure="yes" printsummary="yes" fork="true">
-      <classpath refid="project.classpath" />
+      <classpath refid="koan.classpath" />
       <formatter type="plain" usefile="${log.koan.output.to.file}" />
       <test name="net.thornydev.mybatis.koan.koan11.Koan11"/>
     </junit>
@@ -160,7 +218,7 @@
 
   <target name="koan12" depends="compile" description="Run Koan12">
     <junit haltonfailure="yes" printsummary="yes" fork="true">
-      <classpath refid="project.classpath" />
+      <classpath refid="koan.classpath" />
       <formatter type="plain" usefile="${log.koan.output.to.file}" />
       <test name="net.thornydev.mybatis.koan.koan12.Koan12"/>
     </junit>
@@ -168,7 +226,7 @@
 
   <target name="koan13" depends="compile" description="Run Koan13">
     <junit haltonfailure="yes" printsummary="yes" fork="true">
-      <classpath refid="project.classpath" />
+      <classpath refid="koan.classpath" />
       <formatter type="plain" usefile="${log.koan.output.to.file}" />
       <test name="net.thornydev.mybatis.koan.koan13.Koan13"/>
     </junit>
@@ -176,7 +234,7 @@
 
   <target name="koan14" depends="compile" description="Run Koan14">
     <junit haltonfailure="yes" printsummary="yes" fork="true">
-      <classpath refid="project.classpath" />
+      <classpath refid="koan.classpath" />
       <formatter type="plain" usefile="${log.koan.output.to.file}" />
       <test name="net.thornydev.mybatis.koan.koan14.Koan14"/>
     </junit>
@@ -184,7 +242,7 @@
 
   <target name="koan15" depends="compile" description="Run Koan15">
     <junit haltonfailure="yes" printsummary="yes" fork="true">
-      <classpath refid="project.classpath" />
+      <classpath refid="koan.classpath" />
       <formatter type="plain" usefile="${log.koan.output.to.file}" />
       <test name="net.thornydev.mybatis.koan.koan15.Koan15"/>
     </junit>
@@ -192,7 +250,7 @@
 
   <target name="koan16" depends="compile" description="Run Koan16">
     <junit haltonfailure="yes" printsummary="yes" fork="true">
-      <classpath refid="project.classpath" />
+      <classpath refid="koan.classpath" />
       <formatter type="plain" usefile="${log.koan.output.to.file}" />
       <test name="net.thornydev.mybatis.koan.koan16.Koan16"/>
     </junit>
@@ -200,7 +258,7 @@
 
   <target name="koan17" depends="compile" description="Run Koan17">
     <junit haltonfailure="yes" printsummary="yes" fork="true">
-      <classpath refid="project.classpath" />
+      <classpath refid="koan.classpath" />
       <formatter type="plain" usefile="${log.koan.output.to.file}" />
       <test name="net.thornydev.mybatis.koan.koan17.Koan17"/>
     </junit>
@@ -208,7 +266,7 @@
 
   <target name="koan18" depends="compile" description="Run Koan18">
     <junit haltonfailure="yes" printsummary="yes" fork="true">
-      <classpath refid="project.classpath" />
+      <classpath refid="koan.classpath" />
       <formatter type="plain" usefile="${log.koan.output.to.file}" />
       <test name="net.thornydev.mybatis.koan.koan18.Koan18"/>
     </junit>
@@ -216,7 +274,7 @@
 
   <target name="koan19" depends="compile" description="Run Koan19">
     <junit haltonfailure="yes" printsummary="yes" fork="true">
-      <classpath refid="project.classpath" />
+      <classpath refid="koan.classpath" />
       <formatter type="plain" usefile="${log.koan.output.to.file}" />
       <test name="net.thornydev.mybatis.koan.koan19.Koan19"/>
     </junit>
@@ -224,7 +282,7 @@
 
   <target name="koan20" depends="compile" description="Run Koan20">
     <junit haltonfailure="yes" printsummary="yes" fork="true">
-      <classpath refid="project.classpath" />
+      <classpath refid="koan.classpath" />
       <formatter type="plain" usefile="${log.koan.output.to.file}" />
       <test name="net.thornydev.mybatis.koan.koan20.Koan20"/>
     </junit>
@@ -232,7 +290,7 @@
 
   <target name="koan21" depends="compile" description="Run Koan21">
     <junit haltonfailure="yes" printsummary="yes" fork="true">
-      <classpath refid="project.classpath" />
+      <classpath refid="koan.classpath" />
       <formatter type="plain" usefile="${log.koan.output.to.file}" />
       <test name="net.thornydev.mybatis.koan.koan21.Koan21"/>
     </junit>
@@ -240,7 +298,7 @@
 
   <target name="koan22" depends="compile" description="Run Koan22">
     <junit haltonfailure="yes" printsummary="yes" fork="true">
-      <classpath refid="project.classpath" />
+      <classpath refid="koan.classpath" />
       <formatter type="plain" usefile="${log.koan.output.to.file}" />
       <test name="net.thornydev.mybatis.koan.koan22.Koan22"/>
     </junit>
@@ -248,15 +306,15 @@
 
   <target name="koan23" depends="compile" description="Run Koan23">
     <junit haltonfailure="yes" printsummary="yes" fork="true">
-      <classpath refid="project.classpath" />
+      <classpath refid="koan.classpath" />
       <formatter type="plain" usefile="${log.koan.output.to.file}" />
       <test name="net.thornydev.mybatis.koan.koan23.Koan23"/>
     </junit>
   </target>
 
-  <target name="run" depends="compile" description="Runs all Koans">
+  <target name="run-all" depends="compile" description="Runs all Koans (in main)">
     <junit haltonfailure="yes" fork="true">
-      <classpath refid="project.classpath" />
+      <classpath refid="koan.classpath" />
       <formatter type="plain" usefile="${log.koan.output.to.file}" />
       <batchtest>
         <fileset dir="${src.dir}" includes="**/Koan**.java">
@@ -264,4 +322,359 @@
       </batchtest>
     </junit>
   </target>
+
+
+
+  <!-- ============================================== -->
+  <!-- targets for the already completed "test" koans -->
+  <!-- ============================================== -->
+
+  <target name="compile-completed" depends="init,prepare-resources-completed"
+          description="Compile already completed koans">
+    <javac
+        srcdir="${src-completed.dir}"
+        destdir="${build-completed.dir}"
+        excludes="**/h2server/**"
+        debug="${compile.debug}"
+        debuglevel="${compile.debuglevel}"
+        includeantruntime="false">
+      <compilerarg line="-Xlint:unchecked" />
+      <classpath refid="completed-koan.classpath" />
+    </javac>
+  </target>
+
+  <target name="comp-all-mysql" depends="init,prepare-resources-completed,compile-completed"
+          description="Runs all completed koans using PostgreSQL db">
+    <junit haltonfailure="yes" fork="true" showoutput="true" printsummary="yes">
+      <classpath refid="completed-koan.classpath" />
+      <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      <batchtest>
+        <fileset dir="${build-completed.dir}"
+                 includes="**/Koan*.class"
+                 excludes="**/*Mapper.class,**/*ObjectFactory.class,**/*SchoolMarm*,
+                           **/pg/**,**/h2/**">
+        </fileset>
+        
+      </batchtest>
+    </junit>
+  </target>
+  
+  <target name="comp-all-pg" depends="init,prepare-resources-completed,compile-completed"
+          description="Runs all completed koans using MySQL db">
+    <junit haltonfailure="yes" fork="true" showoutput="true" printsummary="yes">
+      <classpath refid="completed-koan.classpath" />
+      <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      <batchtest>
+        <fileset dir="${build-completed.dir}"
+                 includes="**/Koan*.class"
+                 excludes="**/*Mapper.class,**/*ObjectFactory.class,**/*SchoolMarm*,
+                           **/mysql/**,**/h2/**,**/koan23/Koan23.class">
+        </fileset>
+        
+      </batchtest>
+    </junit>
+  </target>
+  
+  <target name="comp-all-h2" depends="init,prepare-resources-completed,compile-completed"
+          description="Runs all completed koans using H2 db">
+    <junit haltonfailure="yes" fork="true" showoutput="true" printsummary="yes">
+      <classpath refid="completed-koan.classpath" />
+      <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      <batchtest>
+        <fileset dir="${build-completed.dir}"
+                 includes="**/Koan*.class"
+                 excludes="**/*Mapper.class,**/*ObjectFactory.class,**/*SchoolMarm*,
+                           **/pg/**,**/mysql/**,**/koan12/Koan12.class">
+        </fileset>
+      </batchtest>
+    </junit>
+  </target>
+  
+  <target name="comp-koan01" depends="compile-completed" description="Run Already Completed Koan01">
+    <junit haltonfailure="yes" printsummary="yes" fork="true">
+      <classpath refid="completed-koan.classpath" />
+      <test name="net.thornydev.mybatis.test.koan01.Koan01">
+        <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      </test>
+    </junit>
+  </target>
+
+  <target name="comp-koan02" depends="compile-completed" description="Run Already Completed Koan02">
+    <junit haltonfailure="yes" printsummary="yes" fork="true">
+      <classpath refid="completed-koan.classpath" />
+      <test name="net.thornydev.mybatis.test.koan02.Koan02">
+        <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      </test>
+    </junit>
+  </target>
+
+  <target name="comp-koan03" depends="compile-completed" description="Run Already Completed Koan03">
+    <junit haltonfailure="yes" printsummary="yes" fork="true">
+      <classpath refid="completed-koan.classpath" />
+      <test name="net.thornydev.mybatis.test.koan03.Koan03">
+        <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      </test>
+    </junit>
+  </target>
+
+  <target name="comp-koan04" depends="compile-completed" description="Run Already Completed Koan04">
+    <junit haltonfailure="yes" printsummary="yes" fork="true">
+      <classpath refid="completed-koan.classpath" />
+      <test name="net.thornydev.mybatis.test.koan04.Koan04">
+        <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      </test>
+    </junit>
+  </target>
+
+  <target name="comp-koan05" depends="compile-completed" description="Run Already Completed Koan05">
+    <junit haltonfailure="yes" printsummary="yes" fork="true">
+      <classpath refid="completed-koan.classpath" />
+      <test name="net.thornydev.mybatis.test.koan05.Koan05">
+        <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      </test>
+    </junit>
+  </target>
+
+  <target name="comp-koan06" depends="compile-completed" description="Run Already Completed Koan06">
+    <junit haltonfailure="yes" printsummary="yes" fork="true">
+      <classpath refid="completed-koan.classpath" />
+      <test name="net.thornydev.mybatis.test.koan06.Koan06">
+        <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      </test>
+    </junit>
+  </target>
+
+  <target name="comp-koan07" depends="compile-completed" description="Run Already Completed Koan07">
+    <junit haltonfailure="yes" printsummary="yes" fork="true">
+      <classpath refid="completed-koan.classpath" />
+      <test name="net.thornydev.mybatis.test.koan07.Koan07">
+        <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      </test>
+    </junit>
+  </target>
+
+  <target name="comp-koan08" depends="compile-completed" description="Run Already Completed Koan08">
+    <junit haltonfailure="yes" printsummary="yes" fork="true">
+      <classpath refid="completed-koan.classpath" />
+      <test name="net.thornydev.mybatis.test.koan08.Koan08">
+        <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      </test>
+    </junit>
+  </target>
+
+  <target name="comp-koan09" depends="compile-completed" description="Run Already Completed Koan09">
+    <junit haltonfailure="yes" printsummary="yes" fork="true">
+      <classpath refid="completed-koan.classpath" />
+      <test name="net.thornydev.mybatis.test.koan09.Koan09">
+        <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      </test>
+    </junit>
+  </target>
+
+  <target name="comp-koan10" depends="compile-completed" description="Run Already Completed Koan10">
+    <junit haltonfailure="yes" printsummary="yes" fork="true">
+      <classpath refid="completed-koan.classpath" />
+      <test name="net.thornydev.mybatis.test.koan10.Koan10">
+        <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      </test>
+    </junit>
+  </target>
+
+  <target name="comp-koan11" depends="compile-completed" description="Run Already Completed Koan11">
+    <junit haltonfailure="yes" printsummary="yes" fork="true">
+      <classpath refid="completed-koan.classpath" />
+      <test name="net.thornydev.mybatis.test.koan11.Koan11">
+        <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      </test>
+    </junit>
+  </target>
+
+  <target name="comp-koan12-h2" depends="compile-completed"
+          description="Run Already Completed Koan12 Using H2">
+    <junit haltonfailure="yes" printsummary="yes" fork="true">
+      <classpath refid="completed-koan.classpath" />
+      <test name="net.thornydev.mybatis.test.koan12.h2.Koan12">
+        <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      </test>
+    </junit>
+  </target>
+
+  <!-- The MySQL and PostgreSQL code for Koan12 is the same, so one
+       just invokes the other-->
+  <target name="comp-koan12-mysql" depends="comp-koan12-pg"
+          description="Run Already Completed Koan12 Using MySQL">
+  </target>
+
+  <target name="comp-koan12-pg" depends="compile-completed"
+          description="Run Already Completed Koan12 Using PostgreSQL">
+    <junit haltonfailure="yes" printsummary="yes" fork="true">
+      <classpath refid="completed-koan.classpath" />
+      <test name="net.thornydev.mybatis.test.koan12.Koan12">
+        <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      </test>
+    </junit>
+  </target>
+
+  <target name="comp-koan13" depends="compile-completed" description="Run Already Completed Koan13">
+    <junit haltonfailure="yes" printsummary="yes" fork="true">
+      <classpath refid="completed-koan.classpath" />
+      <test name="net.thornydev.mybatis.test.koan13.Koan13">
+        <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      </test>
+    </junit>
+  </target>
+
+  <target name="comp-koan14" depends="compile-completed" description="Run Already Completed Koan14">
+    <junit haltonfailure="yes" printsummary="yes" fork="true">
+      <classpath refid="completed-koan.classpath" />
+      <test name="net.thornydev.mybatis.test.koan14.Koan14">
+        <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      </test>
+    </junit>
+  </target>
+
+  <target name="comp-koan15" depends="compile-completed" description="Run Already Completed Koan15">
+    <junit haltonfailure="yes" printsummary="yes" fork="true">
+      <classpath refid="completed-koan.classpath" />
+      <test name="net.thornydev.mybatis.test.koan15.Koan15">
+        <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      </test>
+    </junit>
+  </target>
+
+  <!-- TODO: do we need variants of 16 and 17 for H2??? -->
+  
+  <target name="comp-koan16-h2" depends="compile-completed"
+          description="Run Already Completed Koan16 Using H2">
+    <junit haltonfailure="yes" printsummary="yes" fork="true">
+      <classpath refid="completed-koan.classpath" />
+      <test name="net.thornydev.mybatis.test.koan16.h2.Koan16">
+        <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      </test>
+    </junit>
+  </target>
+
+  <target name="comp-koan16-mysql" depends="compile-completed"
+          description="Run Already Completed Koan16 Using MySQL">
+    <junit haltonfailure="yes" printsummary="yes" fork="true">
+      <classpath refid="completed-koan.classpath" />
+      <test name="net.thornydev.mybatis.test.koan16.mysql.Koan16">
+        <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      </test>
+    </junit>
+  </target>
+
+  <target name="comp-koan16-pg" depends="compile-completed"
+          description="Run Already Completed Koan16 Using PostgreSQL">
+    <junit haltonfailure="yes" printsummary="yes" fork="true">
+      <classpath refid="completed-koan.classpath" />
+      <test name="net.thornydev.mybatis.test.koan16.pg.Koan16">
+        <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      </test>
+    </junit>
+  </target>
+
+  <target name="comp-koan17-h2" depends="compile-completed"
+          description="Run Already Completed Koan17 Using H2">
+    <junit haltonfailure="yes" printsummary="yes" fork="true">
+      <classpath refid="completed-koan.classpath" />
+      <test name="net.thornydev.mybatis.test.koan17.h2.Koan17">
+        <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      </test>
+    </junit>
+  </target>
+
+  <target name="comp-koan17-mysql" depends="compile-completed"
+          description="Run Already Completed Koan17 Using MySQL">
+    <junit haltonfailure="yes" printsummary="yes" fork="true">
+      <classpath refid="completed-koan.classpath" />
+      <test name="net.thornydev.mybatis.test.koan17.mysql.Koan17">
+        <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      </test>
+    </junit>
+  </target>
+
+  <target name="comp-koan17-pg" depends="compile-completed"
+          description="Run Already Completed Koan17 Using PostgreSQL">
+    <junit haltonfailure="yes" printsummary="yes" fork="true">
+      <classpath refid="completed-koan.classpath" />
+      <test name="net.thornydev.mybatis.test.koan17.pg.Koan17">
+        <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      </test>
+    </junit>
+  </target>
+
+  <target name="comp-koan18" depends="compile-completed" description="Run Already Completed Koan18">
+    <junit haltonfailure="yes" printsummary="yes" fork="true">
+      <classpath refid="completed-koan.classpath" />
+      <test name="net.thornydev.mybatis.test.koan18.Koan18">
+        <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      </test>
+    </junit>
+  </target>
+
+  <target name="comp-koan19" depends="compile-completed" description="Run Already Completed Koan19">
+    <junit haltonfailure="yes" printsummary="yes" fork="true">
+      <classpath refid="completed-koan.classpath" />
+      <test name="net.thornydev.mybatis.test.koan19.Koan19">
+        <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      </test>
+    </junit>
+  </target>
+
+  <target name="comp-koan20" depends="compile-completed" description="Run Already Completed Koan20">
+    <junit haltonfailure="yes" printsummary="yes" fork="true">
+      <classpath refid="completed-koan.classpath" />
+      <test name="net.thornydev.mybatis.test.koan20.Koan20">
+        <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      </test>
+    </junit>
+  </target>
+
+  <target name="comp-koan21" depends="compile-completed" description="Run Already Completed Koan21">
+    <junit haltonfailure="yes" printsummary="yes" fork="true">
+      <classpath refid="completed-koan.classpath" />
+      <test name="net.thornydev.mybatis.test.koan21.Koan21">
+        <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      </test>
+    </junit>
+  </target>
+
+  <target name="comp-koan22" depends="compile-completed" description="Run Already Completed Koan22">
+    <junit haltonfailure="yes" printsummary="yes" fork="true">
+      <classpath refid="completed-koan.classpath" />
+      <test name="net.thornydev.mybatis.test.koan22.Koan22">
+        <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      </test>
+    </junit>
+  </target>
+
+  <target name="comp-koan23" depends="compile-completed" description="Run Already Completed Koan23">
+    <junit haltonfailure="yes" printsummary="yes" fork="true">
+      <classpath refid="completed-koan.classpath" />
+      <test name="net.thornydev.mybatis.test.koan23.Koan23">
+        <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      </test>
+    </junit>
+  </target>
+
+  <target name="comp-koan23-pg" depends="compile-completed"
+          description="Run Already Completed Koan23 - PostgreSQL variant">
+    <junit haltonfailure="yes" printsummary="yes" fork="true">
+      <classpath refid="completed-koan.classpath" />
+      <test name="net.thornydev.mybatis.test.koan23.pg.Koan23">
+        <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      </test>
+    </junit>
+  </target>
+
+  <target name="comp-koan24" depends="compile-completed" description="Run Already Completed Koan24">
+    <junit haltonfailure="yes" printsummary="yes" fork="true">
+      <classpath refid="completed-koan.classpath" />
+      <test name="net.thornydev.mybatis.test.koan24.Koan24">
+        <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      </test>
+    </junit>
+  </target>
+
 </project>

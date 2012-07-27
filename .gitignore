@@ -1,9 +1,28 @@
-sql/Sakila/
+#
+# eclipse ide meta data
+#
 .classpath
 .project
+.settings/
+
+#
+# eclipse ide build folder
+#
 bin/
+
+#
+# maven build folder
+#
+target/
+
+#
+# ???
+#
+sql/Sakila/
 lib/*.jar
 tmp
 TEST-*
 TODO.org
 *.orig
+bin-comp
+README.html

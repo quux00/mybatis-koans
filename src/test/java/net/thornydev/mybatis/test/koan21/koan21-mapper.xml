@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.thornydev.mybatis.test.koan21.Koan21Mapper">
+
+  <select id="selectLongFilmsByTitleOrRating" parameterType="Film" resultType="String">
+    SELECT title FROM film
+    WHERE length > 90
+    <if test="title != null">
+      AND title LIKE #{title}
+    </if>
+    <if test="rating != null">
+      AND rating = '${rating}'
+    </if>
+    ORDER BY length DESC
+  </select>
+  
+  <select id="selectFilmByTitleRatingAndOrMinLength" parameterType="Film" resultType="String">
+    SELECT title FROM film
+    <where>
+      <if test="length > 0">
+        length > #{length}
+      </if>
+      <if test="title != null">
+        AND title LIKE #{title}
+      </if>
+      <if test="rating != null">
+        AND rating = '${rating}'
+      </if>
+    </where>
+  </select>
+  
+  <select id="selectFilmByRentalRates" resultType="String">
+    SELECT title FROM film
+    WHERE rental_rate IN
+    <foreach collection="array" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </select>
+
+  <select id="selectFilmByRentalRates2" resultType="String">
+    SELECT title FROM film
+    <where>
+      <if test="rates != null">
+        rental_rate IN
+        <foreach collection="rates" item="item" open="(" separator="," close=")">
+          #{item}
+        </foreach>
+      </if>
+    </where>
+  </select>
+  
+  <update id="updateFilmIfNecessary" parameterType="Film">
+    UPDATE film
+    <set>
+      film_id = #{id},
+      <if test="title != null">
+        title = #{title},
+      </if>
+      <if test="rentalDuration > 0">
+        rental_duration = #{rentalDuration},
+      </if>
+      <if test="rentalRate > 0">
+        rental_rate = #{rentalRate}
+      </if>
+    </set>
+    WHERE film_id = #{id}
+  </update>
+
+  <select id="getFilmById" parameterType="_int" resultType="Film">
+    SELECT film_id AS id, title, rental_duration, rental_rate
+    FROM film
+    WHERE film_id = #{id}
+  </select>
+  
+</mapper>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.thornydev.mybatis.test.koan20.Koan20Mapper">
+
+  <select id="selectLongFilmsByTitleWithPound" parameterType="Film" resultType="String">
+    SELECT title FROM film
+    WHERE length > 90
+      AND title LIKE #{title}
+    ORDER BY length DESC
+  </select>
+
+  <select id="selectLongFilmsByTitleWithDollar" parameterType="Film" resultType="String">
+    SELECT title FROM film
+    WHERE length > 90
+      AND title LIKE '%${title}%'
+    ORDER BY length DESC
+  </select>
+
+  <select id="selectLongFilmsByTitleAndRating" parameterType="Film" resultType="String">
+    SELECT title FROM film
+    WHERE length > 90
+      AND title LIKE '%${title}%'
+      AND rating = '${rating}'
+    ORDER BY length DESC
+  </select>
+  
+</mapper>

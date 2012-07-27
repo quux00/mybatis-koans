@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.thornydev.mybatis.test.koan23.pg.Koan23Mapper">
+
+  <select id="getCategoryByName" resultType="Category" parameterType="String">
+    SELECT UPPER(name)
+    FROM category
+    WHERE name = #{name}
+  </select>
+
+  <resultMap id="filmWithCategoriesMap" type="FilmWithCategories">
+    <id column="id" property="id" javaType="_int"/>
+    <result column="title" property="title"/>
+    <collection property="categories" ofType="Category">
+      <result column="cat_name"/>
+    </collection>
+  </resultMap>
+
+  <select id="getFilmById" parameterType="int" resultMap="filmWithCategoriesMap">
+    SELECT f.film_id AS id, f.title, c.category_id, UPPER(c.name) as cat_name
+    FROM film f
+    JOIN film_category fc ON f.film_id = fc.film_id
+    JOIN category c ON fc.category_id = c.category_id
+    WHERE f.film_id = #{id}
+  </select>
+
+  <resultMap id="filmWithRatingMap" type="FilmWithCategories">
+    <id column="id" property="id" javaType="_int"/>
+    <result column="title" property="title"/>
+    <result column="rating" property="rating" typeHandler="RatingTypeHandler"/>
+  </resultMap>
+
+  <select id="getFilmWithRatingById" parameterType="int" resultMap="filmWithRatingMap">
+    SELECT f.film_id AS id, f.title, f.rating
+    FROM film f
+    WHERE f.film_id = #{id}
+  </select>
+
+  <update id="updateFilmRating" parameterType="FilmWithCategories">
+    UPDATE film
+    SET rating = #{rating, typeHandler=RatingTypeHandler}::mpaa_rating 
+    WHERE film_id = #{id}
+  </update>
+
+  <delete id="deleteAllCategoriesForFilm" parameterType="FilmWithCategories">
+    DELETE FROM film_category
+    WHERE film_id = #{id} 
+  </delete>
+
+  <insert id="addCategoryForFilm">
+    INSERT INTO film_category (film_id, category_id, last_update)
+    VALUES(#{film.id}, #{category.id}, #{date})
+  </insert>
+
+</mapper>

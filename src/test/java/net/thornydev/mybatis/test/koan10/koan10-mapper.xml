@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.thornydev.mybatis.test.koan10.Koan10Mapper">
+  
+  <resultMap id="countryResultMap" type="Country">
+    <id property="id" column="country_id" />
+    <result property="country" column="country"/>
+    <result property="lastUpdate" column="last_update"/>
+  </resultMap>
+
+  <select id="getCountryById" parameterType="int" resultMap="countryResultMap">
+    SELECT country_id, country, last_update
+    FROM country 
+    WHERE country_id = #{id}
+  </select>
+
+  <resultMap id="cityResultMap" type="City">
+    <constructor>
+      <idArg column="city_id" javaType="_integer"/>
+    </constructor>
+    <result property="city"       column="city"/>
+    <result property="lastUpdate" column="city_upd"/>
+    
+    <association property="country" resultMap="countryResultMap"/>
+  </resultMap>
+
+  <!-- Nested Result for Association (Eager loading) -->
+  <select id="getCityById" parameterType="int" resultMap="cityResultMap">
+    SELECT ci.city_id, ci.city, ci.last_update AS city_upd, 
+           co.country_id, co.country, co.last_update
+    FROM city ci
+    JOIN country co ON ci.country_id = co.country_id
+    WHERE ci.city_id = #{id}
+  </select>
+
+  <!-- Nested Select for Association (Lazy loading) -->
+  <resultMap id="cityResultMapLazy" type="City">
+    <constructor>
+      <idArg column="city_id" javaType="_integer"/>
+    </constructor>
+    <association property="country" column="country_id" javaType="Country" select="getCountryById"/>
+  </resultMap>
+
+  <select id="getCities" resultMap="cityResultMapLazy">
+    SELECT city_id, city, last_update AS lastUpdate, country_id
+    FROM city 
+    ORDER by city_id
+  </select>
+  
+  <select id="getCityCount" resultType="int">
+    SELECT count(*) FROM city
+  </select>
+
+</mapper>

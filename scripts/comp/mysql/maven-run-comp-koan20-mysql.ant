@@ -1,0 +1,29 @@
+<!--
+  This ant snippet can be invoked from Eclipse.
+    Open file in Eclipse, right click in file:
+    Run As -> Ant Build
+  
+  It is equivalent to the following command line invocation:
+    mvn clean verify -P run-comp-koans-mysql -D koan=Koan20
+-->
+<project default="maven" basedir="./../../..">
+
+	<property file="scripts/mvn.properties"/>
+
+  <target name="maven">
+  	
+  	<exec executable="${mvn}">
+      <arg value="clean" />
+      <arg value="verify" />
+
+      <arg value="--activate-profiles" />
+      <arg value="run-comp-koans-mysql" />
+
+      <arg value="--define" />
+      <arg value="koan=Koan20" />
+
+      <arg value="--show-version" />
+    </exec>
+
+  </target>
+</project>
