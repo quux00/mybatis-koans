@@ -478,16 +478,19 @@ To have less logging (none if the koans passing), set logging levels to "info". 
 
 # tl;dr - Too many options, just tell me the bare minimum
 
-My recommendation on the best way - the short version:
+We've tried to be flexible with options and document everything, but here's my short version for those that want my recommendation on how I would do it:
 
-1. Ensure/install prequisites
+1. Ensure/install prerequisites
 2. Clone the repo
-3. Setup sakila db in PostgreSQL (my favorite) or MySQL
-4. Install m2e in Eclipse, load the project as a maven project and let maven compile everything
-5. Open Koan01.java in src/main and read the instructions.
+3. Setup sakila db in PostgreSQL (or MySQL)
+4. Using m2e in Eclipse, load the project as a maven project and let maven compile everything
+5. Open src/main ... Koan01.java and read the instructions
 6. Complete the TODOs
 7. Run the koans using Eclipse's JUnit runner
-8. Repeat 5-7 until finished
+8. Repeat 5-7 until enlightened
+9. Go answer MyBatis questions on stackoverflow and generally be excellent to each other
+
+For extra credit, think of new koans and add them to the repo with a pull request!
 
 ---
 
