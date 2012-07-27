@@ -328,8 +328,8 @@ Ideally, among all the verbiage that maven spits out, when you run a completed k
 
     [INFO] H2 server spawned at tcp://localhost:9092
     [INFO] 
-    [INFO] --- maven-surefire-plugin:2.12:test (test-koans) @ sql_mybatis-koans ---
-    [INFO] Surefire report directory: /home/midpeter444/databases/mybatis/sql_mybatis-koans/target/surefire-reports
+    [INFO] --- maven-surefire-plugin:2.12:test (test-koans) @ mybatis-koans ---
+    [INFO] Surefire report directory: /home/midpeter444/databases/mybatis/mybatis-koans/target/surefire-reports
     [INFO] Using configured provider org.apache.maven.surefire.junitcore.JUnitCoreProvider
     
     -------------------------------------------------------
@@ -346,7 +346,7 @@ Ideally, among all the verbiage that maven spits out, when you run a completed k
     Tests run: 3, Failures: 0, Errors: 0, Skipped: 0
     
     [INFO] 
-    [INFO] --- h2-maven-plugin:1.0:stop (h2-finish) @ sql_mybatis-koans ---
+    [INFO] --- h2-maven-plugin:1.0:stop (h2-finish) @ mybatis-koans ---
     [INFO] H2 server stopped
     [INFO] ------------------------------------------------------------------------
     [INFO] BUILD SUCCESS
@@ -422,10 +422,10 @@ In Eclipse, right click (or double click to open and right click) one of these .
      [exec]   net.thornydev.mybatis.koan.koan03.Koan03: (..)
      [exec] Tests run: 1, Failures: 0, Errors: 1, Skipped: 0
      [exec] [ERROR] There are test failures.
-     [exec] Please refer to /home/midpeter444/databases/mybatis/sql_mybatis-koans/target/surefire-reports for the individual test results.
+     [exec] Please refer to /home/midpeter444/databases/mybatis/mybatis-koans/target/surefire-reports for the individual test results.
      [exec] [INFO] 
      [exec] [INFO] --- maven-jar-plugin:2.3.1:jar (default-jar) @ mybatis-koans ---
-     [exec] [INFO] Building jar: /home/midpeter444/databases/mybatis/sql_mybatis-koans/target/mybatis-koans-1.2.jar
+     [exec] [INFO] Building jar: /home/midpeter444/databases/mybatis/mybatis-koans/target/mybatis-koans-1.2.jar
      [exec] [INFO] ------------------------------------------------------------------------
      [exec] [INFO] BUILD SUCCESS
      [exec] [INFO] ------------------------------------------------------------------------
@@ -498,7 +498,7 @@ For extra credit, think of new koans and add them to the repo with a pull reques
 
 # Directory of Koan Topics
 
-See the [directory of koans](sql_mybatis-koans/blob/master/KOANS.md) for a description of what each koan tests.
+See the [directory of koans](mybatis-koans/blob/master/KOANS.md) for a description of what each koan tests.
 
 ---
 
