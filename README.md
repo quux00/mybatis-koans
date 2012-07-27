@@ -1,5 +1,3 @@
-**Note: IN PROGRESS!** This repo is a fork of the [original mybatis-koans repo](https://github.com/midpeter444/mybatis-koans) and is in progress to add maven support.  When it is completed and ready-to-go, it will be merged back into the original mybatis-koans repo.  For now we recommended that you use the original mybatis-koans repo unless you want to help us finish this one.
-
 # MyBatis Koans
 
 A [koan](http://en.wikipedia.org/wiki/K%C5%8Dan) is a question or statement to be meditated upon in order to improve and test a student's progress. Among programmers, software koans have become a clever way to learn a software language or tool.  As the [Ruby koan website](http://rubykoans.com/) says: "The Koans walk you along the path to enlightenment" -- in this case to learn and practice with the [MyBatis 3](http://www.mybatis.org/core/) data mapper framework.
@@ -28,6 +26,8 @@ The structure of these koans is inspired by the challenging and informative [Neo
   * [Run completed koans](#runComp)
 * [Do the koans](#doKoans)
   * [Test your koans](#runMainKoans)
+* [OMG! - tl;dr - short version please](#tldr)
+
 * [Directory of Koan Topics](#koanDirectory)
 * [A Note on Solutions](#noteOnSolutions)
 * [A Note on Best Practices](#noteOnBestPractices)
@@ -380,8 +380,7 @@ By default, the koan test output will be written to the console only. If you wan
 
 ### Do the Koans in Eclipse
 
-Import > Maven > Existing Maven Project
-Navigate to the mybatis-koans directory for the "root directory". It should find the pom.xml and name the project "mybatis-koans". Click finish.
+After you install the m2e plugin, do: Import > Maven > Existing Maven Project. Specify the mybatis-koans directory for the "root directory". It should find the pom.xml and name the project "mybatis-koans". Click Finish.
 
 It should find your maven dependencies and download those or reference them if you've already done the maven commands from the command line.  If something doesn't work, try going to the command line and type `mvn verify` to download and compile and verify the setup described in the pom.
 
@@ -391,9 +390,11 @@ Once you have the mybatis-koans project created in Eclipse and have all the prev
 * running them via ant targets
 * running them via maven targets
 
-If you need to modify the config.properties for src/main and src/test, do that first.
+Modify the config.properties in src/main and src/test to set the database properties you need.  (For H2, you don't need to change it.)
 
-If you are using the H2 database and using the Eclipse JUnit test runner or ant targets, you must first start the H2 database: in `src/test/java/h2server` right click on `RunH2.java` and select "Run As Java Application".  Then run your koans.  When finished, stop the h2server by clicking the terminate button in the Eclipse Console window (you will probably have to click the "Remove Launch" button next to it first).  Or you can start it on with ant by invoking the runH2 target.
+If you are using the H2 database and using the Eclipse JUnit test runner or ant targets, you must first start the H2 database: in `src/test/java/h2server` right click on `RunH2.java` and select "Run As Java Application".  Then run your koans.  When finished, stop the h2server by clicking the terminate button in the Eclipse Console window (you will probably have to click the "Remove Launch" button next to it first).
+
+The other option is to start H2 with ant by invoking the runH2 target.
 
 **Example Instructions: Run koans as Eclipse JUnit tests**
 
@@ -473,6 +474,23 @@ To have less logging (none if the koans passing), set logging levels to "info". 
 
 ---
 
+<a name="tldr"></a>
+
+# tl;dr - Too many options, just tell me the bare minimum
+
+My recommendation on the best way - the short version:
+
+1. Ensure/install prequisites
+2. Clone the repo
+3. Setup sakila db in PostgreSQL (my favorite) or MySQL
+4. Install m2e in Eclipse, load the project as a maven project and let maven compile everything
+5. Open Koan01.java in src/main and read the instructions.
+6. Complete the TODOs
+7. Run the koans using Eclipse's JUnit runner
+8. Repeat 5-7 until finished
+
+---
+
 <a name="koanDirectory"></a>
 
 # Directory of Koan Topics
@@ -526,10 +544,9 @@ If you have found any of these to be really useful, feel free to suggest a new k
 
 Anyone that wants to use the previous Eclipse / ant-centric version of the koans can still get them from the repo. I've tagged that last commit with `koans-v1`.  You can revert to that version by cloning the current repo and then checking out the tag:
 
-    git checkout tags/koans-v1
+    git checkout tags/koans-v1 -b koans-v1
     
-**CHECK THIS**
-  >> This might result in detached head, if so, see: http://stackoverflow.com/a/792030/871012
+You need to include the -b switch to create a new named branch, otherwise you will be in "detached HEAD state", which is never fun.
 
 *One caution*: any new koans will not be added to this version/setup of the repo, although you could add them yourself.
 
