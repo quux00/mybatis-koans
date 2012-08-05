@@ -76,18 +76,13 @@ public class Koan02 {
   public void learnToQueryViaXmlMapperReturningListOfHashMaps() throws Exception {
     // TODO: query for a list
     // TODO: fill in "?" generic unknown placeholders
-    List<Map<?,?>> lmap = session.selectList("selectAsListOfMaps");
+    final List<Map<?,?>> lmap = session.selectList("selectAsListOfMaps");
 
     assertEquals(109, lmap.size());
     // TODO: fill in "?" generic unknown placeholders
-    Map<?,?> map109 = lmap.get(0);
+    final Map<?,?> map109 = lmap.get(0);
 
     assertEquals(Integer.valueOf(109), map109.get("country_id"));
     assertEquals("Zambia", map109.get("country"));
   }
-
-  // FIXME: need to add query that uses selectMap
-  // NOTE: you will only be able to do this if you are using MyBatis 3.0.3 or higher, as
-  //       this feature was removed in the early versions of MyBatis 3 and then added back
-
 }

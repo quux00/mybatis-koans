@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.thornydev.mybatis.koan.koan24.Koan24Mapper">
+
+  <sql id="queryActorsInFilm">
+    SELECT a.actor_id, a.first_name, a.last_name, a.last_update
+    FROM actor a
+    JOIN film_actor fa ON fa.actor_id = a.actor_id
+    JOIN film f ON f.film_id = fa.film_id
+    WHERE f.film_id = #{filmId}
+    ORDER BY a.actor_id
+  </sql>
+
+  <resultMap id="actorMapping" type="Actor">  
+    <constructor>
+      <idArg column="actor_id"  javaType="integer"/>
+      <arg column="first_name"  javaType="String"/>
+      <arg column="last_name"   javaType="String"/>
+      <arg column="last_update" javaType="Date"/>
+    </constructor>
+  </resultMap>
+
+  <select id="getActorsInFilm" parameterType="int" resultMap="actorMapping">
+    <include refid="queryActorsInFilm"/>
+  </select>
+  
+  <!-- TODO: this one needs a resultMap or resultType => it should
+             return a map that is case-insensitive -->
+  <select id="getActorsInFilmAsMap" parameterType="int">
+    <include refid="queryActorsInFilm"/>
+  </select>
+  
+</mapper>
