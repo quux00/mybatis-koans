@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.thornydev.mybatis.koan.koan25.Koan25Mapper">
+  
+  <!-- TODO: do not modify the SQL in this select mapping, but you
+             might want to use a ResultMap to help solve this koan -->
+  <select id="getAddressById">
+    SELECT address_id, address, address2
+    FROM address 
+    WHERE address_id = #{id}
+  </select>
+  
+  <!-- NOTE: no need to do anything with this - just here to put some
+             data in the address2 field for the koan tests -->
+  <insert id="addAddress2Data">
+    UPDATE address
+    SET address2 = #{a2}
+    WHERE address_id = #{id}
+  </insert>
+</mapper>

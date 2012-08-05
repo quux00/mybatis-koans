@@ -454,9 +454,9 @@ To run the koans you are completing, do:
     $ mvn clean verify -P run-koans-h2 -D koan=Koan01  # run one koan
     $ mvn clean verify -P run-koans-h2                 # run all koans
 
-    # if you are NOT using H2, then use this:
-    $ mvn clean test -P run-koans -D koan=Koan01  # run one koan
-    $ mvn clean test -P run-koans                 # run all koans
+    # if you are NOT using H2, then use this (can use 'test' not 'verify' for non-H2 dbs):
+    $ mvn clean verify -P run-koans -D koan=Koan01  # run one koan
+    $ mvn clean verify -P run-koans                 # run all koans
 
 **or**
 
