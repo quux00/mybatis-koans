@@ -89,7 +89,7 @@ public class Koan02 {
   // FIXME: need to add query that uses selectMap
   // NOTE: you will only be able to do this if you are using MyBatis 3.0.3 or higher, as
   //       this feature was removed in the early versions of MyBatis 3 and then added back
-  
+
 
   /* ---[ Helper method ]--- */
 

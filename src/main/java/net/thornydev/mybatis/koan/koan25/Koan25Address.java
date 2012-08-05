@@ -8,7 +8,7 @@ public class Koan25Address {
   public Koan25Address(final int id) {
     this.id = id;
   }
-  
+
   public int getId() {
     return id;
   }

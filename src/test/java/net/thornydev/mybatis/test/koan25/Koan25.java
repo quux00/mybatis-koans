@@ -19,7 +19,7 @@ public class Koan25 {
   static Koan25Mapper mapper;
   static final String ADDR2_ID1 = "Apt. A";
   static final String ADDR2_ID2 = "Suite 234";
-  
+
   @BeforeClass
   public static void setUpBeforeClass() throws Exception {
     final String resource = "net/thornydev/mybatis/test/koan25/koan25-config.xml";
@@ -28,14 +28,14 @@ public class Koan25 {
     inputStream.close();
 
     session = sessionFactory.openSession();
-    
+
     mapper = session.getMapper(Koan25Mapper.class);
-    
-    // since address2 field is null/blank by default in sakila, 
+
+    // since address2 field is null/blank by default in sakila,
     // we update a couple of records
     int r1 = mapper.addAddress2Data(1, ADDR2_ID1);
     int r2 = mapper.addAddress2Data(2, ADDR2_ID2);
-    
+
     assertEquals(1, r1);
     assertEquals(1, r2);
   }
@@ -45,12 +45,12 @@ public class Koan25 {
     if (session != null)
       // undo the address2 update we did in setup method
       session.rollback();
-      session.close();
+    session.close();
   }
 
   @Test
-  public void learnToMapMultipleColumnsIntoArray() {    
-    
+  public void learnToMapMultipleColumnsIntoArray() {
+
     Koan25Address addr = mapper.getAddressById(1);
     assertNotNull(addr);
     assertEquals(1, addr.getId());

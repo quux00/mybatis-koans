@@ -46,7 +46,7 @@ public class Koan24 {
     assertEquals(10, actors.size());
     Actor penelope = actors.get(0);
     Actor rock = actors.get(8);
-    
+
     assertEquals("GUINESS", penelope.getLastName());
     assertEquals("DUKAKIS", rock.getLastName());
 
@@ -60,12 +60,12 @@ public class Koan24 {
     assertNotNull(actors);
     assertEquals(4, actors.size());
     assertEquals(CopyOnWriteArrayList.class, actors.getClass());
-    
+
     Map<String,Object> m = actors.get(0);
     assertNotNull(m);
     assertEquals("FAWCETT", m.get("last_name"));
     assertEquals("BOB", m.get("FIRST_NAME"));
-    
+
     m = actors.get(3);
     assertNotNull(m);
     assertEquals("DEPP", m.get("Last_Name"));

@@ -23,10 +23,10 @@ import org.junit.Test;
 // Suppose for thread-safety reasons that instead of an ArrayList,
 // you want a java.util.concurrent.CopyOnWriteArrayList.  You could
 // let MyBatis return an ArrayList and then copy everything into a
-// CopyOnWriteArrayList, but that is not efficient. 
+// CopyOnWriteArrayList, but that is not efficient.
 //
 // Your first task in the "testRetrievingCopyOnWriteArrayList" koan
-// is to have MyBatis return a CopyOnWriteArrayList. There are at 
+// is to have MyBatis return a CopyOnWriteArrayList. There are at
 // least two ways I know of to do this.  I have implemented one in
 // the completed koans and outlined the other in this StackOverflow
 // answer: http://stackoverflow.com/a/11596014/871012.  (Don't
@@ -40,7 +40,9 @@ import org.junit.Test;
 // Which it is is determined by the underlying JDBC driver.  In some
 // cases you can specify a column alias in your SQL with upper or lower case
 // and the map key will match that - this works with MySQL for instance,
-// but not with H2 and PostgreSQL.  In the second test in this koan,
+// but not with H2 and PostgreSQL.
+//
+// In the second test in this koan,
 // "testRetrievingListOfCaseInsensitiveMaps", I want you to return
 // a List<Map> where the List is of type CopyOnWriteArrayList and
 // the Map somehow doesn't care about the case of the keys you pass in:
@@ -48,11 +50,11 @@ import org.junit.Test;
 // map.get("Foo").  There are a couple of ways to do this.  Again,
 // I have an example in the completed koans and another outlined
 // in a StackOverflow answer: http://stackoverflow.com/a/11732674/871012.
-// You might also search apache commons to look at maps they have 
-// defined for this.  Note that they built this before generics and
-// haven't retrofitted it, so that presents its own challenge, but
+// You might also search apache commons to look at maps they have
+// defined for this.  Note that they built their solution before generics
+// and haven't retrofitted it, so that presents its own challenge, but
 // an interesting one at that.
-// 
+//
 // Good luck.
 public class Koan24 {
 
@@ -83,7 +85,7 @@ public class Koan24 {
     assertEquals(10, actors.size());
     Actor penelope = actors.get(0);
     Actor rock = actors.get(8);
-    
+
     assertEquals("GUINESS", penelope.getLastName());
     assertEquals("DUKAKIS", rock.getLastName());
 
@@ -97,12 +99,12 @@ public class Koan24 {
     assertNotNull(actors);
     assertEquals(4, actors.size());
     assertEquals(CopyOnWriteArrayList.class, actors.getClass());
-    
+
     Map<String,Object> m = actors.get(0);
     assertNotNull(m);
     assertEquals("FAWCETT", m.get("last_name"));
     assertEquals("BOB", m.get("FIRST_NAME"));
-    
+
     m = actors.get(3);
     assertNotNull(m);
     assertEquals("DEPP", m.get("Last_Name"));
