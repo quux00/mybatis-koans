@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.thornydev.mybatis.test.koan25.Koan25Mapper">
+  <resultMap id="addrResultMap" type="Address">
+    <constructor>
+      <idArg column="address_id" javaType="_integer"/>
+      <arg column="address" javaType="String"/>
+      <arg column="address2" javaType="String"/>
+    </constructor>
+  </resultMap>
+  
+  <select id="getAddressById" resultMap="addrResultMap">
+    SELECT address_id, address, address2
+    FROM address 
+    WHERE address_id = #{id}
+  </select>
+  
+  <insert id="addAddress2Data">
+    UPDATE address
+    SET address2 = #{a2}
+    WHERE address_id = #{id}
+  </insert>
+</mapper>
