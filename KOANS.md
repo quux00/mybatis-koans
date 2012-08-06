@@ -263,3 +263,24 @@ Learn:
 * How to map a Java Enum to the result of a database query
 * How to map a Java Enum to a database DML (insert/update/delete)
 
+---
+
+### Koan 24
+
+**Get MyBatis to return non-default Collection Types**
+
+Learn:
+
+* How to have MyBatis return a CopyOnWriteArrayList instead of an ArrayList from a query
+* How to have a case-insensitive Map returned instead of a regular HashMap from a query
+
+---
+
+### Koan 25
+
+**Map/shoehorn multiple database columns into one Java field**
+
+Learn:
+
+* How to take a query like select foo1, foo2, foo3 and using a domain object that has an foo array, rather than three separate fields, one for each foo.
+

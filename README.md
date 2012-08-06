@@ -522,6 +522,10 @@ As you go through the koans, you'll see that I change styles/idioms from time to
 
 # Current Status
 
+Two new koans (24 and 25) were added on 05-Aug-2012.
+
+----
+
 The original koans were released in May 2012.  In July, [Andrei Pozolotin](https://github.com/carrot-garden) contributed some changes to make the koans work with maven, so we are releasing the revised setup for the koans.
 
 So far, we have tested them carefully with MyBatis-3.1.1 using H2-1.3.168, PostgreSQL 9.1.3 and MySQL 5.5 on Linux and using H2 on Windows 7. If you try them with other combinations and have problems, let me know.  (Suggested patches are welcome.)
