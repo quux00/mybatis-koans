@@ -1,3 +1,7 @@
+# Koan Topic Overview
+
+Over time the number of koans has grown to be large. Many of the later ones examine various edge cases of the framework.  If you want to be focus just on the "core" to learn the basics of MyBatis, I would recommending doing koans 1 through 12 and 15 through 18.
+
 # Koan Topics
 
 ### Koan 01
@@ -282,5 +286,15 @@ Learn:
 
 Learn:
 
-* How to take a query like select foo1, foo2, foo3 and using a domain object that has an foo array, rather than three separate fields, one for each foo.
+* How to take a query like `select foo1, foo2, foo3` and create a domain object that has an foo array, rather than three separate fields, one for each foo.
 
+---
+
+### Koan 26
+
+**Return Maps from MyBatis where the key is the id (primary key) and the value is either a domain object or a particular string from the table you are querying from**
+
+Learn:
+
+* How to return `Map<Integer,DomainObject>` instead of `List<Map<String,Object>>`
+* How to return `Map<Integer,String>` instead of `List<Map<String,Object>>` from a query like: `select id, foo` and the map is a mapping of id to foo values.
