@@ -328,6 +328,14 @@
     </junit>
   </target>
 
+  <target name="koan26" depends="compile" description="Run Koan26">
+    <junit haltonfailure="yes" printsummary="yes" fork="true">
+      <classpath refid="koan.classpath" />
+      <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      <test name="net.thornydev.mybatis.koan.koan26.Koan26"/>
+    </junit>
+  </target>
+
   <target name="run-all" depends="compile" description="Runs all Koans (in main)">
     <junit haltonfailure="yes" fork="true">
       <classpath refid="koan.classpath" />
@@ -360,7 +368,7 @@
   </target>
 
   <target name="comp-all-mysql" depends="init,prepare-resources-completed,compile-completed"
-          description="Runs all completed koans using PostgreSQL db">
+          description="Runs all completed koans using MySQL db">
     <junit haltonfailure="yes" fork="true" showoutput="true" printsummary="yes">
       <classpath refid="completed-koan.classpath" />
       <formatter type="plain" usefile="${log.koan.output.to.file}" />
@@ -376,7 +384,7 @@
   </target>
   
   <target name="comp-all-pg" depends="init,prepare-resources-completed,compile-completed"
-          description="Runs all completed koans using MySQL db">
+          description="Runs all completed koans using PostgreSQL db">
     <junit haltonfailure="yes" fork="true" showoutput="true" printsummary="yes">
       <classpath refid="completed-koan.classpath" />
       <formatter type="plain" usefile="${log.koan.output.to.file}" />
@@ -697,6 +705,15 @@
     <junit haltonfailure="yes" printsummary="yes" fork="true">
       <classpath refid="completed-koan.classpath" />
       <test name="net.thornydev.mybatis.test.koan25.Koan25">
+        <formatter type="plain" usefile="${log.koan.output.to.file}" />
+      </test>
+    </junit>
+  </target>
+
+  <target name="comp-koan26" depends="compile-completed" description="Run Already Completed Koan26">
+    <junit haltonfailure="yes" printsummary="yes" fork="true">
+      <classpath refid="completed-koan.classpath" />
+      <test name="net.thornydev.mybatis.test.koan26.Koan26">
         <formatter type="plain" usefile="${log.koan.output.to.file}" />
       </test>
     </junit>

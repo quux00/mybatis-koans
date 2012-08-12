@@ -6,7 +6,7 @@
 // edit the dbs and koans variables at the top of the file.
 
 // if you add another koan, increment the range
-def koans = 1 .. 25;
+def koans = 1 .. 26;
 
 def compdbs = ['h2', 'mysql', 'pg'];
 def maindbs = ['h2', 'default'];

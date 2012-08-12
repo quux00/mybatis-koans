@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.thornydev.mybatis.test.koan26.Koan26Mapper">
+
+  <select id="getAllCountries" resultType="hashmap">
+    SELECT country_id AS id, country
+    FROM country
+  </select>
+  
+</mapper>
