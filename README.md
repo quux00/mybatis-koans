@@ -346,7 +346,7 @@ Ideally, among all the verbiage that maven spits out, when you run a completed k
     Tests run: 3, Failures: 0, Errors: 0, Skipped: 0
     
     [INFO] 
-    [INFO] --- h2-maven-plugin:1.0:stop (h2-finish) @ mybatis-koans ---
+    [INFO] --- h2-maven-plugin:1.0:stop (h2-finish) @ mybatis-koans ----
     [INFO] H2 server stopped
     [INFO] ------------------------------------------------------------------------
     [INFO] BUILD SUCCESS
@@ -472,7 +472,7 @@ If you want more logging information when running your koan tests, adjust the lo
 
 To have less logging (none if the koans passing), set logging levels to "info".  For more, set levels to "debug".  Mix and match to get the output you want.
 
----
+----
 
 <a name="tldr"></a>
 
@@ -492,7 +492,7 @@ We've tried to be flexible with options and document everything, but here's my s
 
 For extra credit, think of new koans and add them to the repo with a pull request!
 
----
+----
 
 <a name="koanDirectory"></a>
 
@@ -500,7 +500,7 @@ For extra credit, think of new koans and add them to the repo with a pull reques
 
 See the [directory of koans](mybatis-koans/blob/master/KOANS.md) for a description of what each koan tests.
 
----
+----
 
 <a name="noteOnSolutions"></a>
 
@@ -508,7 +508,7 @@ See the [directory of koans](mybatis-koans/blob/master/KOANS.md) for a descripti
 
 For many koans, there are probably many ways to make it work (even within the constraints put in place to exercise a given feature of MyBatis). If you have an alternative solution that will help others see the possibilities, feel free to send a pull request to get it added to the repo.
 
----
+----
 
 <a name="noteOnBestPractices"></a>
 
@@ -516,7 +516,7 @@ For many koans, there are probably many ways to make it work (even within the co
 
 As you go through the koans, you'll see that I change styles/idioms from time to time. Sometimes I start a session for each test, then later not.  Sometimes I use mappers with a Java interface, sometimes not.  Sometimes I turn camelCase mapping on, sometimes not. These koans are not intended to recommend best practice, but rather to see the variations of possibilities that MyBatis 3 allows. I mix it up so you can be reminded of these variations. You should decide, in conjunction with the recommendations in the User Guide and reading other tutorials and code examples, on what is best practice for your code base.
 
----
+----
 
 <a name="currentStatus"></a>
 
@@ -547,7 +547,7 @@ Even within the Persistence Framework, these koans do **not** cover some functio
 
 If you have found any of these to be really useful, feel free to suggest a new koan or write one yourself to add it here with a [pull request](https://help.github.com/articles/using-pull-requests/).
 
----
+----
 
 <a name="prevKoans"></a>
 
@@ -561,7 +561,7 @@ You need to include the -b switch to create a new named branch, otherwise you wi
 
 *One caution*: any new koans will not be added to this version/setup of the repo, although you could add them yourself.
 
----
+----
 
 <a name="contributors"></a>
 
