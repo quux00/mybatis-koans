@@ -342,6 +342,7 @@
       <formatter type="plain" usefile="${log.koan.output.to.file}" />
       <batchtest>
         <fileset dir="${src.dir}" includes="**/Koan**.java">
+          <containsregexp expression="Koan[0-9][0-9]\..*"/>
         </fileset>
       </batchtest>
     </junit>
@@ -375,8 +376,8 @@
       <batchtest>
         <fileset dir="${build-completed.dir}"
                  includes="**/Koan*.class"
-                 excludes="**/*Mapper.class,**/*ObjectFactory.class,**/*SchoolMarm*,
-                           **/pg/**,**/h2/**">
+                 excludes="**/pg/**,**/h2/**,**/koan12/Koan12.class">
+          <containsregexp expression="Koan[0-9][0-9]\..*"/>
         </fileset>
         
       </batchtest>
@@ -391,8 +392,8 @@
       <batchtest>
         <fileset dir="${build-completed.dir}"
                  includes="**/Koan*.class"
-                 excludes="**/*Mapper.class,**/*ObjectFactory.class,**/*SchoolMarm*,
-                           **/mysql/**,**/h2/**,**/koan23/Koan23.class">
+                 excludes="**/mysql/**,**/h2/**,**/koan23/Koan23.class">
+          <containsregexp expression="Koan[0-9][0-9]\..*"/>
         </fileset>
         
       </batchtest>
@@ -407,8 +408,8 @@
       <batchtest>
         <fileset dir="${build-completed.dir}"
                  includes="**/Koan*.class"
-                 excludes="**/*Mapper.class,**/*ObjectFactory.class,**/*SchoolMarm*,
-                           **/pg/**,**/mysql/**,**/koan12/Koan12.class">
+                 excludes="**/pg/**,**/mysql/**,**/koan12/Koan12.class">
+          <containsregexp expression="Koan[0-9][0-9]\..*"/>
         </fileset>
       </batchtest>
     </junit>

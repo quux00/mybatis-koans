@@ -1,6 +1,6 @@
 # Koan Topic Overview
 
-Over time the number of koans has grown to be large. Many of the later ones examine various edge cases of the framework.  If you want to be focus just on the "core" to learn the basics of MyBatis, I would recommending doing koans 1 through 12 and 15 through 18.
+Over time the number of koans has grown to be large. Some of them examine various edge cases of the framework or special usage scenarios.  If you want to be focus on just the "core" to learn the basics of MyBatis, I would recommending doing koans 1-12, 15-18 and 21.
 
 # Koan Topics
 

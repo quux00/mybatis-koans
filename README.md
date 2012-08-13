@@ -522,6 +522,10 @@ As you go through the koans, you'll see that I change styles/idioms from time to
 
 # Current Status
 
+Added Koan 26 on 12-Aug-2012.
+
+----
+
 Two new koans (24 and 25) were added on 05-Aug-2012.
 
 ----

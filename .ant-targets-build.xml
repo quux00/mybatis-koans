@@ -1,4 +1,7 @@
 clean
+comp-all-h2
+comp-all-mysql
+comp-all-pg
 comp-koan01
 comp-koan02
 comp-koan03
@@ -10,12 +13,16 @@ comp-koan08
 comp-koan09
 comp-koan10
 comp-koan11
-comp-koan12
+comp-koan12-h2
+comp-koan12-mysql
+comp-koan12-pg
 comp-koan13
 comp-koan14
 comp-koan15
+comp-koan16-h2
 comp-koan16-mysql
 comp-koan16-pg
+comp-koan17-h2
 comp-koan17-mysql
 comp-koan17-pg
 comp-koan18
@@ -24,6 +31,10 @@ comp-koan20
 comp-koan21
 comp-koan22
 comp-koan23
+comp-koan23-pg
+comp-koan24
+comp-koan25
+comp-koan26
 compile
 compile-completed
 koan01
@@ -49,5 +60,8 @@ koan20
 koan21
 koan22
 koan23
-run
+koan24
+koan25
+koan26
+run-all
 runH2
