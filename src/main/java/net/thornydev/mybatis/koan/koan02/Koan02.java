@@ -57,7 +57,7 @@ public class Koan02 {
     // TODO: fill in "?" generic unknown placeholders
     Map<?,?> map = null;
 
-    assertEquals(Integer.valueOf(1), map.get("country_id"));
+    assertEquals(1, ((Number) getFromMap(map, "country_id") ).intValue());
     assertEquals("Afghanistan", map.get("country"));
     assertNotNull(map.get("last_update"));
   }
@@ -67,7 +67,7 @@ public class Koan02 {
     // TODO: call "selectOneAsMapDynamic" mapped query, passing in id 33 as param
     Map<Object,Object> map = null;
 
-    assertEquals(Integer.valueOf(33), map.get("country_id"));
+    assertEquals(33, ((Number)getFromMap(map, "country_id")).intValue());
     assertEquals("Finland", map.get("country"));
     assertNotNull(map.get("last_update"));
   }
@@ -82,7 +82,17 @@ public class Koan02 {
     // TODO: fill in "?" generic unknown placeholders
     final Map<?,?> map109 = lmap.get(0);
 
-    assertEquals(Integer.valueOf(109), map109.get("country_id"));
+    assertEquals(109, ((Number)getFromMap(map109, "country_id")).intValue());
     assertEquals("Zambia", map109.get("country"));
+  }
+
+  /* ---[ Helper method ]--- */
+
+  private Object getFromMap(Map<String, Object> map, String key) {
+    if (map.containsKey(key.toLowerCase())) {
+      return map.get(key.toLowerCase());
+    } else {
+      return map.get(key.toUpperCase());
+    }
   }
 }
