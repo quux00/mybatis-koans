@@ -190,14 +190,15 @@ To use PostgreSQL or MySQL you will need to both install the database server and
   <p><strong>Creating and loading the PostgreSQL sakila database</strong></p>
   <pre>
   $ cd db/postgresql
-  # edit the next line to have your username rather than mine
+  # create your database user if you haven't already
+  # and then edit the next line to have your username rather than mine
   $ echo "GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO midpeter444;" >> postgres-sakila-schema.sql
   $ sudo su postgres
   $ createdb sakila
   $ psql sakila &lt; postgres-sakila-schema.sql
   $ psql sakila &lt; postgres-sakila-data.sql
   $ &lt;Ctrl-D&gt; (log-out as postgres back to your user)
-  $ psql -h localhost  # log in here and check that the tables were created and that you can query them</pre>
+  $ psql -h localhost sakila  # log in here and check that tables were created and can be queried</pre>
 </div>
 
 
@@ -211,7 +212,7 @@ To use PostgreSQL or MySQL you will need to both install the database server and
   mysql> exit
   $ mysql sakila -p &lt; sakila-schema.sql
   $ mysql sakila -p &lt; sakila-data.sql
-  $ mysql -p  # log in here and check that the tables were created and that you can query them</pre>
+  $ mysql -p sakila # log in here and check that the tables were created and that you can query them</pre>
 </div>
 
 ### Other database servers
@@ -522,6 +523,10 @@ As you go through the koans, you'll see that I change styles/idioms from time to
 
 # Current Status
 
+[Thiago Arrais](https://github.com/thiagoarrais) fixed a bug in Koan02. I fixed a few minor ambiguities in the PostgreSQL sakila installation instructions.
+
+----
+
 Added Koan 26 on 12-Aug-2012.
 
 ----
@@ -567,5 +572,6 @@ You need to include the -b switch to create a new named branch, otherwise you wi
 
 # Contributors
 
+* [Thiago Arrais](https://github.com/thiagoarrais) fixed a mismatch in Koan02 between the completed version (which was correct) and the uncompleted version.
 * [Andrei Pozolotin](https://github.com/carrot-garden) did significant work to revamp the structure of the koans to be maven compatible and wrote much of the maven setup to get things going - thanks!
 * [Michael Kolakowski](https://github.com/mkolakow) fixed some typos on the original README
