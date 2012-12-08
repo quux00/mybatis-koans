@@ -88,7 +88,8 @@ public class Koan02 {
 
   /* ---[ Helper method ]--- */
 
-  private Object getFromMap(Map<String, Object> map, String key) {
+  // TODO: fill in "?" generic unknown placeholders
+  private Object getFromMap(Map<?, ?> map, String key) {
     if (map.containsKey(key.toLowerCase())) {
       return map.get(key.toLowerCase());
     } else {
