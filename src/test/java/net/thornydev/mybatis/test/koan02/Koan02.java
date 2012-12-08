@@ -47,8 +47,7 @@ public class Koan02 {
 
   @After
   public void tearDown() throws Exception {
-    if (session != null)
-      session.close();
+    if (session != null) session.close();
   }
 
   @Test

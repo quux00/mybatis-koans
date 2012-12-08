@@ -55,7 +55,7 @@ public class Koan02 {
   public void learnToQueryViaXmlMapperReturningHashMap() throws Exception {
     // TODO: call "selectFirstCountryAsMap" mapped query
     // TODO: fill in "?" generic unknown placeholders
-    Map<?,?> map = null;
+    final Map<?,?> map = null;
 
     assertEquals(1, ((Number) getFromMap(map, "country_id") ).intValue());
     assertEquals("Afghanistan", map.get("country"));
@@ -65,7 +65,7 @@ public class Koan02 {
   @Test
   public void learnToQueryMapperReturningHashMapWithParameterInput() throws Exception {
     // TODO: call "selectOneAsMapDynamic" mapped query, passing in id 33 as param
-    Map<Object,Object> map = null;
+    final Map<?,?> map = null;
 
     assertEquals(33, ((Number)getFromMap(map, "country_id")).intValue());
     assertEquals("Finland", map.get("country"));

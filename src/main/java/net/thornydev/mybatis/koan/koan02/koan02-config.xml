@@ -18,6 +18,6 @@
   </environments>
   
   <mappers>
-    <mapper resource="net/thornydev/mybatis/koan/koan02/koan02-mapper.xml"/>
+    <!-- TODO: fill in mapper file you will use -->
   </mappers>
 </configuration>
