@@ -16,6 +16,7 @@ The structure of these koans is inspired by the challenging and informative [Neo
   * [Prerequisites](#Prerequisites)
   * [Setup overview](#SetUpOverview)
   * [Main steps to doing the koans](#MainSteps)
+
 * [Setup](#Setup)
   * [Clone the koans repo](#cloneRepo)
     * [The koan directory structure](#koanDirStr)
@@ -24,15 +25,22 @@ The structure of these koans is inspired by the challenging and informative [Neo
     * [Maven](#getDepsMaven)
     * [Ant](#getDepsAnt)
   * [Run completed koans](#runComp)
+
 * [Do the koans](#doKoans)
   * [Test your koans](#runMainKoans)
+
 * [OMG! - tl;dr - short version please](#tldr)
 
 * [Directory of Koan Topics](#koanDirectory)
+
 * [A Note on Solutions](#noteOnSolutions)
+
 * [A Note on Best Practices](#noteOnBestPractices)
+
 * [Current Status](#currentStatus)
+
 * [I Prefer the Previous Koan Structure](#prevKoans)
+
 * [Contributors](#contributors)
 
 ---
@@ -262,7 +270,7 @@ If you see no errors while downloading and compiling, then try [running a couple
 
 ### I prefer Apache Ant
 
-When using the ant for the koans, you will not have any dependency management system. You will need to put (or symlink to) the jar file dependencies in the `mybatis-koans/lib` directory.  For example, here is what my `lib` directory looks like:
+When using the ant for the koans, you will not have any dependency management system. You will need to put (or symlink) the jar file dependencies in the `mybatis-koans/lib` directory.  For example, here is what my `lib` directory looks like:
 
     $ ls -l
     lrwxrwxrwx 1 (...) junit4.jar -> /home/midpeter444/java/lib/junit4.jar
@@ -499,7 +507,7 @@ For extra credit, think of new koans and add them to the repo with a pull reques
 
 # Directory of Koan Topics
 
-See the [directory of koans](mybatis-koans/blob/master/KOANS.md) for a description of what each koan tests.
+See the [directory of koans](https://github.com/midpeter444/mybatis-koans/blob/master/KOANS.md) for a description of what each koan tests.
 
 ----
 
@@ -523,15 +531,21 @@ As you go through the koans, you'll see that I change styles/idioms from time to
 
 # Current Status
 
-[Thiago Arrais](https://github.com/thiagoarrais) fixed a bug in Koan02. I fixed a few minor ambiguities in the PostgreSQL sakila installation instructions.
+**17-Feb-2013**:  José Antonio López figured out how to implement the EmailTypeHandler for the Null Object Pattern koan (Koan 19).  See his [stackoverflow posting](http://stackoverflow.com/questions/14874547/null-object-pattern-with-a-mybatis-typehandler).  We should add that as an alternative solution to the completed koans.
+
+Also, [mybatis-3.2.0-SNAPSHOT](https://code.google.com/p/mybatis/downloads/list?can=3&q=Product%3DMyBatis) recently came out. Anyone tested the koans with that yet? Put that on our TODO list.
 
 ----
 
-Added Koan 26 on 12-Aug-2012.
+**08-Dec-2012**: [Thiago Arrais](https://github.com/thiagoarrais) fixed a bug in Koan02. I fixed a few minor ambiguities in the PostgreSQL sakila installation instructions.
 
 ----
 
-Two new koans (24 and 25) were added on 05-Aug-2012.
+**12-Aug-2012**: Added Koan 26.
+
+----
+
+**05-Aug-2012**: Two new koans (24 and 25) were added.
 
 ----
 

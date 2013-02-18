@@ -27,7 +27,7 @@
     <constructor>
       <idArg column="id" javaType="_int"/>
       <arg column="email" javaType="String"/>
-      <!-- NOTE: using the typehandler below doesn't work - the ObjectFactor still gets
+      <!-- NOTE: using the typehandler below doesn't work - the ObjectFactory still gets
                  null, not a NullEmail object.  Don't understand why. -->
 <!--       <arg column="email" javaType="Email" typeHandler="EmailTypeHandler"/> -->
     </constructor>
