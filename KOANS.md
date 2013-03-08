@@ -213,6 +213,9 @@ Learn:
 * How to use the MyBatis SqlBuilder "DSL" to generate SQL insert, update and delete statements
 * How to use the MyBatis SqlBuilder "DSL" to generate compound SQL (subselects)
 
+**[Update]**: In mybatis-3.2, SQLBuilder has been deprecated, so Koan18 is now vestigial.  However, I will leave it in for a while longer in case people are still using older versions and depending on SQLBuilder.  You should stop using it. See the MyBatis documentation for more details.
+
+
 ----
 
 ### Koan 19

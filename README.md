@@ -298,7 +298,11 @@ So in the end you'll need to have the lib directory have those jars or links to 
     lrwxrwxrwx 1 (...) h2.jar -> /home/midpeter444/java/lib/h2/bin/h2-1.3.166.jar
     lrwxrwxrwx 1 (...) logback-classic.jar -> /home/midpeter444/java/lib/h2/bin/logback-classic-1.0.6.jar
     lrwxrwxrwx 1 (...) logback-core.jar -> /home/midpeter444/java/lib/h2/bin/logback-core-1.0.6.jar
-
+    lrwxrwxrwx 1 (...) log4j.jar -> /home/midpeter444/.m2/repository/log4j/log4j/1.2.17/log4j-1.2.17.jar
+    lrwxrwxrwx 1 (...) hamcrest-core.jar -> /home/midpeter444/lang/java/lib/junit/hamcrest-core-1.3.jar
+    lrwxrwxrwx 1 (...) cglib.jar -> /home/midpeter444/.m2/repository/cglib/cglib/2.2.2/cglib-2.2.2.jar
+    lrwxrwxrwx 1 (...) asm.jar -> /home/midpeter444/.m2/repository/asm/asm/3.3.1/asm-3.3.1.jar
+    lrwxrwxrwx 1 (...) asm-util.jar -> /home/midpeter444/.m2/repository/asm/asm-util/3.2/asm-util-3.2.jar
 
 <br />
 <a name="runComp"></a>
@@ -530,6 +534,16 @@ As you go through the koans, you'll see that I change styles/idioms from time to
 <a name="currentStatus"></a>
 
 # Current Status
+
+**07-Mar-2013**: mybatis-3.2 was released in late February.  **The koans dependencies have been updated to work with mybatis-3.2**.  Basically, cglib (2.2.2) and log4j (1.2.17) had to be explicitly added to the classpath.  They were added to the pom and the instructions below for adding them to your lib directory if using Ant have also been updated.
+
+If you need to get back to the mybatis-3.1 version, I have created a git tag for that last commit:
+
+    git checkout tags/mybatis-3.1 -b mybatis-3.1
+    
+*Note*: In mybatis-3.2, SQLBuilder has been deprecated, so Koan18 is now vestigial.  However, I will leave it in for a while longer in case people are still using older versions and depending on SQLBuilder.  You should stop using it. See the MyBatis documentation for more details.
+
+----
 
 **17-Feb-2013**:  José Antonio López figured out how to implement the EmailTypeHandler for the Null Object Pattern koan (Koan 19).  See his [stackoverflow posting](http://stackoverflow.com/questions/14874547/null-object-pattern-with-a-mybatis-typehandler).  We should add that as an alternative solution to the completed koans.
 

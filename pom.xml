@@ -5,7 +5,7 @@
 
   <groupId>net.thornydev.mybatis</groupId>
   <artifactId>mybatis-koans</artifactId>
-  <version>1.2</version>
+  <version>1.3</version>
 
   <properties>
     <!-- enforce java version -->
@@ -20,11 +20,11 @@
        mybatis or driver versions -->
   <dependencies>
 
-    <!-- batis http://www.mybatis.org/core/ -->
+    <!-- mybatis http://www.mybatis.org/core/ -->
     <dependency>
       <groupId>org.mybatis</groupId>
       <artifactId>mybatis</artifactId>
-      <version>3.1.1</version>
+      <version>3.2.0</version>
     </dependency>
 
     <!-- H2 JDBC driver and tools http://www.h2database.com/html/main.html -->
@@ -58,16 +58,28 @@
       <version>4.10</version>
     </dependency>
 
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.17</version>
+    </dependency>
+
+    <dependency>
+      <groupId>cglib</groupId>
+      <artifactId>cglib</artifactId>
+      <version>2.2.2</version>
+    </dependency>
+    
     <!-- logging framework http://logback.qos.ch/ -->
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
-      <version>1.6.5</version>
+      <version>1.7.2</version>
     </dependency>
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
-      <version>1.0.6</version>
+      <version>1.0.9</version>
     </dependency>
 
     <!-- utilities to copy files http://commons.apache.org/io/ -->
