@@ -31,7 +31,7 @@ import org.junit.Test;
 // want to return from queries or convert to a database type for DML statements.
 //
 // In this koan, we use net.thornydev.mybatis.koan.domain.Film, rather than
-// net.thornydev.mybatis.koan.koan10.FilmK10. There are three differences:
+// net.thornydev.mybatis.koan.koan11.FilmK11. There are three differences:
 // 1. the "releaseYear" field is of type net.thornydev.mybatis.koan.util.Year
 //    rather than a simple String
 // 2. the "specialFeatures" field is now a List<String>, rather than a simple
