@@ -57,9 +57,9 @@ public class Koan02 {
     // TODO: fill in "?" generic unknown placeholders
     final Map<?,?> map = null;
 
-    assertEquals(1, ((Number) getFromMap(map, "country_id") ).intValue());
-    assertEquals("Afghanistan", map.get("country"));
-    assertNotNull(map.get("last_update"));
+    assertEquals(1, ((Number) getFromMap(map, "country_id")).intValue());
+    assertEquals("Afghanistan", getFromMap(map, "country"));
+    assertNotNull(getFromMap(map, "last_update"));
   }
 
   @Test
@@ -68,8 +68,8 @@ public class Koan02 {
     final Map<?,?> map = null;
 
     assertEquals(33, ((Number)getFromMap(map, "country_id")).intValue());
-    assertEquals("Finland", map.get("country"));
-    assertNotNull(map.get("last_update"));
+    assertEquals("Finland", getFromMap(map, "country"));
+    assertNotNull(getFromMap(map, "last_update"));
   }
 
   @Test
@@ -83,7 +83,7 @@ public class Koan02 {
     final Map<?,?> map109 = lmap.get(0);
 
     assertEquals(109, ((Number)getFromMap(map109, "country_id")).intValue());
-    assertEquals("Zambia", map109.get("country"));
+    assertEquals("Zambia", getFromMap(map109, "country"));
   }
 
   /* ---[ Helper method ]--- */
