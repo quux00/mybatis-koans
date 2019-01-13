@@ -84,7 +84,7 @@ More specifically you must have:
 
 Unfortunately, the setup for the MyBatis koans is not as simple as the Ruby koans, since you have to set up and configure a database, load a standard dataset, and configure the MyBatis system for it.  So you'll need to roll up your sleeves a bit before you can get started meditating on the koans themselves.
 
-However, we now provide a fast-track: using maven and the H2 database is the fastest way to get going.  Using maven with PostgreSQL or MySQL requires only a little more work.  Using ant requires a little more work still, since you will need to download and set up the depedencies yourself.
+However, we now provide a fast-track: using maven and the H2 database is the fastest way to get going.  Using maven with PostgreSQL or MySQL requires only a little more work.  Using ant requires a little more work still, since you will need to download and set up the dependencies yourself.
 
 <a name="MainSteps"></a>
 
